@@ -7,7 +7,7 @@ class index extends Component {
     return (
       <div>
         <Header />
-        {props.children}
+        {this.props.children}
         <Footer />
       </div>
     )

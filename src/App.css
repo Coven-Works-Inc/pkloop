@@ -1,22 +1,350 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Arimo&display=swap');
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+
+
+html, body{
+    line-height: 1.2em;
+    /* font-family: 'Roboto', sans-serif; */
+    /* font-family: HelveticaNeue, */
+    font-family: 'Arimo', sans-serif;
+    background: #f1f5f4;
 }
 
-.App-logo {
-  height: 40vmin;
+.container{
+    margin: auto;
+    max-width: 80%;
+    overflow: auto;
+    height: 10vh;
+    padding-top: 20px; 
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.clr{
+    clear: both;
 }
 
-.App-link {
-  color: #09d3ac;
+.py-1{ padding: 10px 0px; }
+.py-2{ padding: 20px 0px; }
+.py-3{ padding: 30px 0px; }
+
+#navbar {
+    background: #fff;
+    color: #000;
+    overflow: auto;
 }
+
+#navbar .container img{
+    float: left;
+    padding-top: 23px;
+}
+
+#navbar a{
+    color: #000;
+    text-decoration: none;
+}
+
+#navbar ul{
+    float: right;
+    list-style: none;
+}
+
+#navbar ul li {
+    float: left;
+}
+
+
+#navbar ul li a{
+    display: block;
+    border-radius: 5px;
+    padding: 12px 25px;
+    text-align: center;
+}
+
+#navbar ul li a:hover,
+#navbar ul li a.current{
+    background: #0071bc;
+    color: #fff;
+}
+
+#showcase {
+    background: url('../src/assets/showcase.png') no-repeat center center/cover;
+    height: 600px;
+    width: 100vw;
+    color: #fff;
+}
+
+.showcase-content{
+   padding: 10%;
+   max-width: 50%;
+   line-height: 4rem;
+   text-align: center;
+   margin-left: 15%;
+}
+
+#showcase .showcase-content h2{
+    font-size: 3.5rem;
+    margin-bottom: 0px;
+}
+
+#showcase .showcase-content p{
+    font-size: 1.5rem;
+    font-weight: normal;
+    line-height: 2.2rem;
+}
+
+#works {
+    text-align: center;
+    margin-top: 100px;
+    height: 600px;
+}
+
+#works h2{
+    font-size: 3rem;
+    margin-top: 50px;
+    font-weight: bold;
+}
+
+#works .send_travel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#works .send_travel p{
+    border: 2px solid #00bdbe;
+    margin: 10px;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: lighter;
+    font-size: 1rem;
+    color: #00bdbe;
+}
+
+#works .send_travel .lighter{
+    border: 2px solid rgba(0, 189, 190, 0.2);
+    margin: 10px;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: lighter;
+    font-size: 1rem;
+    color: #00bdbe;
+
+}
+
+#works_box{
+    margin-top: 5rem;
+    display: flex;
+    max-width: 100%;
+    justify-content: space-evenly;
+    
+}
+
+#works .works_box .img{
+    height: 100%;
+} 
+
+.works_words{
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 100%;
+    margin-left: 1rem
+}
+
+.works_words p{
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 100;
+}
+
+#cargo {
+    background: url('../src/assets/shippers.jpg') no-repeat center center/cover;
+    height: 600px;
+    width: 100vw;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cargo h1 {
+    font-size: 3rem;
+}
+
+#cargo p{
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+}
+
+.cargo_buttons{
+    display: flex;
+    justify-content: center;
+}
+
+.cargo_items{
+    margin: 0.625rem;
+    border: 1px solid #00bdbe;
+    padding: 0.2rem 2rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.cargo_items:first-child{
+    background: #00bdbe;
+}
+
+#faqs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 47rem;
+
+    
+}
+
+.faqitem {
+        background: #fff;
+        padding: 0rem 2rem;
+        text-align: start;
+        margin: 0.20rem 20rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        /* flex: 1; */
+    }
+.faqitem:nth-child(3){
+    background: #00bdbe;
+    color: white;
+}
+
+.faqitem:nth-child(3) .fas{
+    color: white;
+    border: 2px solid #fff;
+}
+.faqitem:nth-child(4){
+    background: #f1f5f4;
+    line-height: 1.5 rem;
+    font-display: thin;
+    color: rgb(94, 94, 94);
+    display: inline-block;
+    
+
+}
+.fas{
+    border: 2px solid black;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+#faqs .faq1{
+    margin-top: 0px;
+}
+
+#faqs .faq1 h2{
+    font-size: 3rem;
+    margin-top: -0.57rem;
+}
+
+.btnQ{
+    padding: 1.3rem 2.7rem;
+    border: 1px solid #00bdbe;
+    background: inherit;
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: #00bdbe;
+    border-radius: 3px;
+    line-height: normal;
+}
+
+.cta_send{
+    background: url('../src/assets/sendparcel.jpg') no-repeat center center/cover;
+    height: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    align-content: center;
+}
+
+.cta_send .main{
+    margin-top: 111px;
+    font-size: 3.125rem;
+}
+
+.cta_send .cta_box{
+    display: flex;
+    justify-content:space-evenly ;
+}
+
+.items{
+margin: 10px;
+font-size: 1rem;
+padding: 1.3rem 2.8rem;
+border-radius: 4px;
+border: 1px solid #00bdbe;
+background:#00bdbe;
+color: #fff;
+    
+}
+
+.items:nth-child(2){
+    padding: 1.3rem 2.5rem;
+    border: 1px solid #fff;
+    font-size: 1rem;
+    border-radius: 4px;
+    line-height: normal;
+    color: white;
+    background:inherit;
+    
+}
+
+footer{
+    margin: 0rem 3rem;
+}
+
+.footer{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.footer img{
+    height: 100%;
+    margin: 1.7rem 0rem 0rem 9rem;
+}
+
+.footer p{
+    margin: 3rem 1rem 2rem 1rem;
+
+}
+
+.footer_icons{
+    margin: 2.7rem 6rem 2rem 16rem;
+    font-size: 1.7rem;
+    color: #333;
+    
+}
+
+.fab{
+    margin-right: 0.7rem;
+}
+
+.footer_links{
+    margin-left: 20rem;
+display: flex;
+}
+
+.copyright{
+    text-align: center;
+    margin: 3rem;
+}
+
+
+
