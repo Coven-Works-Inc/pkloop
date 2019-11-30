@@ -1,0 +1,123 @@
+@media(max-width: 1100px){
+#navbar {
+    flex-direction: column;
+}
+
+#navbar ul{
+    margin-top: 1.5rem;
+}
+
+
+
+#showcase .showcase-content h2{
+    font-size: 2.8rem;
+    margin: 0;
+    
+}
+
+#showcase .showcase-content p{
+    font-size: 1.1rem;
+    font-weight: normal;
+    line-height: 2.2rem;
+}
+
+#works {
+    text-align: center;
+    margin-top: 100px;
+    height: 500px;
+}
+
+#works_box{
+    margin-top: 3rem;
+    
+}
+
+#works h2{
+    font-size: 2.3rem;
+    margin-top: 50px;
+    font-weight: bold;
+}
+
+#works .send_travel p{
+    border: 2px solid #00bdbe;
+    margin: 10px;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: lighter;
+    font-size: 0.8rem;
+    color: #00bdbe;
+}
+
+#works .send_travel .lighter{
+    border: 2px solid rgba(0, 189, 190, 0.2);
+    margin: 10px;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-weight: lighter;
+    font-size: 0.8rem;
+    color: #00bdbe;
+
+}
+
+.works_words p{
+    font-size: 1.2rem;
+    line-height: 2rem;
+    font-weight: 100;
+}
+
+#cargo h2 {
+    font-size: 2.8rem;
+    text-align: center;
+}
+
+#cargo p{
+    font-size: 1.2rem;
+}
+
+.cargo_items{
+    margin: 0.625rem;
+    border: 1px solid #00bdbe;
+    padding: 0.2rem 2rem;
+    border-radius: 4px;
+    font-size: 0.63rem;
+}
+
+.cta_items{
+margin: 0.625rem;
+font-size: 0.9rem;
+padding: 1rem 2rem;
+border-radius: 4px;
+border: 1px solid #00bdbe;
+background:#00bdbe;
+color: #fff;
+    
+}
+
+.cta_items:nth-child(2){
+    padding: 0.2rem 2rem;
+    border: 1px solid #fff;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    color: white;
+    background:inherit;
+    
+}
+
+footer{
+    margin: 0rem 0rem;
+}
+.footer{
+    justify-content: center;
+}
+
+.footer ul{
+  display: none;
+  margin: 0 1.2rem;
+  
+}
+
+.faqitem {
+        margin: 0.20rem 10rem;
+    }
+
+}

@@ -2,6 +2,7 @@ import React from 'react'
 import Home from './components/home'
 
 import './App.css'
+import './Widescreen.css'
 
 function App () {
   return (

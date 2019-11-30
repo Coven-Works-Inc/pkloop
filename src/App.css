@@ -24,6 +24,7 @@ html, body{
     padding-top: 20px; 
 }
 
+
 .clr{
     clear: both;
 }
@@ -34,14 +35,18 @@ html, body{
 
 #navbar {
     background: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     color: #000;
     overflow: auto;
+    padding: 2rem;
+    flex-wrap: nowrap;
 }
 
-#navbar .container img{
-    float: left;
-    padding-top: 23px;
-}
+ #navbar .logo{
+    margin-top: 0.3rem;
+} 
 
 #navbar a{
     color: #000;
@@ -49,26 +54,22 @@ html, body{
 }
 
 #navbar ul{
-    float: right;
-    list-style: none;
+  display: flex;
+  align-items: center;
+  list-style: none;
 }
-
-#navbar ul li {
-    float: left;
-}
-
 
 #navbar ul li a{
-    display: block;
-    border-radius: 5px;
-    padding: 12px 25px;
-    text-align: center;
+    color: #333;
+    padding: 0.75rem 1rem;
+    margin: 0 0.25rem;
 }
 
 #navbar ul li a:hover,
 #navbar ul li a.current{
     background: #0071bc;
     color: #fff;
+    border-radius: 5px;
 }
 
 #showcase {
@@ -171,7 +172,7 @@ html, body{
     align-items: center;
 }
 
-#cargo h1 {
+#cargo h2 {
     font-size: 3rem;
 }
 
@@ -204,8 +205,6 @@ html, body{
     justify-content: center;
     text-align: center;
     height: 47rem;
-
-    
 }
 
 .faqitem {
@@ -214,28 +213,29 @@ html, body{
         text-align: start;
         margin: 0.20rem 20rem;
         display: flex;
-        flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        /* flex: 1; */
     }
-.faqitem:nth-child(3){
+.faqitem:nth-child(2) {
     background: #00bdbe;
     color: white;
 }
 
-.faqitem:nth-child(3) .fas{
+.faqitem:nth-child(2) .fas{
     color: white;
     border: 2px solid #fff;
 }
-.faqitem:nth-child(4){
+
+.faqitem:nth-child(3){
     background: #f1f5f4;
     line-height: 1.5 rem;
     font-display: thin;
     color: rgb(94, 94, 94);
     display: inline-block;
-    
+}
 
+.faqitem h3{
+    font-size: 0.95rem;
 }
 .fas{
     border: 2px solid black;
@@ -243,11 +243,7 @@ html, body{
     border-radius: 3px;
 }
 
-#faqs .faq1{
-    margin-top: 0px;
-}
-
-#faqs .faq1 h2{
+#faqs h2{
     font-size: 3rem;
     margin-top: -0.57rem;
 }
@@ -281,10 +277,10 @@ html, body{
 
 .cta_send .cta_box{
     display: flex;
-    justify-content:space-evenly ;
+    justify-content:center ;
 }
 
-.items{
+.cta_items{
 margin: 10px;
 font-size: 1rem;
 padding: 1.3rem 2.8rem;
@@ -295,7 +291,7 @@ color: #fff;
     
 }
 
-.items:nth-child(2){
+.cta_items:nth-child(2){
     padding: 1.3rem 2.5rem;
     border: 1px solid #fff;
     font-size: 1rem;
@@ -312,7 +308,20 @@ footer{
 
 .footer{
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
+}
+
+.footer ul{
+  display: flex;
+  list-style: none;
+  align-items: center;
+  margin-left: 7rem;
+  
+}
+
+.footer ul li{
+  margin: 0 1.6rem;
+
 }
 
 .footer img{
@@ -326,7 +335,7 @@ footer{
 }
 
 .footer_icons{
-    margin: 2.7rem 6rem 2rem 16rem;
+    margin: 2.7rem 6rem 2rem 10rem;
     font-size: 1.7rem;
     color: #333;
     
@@ -345,6 +354,7 @@ display: flex;
     text-align: center;
     margin: 3rem;
 }
+
 
 
 

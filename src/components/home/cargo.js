@@ -5,7 +5,7 @@ const Cargo = () => {
     <div id='cargo'>
       <div>
         <div>
-          <h1>For Containers and Cargo Shippers</h1>
+          <h2>For Containers and Cargo Shippers</h2>
           <p>
             List your shipment details for free every month and connect with a
             pool
