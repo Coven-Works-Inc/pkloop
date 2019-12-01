@@ -1,4 +1,4 @@
-@media(max-width: 1100px){
+@media (max-width: 1100px){
 #navbar {
     flex-direction: column;
 }
@@ -106,9 +106,15 @@ footer{
     justify-content: center;
 }
 
+.footerdiv hr{ 
+    width: 100%; 
+    text-align: center; 
+    margin-left: 0rem
+}
+
 .footer ul{
   display: none;
-  margin: 0 1.2rem;
+  /* margin: 0 1.2rem; */
   
 }
 

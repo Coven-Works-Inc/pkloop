@@ -74,7 +74,7 @@ html, body{
 
 #showcase {
     background: url('../src/assets/showcase.png') no-repeat center center/cover;
-    height: 600px;
+    height: 800px;
     width: 100vw;
     color: #fff;
 }
@@ -88,7 +88,7 @@ html, body{
 }
 
 #showcase .showcase-content h2{
-    font-size: 3.5rem;
+    font-size: 4rem;
     margin-bottom: 0px;
 }
 
@@ -139,7 +139,7 @@ html, body{
 
 #works_box{
     margin-top: 4rem;
-    margin-left: 7rem;
+    margin-left: 5rem;
     display: flex;
     max-width: 100%;
     padding: 2rem;
@@ -297,12 +297,7 @@ color: #fff;
 .cta_items:nth-child(2){
     padding: 1.3rem 2.5rem;
     border: 1px solid #fff;
-    font-size: 1rem;
-    border-radius: 4px;
-    line-height: normal;
-    color: white;
-    background:inherit;
-    
+    background: inherit;
 }
 
 footer{
@@ -357,6 +352,11 @@ display: flex;
     text-align: center;
     margin: 3rem;
 }
+
+.footerdiv hr{ 
+    width: 80%; 
+    text-align: center; 
+    margin-left: 12rem }
 
 
 

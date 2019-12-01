@@ -1,9 +1,11 @@
-@media(max-width: 375px){
+@media (max-width: 375px){
     #navbar {
     flex-direction: column;
 }
 
-
+body{
+    color: #333;
+}
  
 #navbar ul{
     display: none;
@@ -29,7 +31,7 @@
 
 
 #showcase .showcase-content h2{
-    font-size: 1.7rem;
+    font-size: 1.8rem;
     margin: 0;
     line-height: 3rem;
     
@@ -52,11 +54,12 @@
     text-align: center;
     margin-top: 70px;
     height: 500px;
+    padding: 0 1rem;
 }
 
 #works .send_travel p{
     border: 2px solid #00bdbe;
-    margin: 10px;
+    margin: 5px;
     padding: 8px 23px;
     border-radius: 50px;
     font-weight: lighter;
@@ -66,7 +69,7 @@
 
 #works .send_travel .lighter{
     border: 2px solid rgba(0, 189, 190, 0.2);
-    margin: 10px;
+    margin: 5px;
     padding: 8px 23px;
     border-radius: 50px;
     font-weight: lighter;
@@ -82,7 +85,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
-    margin-left: 1rem;
+    margin-left: 0rem;
+    margin-top: 1rem
 }
 
 #works_box .works_item{
@@ -116,5 +120,143 @@
     text-align: justify;
     line-height: 1.2rem;
     margin-left: 12px;
+}
+
+#cargo {
+    background: url('../src/assets/shippers.jpg') no-repeat center center/cover;
+    height: 400px;
+    width: 100vw;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cargo_case{
+    padding: 0 1rem;
+}
+
+#cargo h2{
+    font-size: 1.9rem;
+    text-align: center;
+    line-height: 2.5rem;
+}
+
+#cargo p{
+    display: none;
+}
+
+.cargo_buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cargo_items{
+    margin: 0.625rem;
+    border: 1px solid #00bdbe;
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.5rem;
+    text-align: center;
+}
+
+
+.cargo_items:first-child{
+    background: #00bdbe;
+    font-size: 0.44rem;
+}
+
+#faqs{
+    display: none
+}
+
+
+.faqitem {
+        background: #fff;
+        padding: 0rem 2rem;
+        text-align: start;
+        margin: 0.20rem 20rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+
+.cta_send .main{
+    font-size: 1.9rem;
+    text-align: center;
+    line-height: 2.5rem;
+    margin-top: 0px;
+}
+
+.cta_content{
+    padding: 2rem;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cta_send .cta_box{
+    display: flex;
+    flex-direction: column;
+}
+
+.cta_items{
+    margin: 0.625rem;
+    border: 1px solid #00bdbe;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    text-align: center;
+    
+}
+
+.cta_items:nth-child(2){
+    margin: 0.625rem;
+    border: 1px solid #00bdbe;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    text-align: center;
+    
+}
+
+.footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+}
+
+.footer img{
+    height: 100%;
+    margin: 0rem 0rem 0rem 0rem;
+}
+
+.footer ul{
+  display: none;
+  /* margin: 0 1.2rem; */
+  
+}
+
+.footerdiv hr{ 
+    width: 100%; 
+    text-align: center; 
+    margin-left: 0rem
+}
+
+.footer_icons{
+    display: flex;
+    margin: 0rem 0rem 0rem 0rem;
+}
+
+.copyright{
+    margin: 0rem;
+    padding: 0.3rem;
 }
 }

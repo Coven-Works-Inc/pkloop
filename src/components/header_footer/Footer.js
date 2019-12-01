@@ -5,7 +5,7 @@ import Icon from '../../assets/Footer Icon.png'
 
 function Footer () {
   return (
-    <div>
+    <div className='footerdiv'>
       <div className='footer'>
         <img src={Icon} alt='' />
         <ul className='links'>
@@ -28,9 +28,7 @@ function Footer () {
           <i className='fab fa-instagram ' />
         </div>
       </div>
-      <hr
-        style={{ width: '78%', textAlign: 'center', marginLeft: '12.7rem' }}
-      />
+      <hr />
       <div className='copyright'>
         <p> &copy; {new Date().getFullYear()} PKLoop. All rights reserved.</p>
       </div>

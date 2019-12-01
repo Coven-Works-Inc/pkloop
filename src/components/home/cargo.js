@@ -3,7 +3,7 @@ import React from 'react'
 const Cargo = () => {
   return (
     <div id='cargo'>
-      <div>
+      <div className='cargo_case'>
         <div>
           <h2>For Containers and Cargo Shippers</h2>
           <p>

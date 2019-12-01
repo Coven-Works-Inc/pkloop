@@ -2,8 +2,8 @@ import React from 'react'
 
 const Cta = () => {
   return (
-    <div>
-      <div className='cta_send'>
+    <div className='cta_send'>
+      <div className='cta_content'>
         <div>
           <p className='main'>Ready to send or deliver a parcel?</p>
         </div>
