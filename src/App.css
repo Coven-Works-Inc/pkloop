@@ -101,7 +101,7 @@ html, body{
 #works {
     text-align: center;
     margin-top: 100px;
-    height: 600px;
+    height: 550px;
 }
 
 #works h2{
@@ -138,29 +138,32 @@ html, body{
 }
 
 #works_box{
-    margin-top: 5rem;
+    margin-top: 4rem;
+    margin-left: 7rem;
     display: flex;
     max-width: 100%;
-    justify-content: space-evenly;
-    
+    padding: 2rem;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;  
+
 }
 
-#works .works_box .img{
+#works_box .works_item img{
     height: 100%;
-} 
-
-.works_words{
-    display: flex;
-    justify-content: space-evenly;
-    max-width: 100%;
-    margin-left: 1rem
 }
 
-.works_words p{
+#works_box .works_item:nth-child(2) img{
+    margin-top: 30px;
+}
+
+#works_box .works_item p{
     font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 100;
+    line-height: 1.8rem;
 }
+
+
+
 
 #cargo {
     background: url('../src/assets/shippers.jpg') no-repeat center center/cover;

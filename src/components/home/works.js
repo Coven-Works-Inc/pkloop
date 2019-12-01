@@ -13,26 +13,24 @@ const Works = () => {
         <p className='lighter'>For Travelers</p>
       </div>
       <div id='works_box'>
-        <div className='img'>
+        <div className='works_item'>
           <img src={works_1} alt='' />
+          <p>
+            Enter the date <br /> and destination city
+          </p>
         </div>
-        <div className='img'>
-          <img style={{ marginTop: '30px' }} src={works_2} alt='' />
+        <div className='works_item'>
+          <img src={works_2} alt='' />
+          <p>
+            Get matched with <br /> a traveler
+          </p>
         </div>
-        <div className='img'>
+        <div className='works_item'>
           <img src={works_3} alt='' />
+          <p>
+            Meet traveler at least <br /> 2 hours before departure.
+          </p>
         </div>
-      </div>
-      <div className='works_words'>
-        <p>
-          Enter the date <br /> and destination city
-        </p>
-        <p>
-          Get matched with <br /> a traveler
-        </p>
-        <p>
-          Meet traveler anytime <br /> before departure
-        </p>
       </div>
     </div>
   )

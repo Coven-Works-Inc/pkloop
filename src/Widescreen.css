@@ -16,7 +16,7 @@
 }
 
 #showcase .showcase-content p{
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: normal;
     line-height: 2.2rem;
 }
@@ -59,11 +59,7 @@
 
 }
 
-.works_words p{
-    font-size: 1.2rem;
-    line-height: 2rem;
-    font-weight: 100;
-}
+
 
 #cargo h2 {
     font-size: 2.8rem;

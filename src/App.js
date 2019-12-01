@@ -3,6 +3,7 @@ import Home from './components/home'
 
 import './App.css'
 import './Widescreen.css'
+import './Mobile.css'
 
 function App () {
   return (
