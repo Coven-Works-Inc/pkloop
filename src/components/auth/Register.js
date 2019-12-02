@@ -19,7 +19,9 @@ class Register extends Component {
   }
 
   handleChange = e => {
+    const { user } = this.state;
     this.setState({
+      ...user,
       [e.target.name]: e.target.value
     })
   }
@@ -41,7 +43,6 @@ class Register extends Component {
   }
 
   render() {
-    const { user } = this.state;
     return (
       <div id='container'>
         <div className='left items'>
