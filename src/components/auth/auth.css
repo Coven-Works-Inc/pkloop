@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css?family=Arimo&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html, body{
+    line-height: 1.2em;
+    font-family: 'Arimo', sans-serif;
+    background: #f5fafd;
+}
+
+.py-1{ padding: 10px 0px; }
+.py-2{ padding: 20px 0px; }
+.py-3{ padding: 30px 0px; }
+
+#container{
+    display: flex;
+    height: 100vh;
+}
+
+.items{
+    flex: 1
+}
+
+.regright{
+    background: url('../../assets/create_acc.jpg') no-repeat center center/cover;
+}
+
+.loginright{
+    background: url('../../assets/login_banner.jpg') no-repeat center center/cover;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    
+}
+
+.left h3{
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    margin-left: 0rem;
+}
+
+.left p{
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    color: #9ea0a5;
+    font-weight: 100;
+    font-stretch: normal;
+
+}
+
+.inner_container{
+    margin-top: 10rem;
+    margin-left: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+}
+
+#contact-form .form-group{
+    margin-bottom: 6px;
+}
+
+#contact-form input{
+    width: 27.82rem;
+    padding: 20px;
+    height: 50px;
+    border: 1px  #ddd solid;
+    font-size: 1rem
+}
+#contact-form input:focus{
+    outline: none;
+    border: 1px  #00bdbe solid;
+}
+
+.btn{
+    width: 100%;
+    height: 40px;
+    background: #00bdbe;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.inner_container p{
+    text-align: left;
+    font-size: 1rem;
+}
+
+
+.btn_google{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    color: #4a4a4a;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: 200px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.icon{
+    margin-left: 1rem;
+}
+
+.btn_google .text{
+    margin-left: 5rem;
+}
+
+/* .terms p{
+    text-align: start;
+    font-size: 14px;
+} */
+
+.terms span{
+    color: #000
+}
+
+.terms .sec_text{
+    color: #00bdbe;
+    cursor: pointer;
+}
