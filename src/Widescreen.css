@@ -1,10 +1,66 @@
 @media (max-width: 1100px){
-#navbar {
-    flex-direction: column;
+
+.menu-links {
+    display: none;
 }
 
-#navbar ul{
-    margin-top: 1.5rem;
+.menu-bars {
+    display: block;
+    font-size: 2rem;
+    color: var(--secondary-color);
+    cursor: pointer;
+    transition: all ease 1.5s;
+}
+
+.menu-bars:hover {
+    color: var(--primary-color);
+}
+
+.mobile-menu {
+    display: block;
+    /* margin-top: 114px; */
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    width: 100%;
+    background-color: rgba(255 , 255, 255, 0.95);
+    background-color: #fff;
+    /* background-color: rgba(0, 189, 190, 0.95); */
+    color: #fff;
+}
+
+.mobile-menu ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 2rem !important;
+    padding: 0;
+    margin: 0;
+    padding: 1rem;
+    padding-top: 0rem;
+}
+
+.mobile-menu ul li {
+    /* margin: 1rem; */
+    display: inline-block;
+    padding: 0.75rem 1rem;
+}
+
+.mobile-menu ul li a {
+    color: #333;
+    /* margin: 0 0.25rem; */
+    text-decoration: none;
+}
+
+.mobile-menu ul li:hover a {
+    color: #fff;
+}
+
+.mobile-menu ul li:hover,
+.mobile-menu ul li.current{
+    background:var(--primary-color);
+    color: #fff;
+    border-radius: 5px;
 }
 
 

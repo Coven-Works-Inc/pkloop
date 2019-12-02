@@ -40,11 +40,11 @@ html, body{
 #navbar {
     background: #fff;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     color: #000;
     overflow: auto;
-    padding: 2rem;
+    padding: 2rem 4rem;
     flex-wrap: nowrap;
 }
 
@@ -57,10 +57,12 @@ html, body{
     text-decoration: none;
 }
 
-#navbar ul{
+#navbar ul {
   display: flex;
   align-items: center;
   list-style: none;
+  justify-content: space-between;
+  padding: 0;
 }
 
 #navbar ul li a{
@@ -76,11 +78,22 @@ html, body{
     border-radius: 5px;
 }
 
+.menu-bars {
+    display: none;
+}
+
+.menu-links {
+    transition: all ease-in-out 1.5s;
+}
+
 #showcase {
     background: url('../src/assets/showcase.png') no-repeat center center/cover;
     height: 800px;
     width: 100vw;
     color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .showcase-content{
@@ -88,7 +101,7 @@ html, body{
    max-width: 50%;
    line-height: 4rem;
    text-align: center;
-   margin-left: 15%;
+   /* margin-left: 15%; */
 }
 
 #showcase .showcase-content h2{
@@ -244,7 +257,8 @@ html, body{
 .faqitem h3{
     font-size: 0.95rem;
 }
-.fas{
+
+.fa-question {
     border: 2px solid black;
     padding: 3px;
     border-radius: 3px;
