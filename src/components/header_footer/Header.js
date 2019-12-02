@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import './header_footer.css'
-import { Link } from 'react-router-dom'
+import { Switch, Link, Route } from 'react-router-dom'
 import Logo from '../../assets/logo/Logo.png'
 
 class Header extends Component {
