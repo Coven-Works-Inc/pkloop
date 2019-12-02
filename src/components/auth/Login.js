@@ -31,7 +31,7 @@ const signup = () => {
                   placeholder='Password'
                 />
               </div>
-              <p style={{ color: '#00bdbe' }}>Forgot it?</p>
+              <p style={{ color: '#00bdbe' }}>Forgot password?</p>
               <button className='btn'>Log in now</button>
             </form>
             <p style={{ textAlign: 'center' }}>OR</p>

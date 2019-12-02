@@ -1,14 +1,17 @@
 import React from 'react'
-import Home from './components/home'
+// import Home from './components/home'
+// import Login from './components/auth/Login'
+import Signup from './components/auth/Register'
 
 import './App.css'
 import './Widescreen.css'
 import './Mobile.css'
 
-function App () {
+function App() {
   return (
     <div className='App'>
-      <Home />
+      <Signup />
+      {/* <Home /> */}
     </div>
   )
 }
