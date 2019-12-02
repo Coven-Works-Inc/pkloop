@@ -12,7 +12,7 @@ const signup = () => {
           </div>
           <div>
             <p>
-              PKLoop connects senders with travelers to facilitate <br /> parcel
+              PKLoop connects senders with travelers to facilitate parcel
               delivery within 12-48 hours at the cheapest rates
             </p>
           </div>

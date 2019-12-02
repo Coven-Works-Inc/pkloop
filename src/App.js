@@ -2,7 +2,6 @@ import React from 'react'
 import './App.css'
 import './Widescreen.css'
 import './Mobile.css'
-
 import Routes from './routes'
 
 import jwt_decode from 'jwt-decode'
