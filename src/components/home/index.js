@@ -5,18 +5,20 @@ import Works from './works'
 import Cargo from './cargo'
 import Faqs from './faqs'
 import Cta from './cta_banner'
-
+import { BrowserRouter } from 'react-router-dom'
 import './home.css'
 
 const index = () => {
   return (
-    <HeaderFooter>
-      <Showcase />
-      <Works />
-      <Cargo />
-      <Faqs />
-      <Cta />
-    </HeaderFooter>
+    <BrowserRouter>
+      <HeaderFooter>
+        <Showcase />
+        <Works />
+        <Cargo />
+        <Faqs />
+        <Cta />
+      </HeaderFooter>
+    </BrowserRouter>
   )
 }
 

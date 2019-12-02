@@ -6,6 +6,11 @@
     box-sizing: border-box;
 } */
 
+:root{
+    --primary-color:rgba(0, 113, 188);
+    --secondary-color:rgba(0, 189, 190);
+}
+
 
 
 html, body{
@@ -67,7 +72,7 @@ html, body{
 
 #navbar ul li a:hover,
 #navbar ul li a.current{
-    background: #0071bc;
+    background:var(--primary-color);
     color: #fff;
     border-radius: 5px;
 }
@@ -117,7 +122,7 @@ html, body{
 }
 
 #works .send_travel p{
-    border: 2px solid #00bdbe;
+    border: 2px solid var(--secondary-color);
     margin: 10px;
     padding: 10px 25px;
     border-radius: 50px;
@@ -192,14 +197,14 @@ html, body{
 
 .cargo_items{
     margin: 0.625rem;
-    border: 1px solid #00bdbe;
+    border: 1px solid var(--secondary-color);
     padding: 0.2rem 2rem;
     border-radius: 4px;
     font-size: 0.9rem;
 }
 
 .cargo_items:first-child{
-    background: #00bdbe;
+    background: var(--secondary-color);
 }
 
 #faqs{
@@ -220,7 +225,7 @@ html, body{
         align-items: center;
     }
 .faqitem:nth-child(2) {
-    background: #00bdbe;
+    background: var(--secondary-color);
     color: white;
 }
 
@@ -253,7 +258,7 @@ html, body{
 
 .btnQ{
     padding: 1.3rem 2.7rem;
-    border: 1px solid #00bdbe;
+    border: 1px solid var(--secondary-color);
     background: inherit;
     margin-top: 2rem;
     font-size: 1rem;
@@ -288,8 +293,8 @@ margin: 10px;
 font-size: 1rem;
 padding: 1.3rem 2.8rem;
 border-radius: 4px;
-border: 1px solid #00bdbe;
-background:#00bdbe;
+border: 1px solid var(--secondary-color);
+background:var(--secondary-color);
 color: #fff;
     
 }

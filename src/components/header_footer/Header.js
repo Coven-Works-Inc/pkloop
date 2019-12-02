@@ -1,6 +1,6 @@
 import React from 'react'
 import './header_footer.css'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Logo from '../../assets/logo/Logo.png'
 
 function Header () {
@@ -12,28 +12,28 @@ function Header () {
       <div className='links'>
         <ul>
           <li>
-            <a>How it works</a>
+            <Link to='#works'>How it works</Link>
           </li>
           <li>
-            <a>Pricing</a>
+            <Link to='/pricing'>Pricing</Link>
           </li>
           <li>
-            <a>FAQs</a>
+            <Link to='/faqs'>FAQs</Link>
           </li>
           <li>
-            <a>About us</a>
+            <Link to='/about'>About us</Link>
           </li>
           <li>
-            <a>Send parcel</a>
+            <Link to='/send'>Send parcel</Link>
           </li>
           <li>
-            <a>List your trip</a>
+            <Link to='/trip'>List your trip</Link>
           </li>
           <li>
-            <a>Log in</a>
+            <Link to='/login'>Log in</Link>
           </li>
           <li>
-            <a>Sign up</a>
+            <Link to='/signup'>Sign up</Link>
           </li>
         </ul>
       </div>
