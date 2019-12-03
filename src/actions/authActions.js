@@ -21,7 +21,7 @@ export const registerUser = (userData, history) => dispatch => {
         .post(`${BASE_URL}/users/signup`, userData)
         .then(res => {
             console.log(res.data)
-            history.push('/verify')
+            history.push('/confirm')
         })
         .catch(err => {
             dispatch({

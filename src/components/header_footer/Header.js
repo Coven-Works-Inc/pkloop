@@ -6,10 +6,6 @@ import { Link as Linker } from 'react-scroll'
 
 
 class Header extends Component {
-  // let menu = true;
-  // const showMenu = () => {
-  //   menu = !menu
-  // }
   state = {
     menu: false
   }
