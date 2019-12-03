@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import './header_footer.css'
-import { Switch, Link, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import Logo from '../../assets/logo/Logo.png'
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
 
 class Header extends Component {
   // let menu = true;
@@ -29,7 +31,7 @@ class Header extends Component {
           <div className='menu-links'>
             <ul>
               <li>
-                <Link to='#works'>How it works</Link>
+                <Link activeClass="active" to="works" spy={true} smooth={true} offset={114} duration={500}>How it works</Link>
               </li>
               <li>
                 <Link to='/pricing'>Pricing</Link>
