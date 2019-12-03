@@ -8,6 +8,7 @@ import Pricing from './components/pricing'
 import Trips from './components/trips'
 import About from './components/about'
 import Parcel from './components/parcel'
+import Confirm from './components/confirm'
 
 const Routes = () => {
   return (
@@ -18,6 +19,7 @@ const Routes = () => {
       <Route exact component={About} path='/about' />
       <Route component={Parcel} path='/parcel' />
       <Route component={Trips} path='/trips' />
+      <Route component={Confirm} path='/confirm' />
       <Route exact component={Home} path='/' />
     </Switch>
   )

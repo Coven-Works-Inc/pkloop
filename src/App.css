@@ -161,6 +161,7 @@ html, body{
     font-weight: lighter;
     font-size: 1rem;
     color: #00bdbe;
+    cursor: pointer;
 }
 
 #works .send_travel .lighter{
@@ -228,15 +229,21 @@ html, body{
     justify-content: center;
 }
 
-.cargo_items{
+.cargo_items {
     margin: 0.625rem;
     border: 1px solid var(--secondary-color);
     padding: 1.2rem 2rem;
     border-radius: 4px;
     font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 1s ease-out;
 }
 
-.cargo_items:first-child{
+.cargo_items h3 {
+    color: #fff;
+}
+
+a:first-child .cargo_items {
     background: var(--secondary-color);
 }
 
@@ -344,9 +351,10 @@ html, body{
     border: 1px solid var(--secondary-color);
     background:var(--secondary-color);
     color: #fff;
+    cursor: pointer;
 }
 
-.cta_items:nth-child(2) {
+a:nth-child(2) .cta_items {
     padding: 1.3rem 2.5rem;
     border: 1px solid #fff;
     background: inherit;
@@ -409,4 +417,6 @@ footer {
 
 .empty-page {
     height: 30rem;
+    padding: 2rem;
+    text-align: center;
 }

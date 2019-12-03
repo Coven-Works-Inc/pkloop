@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Cta = () => {
   return (
@@ -8,9 +9,12 @@ const Cta = () => {
           <p className='main'>Ready to send or deliver a parcel?</p>
         </div>
         <div className='cta_box'>
-          <button className='cta_items'>SEND A PARCEL</button>
-
-          <button className='cta_items'>LIST YOUR TRIP</button>
+          <Link to="/parcel" style={{ textDecoration: 'none' }}>
+            <button className='cta_items'>SEND A PARCEL</button>
+          </Link>
+          <Link to="/trips" style={{ textDecoration: 'none' }}>
+            <button className='cta_items'>LIST YOUR TRIP</button>
+          </Link>
         </div>
       </div>
     </div>
