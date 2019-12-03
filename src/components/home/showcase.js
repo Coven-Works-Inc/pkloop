@@ -5,9 +5,11 @@ function Showcase () {
     <div id='showcase'>
       <div className='showcase-content'>
         <h2>
-          Send anything through <br />
-          travelers around the world
+          Same day global package delivery <br />
+          through trusted travelers
+          <br /> around the world.
         </h2>
+        <h3>Get Started Now</h3>
         <p>
           PKLoop connects senders with travelers to facilitate parcel delivery
           <br />
