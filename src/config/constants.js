@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://pkloopapi.herokuapp.com/api/v1'
+export const BASE_URL = 'https://pkloop-api.herokuapp.com/api/v1'
