@@ -55,8 +55,8 @@ class Header extends Component {
             </ul>
           </div>
           <div className="menu-bars" onClick={this.showMenu}>
-            {menu && <i class="fas fa-times"></i>}
-            {!menu && <i class="fas fa-bars"></i>}
+            {menu && <i className="fas fa-times"></i>}
+            {!menu && <i className="fas fa-bars"></i>}
           </div>
         </div>
         {menu && <div className='mobile-menu'>
