@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import './header_footer.css'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 import Logo from '../../assets/logo/Logo.png'
-import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { Link as Linker } from 'react-scroll'
 
 
 class Header extends Component {
@@ -31,28 +31,28 @@ class Header extends Component {
           <div className='menu-links'>
             <ul>
               <li>
-                <Link activeClass="active" to="works" spy={true} smooth={true} offset={114} duration={500}>How it works</Link>
+                <Linker activeClass="active" to="works" spy={true} smooth={true} offset={-114} duration={500}>How it works</Linker>
               </li>
               <li>
-                <Link to='/pricing'>Pricing</Link>
+                <Link to="/pricing">Pricing</Link>
               </li>
               <li>
-                <Link to='/faqs'>FAQs</Link>
+                <Linker to="faqs" spy={true} smooth={true} offset={-114} duration={500}>FAQs</Linker>
               </li>
               <li>
-                <Link to='/about'>About us</Link>
+                <Link to="/about">About us</Link>
               </li>
               <li>
-                <Link to='/send'>Send parcel</Link>
+                <Link to="/parcel">Send parcel</Link>
               </li>
               <li>
-                <Link to='/trip'>List your trip</Link>
+                <Link to="/trips">List your trip</Link>
               </li>
               <li>
                 <Link to='/login'>Log in</Link>
               </li>
               <li>
-                <Link to='/signup'>Sign up</Link>
+                <Link to='/register'>Sign up</Link>
               </li>
             </ul>
           </div>

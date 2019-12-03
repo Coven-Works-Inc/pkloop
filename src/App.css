@@ -68,6 +68,7 @@ html, body{
   list-style: none;
   justify-content: space-between;
   padding: 0;
+  cursor: pointer;
 }
 
 #navbar ul li a{
@@ -244,23 +245,26 @@ html, body{
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    height: 47rem;
-    
+    padding: 100px 0px;
 }
 
 #faqs h2 {
     margin-bottom: 3.5rem;
 }
 
+.faqitem {
+    padding: 0.20rem 20rem;
+}
+
 .faqitem .question {
     background: #fff;
     padding: 1rem 2rem;
     /* text-align: start; */
-    margin: 0.20rem 20rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    width: 100%;
 }
 
 .faqitem .question.active {
@@ -279,8 +283,8 @@ html, body{
     font-display: thin;
     color: rgb(94, 94, 94);
     text-align: left;
-    margin: 0.20rem 20rem;
     padding: 1rem 2rem;
+    width: 100%;
 }
 
 .faqitem h3 {
@@ -314,14 +318,15 @@ html, body{
     height: 400px;
     width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    /* flex-direction: column; */
     align-items: center;
     color: #fff;
-    align-content: center;
+    /* align-content: center; */
 }
 
 .cta_send .main {
-    margin-top: 111px;
+    /* margin-top: 111px; */
     font-size: 3.125rem;
 }
 
@@ -400,4 +405,8 @@ footer {
     width: 80%; 
     text-align: center; 
     margin-left: 12rem
+}
+
+.empty-page {
+    height: 30rem;
 }

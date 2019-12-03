@@ -57,22 +57,20 @@ class Faqs extends Component {
   render() {
 
     return (
-      <div>
-        <div id='faqs'>
-          <h2>Frequently Asked Questions</h2>
-          {this.state.questions.map((question, key) => (<div key={key} className='faqitem'>
-            <div onClick={() => this.toggleAnswer(key)} className={"question " + (question.active ? 'active' : '')}>
-              <h3>{question.question}</h3>
-              <i className='fas fa-question' />
-            </div>
-            {question.active && <div className="answer">
-              <p>{question.answer}</p>
-            </div>}
+      <div id='faqs' className="faqs">
+        <h2>Frequently Asked Questions</h2>
+        {this.state.questions.map((question, key) => (<div key={key} className='faqitem'>
+          <div onClick={() => this.toggleAnswer(key)} className={"question " + (question.active ? 'active' : '')}>
+            <h3>{question.question}</h3>
+            <i className='fas fa-question' />
           </div>
-          ))}
-          <div>
-            <button className='btnQ'>MORE QUESTIONS</button>
-          </div>
+          {question.active && <div className="answer">
+            <p>{question.answer}</p>
+          </div>}
+        </div>
+        ))}
+        <div>
+          <button className='btnQ'>MORE QUESTIONS</button>
         </div>
       </div>
     )
