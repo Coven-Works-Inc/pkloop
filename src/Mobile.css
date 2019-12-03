@@ -1,14 +1,24 @@
 @media (max-width: 375px){
-    #navbar {
-    flex-direction: column;
+#navbar {
+    padding: 2rem;
 }
 
 body{
     color: #333;
 }
  
-#navbar ul{
+/* #navbar ul{
     display: none;
+} */
+
+/* .loginright, .regright {
+    display: none;
+} */
+
+#container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #showcase {
@@ -84,7 +94,6 @@ body{
     text-align: left;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 100%;
     margin-left: 0rem;
     margin-top: 1rem
 }
@@ -117,7 +126,6 @@ body{
 
 #works_box .works_item p{
     font-size: 1.1rem;
-    text-align: justify;
     line-height: 1.2rem;
     margin-left: 12px;
 }
@@ -155,14 +163,18 @@ body{
 }
 
 .cargo_items{
-    margin: 0.625rem;
+    padding: 1rem 1.5rem;
     border: 1px solid #00bdbe;
-    padding: 0.1rem 0.5rem;
+    margin: 0.625rem;
     border-radius: 4px;
     font-size: 0.5rem;
     text-align: center;
 }
 
+.cargo_items h3 {
+    font-size: 0.7rem;
+    margin: 0;
+}
 
 .cargo_items:first-child{
     background: #00bdbe;
@@ -258,5 +270,9 @@ body{
 .copyright{
     margin: 0rem;
     padding: 0.3rem;
+}
+
+.form-group {
+    text-align: center;
 }
 }

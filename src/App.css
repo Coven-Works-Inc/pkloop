@@ -41,11 +41,11 @@ html, body{
 #navbar {
     background: #fff;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     color: #000;
     overflow: auto;
-    padding: 2rem;
+    padding: 2rem 4rem;
     flex-wrap: nowrap;
 }
 
@@ -58,10 +58,12 @@ html, body{
     text-decoration: none;
 }
 
-#navbar ul{
+#navbar ul {
   display: flex;
   align-items: center;
   list-style: none;
+  justify-content: space-between;
+  padding: 0;
 }
 
 #navbar ul li a{
@@ -77,28 +79,39 @@ html, body{
     border-radius: 5px;
 }
 
+.menu-bars {
+    display: none;
+}
+
+.menu-links {
+    transition: all ease-in-out 1.5s;
+}
+
 #showcase {
     background: url('../src/assets/showcase.png') no-repeat center center/cover;
     height: 800px;
     width: 100vw;
     color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .showcase-content{
     display: flex;
     flex-direction: column;
    padding: 10%;
-   max-width: 50%;
+   max-width: 75%;
    line-height: 4rem;
    text-align: center;
    align-content: center;
    align-items: center;
    justify-content: center;
-   /* margin-left: 15%; */
+
 }
 
 #showcase .showcase-content h2{
-    font-size: 3.5rem;
+    font-size: 4rem;
     margin-bottom: 2rem;
 }
 
@@ -135,6 +148,7 @@ html, body{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 1.5rem;
 }
 
 #works .send_travel p{
@@ -181,6 +195,7 @@ html, body{
 #works_box .works_item p{
     font-size: 1.5rem;
     line-height: 1.8rem;
+    margin-top: 2rem;
 }
 
 
@@ -198,12 +213,14 @@ html, body{
 
 #cargo h2 {
     font-size: 3rem;
+    margin-bottom: 1.5rem;
 }
 
 #cargo p{
     font-size: 1.5rem;
     line-height: 2.5rem;
     text-align: center;
+    margin-bottom: 2rem;
 }
 
 .cargo_buttons{
@@ -214,7 +231,7 @@ html, body{
 .cargo_items{
     margin: 0.625rem;
     border: 1px solid var(--secondary-color);
-    padding: 0.2rem 2rem;
+    padding: 1.2rem 2rem;
     border-radius: 4px;
     font-size: 0.9rem;
 }
@@ -229,11 +246,16 @@ html, body{
     justify-content: center;
     text-align: center;
     height: 47rem;
+    
+}
+
+#faqs h2 {
+    margin-bottom: 3.5rem;
 }
 
 .faqitem {
         background: #fff;
-        padding: 0rem 2rem;
+        padding: 1rem 2rem;
         text-align: start;
         margin: 0.20rem 20rem;
         display: flex;
@@ -261,7 +283,8 @@ html, body{
 .faqitem h3{
     font-size: 0.95rem;
 }
-.fas{
+
+.fa-question {
     border: 2px solid black;
     padding: 3px;
     border-radius: 3px;
@@ -302,6 +325,7 @@ html, body{
 .cta_send .cta_box{
     display: flex;
     justify-content:center ;
+    margin-top: 2rem;
 }
 
 .cta_items{

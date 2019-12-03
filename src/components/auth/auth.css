@@ -35,8 +35,11 @@ html, body{
 
 .left{
     display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
+    /* flex-direction: column;
+    align-items: flex-start; */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     
 }
 
@@ -44,6 +47,7 @@ html, body{
     font-size: 2.5rem;
     margin-bottom: 10px;
     margin-left: 0rem;
+    line-height: 2.5rem;
 }
 
 .left p{
@@ -56,11 +60,12 @@ html, body{
 }
 
 .inner_container{
-    margin-top: 10rem;
-    margin-left: 8rem;
+    /* margin-top: 10rem; */
+    /* margin-left: 8rem; */
     display: flex;
     flex-direction: column;
     align-content: flex-start;
+    width: 90%;
 }
 
 #contact-form .form-group{
@@ -68,7 +73,8 @@ html, body{
 }
 
 #contact-form input{
-    width: 27.82rem;
+    /* width: 27.82rem; */
+    width: 100%;
     padding: 20px;
     height: 50px;
     border: 1px  #ddd solid;
@@ -77,6 +83,10 @@ html, body{
 #contact-form input:focus{
     outline: none;
     border: 1px  #00bdbe solid;
+}
+
+#contact-form > p {
+    text-align: center;
 }
 
 .btn{
@@ -91,11 +101,14 @@ html, body{
     margin-top: 10px;
 }
 
-.inner_container p{
+.inner_container p {
     text-align: left;
     font-size: 1rem;
 }
 
+.inner_container div:nth-child(2) p {
+    width: 70%;
+}
 
 .btn_google{
     display: flex;
@@ -120,10 +133,11 @@ html, body{
     margin-left: 5rem;
 }
 
-/* .terms p{
-    text-align: start;
-    font-size: 14px;
-} */
+.terms p {
+    text-align: center;
+    /* text-align: start;
+    font-size: 14px; */
+}
 
 .terms span{
     color: #000
