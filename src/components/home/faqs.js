@@ -44,18 +44,15 @@ class Faqs extends Component {
 
   toggleAnswer = (index) => {
     let question = { ...this.state.questions[index] };
-    console.log(question.active);
     question.active = !question.active;
     let questions = [...this.state.questions]
     questions[index] = question;
-    // console.log();
     this.setState({
       questions: questions
     });
   }
 
   render() {
-
     return (
       <div id='faqs' className="faqs">
         <h2>Frequently Asked Questions</h2>
