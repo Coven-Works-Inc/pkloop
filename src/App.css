@@ -41,12 +41,16 @@ html, body{
 #navbar {
     background: #fff;
     display: flex;
+    width: 100vw;
     justify-content: space-between;
     align-items: center;
     color: #000;
     overflow: auto;
     padding: 2rem 4rem;
     flex-wrap: nowrap;
+    position: fixed;
+    position: sticky;
+    top: 0;
 }
 
  #navbar .logo{
@@ -133,13 +137,11 @@ html, body{
 
 #works {
     text-align: center;
-    /* margin-top: 100px; */
-    /* height: 550px; */
+    padding: 100px 0px;
 }
 
 #works h2{
     font-size: 3rem;
-    margin-top: 50px;
     font-weight: bold;
 }
 
@@ -147,7 +149,7 @@ html, body{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
 }
 
 #works .send_travel p{
@@ -175,7 +177,6 @@ html, body{
     margin-top: 2rem;
     display: flex;
     max-width: 100%;
-    padding: 2rem;
     justify-content: space-around;
     text-align: center;
     align-items: center;  

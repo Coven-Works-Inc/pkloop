@@ -6,7 +6,7 @@ import works_3 from '../../assets/How it works 3.png'
 
 const Works = () => {
   return (
-    <div id='works'>
+    <div id='works' className="works">
       <h2>How it works</h2>
       <div className='send_travel'>
         <p>For Senders</p>
