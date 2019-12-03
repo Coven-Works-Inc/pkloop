@@ -9,7 +9,7 @@ function Showcase () {
           through trusted travelers
           <br /> around the world.
         </h2>
-        <h3>Get Started Now</h3>
+        {/* <h3>Get Started Now</h3> */}
         <p>
           PKLoop connects senders with travelers to facilitate parcel delivery
           <br />
