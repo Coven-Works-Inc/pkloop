@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import './header_footer.css'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Logo from '../../assets/logo/Logo.png'
 import { Link as Linker } from 'react-scroll'
 
