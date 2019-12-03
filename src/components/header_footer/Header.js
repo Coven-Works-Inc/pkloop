@@ -26,7 +26,9 @@ class Header extends Component {
       <Fragment>
         <div id='navbar'>
           <div className='logo'>
-            <img src={Logo} alt='Logo' />
+            <Link to="/">
+              <img src={Logo} alt='Logo' />
+            </Link>
           </div>
           <div className='menu-links'>
             <ul>
