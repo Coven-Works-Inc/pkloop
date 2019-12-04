@@ -5,6 +5,7 @@ import { registerUser } from '../../actions/authActions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import loader from '../../assets/loader.gif'
 
 class Register extends Component {
   state = {
@@ -15,7 +16,20 @@ class Register extends Component {
     phone: "",
     password: "",
     confirmPassword: "",
-    errors: {}
+    errors: {},
+    loading: false
+  }
+
+  // componentDidUpdate() {
+  //   console.log(this.props);
+  // }
+
+  componentWillReceiveProps() {
+    // console.log(this.props);
+    this.setState({
+      errors: this.props.errors,
+      // loading: this.props.loading
+    });
   }
 
   handleChange = e => {
@@ -43,6 +57,9 @@ class Register extends Component {
   }
 
   render() {
+    const { errors, loading } = this.state;
+    console.log(errors);
+
     return (
       <div id='container'>
         <div className='left items'>
@@ -128,7 +145,15 @@ class Register extends Component {
                     onChange={this.handleChange}
                   />
                 </div>
-                <button className='btn'>SIGN UP NOW</button>
+                {errors.message && <div className="error-msg">
+                  <p>{errors.message}</p>
+                </div>}
+                {/* !loading &&  */}
+                <button className="btn">SIGN UP NOW</button>
+                {/* {loading && <img
+                  src={loader}
+                  alt=''
+                />} */}
               </form>
               <p>OR</p>
               <button className='btn_google'>
@@ -180,7 +205,7 @@ Register.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   return {
     auth: state.auth,
-    error: state.errors,
+    errors: state.errors,
     loading: state.loading
   }
 }

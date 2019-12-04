@@ -18,12 +18,13 @@ export const registerUser = (userData, history) => dispatch => {
     })
 
     axios
-        .post(`${BASE_URL}/users/signup`, userData)
+        .post(`${BASE_URL}/auth/signup`, userData)
         .then(res => {
-            console.log(res.data)
-            history.push('/confirm')
+            // console.log(res.data)
+            history.push('/verify')
         })
         .catch(err => {
+            console.log(err.response);
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response ? err.response.data : { message: 'Something went wrong. Please try again' }
@@ -47,7 +48,7 @@ export const loginUser = (userData, history) => dispatch => {
     })
 
     axios
-        .post(`${BASE_URL}/users/login`, userData)
+        .post(`${BASE_URL}/auth/login`, userData)
         .then(async res => {
             const { token } = res.data
             localStorage.setItem('jwtToken', token)
@@ -95,9 +96,12 @@ export const verify = (token, history) => dispatch => {
     })
 
     axios
-        .post(`${BASE_URL}/users/verify`, { token })
+        .post(`${BASE_URL}/auth/verify`, { token })
         .then(async res => {
-            history.push('/login')
+            console.log(res);
+            setTimeout(() => {
+                history.push('/login')
+            }, 2000);
         })
         .catch(err => dispatch({ type: GET_ERRORS, payload: err.response ? err.response.data : { message: 'Something went wrong' } }))
         .finally(() => dispatch({
