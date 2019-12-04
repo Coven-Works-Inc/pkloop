@@ -318,6 +318,14 @@ a:first-child .cargo_items {
     color: #00bdbe;
     border-radius: 3px;
     line-height: normal;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btnQ:hover {
+    /* border: 1px solid #fff; */
+    background-color: #fff;
+    color: var(--secondary-color);
 }
 
 .cta_send {
@@ -412,11 +420,24 @@ footer {
 .footerdiv hr {
     width: 80%; 
     text-align: center; 
-    margin-left: 12rem
+    margin-left: 12rem;
 }
 
 .empty-page {
     height: 30rem;
     padding: 2rem;
     text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column; */
+}
+
+.empty-page p {
+    margin: 0 auto;
+    color: #fff;
+    background-color: rgba(0, 189, 190);
+    padding: 2rem 4rem;
+    border-radius: 0.5rem;
+    width: 50%;
 }

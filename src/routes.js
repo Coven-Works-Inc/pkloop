@@ -17,9 +17,9 @@ const Routes = () => {
       <Route exact component={Register} path='/register' />
       <Route exact component={Pricing} path='/pricing' />
       <Route exact component={About} path='/about' />
-      <Route component={Parcel} path='/parcel' />
-      <Route component={Trips} path='/trips' />
-      <Route component={Confirm} path='/confirm' />
+      <Route exact component={Parcel} path='/parcel' />
+      <Route exact component={Trips} path='/trips' />
+      <Route exact component={Confirm} path='/confirm' />
       <Route exact component={Home} path='/' />
     </Switch>
   )
