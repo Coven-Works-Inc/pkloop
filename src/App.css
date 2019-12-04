@@ -441,3 +441,79 @@ footer {
     border-radius: 0.5rem;
     width: 50%;
 }
+
+/* User Dashboard Styles */
+
+.dashboard-header {
+    background: url(/static/media/sendparcel.98e335a8.jpg) no-repeat center center/cover;
+    height: 240px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.dashboard-header h2 {
+    font-size: 3rem;
+}
+
+.dashboard-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+
+.dashboard-menu p {
+    border: 2px solid var(--secondary-color);
+    margin: 10px;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: lighter;
+    font-size: 1rem;
+    color: #00bdbe;
+    cursor: pointer;
+}
+
+.dashboard-menu p:hover {
+    background-color: #fff;
+}
+
+.dashboard-menu .lighter {
+    border: 2px solid rgba(0, 189, 190, 0.25);
+    margin: 10px;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: lighter;
+    font-size: 1rem;
+    color: #00bdbe;
+}
+
+.dashboard-menu .lighter:hover {
+    border: 2px solid rgba(0, 189, 190, 0.5);
+}
+
+.dashboard-menu .gray {
+    border: 2px solid rgba(136, 160, 160, 0.25);
+    color: rgb(136, 160, 160);
+    margin: 10px;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: lighter;
+    font-size: 1rem;
+}
+
+.dashboard-menu .gray:hover {
+    border: 2px solid rgba(136, 160, 160, 0.5);
+}
+
+.dashboard-body .transactions-content {
+    height: 20rem;
+    display: flex;
+    align-items: row;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+/* END OF User Dashboard Styles */
