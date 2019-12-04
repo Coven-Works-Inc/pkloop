@@ -15,7 +15,7 @@ const signup = () => {
           </div>
           <div id='contact-form' className='py-2'>
             <form>
-              <div class='form-group'>
+              <div className='form-group'>
                 <input
                   type='email'
                   name='email'
@@ -35,8 +35,8 @@ const signup = () => {
               <button className='btn'>Log in now</button>
             </form>
             <p style={{ textAlign: 'center' }}>OR</p>
-            <button class='btn_google'>
-              <i class='icon'>
+            <button className='btn_google'>
+              <i className='icon'>
                 <img
                   src='https://img.icons8.com/color/30/000000/google-logo.png'
                   alt=''
@@ -45,16 +45,16 @@ const signup = () => {
               <span className='text'> Log in with Google </span>
             </button>
             <button
-              class='btn_google'
+              className='btn_google'
               style={{ background: '#3b5998', color: 'white' }}
             >
-              <i class='icon' style={{ marginLeft: '0.7rem' }}>
+              <i className='icon' style={{ marginLeft: '0.7rem' }}>
                 <img
                   src='https://img.icons8.com/color/27/000000/facebook-f.png'
                   alt=''
                 />
               </i>
-              <span class='text'> Log in with Facebook</span>
+              <span className='text'> Log in with Facebook</span>
             </button>
           </div>
           <div className='terms'>
