@@ -9,6 +9,7 @@ import Trips from './components/trips'
 import About from './components/about'
 import Parcel from './components/parcel'
 import Verify from './components/verify'
+import Dashboard from './components/dashboard'
 
 const Routes = () => {
   return (
@@ -20,6 +21,7 @@ const Routes = () => {
       <Route exact component={Parcel} path='/parcel' />
       <Route exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
+      <Route exact component={Dashboard} path='/dashboard' />
       <Route exact component={Home} path='/' />
     </Switch>
   )
