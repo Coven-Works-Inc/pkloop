@@ -1,8 +1,16 @@
-import React from 'react'
+import React, {Component} from 'react'
 
 import './auth.css'
 
-const signup = () => {
+class Register extends Component {
+
+  state = {
+    username: "",
+    password: ""
+  }
+
+
+  render(){
   return (
     <div id='container'>
       <div className='left items'>
@@ -17,10 +25,10 @@ const signup = () => {
             <form>
               <div className='form-group'>
                 <input
-                  type='email'
-                  name='email'
-                  id='email'
-                  placeholder='Email Address'
+                  type='text'
+                  name='username'
+                  id='username'
+                  placeholder='Username'
                 />
               </div>
               <div className='form-group'>
@@ -68,6 +76,7 @@ const signup = () => {
       <div className='loginright items' />
     </div>
   )
+}
 }
 
 export default signup
