@@ -57,7 +57,9 @@ export const loginUser = (userData, history) => dispatch => {
             await dispatch(setCurrentUser(decoded, token));
             history.push('/dashboard')
         })
-        .catch(err => dispatch({ type: GET_ERRORS, payload: err.response ? err.response.data : { message: 'Something went wrong' } }))
+        .catch(err => {
+            console.log(err.response.data)
+            dispatch({ type: GET_ERRORS, payload: err.response ? err.response.data : { message: 'Something went wrong' } })})
         .finally(() => dispatch({
             type: LOADING,
             payload: false
@@ -76,6 +78,7 @@ export const fetchUser = history => (
                 localStorage.setItem('token', res.data.data.token)
             })
             .catch(err => {
+        
                 // history.push('/login')
                 // // window.location.href = '/login'
                 // dispatch({ type: GET_ERRORS, payload: err.response ? err.response.data : { message: 'Something went wrong' } })

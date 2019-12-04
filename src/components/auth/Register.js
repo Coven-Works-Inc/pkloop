@@ -58,7 +58,7 @@ class Register extends Component {
 
   render() {
     const { errors, loading } = this.state;
-    console.log(errors);
+    // console.log(errors);
 
     return (
       <div id='container'>
@@ -74,6 +74,9 @@ class Register extends Component {
             </p>
             </div>
             <div id='contact-form' className='py-2'>
+              {errors.message && <div className="error-msg">
+                <p>{errors.message}</p>
+              </div>}
               <form onSubmit={this.handleSubmit}>
                 <div className='form-group'>
                   <input
@@ -145,9 +148,6 @@ class Register extends Component {
                     onChange={this.handleChange}
                   />
                 </div>
-                {errors.message && <div className="error-msg">
-                  <p>{errors.message}</p>
-                </div>}
                 {/* !loading &&  */}
                 <button className="btn">SIGN UP NOW</button>
                 {/* {loading && <img
