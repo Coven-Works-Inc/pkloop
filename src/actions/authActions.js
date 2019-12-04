@@ -179,15 +179,17 @@ export const setCurrentUser = (decoded, token) => (
 
 // Log user out
 export const logoutUser = () => dispatch => {
-    console.log('logoutUser')
+
     // Remove token from localStorage
     localStorage.removeItem('jwtToken');
+
     // Remove auth header for future requests
     setAuthToken(false);
+
     // Set current user to {} which will set isAuthenticated to false
     dispatch(setCurrentUser({}));
 
-    window.location.href = '/login';
+    window.location.href = '/';
 };
 
 export const changePassword = data => (
