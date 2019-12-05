@@ -30,6 +30,9 @@ class Register extends Component {
       errors: this.props.errors,
       // loading: this.props.loading
     });
+    setTimeout(() => {
+      this.setState({ errors: '' });
+    }, 4000);
   }
 
   handleChange = e => {
