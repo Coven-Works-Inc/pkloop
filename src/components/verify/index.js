@@ -37,9 +37,6 @@ class Verify extends Component {
     }
 
     render() {
-        // console.log(this.props.location);
-        // console.log(this.props.location.search.split('=')[1]);
-
         const { errors } = this.state
         console.log(errors);
 
