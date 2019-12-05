@@ -1,0 +1,11 @@
+.banner {
+    display: flex;
+    background: url('../../assets/default.jpg') no-repeat center center/cover;
+    height: 200px;
+    font-size: 3.2rem;
+    align-items: center;
+    color: #fff;
+    justify-content: center;
+    /* font-weight: bold; */
+    letter-spacing: -0.87px;
+}

@@ -1,0 +1,26 @@
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+
+.container{
+    padding: 2rem;
+    height: 100%;
+    background-color: #fff;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.text{
+    margin-top: 1rem;
+}
+
+.container h3{
+    color: #00bdbe;
+}
+
+.container b{
+    color: rgb(241, 74, 74);
+}
+

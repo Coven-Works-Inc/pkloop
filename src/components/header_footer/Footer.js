@@ -4,23 +4,31 @@ import { Link } from 'react-router-dom'
 
 import Icon from '../../assets/Footer Icon.png'
 
-function Footer() {
+function Footer () {
   return (
     <div className='footerdiv'>
       <div className='footer'>
         <img src={Icon} alt='' />
         <ul className='links'>
           <li>
-            <Link to="/" style={{ textDecoration: 'none' }}>Terms of Service</Link>
+            <Link to='' style={{ textDecoration: 'none' }}>
+              Terms of Service
+            </Link>
           </li>
           <li>
-            <Link to="/" style={{ textDecoration: 'none' }}>Privacy Policy</Link>
+            <Link to='/' style={{ textDecoration: 'none' }}>
+              Privacy Policy
+            </Link>
           </li>
           <li>
-            <Link to="/" style={{ textDecoration: 'none' }}>Trust and Safety</Link>
+            <Link to='/tns' style={{ textDecoration: 'none' }}>
+              Trust and Safety
+            </Link>
           </li>
           <li>
-            <Link to="/" style={{ textDecoration: 'none' }}>Contact us</Link>
+            <Link to='/' style={{ textDecoration: 'none' }}>
+              Contact us
+            </Link>
           </li>
         </ul>
         <div className='footer_icons'>
