@@ -29,7 +29,6 @@ html, body{
     padding-top: 20px; 
 }
 
-
 .clr{
     clear: both;
 }
@@ -421,6 +420,14 @@ footer {
     width: 80%; 
     text-align: center; 
     margin-left: 12rem;
+}
+
+.inner_container {
+    max-height: 90vh;
+    overflow-y: scroll;
+    height: 100vh;
+    padding: 2rem 0rem;
+    overflow-y: scroll;
 }
 
 .empty-page {

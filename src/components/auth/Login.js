@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { loginUser } from '../../actions/authActions'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import './auth.css'
 
@@ -9,6 +10,15 @@ class Login extends Component {
     username: '',
     password: '',
     errors: {}
+  }
+
+  componentWillReceiveProps() {
+    this.setState({
+      errors: this.props.error
+    });
+    setTimeout(() => {
+      this.setState({ errors: '' });
+    }, 4000);
   }
 
   onChangeHandler = e => {
@@ -28,7 +38,7 @@ class Login extends Component {
     this.props.loginUser(userData, this.props.history)
   }
 
-  render () {
+  render() {
     const { errors } = this.state
     return (
       <div id='container'>
@@ -96,7 +106,7 @@ class Login extends Component {
             <div className='terms'>
               <p>
                 Don't have a PKLoop account?
-                <span className='sec_text'> Sign up now</span>
+                <span className='sec_text'> <Link to="/register" style={{ textDecoration: 'none', color: 'rgba(0, 189, 190)' }}>Sign up now</Link></span>
               </p>
             </div>
           </div>
