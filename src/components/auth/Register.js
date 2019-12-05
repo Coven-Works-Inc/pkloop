@@ -4,7 +4,7 @@ import './auth.css'
 import { registerUser } from '../../actions/authActions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import loader from '../../assets/loader.gif'
 
 class Register extends Component {
@@ -185,7 +185,7 @@ class Register extends Component {
                 <span>Privacy Policy</span>.
             </p>
               <p>
-                Already have an account ? <span>Log in</span>
+                Already have an account? <span className='sec_text'> <Link to="/login" style={{ textDecoration: 'none', color: 'rgba(0, 189, 190)' }}>Log in</Link></span>
               </p>
             </div>
           </div>

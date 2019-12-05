@@ -168,13 +168,11 @@ footer{
     padding: 0.20rem 10rem;
 }
 
-.inner_container {
-    max-height: 90vh;
-    overflow-y: scroll;
-    /* padding-top: 13rem; */
-}
-
 .inner_container div:nth-child(2) p {
     width: 100%;
+}
+
+.loginright, .regright {
+    display: none;
 }
 }
