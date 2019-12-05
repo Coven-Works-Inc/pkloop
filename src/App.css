@@ -425,7 +425,6 @@ footer {
 .inner_container {
     max-height: 90vh;
     overflow-y: scroll;
-    height: 100vh;
     padding: 2rem 0rem;
     overflow-y: scroll;
 }
