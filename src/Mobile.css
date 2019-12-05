@@ -11,9 +11,9 @@ body{
     display: none;
 } */
 
-/* .loginright, .regright {
+.loginright, .regright {
     display: none;
-} */
+}
 
 #container{
     display: flex;
