@@ -5,12 +5,12 @@ import Home from './components/home'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Pricing from './components/pricing'
-import Trips from './components/trips'
+import Trips from './components/trip'
 import About from './components/about'
 import Parcel from './components/parcel'
 import Verify from './components/verify'
 import Dashboard from './components/dashboard'
-import TNS from './components/pages/TnS'
+import Terms from './components/pages/terms'
 
 const Routes = () => {
   return (
@@ -23,7 +23,7 @@ const Routes = () => {
       <Route exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Dashboard} path='/dashboard' />
-      <Route exact component={TNS} path='/tns' />
+      <Route exact component={Terms} path='/terms' />
       <Route exact component={Home} path='/' />
     </Switch>
   )

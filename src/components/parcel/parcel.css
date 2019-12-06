@@ -1,12 +1,15 @@
-.container{
-    background: url('../../assets/default.jpg') no-repeat center center/cover;
-    height: 100vh;
-    width: 100vw;
+.maincontainer{
+    background: url('../../assets/parcel.jpg') no-repeat center center/cover;
+    height: 60vh;
+    max-width: 100%;
     text-align: center;
     color: #fff;
+     margin: auto;
+    overflow: auto;
+    padding-top: 20px; 
 }
 
-.container h1{
+.maincontainer h1{
     font-size: 3rem;
     margin-bottom: 2rem;
     margin-top: 2rem;
@@ -32,7 +35,7 @@
 }
 
 .btnQ {
-    padding: 1.3rem 2.7rem;
+    padding: 1rem 2.7rem;
     border: 1px solid var(--secondary-color);
     background: #00bdbe;
     margin-top: 1rem;
@@ -41,6 +44,7 @@
     border-radius: 3px;
     text-transform: uppercase;
     cursor: pointer;
+    height: 53px
 }
 
 .btnQ:hover {

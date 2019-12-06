@@ -1,13 +1,14 @@
 import React from 'react'
 import HeaderFooter from '../headerFooter'
 import Banner from '../headerFooter'
+
 import './pages.css'
 
 const TnS = () => {
   return (
     <HeaderFooter>
-      <Banner title='Trust & Safety' />
-      <div className='container py-3'>
+      {/* <Banner title='Trust & Safety' /> */}
+      <div className='container pagecontainer py-3'>
         <div>
           <h3>Trust and Safety</h3>
           <p className='text'>

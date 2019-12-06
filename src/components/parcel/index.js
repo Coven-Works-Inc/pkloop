@@ -11,12 +11,12 @@ class Parcel extends Component {
   render () {
     return (
       <HeaderFooter>
-        <div className='container'>
+        <div className='maincontainer'>
           <h1>Send parcel</h1>
           <div className='py-2 form-group'>
             <form onSubmit={this.submitHandler}>
-              <input type='text' placeholder='City, Country' /> <br />
-              <input type='text' placeholder='City, Country' /> <br />
+              <input type='text' placeholder='From: City, Country' /> <br />
+              <input type='text' placeholder='To: City, Country' /> <br />
               <select>
                 <option value='extra large' selected='selected'>
                   Extra large (E.g Big box, electronics)

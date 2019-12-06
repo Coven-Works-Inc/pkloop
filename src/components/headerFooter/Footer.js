@@ -21,7 +21,7 @@ function Footer () {
             </Link>
           </li>
           <li>
-            <Link to='/tns' style={{ textDecoration: 'none' }}>
+            <Link to='/terms' style={{ textDecoration: 'none' }}>
               Trust and Safety
             </Link>
           </li>
