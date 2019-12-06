@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
 
 import './auth.css'
-import { registerUser } from '../../actions/authActions';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
-import loader from '../../assets/loader.gif'
+import { registerUser } from '../../actions/authActions'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { withRouter, Link } from 'react-router-dom'
+// import loader from '../../assets/loader.gif'
 
 class Register extends Component {
   state = {
-    firstname: "",
-    lastname: "",
-    username: "",
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
+    firstname: '',
+    lastname: '',
+    username: '',
+    email: '',
+    phone: '',
+    password: '',
+    confirmPassword: '',
     errors: {},
     loading: false
   }
@@ -24,19 +24,19 @@ class Register extends Component {
   //   console.log(this.props);
   // }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps () {
     // console.log(this.props);
     this.setState({
-      errors: this.props.errors,
+      errors: this.props.errors
       // loading: this.props.loading
-    });
+    })
     setTimeout(() => {
-      this.setState({ errors: '' });
-    }, 4000);
+      this.setState({ errors: '' })
+    }, 4000)
   }
 
   handleChange = e => {
-    const { user } = this.state;
+    const { user } = this.state
     this.setState({
       ...user,
       [e.target.name]: e.target.value
@@ -59,8 +59,8 @@ class Register extends Component {
     this.props.registerUser(newUser, this.props.history)
   }
 
-  render() {
-    const { errors, loading } = this.state;
+  render () {
+    const { errors } = this.state
     // console.log(errors);
 
     return (
@@ -74,12 +74,14 @@ class Register extends Component {
               <p>
                 PKLoop connects senders with travelers to facilitate parcel
                 delivery within 12-48 hours at the cheapest rates
-            </p>
+              </p>
             </div>
             <div id='contact-form' className='py-2'>
-              {errors.message && <div className="error-msg">
-                <p>{errors.message}</p>
-              </div>}
+              {errors.message && (
+                <div className='error-msg'>
+                  <p>{errors.message}</p>
+                </div>
+              )}
               <form onSubmit={this.handleSubmit}>
                 <div className='form-group'>
                   <input
@@ -152,7 +154,7 @@ class Register extends Component {
                   />
                 </div>
                 {/* !loading &&  */}
-                <button className="btn">SIGN UP NOW</button>
+                <button className='btn'>SIGN UP NOW</button>
                 {/* {loading && <img
                   src={loader}
                   alt=''
@@ -184,11 +186,23 @@ class Register extends Component {
             <div className='terms'>
               <p>
                 By signing up, you are indicating that you've read and
-              <br /> agree to the <span>Terms of Use</span> and{' '}
+                <br /> agree to the <span>Terms of Use</span> and{' '}
                 <span>Privacy Policy</span>.
-            </p>
+              </p>
               <p>
-                Already have an account? <span className='sec_text'> <Link to="/login" style={{ textDecoration: 'none', color: 'rgba(0, 189, 190)' }}>Log in</Link></span>
+                Already have an account?{' '}
+                <span className='sec_text'>
+                  {' '}
+                  <Link
+                    to='/login'
+                    style={{
+                      textDecoration: 'none',
+                      color: 'rgba(0, 189, 190)'
+                    }}
+                  >
+                    Log in
+                  </Link>
+                </span>
               </p>
             </div>
           </div>
@@ -197,7 +211,6 @@ class Register extends Component {
       </div>
     )
   }
-
 }
 
 Register.propTypes = {
@@ -213,4 +226,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register))

@@ -1,6 +1,6 @@
 import React from 'react'
-import HeaderFooter from '../../components/header_footer'
-import Banner from '../../components/common/banner'
+import HeaderFooter from '../headerFooter'
+import Banner from '../headerFooter'
 import './pages.css'
 
 const TnS = () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderFooter from '../header_footer'
+import HeaderFooter from '../headerFooter'
 import Showcase from './showcase'
 import Works from './works'
 import Cargo from './cargo'

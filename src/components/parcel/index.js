@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HeaderFooter from '../header_footer'
+import HeaderFooter from '../headerFooter'
 import './parcel.css'
 
 class Parcel extends Component {
@@ -9,8 +9,6 @@ class Parcel extends Component {
     e.preventDefault()
   }
   render () {
-    const text = 'Meaning'
-
     return (
       <HeaderFooter>
         <div className='container'>
