@@ -10,7 +10,7 @@ import About from './components/about'
 import Parcel from './components/parcel'
 import Verify from './components/verify'
 import Dashboard from './components/dashboard'
-import Terms from './components/pages/terms'
+import Trust from './components/pages/trust'
 
 const Routes = () => {
   return (
@@ -23,7 +23,7 @@ const Routes = () => {
       <Route exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Dashboard} path='/dashboard' />
-      <Route exact component={Terms} path='/terms' />
+      <Route exact component={Trust} path='/trust' />
       <Route exact component={Home} path='/' />
     </Switch>
   )
