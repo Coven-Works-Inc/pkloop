@@ -1,0 +1,117 @@
+#banner{
+    background: url('../../assets/default.jpg') no-repeat center center/cover;
+    height: 15rem;
+    width: 100vw;
+    
+}
+
+#banner .bannertext{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: white;
+}
+
+#banner .bannertext h2{
+    font-size: 3.4rem;
+}
+
+.trip_container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 2rem
+}
+
+.trip_container .trip_field{
+    margin-bottom: 0.7rem;
+}
+
+.trip_container .trip_field input,
+.trip_container .trip_field textarea{
+    width: 956px;
+    height: 60px;
+    font-size: 0.9rem;
+    padding: 1rem
+}
+
+.trip_container .trip_field textarea{
+    height: 200px;
+}
+
+/* .btn{
+    padding: 1.3rem 2.7rem;
+    border: 1px solid var(--secondary-color);
+    background: var(--secondary-color);
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: var(--white);
+    border-radius: 3px;
+    line-height: normal;
+} */
+
+
+footer{
+    margin: 10rem 3rem;
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
+}
+
+.footer img{
+    height: 100%;
+    margin: 1.7rem 0rem 0rem 9rem;
+}
+
+.footer p{
+    margin: 3rem 1rem 2rem 1rem;
+
+}
+
+.footer_icons{
+    margin: 2.7rem 6rem 2rem 16rem;
+    font-size: 1.7rem;
+    color: #333;
+    
+}
+
+.fab{
+    margin-right: 0.7rem;
+}
+
+.footer_links{
+    margin-left: 20rem;
+    display: flex;
+}
+
+.copyright{
+    text-align: center;
+    margin: 3rem;
+}
+
+.dup{
+    display: flex;
+    
+}
+
+.dup {
+    margin-bottom: 0.7rem;
+}
+
+.dup input{
+    width: 469px;
+    height: 60px;
+    font-size: 0.9rem;
+    padding: 1rem
+}
+
+.dup input:first-child{
+    margin-right: 1.125rem;
+}
