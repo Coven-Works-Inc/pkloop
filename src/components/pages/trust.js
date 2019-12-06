@@ -1,13 +1,13 @@
 import React from 'react'
 import HeaderFooter from '../headerFooter'
-import Banner from '../headerFooter'
+import Banner from '../common/banner'
 
 import './pages.css'
 
 const TnS = () => {
   return (
     <HeaderFooter>
-      {/* <Banner title='Trust & Safety' /> */}
+      <Banner title='Trust & Safety' />
       <div className='container pagecontainer py-3'>
         <div>
           <h3>Trust and Safety</h3>

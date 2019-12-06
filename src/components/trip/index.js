@@ -1,16 +1,13 @@
 import React from 'react'
 import HeaderFooter from '../headerFooter'
+import Banner from '../common/banner'
 
 import './trips.css'
 
 const index = () => {
   return (
     <HeaderFooter>
-      <section id='banner'>
-        <div class='bannertext'>
-          <h2> List Your Trip </h2>
-        </div>
-      </section>
+      <Banner title='List Your Trip' />
       <section id='list_form'>
         <div className='trip_container'>
           <div className='trip_field'>
@@ -25,7 +22,7 @@ const index = () => {
           <div className='trip_field'>
             <input
               type='text'
-              placeholder='Add Stopovers(stopovers will increase your chances of getting connections)                                                                                                      --'
+              placeholder='Add Stopovers (stopovers will increase your chances of getting connections)                                                                                                       --'
             />
           </div>
           <div className='dup'>
@@ -39,19 +36,22 @@ const index = () => {
             <input type='text' placeholder='Stopover 4   City, Country' />
           </div>
           <div className='trip_field'>
-            <input type='text' />
+            <input
+              type='text'
+              placeholder='Size you are willing to transport, Extra large(E.g Big box, electronics)'
+            />
           </div>
           <div className='trip_field'>
-            <input type='text' />
+            <input
+              type='text'
+              placeholder='Weight of parcel you are willing to transport 0 - 5lbs'
+            />
           </div>
           <div className='trip_field'>
-            <input type='text' />
+            <input type='text' placeholder='Means of transportation Flight' />
           </div>
           <div className='trip_field'>
-            <input type='text' />
-          </div>
-          <div className='trip_field'>
-            <textarea />
+            <textarea placeholder='Additional information' />
           </div>
           <button className='btnQ'>POST YOUR TRIP</button>
         </div>
