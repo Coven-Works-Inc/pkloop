@@ -1,5 +1,5 @@
 import React from 'react'
-import './banner.css'
+import './common.css'
 
 const banner = props => {
   return <div className='banner'>{props.title}</div>

@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Arimo&display=swap');
+
+:root{
+    --primary-color:rgba(0, 113, 188);
+    --secondary-color:rgba(0, 189, 190);
+    --main: #f5fafd;
+    --white: #fff;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body{
+    line-height: 1.2em;
+    font-family: 'Arimo', sans-serif;
+    background:var(--main);
+}
+
+.py-1{ padding: 10px 0px; }
+.py-2{ padding: 20px 0px; }
+.py-3{ padding: 30px 0px; }
+
+#container{
+    display: flex;
+    justify-content: center;
+    padding-top: 4rem;
+    padding-bottom: 10rem;
+    height: 100%;
+
+}
+
+
+#container .price-card{
+    background:inherit;
+    height: 300px;
+    width: 550px;
+    margin: 10px;
+    padding: 2rem;
+    /* display: flex; */
+    
+    
+}
+
+#container .price-card h3{
+    
+    font-size: 1.8rem;
+}

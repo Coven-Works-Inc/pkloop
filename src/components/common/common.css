@@ -9,3 +9,9 @@
     /* font-weight: bold; */
     letter-spacing: -0.87px;
 }
+
+.card{
+    background: #fff;
+    border: 1px solid #fff;
+    height:300px;
+}
