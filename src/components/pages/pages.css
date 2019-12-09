@@ -1,9 +1,9 @@
-/* * {
+.trust-body{
+    background: #f5fafd;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-} */
-
+    height: 100%;
+}
 
 .pagecontainer{
     padding: 2rem;
@@ -11,16 +11,20 @@
     background-color: #fff;
     margin-top: 2rem;
     margin-bottom: 2rem;
+    margin: auto;
+    max-width: 80%;
+    padding-top: 20px; 
 }
+
 .text{
     margin-top: 1rem;
 }
 
-.container h3{
+.pagecontainer h3{
     color: #00bdbe;
 }
 
-.container b{
+.pagecontainer b{
     color: rgb(241, 74, 74);
 }
 
