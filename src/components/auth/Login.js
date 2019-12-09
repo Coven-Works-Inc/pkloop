@@ -3,8 +3,6 @@ import { loginUser } from '../../actions/authActions'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import './auth.css'
-
 class Login extends Component {
   state = {
     username: '',
@@ -12,13 +10,13 @@ class Login extends Component {
     errors: {}
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps () {
     this.setState({
       errors: this.props.error
-    });
+    })
     setTimeout(() => {
-      this.setState({ errors: '' });
-    }, 4000);
+      this.setState({ errors: '' })
+    }, 4000)
   }
 
   onChangeHandler = e => {
@@ -38,7 +36,7 @@ class Login extends Component {
     this.props.loginUser(userData, this.props.history)
   }
 
-  render() {
+  render () {
     const { errors } = this.state
     return (
       <div id='container'>
@@ -51,9 +49,11 @@ class Login extends Component {
               <p>Log in to continue access</p>
             </div>
             <div id='contact-form' className='py-2'>
-              {errors.message && <div className="error-msg">
-                <p>{errors.message}</p>
-              </div>}
+              {errors.message && (
+                <div className='error-msg'>
+                  <p>{errors.message}</p>
+                </div>
+              )}
               <form onSubmit={this.onSubmitHandler}>
                 <div className='form-group'>
                   <input
@@ -106,7 +106,18 @@ class Login extends Component {
             <div className='terms'>
               <p>
                 Don't have a PKLoop account?
-                <span className='sec_text'> <Link to="/register" style={{ textDecoration: 'none', color: 'rgba(0, 189, 190)' }}>Sign up now</Link></span>
+                <span className='sec_text'>
+                  {' '}
+                  <Link
+                    to='/register'
+                    style={{
+                      textDecoration: 'none',
+                      color: 'rgba(0, 189, 190)'
+                    }}
+                  >
+                    Sign up now
+                  </Link>
+                </span>
               </p>
             </div>
           </div>

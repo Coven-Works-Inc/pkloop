@@ -7,9 +7,10 @@ import Human from '../../assets/about_img.jpg'
 
 const About = () => {
   return (
+    <div className="about-body">
     <HeaderFooter>
-      <div className='banner'>
-        <div className='bannertext'>
+      <div className='about-banner'>
+        <div className='about-bannertext'>
           <p>
             We are on a mission to help people <br /> access the world.
           </p>
@@ -88,6 +89,7 @@ const About = () => {
       </div>
       <Cta />
     </HeaderFooter>
+    </div>
   )
 }
 
