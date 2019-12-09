@@ -7,6 +7,7 @@ import Human from '../../assets/about_img.jpg'
 
 const About = () => {
   return (
+    <div className="about-body">
     <HeaderFooter>
       <div className='about-banner'>
         <div className='about-bannertext'>
@@ -88,6 +89,7 @@ const About = () => {
       </div>
       <Cta />
     </HeaderFooter>
+    </div>
   )
 }
 
