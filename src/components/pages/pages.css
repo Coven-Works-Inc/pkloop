@@ -1,12 +1,12 @@
-.trust-body{
+.page-body{
     background: #f5fafd;
     margin: 0;
     padding: 0;
     height: 100%;
 }
 
-.pagecontainer{
-    padding: 2rem;
+.page-container{
+    padding: 4rem;
     height: 100%;
     background-color: #fff;
     margin-top: 2rem;
@@ -14,17 +14,19 @@
     margin: auto;
     max-width: 80%;
     padding-top: 20px; 
+    line-height: 1.5rem;
 }
 
-.text{
+.trust-text{
     margin-top: 1rem;
 }
 
-.pagecontainer h3{
+.page-container h3{
     color: #00bdbe;
 }
 
-.pagecontainer b{
+
+.page-container b{
     color: rgb(241, 74, 74);
 }
 

@@ -16,7 +16,7 @@ function Footer () {
             </Link>
           </li>
           <li>
-            <Link to='/' style={{ textDecoration: 'none' }}>
+            <Link to='/privacy' style={{ textDecoration: 'none' }}>
               Privacy Policy
             </Link>
           </li>
