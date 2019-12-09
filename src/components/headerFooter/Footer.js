@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 
 import Icon from '../../assets/Footer Icon.png'
 
-function Footer () {
+function Footer() {
   return (
     <div className='footerdiv'>
       <div className='footer'>
         <img src={Icon} alt='' />
         <ul className='links'>
           <li>
-            <Link to='' style={{ textDecoration: 'none' }}>
+            <Link to='/terms' style={{ textDecoration: 'none' }}>
               Terms of Service
             </Link>
           </li>
@@ -26,7 +26,7 @@ function Footer () {
             </Link>
           </li>
           <li>
-            <Link to='/' style={{ textDecoration: 'none' }}>
+            <Link to='/contact' style={{ textDecoration: 'none' }}>
               Contact us
             </Link>
           </li>

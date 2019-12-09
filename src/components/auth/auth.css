@@ -22,19 +22,19 @@ html, body{
     background-color: #f5fafd;
 }
 
-.items{
-    flex: 1
+.items {
+    flex: 1;
 }
 
-.regright{
+.regright {
     background: url('../../assets/create_acc.jpg') no-repeat center center/cover;
 }
 
-.loginright{
+.loginright {
     background: url('../../assets/login_banner.jpg') no-repeat center center/cover;
 }
 
-.left{
+.left {
     display: flex;
     /* flex-direction: column;
     align-items: flex-start; */

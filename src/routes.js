@@ -11,8 +11,9 @@ import Parcel from './components/parcel'
 import Verify from './components/verify'
 import Dashboard from './components/dashboard'
 import Trust from './components/pages/trust'
+import Terms from './components/pages/tos'
+import Contact from './components/pages/contact'
 import Privacy from './components/pages/privacy_policy'
-import Travelers from './components/parcel/travelers'
 
 const Routes = () => {
   return (
@@ -26,6 +27,8 @@ const Routes = () => {
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Dashboard} path='/dashboard' />
       <Route exact component={Trust} path='/trust' />
+      <Route exact component={Terms} path='/terms' />
+      <Route exact component={Contact} path='/contact' />
       <Route exact component={Privacy} path='/privacy' />
       <Route exact component={Home} path='/' />
     </Switch>
