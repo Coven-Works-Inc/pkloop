@@ -19,10 +19,17 @@ const index = () => {
           <div className='trip_field'>
             <input type='text' placeholder='Arrival: dd/mm/yyyy' />
           </div>
-          <div className='trip_field'>
-            <input
-              type='text'
-              placeholder='Add Stopovers (stopovers will increase your chances of getting connections)                                                                                                       --'
+          <div className='stopover'>
+            <p>
+              Add Stopovers (stopovers will increase your chances of getting
+              connections){' '}
+            </p>
+            <hr
+              style={{
+                transform: 'rotate(90deg)',
+                borderColor: '#00bdbe',
+                background: 'none'
+              }}
             />
           </div>
           <div className='dup'>
@@ -44,7 +51,7 @@ const index = () => {
           <div className='trip_field'>
             <input
               type='text'
-              placeholder='Weight of parcel you are willing to transport 0 - 5lbs'
+              placeholder='Weight of parcel you are willing to transport 0 - 5(lbs)'
             />
           </div>
           <div className='trip_field'>
@@ -53,7 +60,9 @@ const index = () => {
           <div className='trip_field'>
             <textarea placeholder='Additional information' />
           </div>
-          <button className='btnQ'>POST YOUR TRIP</button>
+          <div className='button_div'>
+            <button className='trip-button'>POST YOUR TRIP</button>
+          </div>
         </div>
       </section>
     </HeaderFooter>

@@ -1,31 +1,16 @@
-/* #banner{
-    background: url('../../assets/default.jpg') no-repeat center center/cover;
-    height: 15rem;
-    width: 100vw;
-    
-} */
-
-/* #banner .bannertext{
+#list-form{
     display: flex;
-    height: 100%;
     justify-content: center;
-    text-align: center;
-    align-items: center;
-    color: white;
+
 }
 
-#banner .bannertext h2{
-    font-size: 3.4rem;
-} */
-
 .trip_container{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    padding: 2rem
+    justify-content: center; */
+    width: 70%;
+    padding: 2rem;
+    margin: 0 auto;
 }
 
 .trip_container .trip_field{
@@ -34,7 +19,7 @@
 
 .trip_container .trip_field input,
 .trip_container .trip_field textarea{
-    width: 956px;
+    width: 100%;
     height: 60px;
     font-size: 0.9rem;
     padding: 1rem
@@ -44,16 +29,9 @@
     height: 200px;
 }
 
-/* .btn{
-    padding: 1.3rem 2.7rem;
-    border: 1px solid var(--secondary-color);
-    background: var(--secondary-color);
-    margin-top: 2rem;
-    font-size: 1rem;
-    color: var(--white);
-    border-radius: 3px;
-    line-height: normal;
-} */
+.trip_container .trip_field textarea:focus{
+    border: none;
+}
 
 
 footer{
@@ -106,7 +84,7 @@ footer{
 }
 
 .dup input{
-    width: 469px;
+    width: 100%;
     height: 60px;
     font-size: 0.9rem;
     padding: 1rem
@@ -115,3 +93,36 @@ footer{
 .dup input:first-child{
     margin-right: 1.125rem;
 }
+.stopover{
+    border: 1px solid #00bdbe;
+    color: #00bdbe;
+    padding: 1rem 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button_div{
+    text-align: center;
+}
+
+.trip-button{
+    padding: 1rem 2rem;
+    border: none;
+    font-size: 1rem;
+    color: #fff;
+    background: #00bdbe;
+    border-radius: 3px;
+    line-height: normal;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.trip-button:hover{
+
+  transform: scale(0.95);
+  
+}
+
+

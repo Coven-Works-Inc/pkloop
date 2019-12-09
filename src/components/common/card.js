@@ -4,10 +4,9 @@ const Card = () => {
   return (
     <div className='card'>
       <div className='left'>
-        Shit
-        <button>Shit</button>
+        <button />
       </div>
-      <div className='right'>Bigger Shit</div>
+      <div className='right' />
     </div>
   )
 }

@@ -28,7 +28,7 @@ class Parcel extends Component {
               <br />
               <select>
                 <option value='small' selected='selected'>
-                  0 - 5lbs
+                  0 - 5(lbs)
                 </option>
                 <option value='medium'>6 - 10lbs</option>
                 <option value='large'>11 - 15lbs</option>
