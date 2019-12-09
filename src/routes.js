@@ -26,6 +26,7 @@ const Routes = () => {
       <Route exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Dashboard} path='/dashboard' />
+      <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />
       <Route exact component={Terms} path='/terms' />
       <Route exact component={Contact} path='/contact' />
