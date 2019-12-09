@@ -12,7 +12,7 @@ const Contact = () => {
             <div className="contact-content-holder">
                 <div className="contact-content">
                     <div className="contact-map-section">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107451.30179088314!2d-97.09085217021435!3d32.689949516481484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e88c445b79661%3A0x8ee7ac248eb7e7d1!2sGrand%20Prairie%2C%20TX%2075052%2C%20USA!5e0!3m2!1sen!2sng!4v1575905514191!5m2!1sen!2sng" style={{ width: "600", height: "450", border: 0 }} title="our-office-923jniu23" frameborder="0" allowfullscreen="" />
+                        <iframe width="100%" height="100%" style={{ border: 0 }} src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d107451.30179088314!2d-97.09085217021435!3d32.689949516481484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e88c445b79661%3A0x8ee7ac248eb7e7d1!2sGrand%20Prairie%2C%20TX%2075052%2C%20USA!5e0!3m2!1sen!2sng!4v1575905514191!5m2!1sen!2sng" style={{ width: "600", height: "450", border: 0 }} title="our-office-address" frameborder="0" allowfullscreen="" />
                     </div>
                     <div className="contact-form-section">
                         <form onSubmit={() => handleSubmit()}>
