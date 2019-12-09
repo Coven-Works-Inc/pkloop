@@ -1,11 +1,11 @@
-#banner{
+/* #banner{
     background: url('../../assets/default.jpg') no-repeat center center/cover;
     height: 15rem;
     width: 100vw;
     
-}
+} */
 
-#banner .bannertext{
+/* #banner .bannertext{
     display: flex;
     height: 100%;
     justify-content: center;
@@ -16,7 +16,7 @@
 
 #banner .bannertext h2{
     font-size: 3.4rem;
-}
+} */
 
 .trip_container{
     display: flex;

@@ -9,7 +9,7 @@ const Pricing = () => {
   return (
     <HeaderFooter>
       <Banner title='Pricing Guide' />
-      <div id='container'>
+      <div id='pricing-container'>
         <div className='price-card'>
           <h3>US & Canada</h3>
           <hr
