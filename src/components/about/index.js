@@ -8,8 +8,8 @@ import Human from '../../assets/about_img.jpg'
 const About = () => {
   return (
     <HeaderFooter>
-      <div className='banner'>
-        <div className='bannertext'>
+      <div className='about-banner'>
+        <div className='about-bannertext'>
           <p>
             We are on a mission to help people <br /> access the world.
           </p>
