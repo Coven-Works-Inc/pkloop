@@ -33,7 +33,7 @@ const Contact = () => {
               <textarea placeholder='Type your message here' />
               <div className='button-space'>
                 <button>SUBMIT</button>
-                <p>Or Send a direct email to contact@pkloop.com</p>
+                <p>Or Send a direct email to contact@mypkloop.com</p>
               </div>
             </form>
           </div>
