@@ -19,7 +19,7 @@ export const postTrip = (tripData, history) => dispatch => {
   axios
     .post(`${BASE_URL}/trips`, tripData)
     .then(res => {
-      console.log(res.data)
+      //   TODO: Make a dispatch with the success page here
     })
     .catch(err => {
       dispatch({
