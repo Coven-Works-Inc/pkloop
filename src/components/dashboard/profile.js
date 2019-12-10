@@ -6,8 +6,19 @@ const Profile = () => {
         <div className="edit-profile">
             <div className="profile-picture">
                 <img src={ProfilePicture} alt="default profile" />
+
             </div>
-            <div className="profile-form"></div>
+            <div className="profile-form">
+                <form>
+                    <input type="text" placeholder="First Name" />
+                    <input type="text" placeholder="Last Name" />
+                    <input type="text" placeholder="Username" />
+                    <input type="text" placeholder="City, Country" />
+                    <input type="email" placeholder="Email Address" />
+                    <input type="tel" placeholder="Phone Number" />
+                    <button className="btnSmall">Save Changes</button>
+                </form>
+            </div>
         </div>
     )
 }
