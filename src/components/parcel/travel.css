@@ -3,7 +3,7 @@
     margin: 1rem 10rem;
     display: flex;
     justify-content: center;
-    height: 100vh;
+    height: 100%;
     /* background: #00bdbe; */
 }
 
@@ -20,6 +20,9 @@
     
 }
 
+#travel-container .card-left{
+    
+}
 
 
 #travel-container .card-left .button{
