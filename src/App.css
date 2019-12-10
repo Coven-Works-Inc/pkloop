@@ -21,7 +21,7 @@ html, body{
     background: #f1f5f4;
 }
 
-.container{
+.container {
     margin: auto;
     max-width: 80%;
     overflow: auto;
@@ -50,6 +50,7 @@ html, body{
     position: fixed;
     position: sticky;
     top: 0;
+    z-index: 99999;
 }
 
  #navbar .logo{
@@ -138,6 +139,7 @@ html, body{
 #works {
     text-align: center;
     padding: 100px 0px;
+    background-color: #f5fafd;
 }
 
 #works h2{
@@ -161,6 +163,10 @@ html, body{
     font-size: 1rem;
     color: #00bdbe;
     cursor: pointer;
+}
+
+#works .send_travel p:hover {
+    background-color: #fff;
 }
 
 #works .send_travel .lighter{
@@ -252,6 +258,7 @@ a:first-child .cargo_items {
     justify-content: center;
     text-align: center;
     padding: 100px 0px;
+    background-color: #f5fafd;
 }
 
 #faqs h2 {
@@ -387,6 +394,15 @@ footer {
   margin: 0 1.6rem;
 }
 
+.footer ul li a {
+  color: #333;
+  opacity: 0.85;
+}
+
+.footer ul li a:hover {
+  opacity: 1;
+}
+
 .footer img {
     height: 100%;
     margin: 1.7rem 0rem 0rem 9rem;
@@ -397,7 +413,7 @@ footer {
 }
 
 .footer_icons {
-    margin: 2.7rem 6rem 2rem 10rem;
+    /* margin: 2.7rem 6rem 2rem 10rem; */
     font-size: 1.7rem;
     color: #333;
 }
@@ -450,7 +466,8 @@ footer {
 
 /* User Dashboard Styles */
 
-.dashboard-header {
+.dashboard-header,
+.tos-header {
     background: url(/static/media/sendparcel.98e335a8.jpg) no-repeat center center/cover;
     height: 240px;
     width: 100%;
@@ -460,7 +477,8 @@ footer {
     color: #fff;
 }
 
-.dashboard-header h2 {
+.dashboard-header h2,
+.tos-header h2 {
     font-size: 3rem;
 }
 
@@ -523,3 +541,173 @@ footer {
 }
 
 /* END OF User Dashboard Styles */
+
+/* Terms of Service Styles */
+
+.tos-body {
+    margin: auto;
+    max-width: 80%;
+    overflow: auto;
+    padding: 4rem 0rem;
+    /* background-color: #f5fafd; */
+    /* padding-top: 20px;  */
+}
+
+.tos-body p {
+    line-height: 1.4;
+}
+
+.tos-body .py-1 h3,
+.tos-body .py-1 h4 {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.tos-body .py-1 h3 .colorless {
+    color: #333;
+}
+
+.tos-body p a {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tos-body .one-star {
+    font-style: italic;
+    opacity: 0.75;
+    line-height: 1.5;
+    max-width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.tos-body .two-star {
+    font-weight: bold;
+    color: #f14a4a;
+}
+
+.tos-body ul {
+    list-style-type: disc !important;
+}
+
+.tos-body ul li {
+    font-style: italic;
+    opacity: 0.75;
+    line-height: 1.5;
+}
+
+.tos-body .py-1 p {
+    margin-bottom: 10px;
+}
+
+.tos-body .py-1 p span {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* END OF Terms of Service Styles */
+
+
+/* Contact Page Styles */
+
+.contact-content-holder {
+    display: flex;
+    justify-content: center;
+    padding: 7.5rem 0rem;
+}
+
+.contact-content {
+    width: 80%;
+    max-width: 1140px;
+    display: flex;
+}
+
+.contact-map-section,
+.contact-form-section {
+    flex: 1;
+}
+
+.contact-map-section {
+    background-color: #f5fafd;
+}
+
+.contact-form-section {
+    padding: 3rem 1.5rem;
+    background-color: #fff;
+}
+
+.contact-form-section h2 {
+    margin-bottom: 2rem;
+}
+
+.contact-form-section input,
+.contact-form-section textarea {
+    display: block;
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 40px;
+    padding-left: 26px;
+    border: 0.5px solid rgba(74, 74, 74, 0.2);
+}
+
+.contact-form-section textarea {
+    height: 120px;
+    padding: 16px;
+}
+
+.contact-form-section input::placeholder,
+.contact-form-section textarea::placeholder {
+    opacity: 0.75;
+}
+
+.contact-form-section .button-space {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-form-section .button-space p {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+.contact-form-section .button-space button {
+    padding: 0.5rem 2.5rem;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+/* END OF Contact Page Styles */
+
+/* COMMON */
+
+    .mt-1 {
+        margin-top: 10px;
+    }
+
+    .mt-2 {
+        margin-top: 20px;
+    }
+
+    .mt-3 {
+        margin-top: 30px;
+    }
+
+    .mb-1 {
+        margin-bottom: 10px;
+    }
+
+    .mb-2 {
+        margin-bottom: 20px;
+    }
+
+    .mb-3 {
+        margin-bottom: 30px;
+    }
+
+/* END OF COMMON */
