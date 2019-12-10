@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import HeaderFooter from '../headerFooter'
 import Transactions from './transactions'
 import Profile from './profile'
+import Balance from './balance'
 import { Link } from 'react-router-dom'
 
 class Dashboard extends Component {
 
   state = {
-    headerText: 'Edit Profile'
+    headerText: 'My Balance'
   }
 
   render() {
@@ -45,7 +46,7 @@ class Dashboard extends Component {
           </div>
           {headerText === 'My Transactions' && <Transactions />}
           {headerText === 'Edit Profile' && <Profile />}
-          {headerText === 'My Balance' && <Transactions />}
+          {headerText === 'My Balance' && <Balance />}
           {headerText === 'Support' && <Transactions />}
         </div>
       </HeaderFooter>

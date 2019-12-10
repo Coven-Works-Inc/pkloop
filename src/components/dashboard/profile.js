@@ -6,7 +6,7 @@ const Profile = () => {
         <div className="edit-profile">
             <div className="profile-picture">
                 <img src={ProfilePicture} alt="default profile" />
-
+                <p>Change Picture</p>
             </div>
             <div className="profile-form">
                 <form>
