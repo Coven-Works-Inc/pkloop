@@ -486,7 +486,7 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 2.5rem;
+    /* margin-top: 2.5rem; */
 }
 
 .dashboard-menu p {
@@ -532,12 +532,95 @@ footer {
     border: 2px solid rgba(136, 160, 160, 0.5);
 }
 
+.dashboard-body {
+    background-color: #f5fafd;
+    padding: 4rem 0rem;
+}
+
 .dashboard-body .transactions-content {
     height: 20rem;
     display: flex;
     align-items: row;
     justify-content: center;
     margin-top: 5rem;
+}
+
+.transactions {
+    margin: 4rem auto;
+    width: 70%;
+    max-width: 1140px;
+}
+
+.transactions-header,
+.transactions-row {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    padding: 30px 16px;
+}
+
+.transactions-header {
+    border-top: 1px solid #979797;
+    border-bottom: 4px solid #979797;
+}
+
+.transactions-header p {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.transactions-row {
+    border-bottom: 1px solid #979797;
+}
+
+.transactions-header p:nth-child(1),
+.transactions-row p:nth-child(1) {
+    width: 20%;
+}
+
+.transactions-header p:nth-child(2),
+.transactions-row p:nth-child(2) {
+    width: 25%;
+}
+
+.transactions-header p:nth-child(3),
+.transactions-row p:nth-child(3) {
+    width: 15%;
+}
+
+.transactions-header p:nth-child(4),
+.transactions-row p:nth-child(4) {
+    width: 30%;
+}
+
+.transactions-header p:nth-child(5),
+.transactions-row p:nth-child(5) {
+    width: 10%;
+}
+
+.transactions-row p {
+    font-size: 0.85rem;
+}
+
+.traveler p,
+.transactions-row p.open {
+    color: #00bdbe;
+    font-weight: bold;
+}
+
+.transactions-row p.completed {
+    color: #4b8b3b;
+    font-weight: bold;
+}
+
+.transactions-row p.pending {
+    color: #f5a623;
+    font-weight: bold;
+}
+
+.transactions-row p.canceled {
+    color: #d0021b;
+    font-weight: bold;
 }
 
 /* END OF User Dashboard Styles */
@@ -607,6 +690,27 @@ footer {
 }
 
 /* END OF Terms of Service Styles */
+
+
+/* Edit Profile Styles */
+
+.edit-profile {
+    margin: 4rem auto;
+    width: 70%;
+    max-width: 1140px;
+    background-color: #fff;
+    padding: 5rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.edit-profile .profile-form {
+    margin-left: 4rem;
+    background-color: #f5fafd;
+    flex: 1;
+}
+
+/* END OF Edit Profile Styles */
 
 
 /* Contact Page Styles */
@@ -683,6 +787,14 @@ footer {
 }
 
 /* END OF Contact Page Styles */
+
+
+/* Dashboard Transactions Styles */
+
+
+
+/* END OF Dashboard Transactions Styles */
+
 
 /* COMMON */
 
