@@ -19,15 +19,23 @@
 
 .trip_container .trip_field input,
 .trip_container .trip_field textarea{
+
     width: 100%;
     height: 60px;
     font-size: 0.9rem;
-    padding: 1rem
+    padding: 1rem;
 }
 
-.trip_container .trip_field textarea{
-    height: 200px;
+.trip_field select{
+    width: 100%;
+    height: 60px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    border-radius: 0px;
+    border: #959595;
+    border: none
 }
+
 
 .trip_container .trip_field textarea:focus{
     border: none;
