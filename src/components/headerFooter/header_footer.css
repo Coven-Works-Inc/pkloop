@@ -2,3 +2,13 @@
     color: var(--primary-color);
     
 }
+
+a {
+    text-decoration: none;
+}
+
+.links{
+    list-style: none;
+    text-decoration: none;
+    
+}

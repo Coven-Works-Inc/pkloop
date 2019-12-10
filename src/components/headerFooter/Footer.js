@@ -32,15 +32,27 @@ function Footer () {
           </li>
         </ul>
         <div className='footer_icons'>
-          <a href='https://www.facebook.com/pkloop.peer' target='_blank'>
+          <a
+            href='https://www.facebook.com/pkloop.peer'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             {' '}
             <i className='fab fa-facebook-f ' />
           </a>
-          <a href='https://www.twitter.com/mypkloop/' target='_blank'>
+          <a
+            href='https://www.twitter.com/mypkloop/'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             <i className='fab fa-twitter ' />
           </a>
 
-          <a href='https://www.instagram.com/mypkloop/' target='_blank'>
+          <a
+            href='https://www.instagram.com/mypkloop/'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             <i className='fab fa-instagram ' />
           </a>
         </div>
