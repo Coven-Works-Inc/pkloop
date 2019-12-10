@@ -8,7 +8,7 @@ class Parcel extends Component {
   submitHandler = e => {
     e.preventDefault()
   }
-  render() {
+  render () {
     return (
       <HeaderFooter>
         <div className='maincontainer send-parcel'>
@@ -33,6 +33,13 @@ class Parcel extends Component {
                 <option value='medium'>6 - 10lbs</option>
                 <option value='large'>11 - 15lbs</option>
               </select>
+              <textarea
+                name='additionalInfo'
+                id='additionalInfo'
+                value={this.state.additionalInfo}
+                onChange={this.onChangeHandler}
+                placeholder='Additional information'
+              />
             </form>
           </div>
           <button className='btnQ'>Find Travellers</button>
