@@ -1,7 +1,7 @@
 import React from 'react'
 import HeaderFooter from '../headerFooter'
 import Banner from '../common/banner'
-import Card from '../common/card'
+// import Card from '../common/card'
 
 import Jeph from '../../assets/Jeph.jpg'
 import Jephtah from '../../assets/jephtah.JPG'
