@@ -334,6 +334,25 @@ a:first-child .cargo_items {
     color: var(--secondary-color);
 }
 
+.btnSmall {
+    padding: 0.5rem 2.5rem;
+    border: 1px solid var(--secondary-color);
+    background: inherit;
+    margin-top: 1rem;
+    font-size: 1rem;
+    background-color: #00bdbe;
+    color: #fff;
+    border-radius: 3px;
+    line-height: normal;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btnSmall:hover {
+    transform: scale(0.95);
+}
+
 .cta_send {
     background: url('../src/assets/sendparcel.jpg') no-repeat center center/cover;
     height: 400px;
@@ -642,8 +661,15 @@ a:nth-child(2) .cta_items {
 
 .edit-profile .profile-form {
     margin-left: 4rem;
-    background-color: #f5fafd;
     flex: 1;
+}
+
+.edit-profile .profile-form form input {
+    display: block;
+    width: 100%;
+    border: 1px solid #dddddd;
+    padding: 1rem;
+    margin-bottom: 10px;
 }
 
 /* END OF Edit Profile Styles */
