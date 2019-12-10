@@ -8,11 +8,11 @@ class Parcel extends Component {
   submitHandler = e => {
     e.preventDefault()
   }
-  render () {
+  render() {
     return (
       <HeaderFooter>
-        <div className='maincontainer'>
-          <h1>Send parcel</h1>
+        <div className='maincontainer send-parcel'>
+          <h1>Send Parcel</h1>
           <div className='py-2 form-group'>
             <form onSubmit={this.submitHandler}>
               <input type='text' placeholder='From: City, Country' /> <br />

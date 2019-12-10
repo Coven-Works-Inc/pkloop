@@ -17,7 +17,7 @@ const ToS = () => {
                     These include various limitations and exclusions, a clause that governs
                     the jurisdiction and venue of disputes, and obligations to comply with
                     applicable laws and regulations.</p>
-                <p className="mb-2">Update: <b>DATE</b></p>
+                <p className="mb-2">Update: <b>{new Date().getFullYear()}</b></p>
 
                 <div className="py-1">
                     <h3>TERMS OF SERVICE</h3>

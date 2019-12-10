@@ -240,9 +240,9 @@ body{
 
 .footer{
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     align-items: center;
-    padding: 1rem;
+    /* padding: 1rem; */
 }
 
 .footer img{
@@ -250,7 +250,7 @@ body{
     margin: 0rem 0rem 0rem 0rem;
 }
 
-.footer ul{
+.footer ul.links {
   display: none;
   /* margin: 0 1.2rem; */
   
@@ -268,7 +268,7 @@ body{
 }
 
 .copyright{
-    margin: 0rem;
+    /* margin: 0rem; */
     padding: 0.3rem;
 }
 
