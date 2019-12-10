@@ -659,6 +659,12 @@ a:nth-child(2) .cta_items {
     align-items: flex-start;
 }
 
+.edit-profile .profile-picture p {
+    color: var(--secondary-color);
+    font-size: 0.65rem;
+    text-align: center
+}
+
 .edit-profile .profile-form {
     margin-left: 4rem;
     flex: 1;
@@ -673,6 +679,69 @@ a:nth-child(2) .cta_items {
 }
 
 /* END OF Edit Profile Styles */
+
+
+/* My Balance Styles */
+
+.balance-section {
+    margin: 4rem auto;
+    width: 70%;
+    max-width: 800px;
+    /* background-color: #fff; */
+    /* padding: 5rem; */
+    display: flex;
+}
+
+.balance-section .amount {
+    flex: 1;
+    background-color: var(--secondary-color);
+    padding: 3rem;
+    margin-right: 1.5rem;
+    color: #fff;
+    max-width: 300px;
+}
+
+.balance-section .balance {
+    flex: 2.5;
+    background-color: var(--primary-color);
+    padding: 3rem;
+    max-width: 550px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.balance-section .amount p,
+.balance-section .balance p {
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.balance-section .amount h2,
+.balance-section .balance h2 {
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+.balance .right-side button {
+    display: block;
+    padding: 10px 0px;
+    width: 150px;
+    border: 1px solid #fff;
+    background: none;
+    border-radius: 3px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.balance .right-side button:first-child {
+    margin-bottom: 0.5rem;
+}
+
+
+/* END OF My Balance Styles */
 
 
 /* Contact Page Styles */
