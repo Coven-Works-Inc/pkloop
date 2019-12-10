@@ -1,7 +1,6 @@
 import React from 'react'
 import HeaderFooter from '../headerFooter'
 import Banner from '../common/banner'
-import Header from '../headerFooter/Header'
 
 const privacy_policy = () => {
   return (

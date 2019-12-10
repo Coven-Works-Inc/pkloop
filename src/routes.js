@@ -14,6 +14,7 @@ import Trust from './components/pages/trust'
 import Terms from './components/pages/tos'
 import Contact from './components/pages/contact'
 import Privacy from './components/pages/privacy_policy'
+import Travelers from './components/parcel/travelers'
 
 const Routes = () => {
   return (
