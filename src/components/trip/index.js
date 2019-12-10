@@ -49,10 +49,18 @@ const index = () => {
             />
           </div>
           <div className='trip_field'>
-            <input
+            {/* <input
               type='text'
               placeholder='Weight of parcel you are willing to transport 0 - 5(lbs)'
-            />
+            /> */}
+            <select>
+              <option value='extra large' selected='selected'>
+                Size you are willing to transport
+              </option>
+              <option value='large'> 0 - 5 (lbs) </option>
+              <option value='medium'>6 - 10 (lbs) </option>
+              <option value='small'>10 - 15(lbs)</option>
+            </select>
           </div>
           <div className='trip_field'>
             <input type='text' placeholder='Means of transportation Flight' />
