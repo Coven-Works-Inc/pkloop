@@ -500,80 +500,100 @@ a:nth-child(2) .cta_items {
     margin-top: 5rem;
 }
 
-.transactions {
-    margin: 4rem auto;
+.transactions,
+.support {
+    margin: 2rem auto;
     width: 70%;
     max-width: 1140px;
+    background-color: #fff;
+    padding: 2rem;
 }
 
-.transactions-header,
-.transactions-row {
+.support .support-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.support .support-header button.btnSmall {
+    margin-top: 0px;
+    background-color: var(--primary-color);
+    /* font-style: normal; */
+    text-transform: none;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.table-header,
+.table-row {
     display: flex;
     height: 60px;
     align-items: center;
     padding: 30px 16px;
 }
 
-.transactions-header {
+.table-header {
     border-top: 1px solid #979797;
     border-bottom: 4px solid #979797;
 }
 
-.transactions-header p {
+.table-header p {
     font-size: 1rem;
     font-weight: 600;
 }
 
-.transactions-row {
+.table-row {
     border-bottom: 1px solid #979797;
 }
 
-.transactions-header p:nth-child(1),
-.transactions-row p:nth-child(1) {
+.table-header p:nth-child(1),
+.table-row p:nth-child(1) {
     width: 20%;
 }
 
-.transactions-header p:nth-child(2),
-.transactions-row p:nth-child(2) {
+.table-header p:nth-child(2),
+.table-row p:nth-child(2) {
     width: 25%;
 }
 
-.transactions-header p:nth-child(3),
-.transactions-row p:nth-child(3) {
+.table-header p:nth-child(3),
+.table-row p:nth-child(3) {
     width: 15%;
 }
 
-.transactions-header p:nth-child(4),
-.transactions-row p:nth-child(4) {
+.table-header p:nth-child(4),
+.table-row p:nth-child(4) {
     width: 30%;
 }
 
-.transactions-header p:nth-child(5),
-.transactions-row p:nth-child(5) {
+.table-header p:nth-child(5),
+.table-row p:nth-child(5) {
     width: 10%;
 }
 
-.transactions-row p {
+.table-row p {
     font-size: 0.85rem;
 }
 
 .traveler p,
-.transactions-row p.open {
+.table-row p.open {
     color: #00bdbe;
     font-weight: bold;
 }
 
-.transactions-row p.completed {
+.table-row p.completed {
     color: #4b8b3b;
     font-weight: bold;
 }
 
-.transactions-row p.pending {
+.table-row p.pending {
     color: #f5a623;
     font-weight: bold;
 }
 
-.transactions-row p.canceled {
+.table-row p.canceled {
     color: #d0021b;
     font-weight: bold;
 }
