@@ -4,7 +4,6 @@ import setAuthToken from '../utils/setAuthToken'
 
 import { GET_ERRORS, SET_CURRENT_USER, LOADING, SET_TOKEN } from './types'
 import { BASE_URL } from '../config/constants'
-import { dispatch } from '../../../Library/Caches/typescript/3.6/node_modules/rxjs/internal/observable/pairs'
 
 export const postTrip = (tripData, history) => dispatch => {
   dispatch({
@@ -18,9 +17,9 @@ export const postTrip = (tripData, history) => dispatch => {
   })
 
   axios
-    .post(`${BASE_URL}/trips`, ttripData)
+    .post(`${BASE_URL}/trips`, tripData)
     .then(res => {
-      history.push('/tripsuccess')
+      console.log(res.data)
     })
     .catch(err => {
       dispatch({
