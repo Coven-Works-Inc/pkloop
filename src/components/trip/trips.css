@@ -32,8 +32,12 @@
     margin-bottom: 8px;
     font-size: 0.9rem;
     border-radius: 0px;
-    border: #959595;
-    border: none
+    border: 0.5px solid #959595;
+    background: #fff;
+}
+
+.trip_container .trip_field textarea{
+    height: 15rem;
 }
 
 
