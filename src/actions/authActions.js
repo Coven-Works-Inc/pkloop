@@ -11,7 +11,7 @@ export const registerUser = (userData, history) => dispatch => {
         type: LOADING,
         payload: true
     })
-
+ 
     dispatch({
         type: GET_ERRORS,
         payload: { message: '' }

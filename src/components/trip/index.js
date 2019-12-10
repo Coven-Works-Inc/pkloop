@@ -1,76 +1,97 @@
 import React from 'react'
 import HeaderFooter from '../headerFooter'
 import Banner from '../common/banner'
+import { postTrip } from '../../actions/tripActions'
 
 import './trips.css'
 
 const index = () => {
+  state = {
+    location: ''
+  }
+
+  onSubmitHandler = e => {
+    e.preventDefault()
+
+    const tripData = {}
+
+    this.props.postTrip(tripData, this.props.history)
+  }
   return (
     <HeaderFooter>
       <Banner title='List Your Trip' />
       <section id='list_form'>
         <div className='trip_container'>
-          <div className='trip_field'>
-            <input type='text' placeholder='From: City, Country' />
-          </div>
-          <div className='trip_field'>
-            <input type='text' placeholder=' To:   City, Country' />
-          </div>
-          <div className='trip_field'>
-            <input type='text' placeholder='Arrival: dd/mm/yyyy' />
-          </div>
-          <div className='stopover'>
-            <p>
-              Add Stopovers (stopovers will increase your chances of getting
-              connections){' '}
-            </p>
-            <hr
-              style={{
-                transform: 'rotate(90deg)',
-                borderColor: '#00bdbe',
-                background: 'none'
-              }}
-            />
-          </div>
-          <div className='dup'>
-            <input type='text' placeholder='Stopover 1  City, Country' />
+          <form onSubmit={onSubmitHandler}>
+            <div className='trip_field'>
+              <input
+                type='text'
+                name='location'
+                id='location'
+                value={this.state.location}
+                onChange={this.onChangeHandler}
+                placeholder='From: City, Country'
+              />
+            </div>
+            <div className='trip_field'>
+              <input type='text' placeholder=' To:   City, Country' />
+            </div>
+            <div className='trip_field'>
+              <input type='text' placeholder='Arrival: dd/mm/yyyy' />
+            </div>
+            <div className='stopover'>
+              <p>
+                Add Stopovers (stopovers will increase your chances of getting
+                connections){' '}
+              </p>
+              <hr
+                style={{
+                  transform: 'rotate(90deg)',
+                  borderColor: '#00bdbe',
+                  background: 'none'
+                }}
+              />
+            </div>
+            <div className='dup'>
+              <input type='text' placeholder='Stopover 1  City, Country' />
 
-            <input type='text' placeholder='Stopover 2  City, Country' />
-          </div>
-          <div className='dup'>
-            <input type='text' placeholder='Stopover 3   City, Country' />
+              <input type='text' placeholder='Stopover 2  City, Country' />
+            </div>
+            <div className='dup'>
+              <input type='text' placeholder='Stopover 3   City, Country' />
 
-            <input type='text' placeholder='Stopover 4   City, Country' />
-          </div>
-          <div className='trip_field'>
-            <input
-              type='text'
-              placeholder='Size you are willing to transport, Extra large(E.g Big box, electronics)'
-            />
-          </div>
-          <div className='trip_field'>
-            {/* <input
+              <input type='text' placeholder='Stopover 4   City, Country' />
+            </div>
+            <div className='trip_field'>
+              <input
+                type='text'
+                placeholder='Size you are willing to transport, Extra large(E.g Big box, electronics)'
+              />
+            </div>
+            <div className='trip_field'>
+              {/* <input
               type='text'
               placeholder='Weight of parcel you are willing to transport 0 - 5(lbs)'
             /> */}
-            <select>
-              <option value='extra large' selected='selected'>
-                Size you are willing to transport
-              </option>
-              <option value='large'> 0 - 5 (lbs) </option>
-              <option value='medium'>6 - 10 (lbs) </option>
-              <option value='small'>10 - 15(lbs)</option>
-            </select>
-          </div>
-          <div className='trip_field'>
-            <input type='text' placeholder='Means of transportation Flight' />
-          </div>
-          <div className='trip_field'>
-            <textarea placeholder='Additional information' />
-          </div>
-          <div className='button_div'>
-            <button className='trip-button'>POST YOUR TRIP</button>
-          </div>
+              <select>
+                <option value='extra large' selected='selected'>
+                  Size you are willing to transport
+                </option>
+                <option value='large'> 0 - 5 (lbs) </option>
+                <option value='medium'>6 - 10 (lbs) </option>
+                <option value='small'>10 - 15(lbs)</option>
+              </select>
+            </div>
+            <div className='trip_field'>
+              <input type='text' placeholder='Means of transportation Flight' />
+            </div>
+            <div className='trip_field'>
+              <textarea placeholder='Additional information' />
+            </div>
+            <div className='button_div'>
+              <button className='trip-button'>POST YOUR TRIP</button>
+            </div>
+          </form>
         </div>
       </section>
     </HeaderFooter>
