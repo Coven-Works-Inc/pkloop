@@ -123,7 +123,7 @@ const index = () => {
                       refuse delivery at any time. Close up the package yourself after
                       having confirmed that the contents are legitimate. In the event of
                       doubt of suspect behavior on the part of the Sender, immediately
-                      refuse the delivery and let us know by e-mail at
+                      refuse the delivery and let us know by e-mail at {' '}
             <a href="mailto:contact@mypkloop.com">contact@mypkloop.com</a> 
           </p>
         </div>
