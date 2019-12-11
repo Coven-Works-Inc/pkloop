@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 class Dashboard extends Component {
 
   state = {
-    headerText: 'Support'
+    headerText: 'My Transactions'
   }
 
   render() {
