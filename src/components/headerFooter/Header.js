@@ -27,7 +27,7 @@ class Header extends Component {
           </div>
           <div className='menu-links'>
             <ul>
-              <li>
+              {/* <li>
                 <Linker
                   activeClass='active'
                   to='works'
@@ -38,6 +38,9 @@ class Header extends Component {
                 >
                   How it works
                 </Linker>
+              </li> */}
+              <li>
+                <Link to='/howitworks'>How It Works</Link>
               </li>
               <li>
                 <Link to='/pricing'>Pricing</Link>
