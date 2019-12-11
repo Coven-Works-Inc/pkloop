@@ -396,7 +396,7 @@ a:nth-child(2) .cta_items {
 .inner_container {
     max-height: 100vh;
     overflow-y: scroll;
-    padding: 2rem 0rem;
+    /* padding: 2rem 0rem; */
     overflow-y: scroll;
 }
 

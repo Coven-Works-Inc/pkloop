@@ -41,14 +41,15 @@ html, body{
     justify-content: center;
     align-items: center;
     width: 100%;
+    padding: 3rem 0rem;
     
 }
 
-.left h3{
+.left h3 {
     font-size: 2.5rem;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     margin-left: 0rem;
-    line-height: 2.5rem;
+    /* line-height: 2.5rem; */
 }
 
 .left p{
@@ -60,13 +61,39 @@ html, body{
 
 }
 
-.inner_container{
+.inner_container {
     /* margin-top: 10rem; */
     /* margin-left: 8rem; */
     display: flex;
     flex-direction: column;
     align-content: flex-start;
     width: 90%;
+}
+
+.inner_container .logo {
+    margin-bottom: 5rem;
+}
+
+.inner_container p {
+    text-align: left;
+    font-size: 1rem;
+}
+
+.inner_container div:nth-child(2) p {
+    width: 70%;
+}
+
+.all-auth-content {
+    display: flex;
+    align-items: flex-start;
+    width: 80%;
+}
+
+.all-auth-content > i.material-icons {
+    color: #9ea0a5;
+    padding: 5px 0px;
+    margin-right: 1.2rem;
+    cursor: pointer;
 }
 
 #contact-form .form-group{
@@ -100,15 +127,6 @@ html, body{
     border-radius: 4px;
     font-weight: 600;
     margin-top: 10px;
-}
-
-.inner_container p {
-    text-align: left;
-    font-size: 1rem;
-}
-
-.inner_container div:nth-child(2) p {
-    width: 70%;
 }
 
 .btn_google{
