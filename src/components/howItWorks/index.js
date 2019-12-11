@@ -1,7 +1,6 @@
 import React from 'react'
 import HeaderFooter from '../headerFooter'
 import Banner from '../common/banner'
-import cta from '../home/cta_banner'
 import './howitworks.css'
 import Cta from '../home/cta_banner'
 
@@ -114,18 +113,18 @@ const index = () => {
           <p>
             You simply carry the item as you would do for a family member or a
                       friend. All packages without exclusion must be inspected. For any
-            questions, do not hesitate to contact us <a href="mailto:contact@mypkloop.com">contact@mypkloop.com</a> 
+            questions, do not hesitate to contact us 
           </p>
           <br />
                   <p>
             Be Watchful, Only deliver what You can see. Please, thoroughly check
-            the content to be delivered, especially when it's a personal
-            package. Never accept a closed package. Also, you have the right to
-            refuse delivery at any time. Close up the package yourself after
-            having confirmed that the contents are legitimate. In the event of
-            doubt of suspect behavior on the part of the Sender, immediately
-            refuse the delivery and let us know by e-mail at
-            contact@mypkloop.com
+                      the content to be delivered, especially when it's a personal
+                      package. Never accept a closed package. Also, you have the right to
+                      refuse delivery at any time. Close up the package yourself after
+                      having confirmed that the contents are legitimate. In the event of
+                      doubt of suspect behavior on the part of the Sender, immediately
+                      refuse the delivery and let us know by e-mail at
+            <a href="mailto:contact@mypkloop.com">contact@mypkloop.com</a> 
           </p>
         </div>
       </div>
