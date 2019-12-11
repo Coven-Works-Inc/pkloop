@@ -4,18 +4,16 @@ import Banner from '../common/banner'
 import './howitworks.css'
 import Cta from '../home/cta_banner'
 
+import Human from '../../assets/about_img.jpg'
+
 const index = () => {
   return (
     <HeaderFooter>
       <Banner title='Same Day Global Shipping!' />
       <div className='top'>
         <div className='top_left'>
-          <h3>
-            DO YOU HAVE ENOUGH TIME TO PLAN AHEAD? INDIVIDUALS OR AGENCIES
-            SHIPPING CONTAINERS OR CARGO? LIST YOUR DETAILS/SERVICES ON PK LOOP
-            FOR FREE. CUSTOMERS LOOKING TO USE THESE SERVICES, FIND THEM HERE
-            FOR FREE!
-          </h3>
+          
+                  <img src={Human} alt='' />
         </div>
         <div className='top_right'>
           <h3>
@@ -25,7 +23,7 @@ const index = () => {
           <br />
           
            <h3>For Senders:</h3> 
-            <ol>
+            <ol className="how-list">
               <li>
                 Search for a traveler by City/Country, Departure Date or Airport
                 Code. A list of travelers who match your search options is
@@ -60,7 +58,7 @@ const index = () => {
           </p>
           <br />
             <h3>For Travelers:</h3>
-             <ol>
+                  <ol className="how-list">
                 <li>Post your Trip (Travel Dates, Departure/Arrival
                  City, Country or Airport Code) using drop down menu. (In the
                  comments box, you can enter more information such as Departure time
