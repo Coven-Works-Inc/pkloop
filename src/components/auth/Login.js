@@ -3,7 +3,6 @@ import { loginUser } from '../../actions/authActions'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/logo/Logo.png'
-import Router from 'react-router'
 
 class Login extends Component {
   state = {
@@ -12,7 +11,7 @@ class Login extends Component {
     errors: {}
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps () {
     this.setState({
       errors: this.props.error
     })
@@ -38,14 +37,19 @@ class Login extends Component {
     this.props.loginUser(userData, this.props.history)
   }
 
-  render() {
-    const { errors } = this.state;
+  render () {
+    const { errors } = this.state
 
     return (
       <div id='container'>
         <div className='left items'>
-          <div className="all-auth-content">
-            <i onClick={() => this.props.history.goBack()} className="material-icons">keyboard_backspace</i>
+          <div className='all-auth-content'>
+            <i
+              onClick={() => this.props.history.goBack()}
+              className='material-icons'
+            >
+              keyboard_backspace
+            </i>
             <div className='inner_container'>
               <div className='logo'>
                 <Link to='/'>
@@ -116,7 +120,7 @@ class Login extends Component {
               <div className='terms'>
                 <p>
                   Don't have a PKLoop account?
-                <span className='sec_text'>
+                  <span className='sec_text'>
                     {' '}
                     <Link
                       to='/register'
@@ -126,7 +130,7 @@ class Login extends Component {
                       }}
                     >
                       Sign up now
-                  </Link>
+                    </Link>
                   </span>
                 </p>
               </div>
