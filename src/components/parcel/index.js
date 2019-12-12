@@ -8,7 +8,7 @@ class Parcel extends Component {
   submitHandler = e => {
     e.preventDefault()
   }
-  render () {
+  render() {
     return (
       <HeaderFooter>
         <div className='maincontainer send-parcel'>
@@ -18,7 +18,7 @@ class Parcel extends Component {
               <input type='text' placeholder='From: City, Country' /> <br />
               <input type='text' placeholder='To: City, Country' /> <br />
               <select>
-                <option value='extra large' selected='selected'>
+                <option value='extra large'>
                   Extra large (E.g Big box, electronics)
                 </option>
                 <option value='large'>large (E.g Laptops)</option>
@@ -26,13 +26,14 @@ class Parcel extends Component {
                 <option value='small'>small (E.g mobile phone)</option>
               </select>
               <br />
-              <select>
-                <option value='small' selected='selected'>
+              {/* <select>
+                <option value='small'>
                   0 - 5(lbs)
                 </option>
                 <option value='medium'>6 - 10lbs</option>
                 <option value='large'>11 - 15lbs</option>
-              </select>
+              </select> */}
+              <input type='tel' placeholder='Weight of your parcel (lbs) e.g. 5' /> <br />
               <textarea
                 name='additionalInfo'
                 id='additionalInfo'
