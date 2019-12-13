@@ -11,13 +11,15 @@ const ToS = () => {
                 <h2>Terms of Service</h2>
             </div>
             <div className='tos-body'>
-                <p className="mb-1">TRAVELERS, SENDERS AND RECIPIENTS</p>
+                <div className='py-1'>
+                <h3>TRAVELERS, SENDERS AND RECIPIENTS</h3>
                 <p className="mb-1">Please read these terms of service carefully as they contain important
                     information regarding your legal rights, remedies and obligations.
                     These include various limitations and exclusions, a clause that governs
                     the jurisdiction and venue of disputes, and obligations to comply with
                     applicable laws and regulations.</p>
                 <p className="mb-2">Update: <b>{new Date().getFullYear()}</b></p>
+                </div>
 
                 <div className="py-1">
                     <h3>TERMS OF SERVICE</h3>
@@ -414,7 +416,14 @@ const ToS = () => {
 
                 <div className="py-1">
                     <h4>Indemnification</h4>
-                    <p>You agree to release, defend, indemnify, and hold PKLoop and its affiliates and subsidiaries, and their respective officers, directors, investors, employees and agents, harmless from and against any claims, liabilities, damages, losses, injuries, and expenses, including without limitation reasonable legal and professional fees, arising out of or in any way connected with (a) Your access to or use of The PKLoop Site or Your violation of these Terms; (b) Your User Content; Your interaction with any other Member, Sender, Traveler or Third Party or other user of the PKLoop Site or (c) any Request, Offer, Acceptance or any other transaction (including but not limited to any injuries, losses, damages (direct, indirect, consequential or otherwise) of any kind between You and Members.</p>
+                    <p>You agree to release, defend, indemnify, and hold PKLoop and its affiliates and subsidiaries, and their respective officers, directors, investors, employees and agents, harmless from and against any claims, liabilities, damages, losses, injuries, and expenses, including without limitation reasonable legal and professional fees, arising out of or in any way connected with.about-banner.
+                        <ol>
+                            (a).Your access to or use of The PKLoop Site or Your violation of these Terms; 
+                            <li>Your User Content; Your interaction with any other Member, Sender, Traveler or Third Party or other user of the PKLoop Site or </li> 
+                            
+                            <li> any Request, Offer, Acceptance or any other transaction (including but not limited to any injuries, losses, damages (direct, indirect, consequential or otherwise) of any kind between You and Members).</li>
+                        </ol>
+                    </p>
                     <p className="two-star">If you are a California resident, you waive California Civil Code Section 1542 which provides:</p>
                     <p className="two-star">A general release does not extend to claims which the creditor does not know or suspect to exist in his or her favor at the time of executing the release, which if known by him or her must have materially affected his or her settlement with the debtor.</p>
                     <p className="two-star">If you are not a California resident, you waive your rights under any statute, at common law, at civil law or in equity similar in principle to California Civil Code Section 1542 that relates to or governs your right to waive unknown claims in your jurisdiction.</p>
@@ -449,12 +458,12 @@ const ToS = () => {
 
                 <div className="py-1">
                     <h4>Trust and Safety</h4>
-                    <p>As part of our community of global senders and travelers, we’ve these few must-know tips to help you make the most of your experience. Scroll below for standards and expectations we’ve put in place to keep you safe.</p>
+                    <p>As part of our community of global senders and travelers, we have these few must-know tips to help you make the most of your experience. Scroll below for standards and expectations we’ve put in place to keep you safe.</p>
                 </div>
 
                 <div className="py-1">
                     <h4>Be Watchful</h4>
-                    <p>Only deliver what You can see. Please, thoroughly check the content to be delivered, especially when it's a personal package. Never accept a closed package. Also, you have the right to refuse delivery at any time. Close up the package yourself after having confirmed that the contents are legitimate. In the event of doubt of suspect behavior on the part of the Sender, take pictures, immediately refuse the delivery and let us know by e-mail at <a mailto="contact@mypkloop.com">contact@mypkloop.com</a></p>
+                    <p>Only deliver what You can see. Please, thoroughly check the content to be delivered, especially when it's a personal package. Never accept a closed package. Also, you have the right to refuse delivery at any time. Close up the package yourself after having confirmed that the contents are legitimate. In the event of doubt of suspect behavior on the part of the Sender, take pictures, immediately refuse the delivery and let us know by e-mail at <a href='mailto:contact@mypkloop.com'>contact@mypkloop.com</a></p>
                 </div>
 
                 <div className="py-1">
@@ -469,7 +478,7 @@ const ToS = () => {
 
                 <div className="py-1">
                     <h4>User Ratings</h4>
-                    <p>By rating your experience, it allows your voice to be heard, supports transparency and helps new users confidently send parcels and travel with PKLoop for the first time. Both senders and travelers should leave a review after a completed delivery. If you encounter an issue with a user, please contact our team <a mailto="contact@mypkloop.com">contact@mypkloop.com</a></p>
+                    <p>By rating your experience, it allows your voice to be heard, supports transparency and helps new users confidently send parcels and travel with PKLoop for the first time. Both senders and travelers should leave a review after a completed delivery. If you encounter an issue with a user, please contact our team <a href='mailto:contact@mypkloop.com'>contact@mypkloop.com</a></p>
                 </div>
 
                 <div className="py-1">
@@ -499,7 +508,7 @@ const ToS = () => {
 
                 <div className="py-1">
                     <h4>Priority Response</h4>
-                    <p>Our dedicated team are on hand to resolve any issue that arises throughout the order and delivery process. Expect an answer within 24 hours. For trust and safety concerns, we will expedite your ticket for a fast resolution <a mailto="contact@mypkloop.com">contact@mypkloop.com</a></p>
+                    <p>Our dedicated team are on hand to resolve any issue that arises throughout the order and delivery process. Expect an answer within 24 hours. For trust and safety concerns, we will expedite your ticket for a fast resolution <a href ='mailto:contact@mypkloop.com'>contact@mypkloop.com</a></p>
                 </div>
 
                 <div className="py-1">

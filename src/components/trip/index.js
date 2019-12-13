@@ -17,7 +17,7 @@ class index extends Component {
     stopOver4: '',
     parcelSize: '',
     parcelWeight: { value: '' },
-    transport: '',
+    transport: { value: '' },
     additionalInfo: ''
   }
 
@@ -182,14 +182,12 @@ class index extends Component {
                 </select>
               </div>
               <div className='trip_field'>
-                <input
-                  type='text'
-                  name='transport'
-                  id='transport'
-                  value={this.state.transport}
-                  onChange={this.onChangeHandler}
-                  placeholder='Means of transportation Flight'
-                />
+                <select value={this.state.value}>
+                  <option value=''>Means Of Transportation</option>
+                  <option value='Flight'> Flight </option>
+                  <option value='Train'>Train</option>
+                  <option value='Car'>Road</option>
+                </select>
               </div>
               <div className='trip_field'>
                 <textarea
@@ -218,7 +216,4 @@ const mapStateToProps = state => ({
   loading: state.loading
 })
 
-export default connect(
-  mapStateToProps,
-  { postTrip }
-)(index)
+export default connect(mapStateToProps, { postTrip })(index)
