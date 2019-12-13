@@ -21,7 +21,7 @@ class index extends Component {
     additionalInfo: ''
   }
 
-  componentWillReceiveProps () {
+  componentWillReceiveProps() {
     this.setState({
       errors: this.props.error
     })
@@ -75,7 +75,7 @@ class index extends Component {
     })
   }
 
-  render () {
+  render() {
     return (
       <HeaderFooter>
         <Banner title='List Your Trip' />
@@ -174,7 +174,7 @@ class index extends Component {
                 />
               </div>
               <div className='trip_field'>
-                <select value={this.state.value}>
+                <select value={this.state.value} className={this.state.parcelWeight === '' ? 'gray' : ''}>
                   <option value=''>Weight you are willing to transport</option>
                   <option value='large'> 0 - 5 (lbs) </option>
                   <option value='medium'>6 - 10 (lbs) </option>
@@ -182,13 +182,25 @@ class index extends Component {
                 </select>
               </div>
               <div className='trip_field'>
-                <select value={this.state.value}>
-                  <option value=''>Means Of Transportation</option>
-                  <option value='Flight'> Flight </option>
-                  <option value='Train'>Train</option>
-                  <option value='Car'>Road</option>
+                <select value={this.state.value} className={this.state.transport === '' ? 'gray' : ''}>
+                  <option value=''>Means of transportation</option>
+                  <option value='large'> Plane</option>
+                  <option value='medium'>Train</option>
+                  <option value='small'>Ship</option>
+                  <option value='small'>Road</option>
+                  <option value='small'>Bicycle</option>
                 </select>
               </div>
+              {/* <div className='trip_field'>
+                <input
+                  type='text'
+                  name='transport'
+                  id='transport'
+                  value={this.state.transport}
+                  onChange={this.onChangeHandler}
+                  placeholder='Means of transportation Flight'
+                />
+              </div> */}
               <div className='trip_field'>
                 <textarea
                   name='additionalInfo'
