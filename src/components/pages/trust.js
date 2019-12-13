@@ -28,8 +28,8 @@ const TnS = () => {
               delivery at any time. Close up the package yourself after having
               confirmed that the contents are legitimate. In the event of doubt
               of suspect behavior on the part of the Sender, take pictures,
-              immediately refuse the delivery and let us know
-              contact@mypkloop.com.
+              immediately refuse the delivery and let us know at{' '}
+              <a href='mailto:contact@mypkloop.com'>contact@mypkloop.com.</a>
             </p>
           </div>
           <div className='py-1'>
@@ -89,7 +89,8 @@ const TnS = () => {
                 {' '}
                 here
               </a>{' '}
-              Phone: 866-701-3654 Email: claims@insureship.com
+              Phone: 866-701-3654 Email:{' '}
+              <a href='mailto:claims@insureship.com'>claims@insureship.com</a>
             </p>
           </div>
           <div className='py-1'>
@@ -100,7 +101,7 @@ const TnS = () => {
               and travel with PKLoop for the first time. Both senders and
               travelers should leave a review after a completed delivery. If you
               encounter an issue with a user, please contact our team at
-              admin@pkloop.com
+              contact@pkloop.com
             </p>
           </div>
           <div className='py-1'>
@@ -153,7 +154,8 @@ const TnS = () => {
               Our dedicated team are on hand to resolve any issue that arises
               throughout the order and delivery process. Expect an answer within
               24 hours. For trust and safety concerns, we will expedite your
-              ticket for a fast resolution contact@mypkloop.com
+              ticket for a fast resolution{' '}
+              <a href='mailto:contact@mypkloop.com'>contact@mypkloop.com</a>
             </p>
           </div>
           <div className='py-1'>
@@ -162,7 +164,8 @@ const TnS = () => {
               Our dedicated team are on hand to resolve any issue that arises
               throughout the order and delivery process. Expect an answer within
               24 hours. For trust and safety concerns, we will expedite your
-              ticket for a fast resolution contact@mypkloop.com
+              ticket for a fast resolution{' '}
+              <a href='mailto:contact@mypkloop.com'>contact@mypkloop.com</a>
             </p>
           </div>
           <div className='py-1'>

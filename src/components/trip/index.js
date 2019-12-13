@@ -16,8 +16,8 @@ class index extends Component {
     stopOver3: '',
     stopOver4: '',
     parcelSize: '',
-    parcelWeight: '',
-    transport: '',
+    parcelWeight: { value: '' },
+    transport: { value: '' },
     additionalInfo: ''
   }
 
@@ -228,7 +228,4 @@ const mapStateToProps = state => ({
   loading: state.loading
 })
 
-export default connect(
-  mapStateToProps,
-  { postTrip }
-)(index)
+export default connect(mapStateToProps, { postTrip })(index)

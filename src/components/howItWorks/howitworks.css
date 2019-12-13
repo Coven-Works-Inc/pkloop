@@ -1,103 +1,99 @@
-.about-body{
-    background: #fff;
-    height: 100%;
+.about-body {
+  background: #fff;
+  height: 100%;
 }
 
-.about-banner{
-    background: url('../../assets/about.jpg') no-repeat center center/cover;
-    height: 20rem;
-    width: 100vw;
-    
+.about-banner {
+  background: url('../../assets/about.jpg') no-repeat center center/cover;
+  height: 20rem;
+  width: 100vw;
 }
 
-.about-banner .about-bannertext{
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    color: white;
-    line-height: 4rem;
-    font-size: 3.2rem;
-
+.about-banner .about-bannertext {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  color: white;
+  line-height: 4rem;
+  font-size: 3.2rem;
 }
 
-.top{
-    margin: 5rem;
-    display: flex;
-    /* justify-content: center; */
-
-
+.top {
+  margin: 5rem 1rem;
+  display: flex;
+  /* justify-content: center; */
 }
 
-.top .top_left{
-    text-align: left;
-    width: 25rem;
-    line-height: 2rem;
-    /* background: #989; */
-    margin-left: 17rem;
-    font-size: 1.1rem;
-    color: #4a4a4a;
-    
+.top .top_left {
+  text-align: left;
+  width: 30rem;
+  line-height: 2rem;
+  /* background: #989; */
+  margin-left: 17rem;
+  font-size: 1.1rem;
+  color: #4a4a4a;
 }
 
-.top .top_right{
-    margin-left: 5rem;
-    width: 631px;
-    line-height: 1.7rem;
-    color: #4a4a4a;
+.top .top_right {
+  margin-left: 5rem;
+  width: 631px;
+  line-height: 1.7rem;
+  color: #4a4a4a;
 }
 
-.mission{
-    display: flex;
-    background: #f5fafd;
-    padding-top: 5rem;
-    height: 38rem;
-    
+.mission {
+  display: flex;
+  background: #f5fafd;
+  padding-top: 5rem;
+  height: 38rem;
 }
 
-.mission .mission_left{
-    margin-right: 5rem;
-    margin-left: 23rem;
+.mission .mission_left {
+  margin-right: 5rem;
+  margin-left: 23rem;
 }
 
-.mission .mission_left img{
-    width: 25rem;
-    height: 100%;
+.mission .mission_left img {
+  width: 25rem;
+  height: 100%;
 }
 
-.mission .mission_right{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 25rem;
-    
+.mission .mission_right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 25rem;
 }
 
-.mission .mission_right h2{
-    color: #00bdbe !important; 
-    margin-bottom: 2rem;
-    font-weight: bold;
-    font-size: 2rem;
+.mission .mission_right h2 {
+  color: #00bdbe !important;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  font-size: 2rem;
 }
 
-.mission .mission_right{
-    color: #4a4a4a
+.mission .mission_right {
+  color: #4a4a4a;
 }
 /* #banner .bannertext h2{
     font-size: 4rem;
 } */
 
-.about-list{
-    margin-left: 2rem
+.about-list {
+  margin-left: 2rem;
 }
 
-.how-h3{
-    color: #00bdbe;
-    text-align: center;
+.how-h3 {
+  color: var(--primary-color);
 }
 
-.how-list{
-    margin-left: 2rem;
-    margin-top: 1rem
+.how-list {
+  margin-left: 2rem;
+  margin-top: 1rem;
+}
+
+.how-p {
+  color: #00bdbe;
 }
