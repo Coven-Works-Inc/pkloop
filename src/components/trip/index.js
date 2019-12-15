@@ -174,7 +174,7 @@ class index extends Component {
                 />
               </div>
               <div className='trip_field'>
-                <select value={this.state.value}>
+                <select value={this.state.parcelWeight}>
                   <option value=''>Weight you are willing to transport</option>
                   <option value='large'> 0 - 5 (lbs) </option>
                   <option value='medium'>6 - 10 (lbs) </option>
@@ -182,7 +182,7 @@ class index extends Component {
                 </select>
               </div>
               <div className='trip_field'>
-                <select value={this.state.value}>
+                <select value={this.state.transport}>
                   <option value=''>Means Of Transportation</option>
                   <option value='Flight'> Flight </option>
                   <option value='Train'>Train</option>

@@ -1,12 +1,45 @@
 import React, { Component } from 'react'
 import HeaderFooter from '../headerFooter'
+import { connect } from 'react-redux'
+import { postParcel } from '../../actions/parcelActions'
+
 import './parcel.css'
 
 class Parcel extends Component {
-  state = {}
+  state = {
+    location: '',
+    destination: '',
+    parcelSize: { value: '' },
+    parcelWeight: '',
+    additionalInfo: ''
+  }
+
+  onChangeHandler = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
 
   submitHandler = e => {
     e.preventDefault()
+
+    const {
+      location,
+      destination,
+      parcelSize,
+      parcelWeight,
+      additionalInfo
+    } = this.state
+
+    const parcelData = {
+      location,
+      destination,
+      parcelSize,
+      parcelWeight,
+      additionalInfo
+    }
+
+    this.props.postParcel(parcelData, this.props.history)
   }
   render () {
     return (
@@ -15,10 +48,31 @@ class Parcel extends Component {
           <h1>Send Parcel</h1>
           <div className='py-2 form-group'>
             <form onSubmit={this.submitHandler}>
-              <input type='text' placeholder='From: City, Country' /> <br />
-              <input type='text' placeholder='To: City, Country' /> <br />
-              <select>
-                <option value='extra large' selected='selected'>
+              <input
+                type='text'
+                id='location'
+                value={this.state.location}
+                onChange={this.onChangeHandler}
+                placeholder='From: City, Country'
+                name='location'
+              />{' '}
+              <br />
+              <input
+                type='text'
+                id='destination'
+                value={this.state.destination}
+                onChange={this.onChangeHandler}
+                placeholder='To: City, Country'
+                name='destination'
+              />{' '}
+              <br />
+              <select
+                name='parcelSize'
+                value={this.state.parcelSize}
+                onChange={this.onChangeHandler}
+              >
+                <option value=''>Size you are willing to transport</option>
+                <option value='extra large'>
                   Extra large (E.g Big box, electronics)
                 </option>
                 <option value='large'>large (E.g Laptops)</option>
@@ -26,13 +80,21 @@ class Parcel extends Component {
                 <option value='small'>small (E.g mobile phone)</option>
               </select>
               <br />
-              <select>
+              {/* <select>
                 <option value='small' selected='selected'>
                   0 - 5(lbs)
                 </option>
                 <option value='medium'>6 - 10lbs</option>
                 <option value='large'>11 - 15lbs</option>
-              </select>
+              </select> */}
+              <input
+                type='number'
+                id='parcelWeight'
+                name='parcelWeight'
+                value={this.state.parcelWeight}
+                onChange={this.onChangeHandler}
+                placeholder='Enter Weight of parcel in pounds (E.g 4 for 4lbs)'
+              />
               <textarea
                 name='additionalInfo'
                 id='additionalInfo'
@@ -40,13 +102,19 @@ class Parcel extends Component {
                 onChange={this.onChangeHandler}
                 placeholder='Additional information'
               />
+              <button className='btnQ'>Find Travellers</button>
             </form>
           </div>
-          <button className='btnQ'>Find Travellers</button>
         </div>
       </HeaderFooter>
     )
   }
 }
 
-export default Parcel
+const mapStateToProps = state => ({
+  auth: state.auth,
+  error: state.errors,
+  loading: state.loading
+})
+
+export default connect(mapStateToProps, { postParcel })(Parcel)
