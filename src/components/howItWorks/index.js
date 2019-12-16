@@ -4,8 +4,6 @@ import Banner from '../common/banner'
 import './howitworks.css'
 import Cta from '../home/cta_banner'
 
-import Human from '../../assets/about_img.jpg'
-
 const index = () => {
   return (
     <HeaderFooter>

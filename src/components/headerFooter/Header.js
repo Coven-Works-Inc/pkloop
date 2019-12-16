@@ -40,6 +40,9 @@ class Header extends Component {
                 </Linker>
               </li> */}
               <li>
+                <Link to='/'>Home</Link>
+              </li>
+              <li>
                 <Link to='/howitworks'>How It Works</Link>
               </li>
               <li>

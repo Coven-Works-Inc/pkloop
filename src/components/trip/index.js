@@ -21,7 +21,7 @@ class index extends Component {
     additionalInfo: ''
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps () {
     this.setState({
       errors: this.props.error
     })
@@ -75,7 +75,7 @@ class index extends Component {
     })
   }
 
-  render() {
+  render () {
     return (
       <HeaderFooter>
         <Banner title='List Your Trip' />
@@ -174,7 +174,10 @@ class index extends Component {
                 />
               </div>
               <div className='trip_field'>
-                <select value={this.state.value} className={this.state.parcelWeight === '' ? 'gray' : ''}>
+                <select
+                  value={this.state.value}
+                  className={this.state.parcelWeight === '' ? 'gray' : ''}
+                >
                   <option value=''>Weight you are willing to transport</option>
                   <option value='large'> 0 - 5 (lbs) </option>
                   <option value='medium'>6 - 10 (lbs) </option>
@@ -182,7 +185,10 @@ class index extends Component {
                 </select>
               </div>
               <div className='trip_field'>
-                <select value={this.state.value} className={this.state.transport === '' ? 'gray' : ''}>
+                <select
+                  value={this.state.value}
+                  className={this.state.transport === '' ? 'gray' : ''}
+                >
                   <option value=''>Means of transportation</option>
                   <option value='large'> Plane</option>
                   <option value='medium'>Train</option>
