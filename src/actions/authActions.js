@@ -1,6 +1,6 @@
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
-// import jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 
 import { GET_ERRORS, SET_CURRENT_USER, LOADING, SET_TOKEN } from './types'
 import { BASE_URL } from '../config/constants'
@@ -53,11 +53,11 @@ export const loginUser = (userData, history) => dispatch => {
   axios
     .post(`${BASE_URL}/auth/login`, userData)
     .then(async res => {
-      // const { token } = res.data
-      // localStorage.setItem('jwtToken', token)
-      // await setAuthToken(token);
-      // const decoded = jwt_decode(token);
-      // await dispatch(setCurrentUser(decoded, token));
+      const { token } = res.data
+      localStorage.setItem('jwtToken', token)
+      await setAuthToken(token);
+      const decoded = jwt_decode(token);
+      await dispatch(setCurrentUser(decoded, token));
       history.push('/dashboard')
     })
     .catch(err => {
@@ -111,10 +111,11 @@ export const verify = (token, history) => dispatch => {
   axios
     .post(`${BASE_URL}/auth/verify`, { token })
     .then(async res => {
-      console.log(res)
-      setTimeout(() => {
-        history.push('/login')
-      }, 2000)
+      // console.log(res)
+      // setTimeout(() => {
+      //   history.push('/login')
+      // }, 2000)
+      history.push('/login')
     })
     .catch(err =>
       dispatch({
