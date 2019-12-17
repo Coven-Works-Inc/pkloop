@@ -1,0 +1,11 @@
+.faq-banner {
+  display: flex;
+  background: url('../../assets/FAQ.jpg') no-repeat center center/cover;
+  height: 23rem;
+  font-size: 3.2rem;
+  align-items: center;
+  color: #fff;
+  justify-content: center;
+  /* font-weight: bold; */
+  letter-spacing: -0.87px;
+}
