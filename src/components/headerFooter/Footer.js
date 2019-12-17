@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Icon from '../../assets/Footer Icon.png'
 
-function Footer() {
+function Footer () {
   return (
     <div className='footerdiv'>
       <div className='footer'>
@@ -33,7 +33,7 @@ function Footer() {
         </ul>
         <div className='footer_icons'>
           <a
-            href='https://www.facebook.com/pkloop.peer'
+            href='http://fb.me/myPKLoop'
             target='_blank'
             rel='noopener noreferrer'
           >
