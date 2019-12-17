@@ -14,12 +14,12 @@ const Cargo = () => {
           </p>
         </div>
         <div className='cargo_buttons'>
-          <Link to="/" style={{ textDecoration: 'none' }}>
+          <Link to="/parcel" style={{ textDecoration: 'none' }}>
             <div className='cargo_items'>
               <h3>LIST YOUR SHIPMENT DETAILS</h3>
             </div>
           </Link>
-          <Link to="/" style={{ textDecoration: 'none' }}>
+          <Link to="/travelers" style={{ textDecoration: 'none' }}>
             <div className='cargo_items'>
               <h3>SEE AVAILABLE SHIPPERS</h3>
             </div>
