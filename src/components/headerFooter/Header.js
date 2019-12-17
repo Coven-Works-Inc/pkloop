@@ -3,18 +3,15 @@ import './header_footer.css'
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/logo/Logo.png'
 import { Link as Linker } from 'react-scroll'
-import {connect} from 'react-redux';
-import { logoutUser} from '../../actions/authActions';
-
-
+import { connect } from 'react-redux'
+import { logoutUser } from '../../actions/authActions'
 
 class Header extends Component {
-  
   state = {
     menu: false
   }
 
-   onLogoutClick = (e) => {
+  onLogoutClick = e => {
     e.preventDefault()
     this.props.logoutUser()
   }
@@ -25,12 +22,11 @@ class Header extends Component {
     })
   }
 
- render () {
-
+  render () {
     const { menu } = this.state
     const { isAuthenticated, user } = this.props.auth
-  const authLinks = (
-    <Fragment>
+    const authLinks = (
+      <Fragment>
         <div id='navbar'>
           <div className='logo'>
             <Link to='/'>
@@ -61,9 +57,7 @@ class Header extends Component {
                 <Link to='/pricing'>Pricing</Link>
               </li>
               <li>
-                <Linker to='faqs' spy smooth offset={-114} duration={500}>
-                  FAQs
-                </Linker>
+                <Link to='/faq'>FAQ</Link>
               </li>
               <li>
                 <Link to='/about'>About us</Link>
@@ -78,14 +72,14 @@ class Header extends Component {
                 <Link to='/dashboard'>Dashboard</Link>
               </li>
               <li>
-               <a
-               href=''
-            onClick={this.onLogoutClick.bind(this)}
-            className='nav-link'
-          >
-            Logout
-          </a>
-          </li>
+                <a
+                  href=''
+                  onClick={this.onLogoutClick.bind(this)}
+                  className='nav-link'
+                >
+                  Logout
+                </a>
+              </li>
             </ul>
           </div>
           <div className='menu-bars' onClick={this.showMenu}>
@@ -103,7 +97,7 @@ class Header extends Component {
                 <Link to='/pricing'>Pricing</Link>
               </li>
               <li>
-                <Link to='/faqs'>FAQs</Link>
+                <Link to='/faq'>FAQs</Link>
               </li>
               <li>
                 <Link to='/about'>About us</Link>
@@ -118,22 +112,22 @@ class Header extends Component {
                 <Link to='/dashboard'>Dashboard</Link>
               </li>
               <li>
-               <a
-               href=''
-            onClick={this.onLogoutClick.bind(this)}
-            className='nav-link'
-          >
-            Logout
-          </a>
-          </li>
+                <a
+                  href=''
+                  onClick={this.onLogoutClick.bind(this)}
+                  className='nav-link'
+                >
+                  Logout
+                </a>
+              </li>
             </ul>
           </div>
         )}
       </Fragment>
-  );
+    )
 
-  const guestLinks = (
-    <Fragment>
+    const guestLinks = (
+      <Fragment>
         <div id='navbar'>
           <div className='logo'>
             <Link to='/'>
@@ -164,9 +158,9 @@ class Header extends Component {
                 <Link to='/pricing'>Pricing</Link>
               </li>
               <li>
-                <Linker to='faqs' spy smooth offset={-114} duration={500}>
-                  FAQs
-                </Linker>
+                <li>
+                  <Link to='/faq'>FAQ</Link>
+                </li>
               </li>
               <li>
                 <Link to='/about'>About us</Link>
@@ -200,7 +194,7 @@ class Header extends Component {
                 <Link to='/pricing'>Pricing</Link>
               </li>
               <li>
-                <Link to='/faqs'>FAQs</Link>
+                <Link to='/faq'>FAQs</Link>
               </li>
               <li>
                 <Link to='/about'>About us</Link>
@@ -221,19 +215,14 @@ class Header extends Component {
           </div>
         )}
       </Fragment>
-  );
- 
-    return (
-      <Fragment>
-        { isAuthenticated ? authLinks : guestLinks}
-      </Fragment>
     )
+
+    return <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
-
+  auth: state.auth
 })
 
-export default connect(mapStateToProps,{logoutUser})(Header)
+export default connect(mapStateToProps, { logoutUser })(Header)

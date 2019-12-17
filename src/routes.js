@@ -16,6 +16,7 @@ import Contact from './components/pages/contact'
 import Privacy from './components/pages/privacy_policy'
 import Travelers from './components/parcel/travelers'
 import HowItWorks from './components/howItWorks'
+import Faq from './components/faq'
 
 const Routes = () => {
   return (
@@ -33,6 +34,7 @@ const Routes = () => {
       <Route exact component={Terms} path='/terms' />
       <Route exact component={HowItWorks} path='/howitworks' />
       <Route exact component={Contact} path='/contact' />
+      <Route exact component={Faq} path='/faq' />
       <Route exact component={Privacy} path='/privacy' />
       <Route exact component={Home} path='/' />
     </Switch>
