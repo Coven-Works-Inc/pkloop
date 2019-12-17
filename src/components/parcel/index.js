@@ -48,24 +48,38 @@ class Parcel extends Component {
           <h1>Send Parcel</h1>
           <div className='py-2 form-group'>
             <form onSubmit={this.submitHandler}>
-              <input
-                type='text'
-                id='location'
-                value={this.state.location}
-                onChange={this.onChangeHandler}
-                placeholder='From: City, Country'
-                name='location'
-              />{' '}
-              <br />
-              <input
-                type='text'
-                id='destination'
-                value={this.state.destination}
-                onChange={this.onChangeHandler}
-                placeholder='To: City, Country'
-                name='destination'
-              />{' '}
-              <br />
+              <div className='country_div'>
+                <select
+                  name='Country'
+                  value={this.state.country}
+                  onChange={this.onChangeHandler}
+                >
+                  <option value='united states'>United States</option>
+                </select>
+                <select
+                  name='parcelSize'
+                  value={this.state.parcelSize}
+                  onChange={this.onChangeHandler}
+                >
+                  <option value=''>New York City (NYC) </option>
+                </select>
+              </div>{' '}
+              <div className='country_div'>
+                <select
+                  name='Country'
+                  value={this.state.country}
+                  onChange={this.onChangeHandler}
+                >
+                  <option value='united states'>United States</option>
+                </select>
+                <select
+                  name='parcelSize'
+                  value={this.state.parcelSize}
+                  onChange={this.onChangeHandler}
+                >
+                  <option value=''>New York City (NYC) </option>
+                </select>
+              </div>
               <select
                 name='parcelSize'
                 value={this.state.parcelSize}
@@ -87,14 +101,40 @@ class Parcel extends Component {
                 <option value='medium'>6 - 10lbs</option>
                 <option value='large'>11 - 15lbs</option>
               </select> */}
-              <input
-                type='number'
-                id='parcelWeight'
+              <select
                 name='parcelWeight'
                 value={this.state.parcelWeight}
                 onChange={this.onChangeHandler}
-                placeholder='Enter Weight of parcel in pounds (E.g 4 for 4lbs)'
-              />
+              >
+                <option value=''>
+                  Select Weight of parcel in pounds (E.g 4 for 4lbs; 0.45kg for
+                  1lbs)
+                </option>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+                <option value='10'>10</option>
+                <option value='11'>11</option>
+                <option value='12'>12</option>
+                <option value='13'>13</option>
+                <option value='14'>14</option>
+                <option value='15'>15</option>
+                <option value='16'>16</option>
+                <option value='17'>17</option>
+                <option value='18'>18</option>
+                <option value='19'>19</option>
+                <option value='20'>20</option>
+                <option value='21'>21</option>
+                <option value='22'>22</option>
+                <option value='23'>23</option>
+                <option value='24'>24</option>
+              </select>
               <textarea
                 name='additionalInfo'
                 id='additionalInfo'
