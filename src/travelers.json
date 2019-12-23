@@ -1,38 +1,46 @@
 [
   {
-    "location": 1,
-    "destination": "New ES6 upgrade available",
-    "Arrival date": "Things are getting better, my life is becoming a source of blessing and favour to my family.",
-    "Stopovers": "Johannesburg",
-    "Means of transportation": "Train",
-    "parcelSize": "Large",
-    "parcelWeight": "10"
+    "name": "Jamie HelfsBurger",
+    "location": "Nairobi, Kenya",
+    "destination": "London, UK",
+    "arrival": "Nov 13, 2019",
+    "stopovers": "",
+    "transport": "Ship",
+    "parcelSize": "Extra Large",
+    "parcelWeight": "10",
+    "image": "assets/jephtah.JPG"
   },
   {
-    "location": 1,
-    "destination": "New ES6 upgrade available",
-    "Arrival date": "Things are getting better, my life is becoming a source of blessing and favour to my family.",
-    "Stopovers": "Johannesburg",
-    "Means of transportation": "Train",
+    "name": "Jerome Tepon",
+    "location": "Texas, USA",
+    "destination": "London, UK",
+    "arrival": "Nov 14, 2019",
+    "stopovers": "New York",
+    "transport": "Plane",
     "parcelSize": "Large",
-    "parcelWeight": "10"
+    "parcelWeight": "10",
+    "image": "assets/Jeph.JPG"
   },
   {
-    "location": 1,
-    "destination": "New ES6 upgrade available",
-    "Arrival date": "Things are getting better, my life is becoming a source of blessing and favour to my family.",
-    "Stopovers": "Johannesburg",
-    "Means of transportation": "Train",
-    "parcelSize": "Large",
-    "parcelWeight": "10"
+    "name": "Jova Latto",
+    "location": "Paris, France",
+    "destination": "London, UK",
+    "arrival": "Nov 15, 2019",
+    "stopovers": "England",
+    "transport": "Train",
+    "parcelSize": "Small",
+    "parcelWeight": "10",
+    "image": "assets/jephtah.JPG"
   },
   {
-    "location": 1,
-    "destination": "New ES6 upgrade available",
-    "Arrival date": "Things are getting better, my life is becoming a source of blessing and favour to my family.",
-    "Stopovers": "Johannesburg",
-    "Means of transportation": "Train",
+    "name": "Blue Dreams",
+    "location": "Texas, USA",
+    "destination": "Lagos, Nigeria",
+    "arrival": "Nov 16, 2019",
+    "stopovers": "",
+    "transport": "Plane",
     "parcelSize": "Large",
-    "parcelWeight": "10"
+    "parcelWeight": "10",
+    "image": "assets/Jeph.JPG"
   }
 ]

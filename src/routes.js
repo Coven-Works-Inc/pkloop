@@ -9,6 +9,7 @@ import Trips from './components/trip'
 import About from './components/about'
 import Parcel from './components/parcel'
 import Verify from './components/verify'
+import Payment from './components/payment'
 import Dashboard from './components/dashboard'
 import Trust from './components/pages/trust'
 import Terms from './components/pages/tos'
@@ -28,6 +29,7 @@ const Routes = () => {
       <Route exact component={Parcel} path='/parcel' />
       <Route exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
+      <Route exact component={Payment} path='/payment' />
       <Route exact component={Dashboard} path='/dashboard' />
       <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />

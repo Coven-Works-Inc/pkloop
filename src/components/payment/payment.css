@@ -1,0 +1,21 @@
+.payment-container {
+    background: url('../../assets/payment.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 6px 0 rgba(179, 179, 179, 0.84), inset 0 -1px 3px 0 #979797;
+    border: solid 1px #b3b3b3;
+    background-color: white;
+}
+
+.payment-logo .logo {
+    width: 100%;
+}

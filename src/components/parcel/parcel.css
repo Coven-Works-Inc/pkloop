@@ -76,8 +76,35 @@
 
 .country_div {
   display: flex;
-  margin: auto;
+  /* margin: auto; */
   justify-content: space-between;
+}
+
+.country_div > div {
+  flex: 1;
+  display: flex;
+}
+
+.country_div > div select {
+  flex: 1;
+  outline: none;
+}
+
+.country_div > div label {
+  background-color: #fff;
+  color: #201f1f;
+  height: 60px;
+  line-height: 60px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 0rem 1rem;
+  margin-right: -5px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.country_div > div:first-child {
+  margin-right: 1rem;
 }
 
 .country_div select:first-child {

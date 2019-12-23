@@ -275,4 +275,86 @@ body{
 .form-group {
     text-align: center;
 }
+
+.dashboard-menu {
+    flex-wrap: wrap;
+    /* overflow-x: scroll; */
+}
+
+.dashboard-header h2 {
+    font-size: 2rem;
+}
+
+.dashboard-body {
+    padding: 1rem 0rem;
+    overflow: hidden;
+}
+
+.dashboard-menu p,
+.dashboard-menu p.lighter {
+    margin: 5px;
+    height: 45px;
+}
+
+.transactions,
+.support {
+    margin: 1rem auto;
+    width: 100%;
+    /* width: 600px; */
+    overflow-x: scroll;
+}
+
+.transactions .table-header,
+.support .table-header,
+.transactions .table-row,
+.support .table-row {
+    width: 600px;
+    /* overflow-x: scroll; */
+}
+
+.support .support-header {
+    flex-direction: column;
+}
+
+.support .support-header > h2,
+.support .support-header > button {
+    align-self: flex-start;
+}
+
+.support .support-header > h2 {
+    margin-bottom: 2rem;
+}
+
+.edit-profile {
+    margin: 1rem auto;
+    padding: 2rem;
+    width: 100%;
+    flex-direction: column;
+}
+
+.edit-profile .profile-picture {
+    align-self: center;
+    margin-bottom: 2rem;
+}
+
+.edit-profile .profile-form,
+.edit-profile .profile-form .btnSmall {
+    margin-left: 0px;
+    width: 100%;
+}
+
+.balance-section,
+.balance-section .balance {
+    margin: 2rem auto;
+    flex-direction: column;
+}
+
+.balance-section .balance .left-side {
+    margin-bottom: 3rem;
+}
+
+.balance-section .amount {
+    margin: 0;
+}
+
 }

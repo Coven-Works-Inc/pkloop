@@ -25,7 +25,7 @@ const Transactions = () => {
                 <p className="open">Open</p>
             </div>
             <div className="table-row">
-                <p className="canceled">Declined/Canceled</p>
+                <p className="canceled">Declined or Canceled</p>
                 <p>Sheldon Cooper</p>
                 <p>Sender</p>
                 <p>Oct 25, 2019, 12:52:02 PM</p>

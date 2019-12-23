@@ -1,31 +1,31 @@
-#travel-container{
+#travel-container {
     padding: 0.5rem;
     margin: 1rem 10rem;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     height: 100%;
     /* background: #00bdbe; */
 }
 
-
-#travel-container .card{
+#travel-container .card {
     background: #fff;
     height: 300px;
     width: 550px;
-    margin: 10px;
     padding: 2rem;
-    display: flex;;
-    justify-content: space-around;
-    
-    
+    display: flex;
 }
 
-#travel-container .card-left{
-    
+#travel-container .card:nth-child(odd) {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
 }
 
+#travel-container .card-left {
+    margin-right: 2rem;
+}
 
-#travel-container .card-left .button{
+#travel-container .card-left .button {
     border: 1px solid #0071bc;
     background: #0071bc;
     color: #fff;
@@ -35,7 +35,21 @@
     margin-top: 2.5rem;
     font-size: 0.8rem;
     text-transform: uppercase;
-
 }
 
+#travel-container .card-right h3:nth-child(2) {
+    margin-bottom: 1rem;
+}
 
+#travel-container .card-right h3,
+#travel-container .card-right p {
+    line-height: 1.5;
+}
+
+#travel-container .card-right p {
+    font-size: 0.85rem
+}
+
+span.gray {
+    color: #9b9b9b;
+}
