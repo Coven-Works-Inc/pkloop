@@ -21,22 +21,22 @@
 }
 
 .top {
-  margin: 5rem 1rem;
+  margin: 2rem 0;
   display: flex;
-  /* justify-content: center; */
+  justify-content: center;
+  padding: 2rem;
 }
 
-.top .top_left {
+.top .top-how-left {
   text-align: left;
-  width: 30rem;
+  width: 40rem;
   line-height: 2rem;
   /* background: #989; */
-  margin-left: 17rem;
   font-size: 1.1rem;
   color: #4a4a4a;
 }
 
-.top .top_right {
+.top > .top_right {
   margin-left: 5rem;
   width: 631px;
   line-height: 1.7rem;

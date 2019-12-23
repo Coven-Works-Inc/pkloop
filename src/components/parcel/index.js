@@ -107,8 +107,9 @@ class Parcel extends Component {
                 onChange={this.onChangeHandler}
               >
                 <option value=''>
-                  Select Weight of parcel in pounds (E.g 4 for 4lbs; 0.45kg for
-                  1lbs)
+                  Select parcel weight in pounds (lbs). E.g enter 4 for 4 lbs.
+                  Also note 1kg = 2.2lbs; multiply weight in kg x 2.2 to get lb
+                  weight
                 </option>
                 <option value='1'>1</option>
                 <option value='2'>2</option>
