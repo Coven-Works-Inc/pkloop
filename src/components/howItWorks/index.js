@@ -9,7 +9,7 @@ const index = () => {
     <HeaderFooter>
       <Banner title='Same Day Global Shipping!' />
       <div className='top'>
-        <div className='top_left'>
+        <div className='top-how-left'>
           <h3 className='how-h3'>DO YOU HAVE ENOUGH TIME TO PLAN AHEAD? </h3>
           <h3 className='how-h3 py-1'>
             INDIVIDUALS OR AGENCIES SHIPPING CONTAINERS OR CARGO?{' '}
