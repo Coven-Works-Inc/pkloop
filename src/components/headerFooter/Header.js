@@ -158,9 +158,7 @@ class Header extends Component {
                 <Link to='/pricing'>Pricing</Link>
               </li>
               <li>
-                <li>
-                  <Link to='/faq'>FAQ</Link>
-                </li>
+                <Link to='/faq'>FAQ</Link>
               </li>
               <li>
                 <Link to='/about'>About us</Link>
