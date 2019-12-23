@@ -9,7 +9,7 @@ const index = () => {
     <HeaderFooter>
       <Banner title='Same Day Global Shipping!' />
       <div className='top'>
-        <div className='top_left'>
+        <div className='top-how-left'>
           <h3 className='how-h3'>DO YOU HAVE ENOUGH TIME TO PLAN AHEAD? </h3>
           <h3 className='how-h3 py-1'>
             INDIVIDUALS OR AGENCIES SHIPPING CONTAINERS OR CARGO?{' '}
@@ -20,6 +20,35 @@ const index = () => {
           <h3 className='how-h3 py-1'>
             CUSTOMERS LOOKING TO USE THESE SERVICES, FIND THEM HERE FOR FREE!
           </h3>
+          <br />
+          <p>
+            Border Controls: Please learn about the local legislation in the
+            countries of origin and destination. These costs will have to be
+            paid by the Sender. (Enter amount under TIP function)
+          </p>
+          <br />
+          <p>
+            Possible Check-in questions while boarding an international flight:
+            As a traveler, the item will be considered yours until hand
+            delivered to Sender’s recipient.
+          </p>
+          <br />
+          <p>
+            You simply carry the item as you would do for a family member or a
+            friend. All packages without exclusion must be inspected. For any
+            questions, do not hesitate to contact us
+          </p>
+          <br />
+          <p>
+            Be Watchful, Only deliver what You can see. Please, thoroughly check
+            the content to be delivered, especially when it's a personal
+            package. Never accept a closed package. Also, you have the right to
+            refuse delivery at any time. Close up the package yourself after
+            having confirmed that the contents are legitimate. In the event of
+            doubt of suspect behavior on the part of the Sender, immediately
+            refuse the delivery and let us know by e-mail at{' '}
+            <a href='mailto:contact@mypkloop.com'>contact@mypkloop.com</a>
+          </p>
         </div>
         <div className='top_right'>
           <h3>
@@ -112,34 +141,6 @@ const index = () => {
             cost $5.99/lb x10 lbs = $59.99
           </p>
           <br />
-          <p>
-            Border Controls: Please learn about the local legislation in the
-            countries of origin and destination. These costs will have to be
-            paid by the Sender. (Enter amount under TIP function)
-          </p>
-          <br />
-          <p>
-            Possible Check-in questions while boarding an international flight:
-            As a traveler, the item will be considered yours until hand
-            delivered to Sender’s recipient.
-          </p>
-          <br />
-          <p>
-            You simply carry the item as you would do for a family member or a
-            friend. All packages without exclusion must be inspected. For any
-            questions, do not hesitate to contact us
-          </p>
-          <br />
-          <p>
-            Be Watchful, Only deliver what You can see. Please, thoroughly check
-            the content to be delivered, especially when it's a personal
-            package. Never accept a closed package. Also, you have the right to
-            refuse delivery at any time. Close up the package yourself after
-            having confirmed that the contents are legitimate. In the event of
-            doubt of suspect behavior on the part of the Sender, immediately
-            refuse the delivery and let us know by e-mail at{' '}
-            <a href='mailto:contact@mypkloop.com'>contact@mypkloop.com</a>
-          </p>
         </div>
       </div>
       <Cta />

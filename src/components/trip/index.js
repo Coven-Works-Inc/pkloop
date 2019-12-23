@@ -16,19 +16,19 @@ class index extends Component {
     stopOver3: '',
     stopOver4: '',
     parcelSize: '',
-    parcelWeight: { value: '' },
+    parcelWeight: '',
     transport: { value: '' },
     additionalInfo: ''
   }
 
-  componentWillReceiveProps () {
-    this.setState({
-      errors: this.props.error
-    })
-    setTimeout(() => {
-      this.setState({ errors: '' })
-    }, 4000)
-  }
+  // componentWillReceiveProps () {
+  //   this.setState({
+  //     errors: this.props.error
+  //   })
+  //   setTimeout(() => {
+  //     this.setState({ errors: '' })
+  //   }, 4000)
+  // }
 
   onChangeHandler = e => {
     this.setState({
@@ -40,8 +40,10 @@ class index extends Component {
     e.preventDefault()
 
     const tripData = {
-      location: this.state.location,
-      destination: this.state.destination,
+      locationCity: this.state.location,
+      locationCountry: this.state.locationCountry,
+      destinationCity: this.state.destinationCity,
+      destinationCountry: this.state.destinationCountry,
       arrivalDate: this.state.arrivalDate,
       stopOver1: this.state.stopOver1,
       stopOver2: this.state.stopOver2,
@@ -99,17 +101,16 @@ class index extends Component {
                   id='destination'
                   value={this.state.destination}
                   onChange={this.onChangeHandler}
-                  placeholder=' To:   City, Country'
+                  placeholder=' To: City, Country'
                 />
               </div>
               <div className='trip_field'>
                 <input
-                  type='text'
+                  type='date'
                   name='arrivalDate'
                   id='arrivalDate'
                   value={this.state.arrivalDate}
                   onChange={this.onChangeHandler}
-                  placeholder='Arrival: dd/mm/yyyy'
                 />
               </div>
               <div className='stopover'>
@@ -174,39 +175,34 @@ class index extends Component {
                 />
               </div>
               <div className='trip_field'>
-                <select
-                  value={this.state.value}
-                  className={this.state.parcelWeight === '' ? 'gray' : ''}
-                >
-                  <option value=''>Weight you are willing to transport</option>
-                  <option value='large'> 0 - 5 (lbs) </option>
-                  <option value='medium'>6 - 10 (lbs) </option>
-                  <option value='small'>10 - 15(lbs)</option>
-                </select>
+                <input
+                  type='number'
+                  name='parcelWeight'
+                  id='parcelWeight'
+                  value={this.state.parcelWeight}
+                  onChange={this.onChangeHandler}
+                  placeholder='Enter the maximum weight you can transport in (lbs). E.g enter 4 for 4 lbs.
+                  Also note 1kg = 2.2lbs; multiply weight in kg x 2.2 to get lb'
+                />
               </div>
+
               <div className='trip_field'>
                 <select
-                  value={this.state.value}
+                  name='transport'
+                  value={this.state.transport}
                   className={this.state.transport === '' ? 'gray' : ''}
+                  onChange={this.onChangeHandler}
+                  style={{ color: '#9b9b9b' }}
                 >
                   <option value=''>Means of transportation</option>
-                  <option value='large'> Plane</option>
-                  <option value='medium'>Train</option>
-                  <option value='small'>Ship</option>
-                  <option value='small'>Road</option>
-                  <option value='small'>Bicycle</option>
+                  <option value='plane'>Plane</option>
+                  <option value='train'>Train</option>
+                  <option value='ship'>Ship</option>
+                  <option value='road'>Road</option>
+                  <option value='bicycle'>Bicycle</option>
                 </select>
               </div>
-              {/* <div className='trip_field'>
-                <input
-                  type='text'
-                  name='transport'
-                  id='transport'
-                  value={this.state.transport}
-                  onChange={this.onChangeHandler}
-                  placeholder='Means of transportation Flight'
-                />
-              </div> */}
+
               <div className='trip_field'>
                 <textarea
                   name='additionalInfo'
