@@ -22,7 +22,7 @@ class Header extends Component {
     })
   }
 
-  render () {
+  render() {
     const { menu } = this.state
     const { isAuthenticated, user } = this.props.auth
     const authLinks = (
@@ -63,7 +63,7 @@ class Header extends Component {
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/parcel'>Send parcel</Link>
+                <Link to='/parcel'>Find Travellers</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>
@@ -103,7 +103,7 @@ class Header extends Component {
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/send'>Send parcel</Link>
+                <Link to='/travelers'>Find Travellers</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>
@@ -158,15 +158,13 @@ class Header extends Component {
                 <Link to='/pricing'>Pricing</Link>
               </li>
               <li>
-                <li>
-                  <Link to='/faq'>FAQ</Link>
-                </li>
+                <Link to='/faq'>FAQ</Link>
               </li>
               <li>
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/parcel'>Send parcel</Link>
+                <Link to='/parcel'>Find Travellers</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>
@@ -200,7 +198,7 @@ class Header extends Component {
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/send'>Send parcel</Link>
+                <Link to='/send'>Find Travellers</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>
