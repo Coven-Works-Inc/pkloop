@@ -22,7 +22,7 @@ class Header extends Component {
     })
   }
 
-  render() {
+  render () {
     const { menu } = this.state
     const { isAuthenticated, user } = this.props.auth
     const authLinks = (
@@ -136,18 +136,6 @@ class Header extends Component {
           </div>
           <div className='menu-links'>
             <ul>
-              {/* <li>
-                <Linker
-                  activeClass='active'
-                  to='works'
-                  spy
-                  smooth
-                  offset={-114}
-                  duration={500}
-                >
-                  How it works
-                </Linker>
-              </li> */}
               <li>
                 <Link to='/'>Home</Link>
               </li>
