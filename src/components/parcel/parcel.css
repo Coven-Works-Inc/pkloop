@@ -88,6 +88,8 @@
 .country_div > div select {
   flex: 1;
   outline: none;
+  border: none;
+  background: #fff;
 }
 
 .country_div > div label {

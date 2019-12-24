@@ -1,6 +1,6 @@
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
-import jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode'
 
 import { GET_ERRORS, SET_CURRENT_USER, LOADING, SET_TOKEN } from './types'
 import { BASE_URL } from '../config/constants'
@@ -55,9 +55,9 @@ export const loginUser = (userData, history) => dispatch => {
     .then(async res => {
       const { token } = res.data
       localStorage.setItem('jwtToken', token)
-      await setAuthToken(token);
-      const decoded = jwt_decode(token);
-      await dispatch(setCurrentUser(decoded, token));
+      await setAuthToken(token)
+      const decoded = jwt_decode(token)
+      await dispatch(setCurrentUser(decoded, token))
       history.push('/dashboard')
     })
     .catch(err => {

@@ -2,32 +2,44 @@ import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
 // import jwt_decode from 'jwt-decode';
 
-import { GET_ERRORS, SET_CURRENT_USER, LOADING, SET_TOKEN } from './types'
+import {
+  GET_ERRORS,
+  SET_CURRENT_USER,
+  LOADING,
+  SET_TOKEN,
+  POST_TRIP
+} from './types'
 import { BASE_URL } from '../config/constants'
 
 export const postTrip = (tripData, history) => dispatch => {
-  dispatch({
-    type: LOADING,
-    payload: true
-  })
+  // dispatch({
+  //   type: LOADING,
+  //   payload: true
+  // })
 
-  dispatch({
-    type: GET_ERRORS,
-    payload: { message: '' }
-  })
+  // dispatch({
+  //   type: GET_ERRORS,
+  //   payload: { message: '' }
+  // })
+
+  console.log(tripData)
 
   axios
     .post(`${BASE_URL}/trips`, tripData)
     .then(res => {
-      //   TODO: Make a dispatch with the success page here
+      dispatch({
+        type: POST_TRIP,
+        payload: res.data.message
+      })
     })
     .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response
-          ? err.response.data
-          : { message: 'Something went wrong, please try again' }
-      })
+      // dispatch({
+      //   type: GET_ERRORS,
+      //   payload: err.response
+      //     ? err.response.data
+      //     : { message: 'Something went wrong, please try again' }
+      // })
+      console.log(err)
     })
     .finally(() =>
       dispatch({
