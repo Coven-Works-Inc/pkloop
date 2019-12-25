@@ -78,6 +78,10 @@ class Parcel extends Component {
           {
             name: 'Washington',
             code: 'dc'
+          },
+          {
+            name: 'Texas',
+            code: 'tx'
           }
         ]
       })
