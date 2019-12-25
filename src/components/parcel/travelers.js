@@ -11,7 +11,7 @@ import './travel.css'
 
 const Travelers = (props) => {
 
-  console.log(props)
+  // console.log(props)
 
   //This function helps the user filter by location
   const getLocation = e => {
@@ -39,9 +39,9 @@ const Travelers = (props) => {
 
   const getTravellers = () => {
     let travelersList = [];
-    props.travelers.map(traveler => (
+    props.travelers.map((traveler, key) => (
       travelersList.push(
-        <div className='card'>
+        <div key={key} className='card'>
           <div className='card-left'>
             <img
               src={Jeph}
