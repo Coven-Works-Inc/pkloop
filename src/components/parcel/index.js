@@ -6,17 +6,23 @@ import Travelers from './travelers'
 
 import './parcel.css'
 import travelData from '../../travelers.json'
+import countriesData from '../../countries.json'
 
 class Parcel extends Component {
   state = {
-    location: '',
-    destination: '',
-    parcelSize: { value: '' },
+    fromCountry: '',
+    fromCity: '',
+    toCountry: '',
+    toCity: '',
+    parcelSize: '',
     parcelWeight: '',
     additionalInfo: '',
     travelers: travelData,
     filteredLocation: [],
-    filteredDestination: []
+    filteredDestination: [],
+    countries: countriesData,
+    fromcities: [],
+    tocities: []
   }
 
   onChangeHandler = e => {
@@ -29,25 +35,70 @@ class Parcel extends Component {
     e.preventDefault()
 
     const {
-      location,
-      destination,
+      fromCountry,
+      fromCity,
+      toCountry,
+      toCity,
       parcelSize,
       parcelWeight,
       additionalInfo
     } = this.state
 
     const parcelData = {
-      location,
-      destination,
+      fromCountry,
+      fromCity,
+      toCountry,
+      toCity,
       parcelSize,
       parcelWeight,
       additionalInfo
     }
 
-    this.props.postParcel(parcelData, this.props.history)
+    console.log(parcelData);
+
+    // this.props.postParcel(parcelData, this.props.history)
   }
+
+  // fetchCountries = () => {
+  //   let countriesList = ''
+  //   this.state.countries.map((country, index) => {
+  //     countriesList += <option value={country[index]}>{country[index]}</option>
+  //   })
+  //   return countriesList
+  // }
+
+  fetchCities = (type, country) => {
+    if (type === 'from') {
+      this.setState({
+        fromcities: [
+          {
+            name: 'New York City',
+            code: 'nyc'
+          },
+          {
+            name: 'Washington',
+            code: 'dc'
+          }
+        ]
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.fromCountry !== this.state.fromCountry) {
+      console.log('you updated the base country');
+      this.fetchCities('from', this.state.fromCountry);
+      // call a function/endpoint/action that gets the list of cities
+    }
+
+    if (prevState.toCountry !== this.state.toCountry) {
+      console.log('you updated the destination country');
+      // call a function/endpoint/action that gets the list of cities
+    }
+  }
+
   render() {
-    const { travelers } = this.state
+    const { travelers, countries } = this.state
     return (
       <HeaderFooter>
         <div className='maincontainer send-parcel'>
@@ -58,21 +109,31 @@ class Parcel extends Component {
                 <div>
                   <label>From (Country)</label>
                   <select
-                    name='Country'
-                    value={this.state.country}
+                    name='fromCountry'
+                    value={this.state.fromCountry}
                     onChange={this.onChangeHandler}
                   >
-                    <option value='united states'>United States</option>
+                    {countries &&
+                      countries.map((country, key) => (
+                        <option value={country.code} key={key}>{country.name}</option>
+                      ))
+                    }
+                    {/* <option value='united states'>United States</option>
+                    <option value='nigeria'>Nigeria</option> */}
                   </select>
                 </div>
                 <div>
                   <label>From (City)</label>
                   <select
-                    name='parcelSize'
-                    value={this.state.parcelSize}
+                    name='fromCity'
+                    value={this.state.fromCity}
                     onChange={this.onChangeHandler}
                   >
-                    <option value=''>New York City (NYC) </option>
+                    {this.state.fromcities &&
+                      this.state.fromcities.map((city, key) => (
+                        <option value={city.code} key={key}>{city.name}</option>
+                      ))
+                    }
                   </select>
                 </div>
               </div>
@@ -80,21 +141,23 @@ class Parcel extends Component {
                 <div>
                   <label>To (Country)</label>
                   <select
-                    name='Country'
-                    value={this.state.country}
+                    name='toCountry'
+                    value={this.state.toCountry}
                     onChange={this.onChangeHandler}
                   >
                     <option value='united states'>United States</option>
+                    <option value='nigeria'>Nigeria</option>
                   </select>
                 </div>
                 <div>
                   <label>To (City)</label>
                   <select
-                    name='parcelSize'
-                    value={this.state.parcelSize}
+                    name='toCity'
+                    value={this.state.toCity}
                     onChange={this.onChangeHandler}
                   >
-                    <option value=''>New York City (NYC) </option>
+                    <option value='nyc'>New York City (NYC) </option>
+                    <option value='dc'>Washington (DC) </option>
                   </select>
                 </div>
               </div>
