@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { postParcel } from '../../actions/parcelActions'
 import HeaderFooter from '../headerFooter'
 import { connect } from 'react-redux'
 import { fetchTravelers } from '../../actions/travelerActions'
+
 import Travelers from './travelers'
+import Modal from '../common/modal'
 
 import './parcel.css'
 import travelData from '../../travelers.json'
@@ -16,7 +19,14 @@ const Parcel = props => {
     destinationCity: '',
     parcelSize: '',
     parcelWeight: '',
-    additionalInfo: ''
+    additionalInfo: '',
+    travelers: travelData,
+    filteredLocation: [],
+    filteredDestination: [],
+    countries: countriesData,
+    fromcities: [],
+    tocities: [],
+    modalOpen: false
   })
 
   useEffect(() => {
@@ -32,6 +42,20 @@ const Parcel = props => {
 
   const submitHandler = e => {
     e.preventDefault()
+  }
+
+  // fetchCountries = () => {
+  //   let countriesList = ''
+  //   this.state.countries.map((country, index) => {
+  //     countriesList += <option value={country[index]}>{country[index]}</option>
+  //   })
+  //   return countriesList
+  // }
+
+  toggleModal = () => {
+    this.setState({
+      modalOpen: !this.state.modalOpen
+    })
   }
 
   const fetchCities = (type, country) => {
@@ -177,8 +201,11 @@ const Parcel = props => {
             <button className='btnQ'>Find Travellers</button>
           </form>
         </div>
-      </div>
-      <Travelers travelers={travelers} />
+        <Travelers travelers={travelers} toggle={this.toggleModal} />
+        <Modal show={this.state.modalOpen}
+          onClose={this.toggleModal}>
+          Here's some content for the modal
+        </Modal>
     </HeaderFooter>
   )
 }

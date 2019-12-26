@@ -13,6 +13,30 @@ const Travelers = props => {
   const { travelers } = props
   console.log(travelers)
 
+  //This function helps the user filter by location
+  const getLocation = e => {
+    let keyword = e.target.value.toUpperCase()
+    const filtered = this.state.travelers.filter(traveler => {
+      return traveler.location.toUpperCase().indexOf(keyword) > -1
+    })
+
+    this.setState({
+      filtered
+    })
+  }
+
+  //This function helps the user filter by destination
+  const getDestination = e => {
+    let keyword = e.target.value.toUpperCase()
+    const filtered = this.state.travelers.filter(traveler => {
+      return traveler.destination.toUpperCase().indexOf(keyword) > -1
+    })
+
+    this.setState({
+      filtered
+    })
+  }
+  
   return (
     <div id='travel-container'>
       {travelers === undefined ? (
