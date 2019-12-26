@@ -4,11 +4,13 @@ import errorReducer from './errorReducer'
 import loadingReducer from './loadingReducer'
 import tripReducer from './tripReducer'
 import travelerReducer from './travelerReducer'
+import transactionsReducer from './transactionsReducer'
 
 export default combineReducers({
   auth: authReducer,
   errors: errorReducer,
   trips: tripReducer,
   loading: loadingReducer,
-  travelers: travelerReducer
+  travelers: travelerReducer,
+  transactions: transactionsReducer
 })
