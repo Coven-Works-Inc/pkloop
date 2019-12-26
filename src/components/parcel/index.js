@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import HeaderFooter from '../headerFooter'
 import { connect } from 'react-redux'
 import { postParcel } from '../../actions/parcelActions'
+
+import HeaderFooter from '../headerFooter'
 import Travelers from './travelers'
+import Modal from '../common/modal'
 
 import './parcel.css'
 import travelData from '../../travelers.json'
@@ -22,7 +24,8 @@ class Parcel extends Component {
     filteredDestination: [],
     countries: countriesData,
     fromcities: [],
-    tocities: []
+    tocities: [],
+    modalOpen: false
   }
 
   onChangeHandler = e => {
@@ -66,6 +69,12 @@ class Parcel extends Component {
   //   })
   //   return countriesList
   // }
+
+  toggleModal = () => {
+    this.setState({
+      modalOpen: !this.state.modalOpen
+    })
+  }
 
   fetchCities = (type, country) => {
     if (type === 'from') {
@@ -274,7 +283,11 @@ class Parcel extends Component {
             </form>
           </div>
         </div>
-        <Travelers travelers={travelers} />
+        <Travelers travelers={travelers} toggle={this.toggleModal} />
+        <Modal show={this.state.modalOpen}
+          onClose={this.toggleModal}>
+          Here's some content for the modal
+        </Modal>
       </HeaderFooter>
     )
   }

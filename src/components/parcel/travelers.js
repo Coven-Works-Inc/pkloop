@@ -11,7 +11,7 @@ import './travel.css'
 
 const Travelers = (props) => {
 
-  // console.log(props)
+  console.log(props)
 
   //This function helps the user filter by location
   const getLocation = e => {
@@ -53,7 +53,7 @@ const Travelers = (props) => {
             />
             <p style={{ marginTop: '2px' }}>{traveler.name}</p>
 
-            <p className='button'>connect</p>
+            <p className='button' onClick={props.toggle}>connect</p>
           </div>
           <div className='card-right'>
             <h3><span className="gray">From</span> {traveler.location}</h3>
