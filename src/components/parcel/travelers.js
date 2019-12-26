@@ -8,28 +8,20 @@ import Jeph from '../../assets/Jeph.jpg'
 // import Jephtah from '../../assets/jephtah.JPG'
 
 import './travel.css'
-import './parcel.css'
 
 const Travelers = props => {
   const { travelers } = props
   console.log(travelers)
 
   return (
-    <div>
-      {/* {travelers === undefined ? (
-        <h3>Loading...</h3>
-      ) : travelers === [] ? (
-        'No Traveler found'
-      ) : (
-        getTravelers()
-      )} */}
+    <div id='travel-container'>
       {travelers === undefined ? (
         <h3>Loading...</h3>
       ) : travelers.length === 0 ? (
         <h3>No Traveler found</h3>
       ) : (
         travelers.map((traveler, key) => (
-          <div key={key} className='card'>
+          <div key={key} className='travel-card'>
             <div className='card-left'>
               <img
                 src={Jeph}
