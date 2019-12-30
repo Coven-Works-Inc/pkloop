@@ -40,15 +40,24 @@ export const registerUser = (userData, history) => dispatch => {
 }
 
 export const loginUser = (userData, history) => dispatch => {
+  dispatch({
+    type: LOADING,
+    payload: true
+  })
+
+  dispatch({
+    type: GET_ERRORS,
+    payload: { message: '' }
+  })
+
   axios
     .post(`${BASE_URL}/auth/login`, userData)
-    .then(res => {
-      const { token, _id } = res.data
+    .then(async res => {
+      const { token } = res.data
       localStorage.setItem('jwtToken', token)
-      localStorage.setItem('id', _id)
-      setAuthToken(token)
+      await setAuthToken(token)
       const decoded = jwt_decode(token)
-      dispatch(setCurrentUser(decoded, token))
+      await dispatch(setCurrentUser(decoded, token))
       history.push('/dashboard')
     })
     .catch(err => {
@@ -65,18 +74,6 @@ export const loginUser = (userData, history) => dispatch => {
         payload: false
       })
     )
-}
-
-export const setCurrentUser = (decoded, token) => dispatch => {
-  dispatch({
-    type: SET_CURRENT_USER,
-    payload: decoded
-  })
-
-  dispatch({
-    type: SET_TOKEN,
-    payload: token
-  })
 }
 
 // export const fetchUser = history => (
@@ -193,6 +190,17 @@ export const verify = (token, history) => dispatch => {
 // }
 
 // Set logged in user
+export const setCurrentUser = (decoded, token) => dispatch => {
+  dispatch({
+    type: SET_CURRENT_USER,
+    payload: decoded
+  })
+
+  dispatch({
+    type: SET_TOKEN,
+    payload: token
+  })
+}
 
 // Log user out
 export const logoutUser = () => dispatch => {
