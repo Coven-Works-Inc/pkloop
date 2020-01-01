@@ -6,6 +6,7 @@ import { postTrip } from '../../actions/tripActions'
 import countries from '../../Countriesstate.json';
 
 import './trips.css'
+import Modal from '../common/modal'
 
 class index extends Component {
   state = {
@@ -22,6 +23,7 @@ class index extends Component {
     parcelWeight: '',
     transport: { value: '' },
     additionalInfo: '',
+    modalOpen:false,
     fromcities: ["Badakhshan", "Badghis", "Baghlan", "Balkh", "Bamian", "Daykondi", "Farah", "Faryab", "Ghazni", "Ghowr", "Helmand", "Herat", "Jowzjan", "Kabul", "Kandahar", "Kapisa", "Khost", "Konar", "Kondoz", "Laghman", "Lowgar", "Nangarhar", "Nimruz", "Nurestan", "Oruzgan", "Paktia", "Paktika", "Panjshir", "Parvan", "Samangan", "Sar-e Pol", "Takhar", "Vardak", "Zabol"],
     tocities: ["Badakhshan", "Badghis", "Baghlan", "Balkh", "Bamian", "Daykondi", "Farah", "Faryab", "Ghazni", "Ghowr", "Helmand", "Herat", "Jowzjan", "Kabul", "Kandahar", "Kapisa", "Khost", "Konar", "Kondoz", "Laghman", "Lowgar", "Nangarhar", "Nimruz", "Nurestan", "Oruzgan", "Paktia", "Paktika", "Panjshir", "Parvan", "Samangan", "Sar-e Pol", "Takhar", "Vardak", "Zabol"],
   }
@@ -56,10 +58,17 @@ class index extends Component {
       tocities: city[0].states
     })
   }
+  toggleModal = () => {
+    this.setState({
+      ...this.state,
+      modalOpen: !this.state.modalOpen
+    })
+  }
 
   onSubmitHandler = e => {
     e.preventDefault()
-
+    this.toggleModal()
+    setTimeout(this.toggleModal, 1000)
     const tripData = {
       locationCity: this.state.locationCity,
       locationCountry: this.state.locationCountry,
@@ -83,7 +92,6 @@ class index extends Component {
     // }
 
     this.props.postTrip(tripData, this.props.history)
-
     this.setState({
       locationCity: '',
       locationCountry: '',
@@ -283,6 +291,9 @@ class index extends Component {
             )}
           </div>
         </section>
+        <Modal show={this.state.modalOpen} onClose={this.toggleModal}>
+          <h5 className="trip-modal">Trip successfully posted</h5>
+        </Modal>
       </HeaderFooter>
     )
   }

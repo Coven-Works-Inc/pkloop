@@ -10,9 +10,9 @@ class Modal extends React.Component {
 
         return (
             <div className="backdrop">
-                <div className="modal">
+                <div className="modals">
                     <div className="footer">
-                    <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
+                    <button type="button" className="closer" aria-label="Close" onClick={this.props.onClose}>
                         <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
