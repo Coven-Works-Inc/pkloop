@@ -277,7 +277,7 @@ class index extends Component {
                 </div>
 
                 <div className='button_div'>
-                  <button className='trip-button'>POST YOUR TRIP</button>
+                  <button className='trip-button' type="submit">POST YOUR TRIP</button>
                 </div>
               </form>
             )}

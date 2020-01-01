@@ -8,7 +8,9 @@ class Login extends Component {
   state = {
     username: '',
     password: '',
-    errors: {}
+    errors: {},
+    buttonText: 'Login Now',
+    display: 'none',
   }
 
   componentWillReceiveProps () {
@@ -34,7 +36,12 @@ class Login extends Component {
       password: this.state.password
     }
 
+    this.setState({
+      display:'inline-block',
+      buttonText: 'PLEASE WAIT',
+    })
     this.props.loginUser(userData, this.props.history)
+    
   }
 
   render () {
@@ -92,7 +99,7 @@ class Login extends Component {
                     />
                   </div>
                   <p style={{ color: '#00bdbe' }}>Forgot password?</p>
-                  <button className='btn'>Log in now</button>
+                  <button className='btn' type="submit">{this.state.buttonText} <span style={{display:this.state.display}} className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
                 </form>
                 <p style={{ textAlign: 'center' }}>OR</p>
                 <button className='btn_google'>
@@ -115,6 +122,7 @@ class Login extends Component {
                     />
                   </i>
                   <span className='text'> Log in with Facebook</span>
+
                 </button>
               </div>
               <div className='terms'>
