@@ -1,3 +1,4 @@
+@import 'https://fonts.googleapis.com/css?family=Prompt:400,700';
 .banner {
     display: flex;
     background: url('../../assets/default.jpg') no-repeat center center/cover;
@@ -32,6 +33,30 @@
     border-radius: 5px;
     max-width: 500px;
     min-height: 300px;
-    margin: 0 auto;
+    margin: 70px auto;
     padding: 30px;
+    text-align: left;
+    color: #000;
 }
+
+.close{
+    width:30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #00bdbe;
+    font: 1em sans-serif;
+    border: 1px solid #00bdbe;
+    color: white;
+    outline: none;
+}
+.footer{
+    float: right;
+}
+.modal h2{
+    margin: 60px 30px 0px 20px;
+    font-family: HelveticaNeue;
+    font-size: 28px;
+    font-weight: 500;
+    font-stretch: normal;
+}
+

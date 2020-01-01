@@ -50,7 +50,17 @@ const Parcel = props => {
       tocities: city[0].states
     })
   }
+  const onChangeHandler = e => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    })
+  }
   const submitHandler = e => {
+    setState({
+      ...state,
+      modalOpen: true
+    })
     e.preventDefault()
   }
 
@@ -63,8 +73,9 @@ const Parcel = props => {
   // }
 
   const toggleModal = () => {
-    this.setState({
-      modalOpen: !this.state.modalOpen
+    setState({
+      ...state,
+      modalOpen: !state.modalOpen
     })
   }
   const fetchCities = (type, country) => {
@@ -157,7 +168,7 @@ const Parcel = props => {
                 <select
                   name='parcelSize'
                   value={state.parcelSize}
-                  
+                  onChange={onChangeHandler}
                 >
                   <option value='extra large'>
                     Extra Large (E.g Big box, electronics)
@@ -172,7 +183,7 @@ const Parcel = props => {
                 <select
                   name='parcelWeight'
                   value={state.parcelWeight}
-                 
+                  onChange={onChangeHandler}    
                 >
                   <option value='1'>1</option>
                   <option value='2'>2</option>
@@ -202,13 +213,18 @@ const Parcel = props => {
               </div>
             </div>
 
-            <button className='btnQ'>Find Travellers</button>
+            <button className='btnQ' type="submit">Find Travellers</button>
           </form>
         </div>
         <Travelers travelers={travelers} toggle={toggleModal} />
         <Modal show={state.modalOpen}
           onClose={toggleModal}>
-          Here's some content for the modal
+          <h2>Are you sure you want to send {state.parcelWeight} pounds of weight?</h2>
+          <br />
+          <div className="button-group">
+            <button className='btnQ medium' type="submit">Yes, Continue</button>
+            <button className='btnQ inverse-btnQ medium' type="submit">No, Change weight</button>
+          </div>
         </Modal>
         </div>
     </HeaderFooter>
