@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { postParcel } from '../../actions/parcelActions'
+// import { postParcel } from '../../actions/parcelActions'
 import HeaderFooter from '../headerFooter'
 import { connect } from 'react-redux'
 import { fetchTravelers } from '../../actions/travelerActions'
+import countries from '../../Countriesstate.json';
 
 import Travelers from './travelers'
 import Modal from '../common/modal'
@@ -24,23 +25,42 @@ const Parcel = props => {
     filteredLocation: [],
     filteredDestination: [],
     countries: countriesData,
-    fromcities: [],
-    tocities: [],
-    modalOpen: false
+    fromcities: ["Badakhshan", "Badghis", "Baghlan", "Balkh", "Bamian", "Daykondi", "Farah", "Faryab", "Ghazni", "Ghowr", "Helmand", "Herat", "Jowzjan", "Kabul", "Kandahar", "Kapisa", "Khost", "Konar", "Kondoz", "Laghman", "Lowgar", "Nangarhar", "Nimruz", "Nurestan", "Oruzgan", "Paktia", "Paktika", "Panjshir", "Parvan", "Samangan", "Sar-e Pol", "Takhar", "Vardak", "Zabol"],
+    tocities: ["Badakhshan", "Badghis", "Baghlan", "Balkh", "Bamian", "Daykondi", "Farah", "Faryab", "Ghazni", "Ghowr", "Helmand", "Herat", "Jowzjan", "Kabul", "Kandahar", "Kapisa", "Khost", "Konar", "Kondoz", "Laghman", "Lowgar", "Nangarhar", "Nimruz", "Nurestan", "Oruzgan", "Paktia", "Paktika", "Panjshir", "Parvan", "Samangan", "Sar-e Pol", "Takhar", "Vardak", "Zabol"],
+    modalOpen: false,
+    index: 0,
   })
-
   useEffect(() => {
     props.fetchTravelers()
   }, [])
 
+  const onFromCountryChangeHandler = e => {
+    const city = countries.countries.filter(country => country.country == e.target.value)
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+      fromcities: city[0].states
+    })
+  }
+  const onToCountryChangeHandler = e => {
+    const city = countries.countries.filter(country => country.country == e.target.value)
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+      tocities: city[0].states
+    })
+  }
   const onChangeHandler = e => {
     setState({
       ...state,
       [e.target.name]: e.target.value
     })
   }
-
   const submitHandler = e => {
+    setState({
+      ...state,
+      modalOpen: true
+    })
     e.preventDefault()
   }
 
@@ -52,12 +72,12 @@ const Parcel = props => {
   //   return countriesList
   // }
 
-  toggleModal = () => {
-    this.setState({
-      modalOpen: !this.state.modalOpen
+  const toggleModal = () => {
+    setState({
+      ...state,
+      modalOpen: !state.modalOpen
     })
   }
-
   const fetchCities = (type, country) => {
     if (type === 'from') {
       this.setState({
@@ -95,16 +115,11 @@ const Parcel = props => {
                 <select
                   name='fromCountry'
                   value={state.fromCountry}
-                  onChange={onChangeHandler}
+                  onChange={onFromCountryChangeHandler}
                 >
-                  {/* {countries &&
-                    countries.map((country, key) => (
-                      <option value={country.code} key={key}>
-                        {country.name}
-                      </option>
-                    ))} */}
-                  <option value='united states'>United States</option>
-                  <option value='nigeria'>Nigeria</option>
+                  {countries.countries.map((country, index) => (
+                    <option value={country.country} key={index}>{country.country}</option>
+                  ))}
                 </select>
               </div>
               <div>
@@ -112,14 +127,12 @@ const Parcel = props => {
                 <select
                   name='fromCity'
                   value={state.fromCity}
-                  onChange={onChangeHandler}
+                  
                 >
-                  {state.fromcities &&
-                    state.fromcities.map((city, key) => (
-                      <option value={city.code} key={key}>
-                        {city.name}
-                      </option>
-                    ))}
+                  {state.fromcities.map((city) => (
+                    <option value={city}>{city}</option>
+                  ))}
+                  
                 </select>
               </div>
             </div>
@@ -129,10 +142,11 @@ const Parcel = props => {
                 <select
                   name='toCountry'
                   value={state.toCountry}
-                  onChange={onChangeHandler}
+                  onChange={onToCountryChangeHandler}
                 >
-                  <option value='united states'>United States</option>
-                  <option value='nigeria'>Nigeria</option>
+                 {countries.countries.map((country, index) => (
+                    <option value={country.country} key={index}>{country.country}</option>
+                  ))}
                 </select>
               </div>
               <div>
@@ -140,10 +154,11 @@ const Parcel = props => {
                 <select
                   name='toCity'
                   value={state.toCity}
-                  onChange={onChangeHandler}
+                
                 >
-                  <option value='nyc'>New York City (NYC) </option>
-                  <option value='dc'>Washington (DC) </option>
+                  {state.tocities.map((city) => (
+                    <option value={city}>{city}</option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -168,7 +183,7 @@ const Parcel = props => {
                 <select
                   name='parcelWeight'
                   value={state.parcelWeight}
-                  onChange={onChangeHandler}
+                  onChange={onChangeHandler}    
                 >
                   <option value='1'>1</option>
                   <option value='2'>2</option>
@@ -198,14 +213,20 @@ const Parcel = props => {
               </div>
             </div>
 
-            <button className='btnQ'>Find Travellers</button>
+            <button className='btnQ' type="submit">Find Travellers</button>
           </form>
         </div>
-        <Travelers travelers={travelers} toggle={this.toggleModal} />
-        <Modal show={this.state.modalOpen}
-          onClose={this.toggleModal}>
-          Here's some content for the modal
+        <Travelers travelers={travelers} toggle={toggleModal} />
+        <Modal show={state.modalOpen}
+          onClose={toggleModal}>
+          <h2>Are you sure you want to send {state.parcelWeight} pounds of weight?</h2>
+          <br />
+          <div className="button-group">
+            <button className='btnQ medium' type="submit">Yes, Continue</button>
+            <button className='btnQ inverse-btnQ medium' type="submit">No, Change weight</button>
+          </div>
         </Modal>
+        </div>
     </HeaderFooter>
   )
 }
