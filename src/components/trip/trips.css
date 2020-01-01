@@ -147,5 +147,6 @@
   transform: scale(0.95);
   
 }
-
-
+.trip-modal{
+    margin-top: 0px;
+}

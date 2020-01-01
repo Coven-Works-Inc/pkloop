@@ -78,26 +78,26 @@ const Parcel = props => {
       modalOpen: !state.modalOpen
     })
   }
-  const fetchCities = (type, country) => {
-    if (type === 'from') {
-      this.setState({
-        fromcities: [
-          {
-            name: 'New York City',
-            code: 'nyc'
-          },
-          {
-            name: 'Washington',
-            code: 'dc'
-          },
-          {
-            name: 'Texas',
-            code: 'tx'
-          }
-        ]
-      })
-    }
-  }
+  // const fetchCities = (type, country) => {
+  //   if (type === 'from') {
+  //     this.setState({
+  //       fromcities: [
+  //         {
+  //           name: 'New York City',
+  //           code: 'nyc'
+  //         },
+  //         {
+  //           name: 'Washington',
+  //           code: 'dc'
+  //         },
+  //         {
+  //           name: 'Texas',
+  //           code: 'tx'
+  //         }
+  //       ]
+  //     })
+  //   }
+  // }
 
   const {
     travelers: { travelers }
@@ -130,7 +130,7 @@ const Parcel = props => {
                   
                 >
                   {state.fromcities.map((city) => (
-                    <option value={city}>{city}</option>
+                    <option value={city} key={city}>{city}</option>
                   ))}
                   
                 </select>
@@ -157,7 +157,7 @@ const Parcel = props => {
                 
                 >
                   {state.tocities.map((city) => (
-                    <option value={city}>{city}</option>
+                    <option value={city} key={city}>{city}</option>
                   ))}
                 </select>
               </div>
@@ -222,8 +222,8 @@ const Parcel = props => {
           <h2>Are you sure you want to send {state.parcelWeight} pounds of weight?</h2>
           <br />
           <div className="button-group">
-            <button className='btnQ medium' type="submit">Yes, Continue</button>
-            <button className='btnQ inverse-btnQ medium' type="submit">No, Change weight</button>
+            <button className='btnQ medium'>Yes, Continue</button>
+            <button className='btnQ inverse-btnQ medium'>No, Change weight</button>
           </div>
         </Modal>
         </div>

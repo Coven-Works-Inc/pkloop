@@ -18,7 +18,9 @@ class Register extends Component {
     password: '',
     confirmPassword: '',
     errors: {},
-    loading: false
+    loading: false,
+    display: 'none',
+    buttonText: 'SIGN UP NOW',
   }
 
   // componentDidUpdate() {
@@ -46,7 +48,10 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-
+    this.setState({
+      display: 'inline-block',
+      buttonText: 'PLEASE WAIT'
+    })
     const newUser = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
@@ -162,7 +167,7 @@ class Register extends Component {
                     />
                   </div>
                   {/* !loading &&  */}
-                  <button className='btn'>SIGN UP NOW</button>
+                  <button className='btn'>{this.state.buttonText} <span style={{display:this.state.display}} className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
                   {/* {loading && <img
                   src={loader}
                   alt=''
