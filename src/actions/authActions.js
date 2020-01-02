@@ -39,35 +39,28 @@ export const registerUser = (userData, history) => dispatch => {
     )
 }
 
-export const loginUser = (userData, history) => dispatch => {
+ export const loginUser = (userData, history) => dispatch => {
   dispatch({
     type: LOADING,
     payload: true
   })
-
-  dispatch({
-    type: GET_ERRORS,
-    payload: { message: '' }
-  })
-
   axios
     .post(`${BASE_URL}/auth/login`, userData)
-    .then(async res => {
-      const { message } = res.data
-      const { token } = res.data.data
-
+    .then(res => {
+      const { token, _id } = res.data.data
       localStorage.setItem('jwtToken', token)
-      await setAuthToken(token)
+      localStorage.setItem('id', _id)
+      setAuthToken(token)
       const decoded = jwt_decode(token)
-      await dispatch(setCurrentUser(decoded, token))
+      dispatch(setCurrentUser(decoded, token))
       history.push('/dashboard')
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
-        payload: err.response
-          ? err.response.data
-          : { message: 'Something went wrong' }
+        payload: err.response ? 
+                  err.response.data.message :
+                  'Something went wrong' 
       })
     })
     .finally(() =>
