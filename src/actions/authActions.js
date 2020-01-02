@@ -39,7 +39,7 @@ export const registerUser = (userData, history) => dispatch => {
     )
 }
 
-export const loginUser = (userData, history) => dispatch => {
+ export const loginUser = (userData, history) => dispatch => {
   dispatch({
     type: LOADING,
     payload: true
@@ -48,12 +48,10 @@ export const loginUser = (userData, history) => dispatch => {
     .post(`${BASE_URL}/auth/login`, userData)
     .then(res => {
       const { token, _id } = res.data.data
-      console.log(res)
       localStorage.setItem('jwtToken', token)
       localStorage.setItem('id', _id)
       setAuthToken(token)
       const decoded = jwt_decode(token)
-      console.log(decoded, token)
       dispatch(setCurrentUser(decoded, token))
       history.push('/dashboard')
     })
@@ -71,18 +69,6 @@ export const loginUser = (userData, history) => dispatch => {
         payload: false
       })
     )
-}
-
-export const setCurrentUser = (decoded, token) => dispatch => {
-  dispatch({
-    type: SET_CURRENT_USER,
-    payload: decoded
-  })
-
-  dispatch({
-    type: SET_TOKEN,
-    payload: token
-  })
 }
 
 // export const fetchUser = history => (
@@ -199,6 +185,17 @@ export const verify = (token, history) => dispatch => {
 // }
 
 // Set logged in user
+export const setCurrentUser = (decoded, token) => dispatch => {
+  dispatch({
+    type: SET_CURRENT_USER,
+    payload: decoded
+  })
+
+  dispatch({
+    type: SET_TOKEN,
+    payload: token
+  })
+}
 
 // Log user out
 export const logoutUser = () => dispatch => {
@@ -209,7 +206,7 @@ export const logoutUser = () => dispatch => {
   setAuthToken(false)
 
   // Set current user to {} which will set isAuthenticated to false
-  dispatch(setCurrentUser({}))
+  //dispatch(setCurrentUser({}))
 
   window.location.href = '/'
 }

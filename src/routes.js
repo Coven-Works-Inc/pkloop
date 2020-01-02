@@ -18,6 +18,7 @@ import Privacy from './components/pages/privacy_policy'
 import Travelers from './components/parcel/travelers'
 import HowItWorks from './components/howItWorks'
 import Faq from './components/faq'
+import PrivateRoute from './components/common/privateRoute'
 
 const Routes = () => {
   return (
@@ -27,10 +28,10 @@ const Routes = () => {
       <Route exact component={Pricing} path='/pricing' />
       <Route exact component={About} path='/about' />
       <Route exact component={Parcel} path='/parcel' />
-      <Route exact component={Trips} path='/trips' />
+      <PrivateRoute exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Payment} path='/payment' />
-      <Route exact component={Dashboard} path='/dashboard' />
+      <PrivateRoute exact path='/dashboard' component={Dashboard} />
       <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />
       <Route exact component={Terms} path='/terms' />
