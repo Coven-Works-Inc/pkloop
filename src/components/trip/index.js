@@ -3,8 +3,10 @@ import HeaderFooter from '../headerFooter'
 import Banner from '../common/banner'
 import { connect } from 'react-redux'
 import { postTrip } from '../../actions/tripActions'
+import countries from '../../Countriesstate.json';
 
 import './trips.css'
+import Modal from '../common/modal'
 
 class index extends Component {
   state = {
@@ -20,7 +22,10 @@ class index extends Component {
     parcelSize: '',
     parcelWeight: '',
     transport: { value: '' },
-    additionalInfo: ''
+    additionalInfo: '',
+    modalOpen:false,
+    fromcities: ["Badakhshan", "Badghis", "Baghlan", "Balkh", "Bamian", "Daykondi", "Farah", "Faryab", "Ghazni", "Ghowr", "Helmand", "Herat", "Jowzjan", "Kabul", "Kandahar", "Kapisa", "Khost", "Konar", "Kondoz", "Laghman", "Lowgar", "Nangarhar", "Nimruz", "Nurestan", "Oruzgan", "Paktia", "Paktika", "Panjshir", "Parvan", "Samangan", "Sar-e Pol", "Takhar", "Vardak", "Zabol"],
+    tocities: ["Badakhshan", "Badghis", "Baghlan", "Balkh", "Bamian", "Daykondi", "Farah", "Faryab", "Ghazni", "Ghowr", "Helmand", "Herat", "Jowzjan", "Kabul", "Kandahar", "Kapisa", "Khost", "Konar", "Kondoz", "Laghman", "Lowgar", "Nangarhar", "Nimruz", "Nurestan", "Oruzgan", "Paktia", "Paktika", "Panjshir", "Parvan", "Samangan", "Sar-e Pol", "Takhar", "Vardak", "Zabol"],
   }
 
   // componentWillReceiveProps () {
@@ -37,10 +42,33 @@ class index extends Component {
       [e.target.name]: e.target.value
     })
   }
+  onFromCountryChangeHandler = e => {
+    const city = countries.countries.filter(country => country.country == e.target.value)
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value,
+      fromcities: city[0].states
+    })
+  }
+  onToCountryChangeHandler = e => {
+    const city = countries.countries.filter(country => country.country == e.target.value)
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value,
+      tocities: city[0].states
+    })
+  }
+  toggleModal = () => {
+    this.setState({
+      ...this.state,
+      modalOpen: !this.state.modalOpen
+    })
+  }
 
   onSubmitHandler = e => {
     e.preventDefault()
-
+    this.toggleModal()
+    setTimeout(this.toggleModal, 1000)
     const tripData = {
       locationCity: this.state.locationCity,
       locationCountry: this.state.locationCountry,
@@ -64,7 +92,6 @@ class index extends Component {
     // }
 
     this.props.postTrip(tripData, this.props.history)
-
     this.setState({
       locationCity: '',
       locationCountry: '',
@@ -99,13 +126,11 @@ class index extends Component {
                     <select
                       name='locationCountry'
                       value={this.state.locationCountry}
-                      onChange={this.onChangeHandler}
+                      onChange={this.onFromCountryChangeHandler}
                     >
-                      <option value='united states'>United States</option>
-                      <option value='england'>England</option>
-                      <option value='netherlands'>Netherlands</option>
-                      <option value='united states'>South Africa</option>
-                      <option value='Sweden'>Sweden</option>
+                      {countries.countries.map((country, index) => (
+                      <option value={country.country} key={index}>{country.country}</option>
+                   ))}
                     </select>
                   </div>
                   <div>
@@ -115,11 +140,10 @@ class index extends Component {
                       value={this.state.locationCity}
                       onChange={this.onChangeHandler}
                     >
-                      <option value='new york city'>New York City (NYC)</option>
-                      <option value='Accra'>Accra</option>
-                      <option value='lagos'>Lagos</option>
-                      <option value='johannesburg'>Johannesburg</option>
-                      <option value='stockholm'>Stockholm</option>
+                      {this.state.fromcities.map((city) => (
+                      <option value={city}>{city}</option>
+                     ))}
+                  
                     </select>
                   </div>
                 </div>
@@ -129,13 +153,11 @@ class index extends Component {
                     <select
                       name='destinationCountry'
                       value={this.state.destinationCountry}
-                      onChange={this.onChangeHandler}
+                      onChange={this.onToCountryChangeHandler}
                     >
-                      <option value='Sweden'>Sweden</option>
-                      <option value='united states'>United States</option>
-                      <option value='england'>England</option>
-                      <option value='netherlands'>Netherlands</option>
-                      <option value='united states'>South Africa</option>
+                      {countries.countries.map((country, index) => (
+                      <option value={country.country} key={index}>{country.country}</option>
+                   ))}
                     </select>
                   </div>
                   <div>
@@ -145,11 +167,10 @@ class index extends Component {
                       value={this.state.destinationCity}
                       onChange={this.onChangeHandler}
                     >
-                      <option value='stockholm'>Stockholm</option>
-                      <option value='new york city'>New York City (NYC)</option>
-                      <option value='Accra'>Accra</option>
-                      <option value='lagos'>Lagos</option>
-                      <option value='johannesburg'>Johannesburg</option>
+                      {this.state.tocities.map((city) => (
+                      <option value={city}>{city}</option>
+                     ))}
+                  
                     </select>
                   </div>
                 </div>
@@ -264,12 +285,15 @@ class index extends Component {
                 </div>
 
                 <div className='button_div'>
-                  <button className='trip-button'>POST YOUR TRIP</button>
+                  <button className='trip-button' type="submit">POST YOUR TRIP</button>
                 </div>
               </form>
             )}
           </div>
         </section>
+        <Modal show={this.state.modalOpen} onClose={this.toggleModal}>
+          <h5 className="trip-modal">Trip successfully posted</h5>
+        </Modal>
       </HeaderFooter>
     )
   }
