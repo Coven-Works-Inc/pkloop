@@ -53,7 +53,9 @@ export const loginUser = (userData, history) => dispatch => {
   axios
     .post(`${BASE_URL}/auth/login`, userData)
     .then(async res => {
-      const { token } = res.data
+      const { message } = res.data
+      const { token } = res.data.data
+
       localStorage.setItem('jwtToken', token)
       await setAuthToken(token)
       const decoded = jwt_decode(token)
@@ -211,7 +213,7 @@ export const logoutUser = () => dispatch => {
   setAuthToken(false)
 
   // Set current user to {} which will set isAuthenticated to false
-  dispatch(setCurrentUser({}))
+  //dispatch(setCurrentUser({}))
 
   window.location.href = '/'
 }

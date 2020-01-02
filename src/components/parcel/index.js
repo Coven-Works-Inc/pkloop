@@ -62,7 +62,7 @@ const Parcel = props => {
   return (
     <HeaderFooter>
       <div className='maincontainer send-parcel'>
-        <h1>Find Travellers</h1>
+        <h1>Find Travelers</h1>
         <div className='py-2 form-group'>
           <form onSubmit={submitHandler}>
             <div className='country_div'>

@@ -23,6 +23,7 @@ class Header extends Component {
   }
 
   render () {
+    const { logoutUser } = this.props
     const { menu } = this.state
     const { isAuthenticated, user } = this.props.auth
     const authLinks = (
@@ -63,7 +64,7 @@ class Header extends Component {
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/parcel'>Find Travellers</Link>
+                <Link to='/parcel'>Find Travelers</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>
@@ -72,13 +73,9 @@ class Header extends Component {
                 <Link to='/dashboard'>Dashboard</Link>
               </li>
               <li>
-                <a
-                  href=''
-                  onClick={this.onLogoutClick.bind(this)}
-                  className='nav-link'
-                >
+                <Link onClick={logoutUser} className='nav-link'>
                   Logout
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -103,7 +100,7 @@ class Header extends Component {
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/travelers'>Find Travellers</Link>
+                <Link to='/travelers'>Find Travelers</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>
@@ -112,13 +109,12 @@ class Header extends Component {
                 <Link to='/dashboard'>Dashboard</Link>
               </li>
               <li>
-                <a
-                  href=''
-                  onClick={this.onLogoutClick.bind(this)}
+                <p
+                  // onClick={() => this.props.logoutUser()}
                   className='nav-link'
                 >
                   Logout
-                </a>
+                </p>
               </li>
             </ul>
           </div>
