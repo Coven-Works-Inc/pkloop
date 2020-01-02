@@ -216,7 +216,11 @@ const Parcel = props => {
             <button className='btnQ' type="submit">Find Travellers</button>
           </form>
         </div>
+        </div>
+        
         <Travelers travelers={travelers} toggle={toggleModal} />
+        
+        
         <Modal show={state.modalOpen}
           onClose={toggleModal}>
           <h2>Are you sure you want to send {state.parcelWeight} pounds of weight?</h2>
@@ -226,7 +230,7 @@ const Parcel = props => {
             <button className='btnQ inverse-btnQ medium'>No, Change weight</button>
           </div>
         </Modal>
-        </div>
+        
     </HeaderFooter>
   )
 }
