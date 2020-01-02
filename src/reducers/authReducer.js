@@ -1,11 +1,13 @@
 import isEmpty from '../utils/validation'
 
-import { SET_CURRENT_USER, SET_TOKEN } from '../actions/types'
+import { SET_CURRENT_USER, SET_TOKEN, GET_ERRORS, LOADING } from '../actions/types'
 
 const initialState = {
   isAuthenticated: false,
   user: {},
-  token: ''
+  error: '',
+  token: '',
+  loading: false,
 }
 
 export default function (state = initialState, action) {
@@ -21,6 +23,18 @@ export default function (state = initialState, action) {
         ...state,
         token: action.payload
       }
+    case GET_ERRORS: 
+      return {
+        ...state,
+        error: action.payload,
+        loading: false
+      }
+    case LOADING:
+      return {
+        ...state,
+        loading: action.payload
+      }
+
     default:
       return state
   }

@@ -141,7 +141,7 @@ class index extends Component {
                       onChange={this.onChangeHandler}
                     >
                       {this.state.fromcities.map((city) => (
-                      <option value={city}>{city}</option>
+                      <option value={city} key={city}>{city}</option>
                      ))}
                   
                     </select>

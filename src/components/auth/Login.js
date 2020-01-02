@@ -40,6 +40,7 @@ class Login extends Component {
       display:'inline-block',
       buttonText: 'PLEASE WAIT',
     })
+    console.log(this.props)
     this.props.loginUser(userData, this.props.history)
     
   }
@@ -70,9 +71,9 @@ class Login extends Component {
                 <p>Log in to continue access</p>
               </div>
               <div id='contact-form' className='py-3'>
-                {errors.message && (
+                {this.props.error && (
                   <div className='error-msg'>
-                    <p>{errors.message}</p>
+                    <p>{this.props.error}</p>
                   </div>
                 )}
                 <form onSubmit={this.onSubmitHandler}>
@@ -84,7 +85,6 @@ class Login extends Component {
                       placeholder='Username'
                       value={this.state.username}
                       onChange={this.onChangeHandler}
-                      errors={errors.username}
                     />
                   </div>
                   <div className='form-group'>
@@ -95,11 +95,11 @@ class Login extends Component {
                       placeholder='Password'
                       value={this.state.password}
                       onChange={this.onChangeHandler}
-                      errors={errors.password}
+                      // errors={errors.password}
                     />
                   </div>
                   <p style={{ color: '#00bdbe' }}>Forgot password?</p>
-                  <button className='btn' type="submit">{this.state.buttonText} <span style={{display:this.state.display}} className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                  <button className='btn' type="submit"> {this.props.loading ? <span style={{display:'inline-block'}} className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>: <div>Login now</div>}</button>
                 </form>
                 <p style={{ textAlign: 'center' }}>OR</p>
                 <button className='btn_google'>
@@ -153,8 +153,8 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  error: state.errors,
-  loading: state.loading
+  error: state.auth.error,
+  loading: state.auth.loading
 })
 
 export default connect(
