@@ -43,7 +43,7 @@ class index extends Component {
     })
   }
   onFromCountryChangeHandler = e => {
-    const city = countries.countries.filter(country => country.country == e.target.value)
+    const city = countries.countries.filter(country => country.country === e.target.value)
     this.setState({
       ...this.state,
       [e.target.name]: e.target.value,
@@ -51,7 +51,7 @@ class index extends Component {
     })
   }
   onToCountryChangeHandler = e => {
-    const city = countries.countries.filter(country => country.country == e.target.value)
+    const city = countries.countries.filter(country => country.country === e.target.value)
     this.setState({
       ...this.state,
       [e.target.name]: e.target.value,
