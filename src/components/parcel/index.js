@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 // import { postParcel } from '../../actions/parcelActions'
 import HeaderFooter from '../headerFooter'
 import { connect } from 'react-redux'
-import { fetchTravelers } from '../../actions/travelerActions'
-import countries from '../../Countriesstate.json';
+import { fetchTravelers } from '../../actions/travelerActions';
+import countries from '../../countries.json'
+import cities from '../../world-cities_json.json';
 
 import Travelers from './travelers'
 import Modal from '../common/modal'
@@ -25,29 +26,30 @@ const Parcel = props => {
     filteredLocation: [],
     filteredDestination: [],
     countries: countriesData,
-    fromcities: ["Badakhshan", "Badghis", "Baghlan", "Balkh", "Bamian", "Daykondi", "Farah", "Faryab", "Ghazni", "Ghowr", "Helmand", "Herat", "Jowzjan", "Kabul", "Kandahar", "Kapisa", "Khost", "Konar", "Kondoz", "Laghman", "Lowgar", "Nangarhar", "Nimruz", "Nurestan", "Oruzgan", "Paktia", "Paktika", "Panjshir", "Parvan", "Samangan", "Sar-e Pol", "Takhar", "Vardak", "Zabol"],
-    tocities: ["Badakhshan", "Badghis", "Baghlan", "Balkh", "Bamian", "Daykondi", "Farah", "Faryab", "Ghazni", "Ghowr", "Helmand", "Herat", "Jowzjan", "Kabul", "Kandahar", "Kapisa", "Khost", "Konar", "Kondoz", "Laghman", "Lowgar", "Nangarhar", "Nimruz", "Nurestan", "Oruzgan", "Paktia", "Paktika", "Panjshir", "Parvan", "Samangan", "Sar-e Pol", "Takhar", "Vardak", "Zabol"],
+    fromcities: [],
+    tocities: [],
     modalOpen: false,
     index: 0,
   })
   useEffect(() => {
     props.fetchTravelers()
   }, [])
-
   const onFromCountryChangeHandler = e => {
-    const city = countries.countries.filter(country => country.country == e.target.value)
+    const selectedCountry = countries.filter(country => country.name === e.target.value )
+    const city = cities.filter(city => city.country === selectedCountry[0].name)
     setState({
       ...state,
       [e.target.name]: e.target.value,
-      fromcities: city[0].states
+      fromcities: city
     })
   }
   const onToCountryChangeHandler = e => {
-    const city = countries.countries.filter(country => country.country == e.target.value)
+    const selectedCountry = countries.filter(country => country.name === e.target.value )
+    const city = cities.filter(city => city.country === selectedCountry[0].name)
     setState({
       ...state,
       [e.target.name]: e.target.value,
-      tocities: city[0].states
+      tocities: city
     })
   }
   const onChangeHandler = e => {
@@ -117,8 +119,8 @@ const Parcel = props => {
                   value={state.fromCountry}
                   onChange={onFromCountryChangeHandler}
                 >
-                  {countries.countries.map((country, index) => (
-                    <option value={country.country} key={index}>{country.country}</option>
+                  {countries.map((country, index) => (
+                    <option value={country.name} key={index}>{country.name}</option>
                   ))}
                 </select>
               </div>
@@ -126,11 +128,12 @@ const Parcel = props => {
                 <label>From (City)</label>
                 <select
                   name='fromCity'
-                  value={state.fromCity}
-                  
+                  value={state.fromCity}   
+                  onChange={onChangeHandler} 
                 >
-                  {state.fromcities.map((city) => (
-                    <option value={city} key={city}>{city}</option>
+                  <option value=""></option>
+                  {state.fromcities.sort().map((city, index) => (
+                    <option value={city.name} key={index}>{city.name},{city.subcountry}</option>
                   ))}
                   
                 </select>
@@ -144,8 +147,8 @@ const Parcel = props => {
                   value={state.toCountry}
                   onChange={onToCountryChangeHandler}
                 >
-                 {countries.countries.map((country, index) => (
-                    <option value={country.country} key={index}>{country.country}</option>
+                 {countries.map((country, index) => (
+                    <option value={country.name} key={index}>{country.name}</option>
                   ))}
                 </select>
               </div>
@@ -156,8 +159,9 @@ const Parcel = props => {
                   value={state.toCity}
                 
                 >
-                  {state.tocities.map((city) => (
-                    <option value={city} key={city}>{city}</option>
+                  <option value=""></option>
+                  {state.tocities.sort().map((city, index) => (
+                    <option value={city.name} key={index}>{city.name},{city.subcountry}</option>
                   ))}
                 </select>
               </div>
