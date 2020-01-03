@@ -41,7 +41,6 @@ class Login extends Component {
       display:'inline-block',
       buttonText: 'PLEASE WAIT',
     })
-    console.log(this.props)
     this.props.loginUser(userData, this.props.history)
     
   }
