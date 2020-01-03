@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { getTransaction } from '../../actions/transActions'
 
 const Transactions = props => {
+
+  console.log(props.trans)
   return (
     <div className='transactions'>
       <div className='table-header'>
