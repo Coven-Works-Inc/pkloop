@@ -11,7 +11,6 @@ import './travel.css'
 
 const Travelers = props => {
   const { travelers } = props
-  console.log(travelers)
 
   //This function helps the user filter by location
   const getLocation = e => {

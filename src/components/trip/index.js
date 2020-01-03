@@ -3,7 +3,8 @@ import HeaderFooter from '../headerFooter'
 import Banner from '../common/banner'
 import { connect } from 'react-redux'
 import { postTrip } from '../../actions/tripActions'
-import countries from '../../Countriesstate.json';
+import countries from '../../countries.json'
+import cities from '../../world-cities_json.json';
 
 import './trips.css'
 import Modal from '../common/modal'
@@ -24,8 +25,8 @@ class index extends Component {
     transport: { value: '' },
     additionalInfo: '',
     modalOpen:false,
-    fromcities: ["Badakhshan", "Badghis", "Baghlan", "Balkh", "Bamian", "Daykondi", "Farah", "Faryab", "Ghazni", "Ghowr", "Helmand", "Herat", "Jowzjan", "Kabul", "Kandahar", "Kapisa", "Khost", "Konar", "Kondoz", "Laghman", "Lowgar", "Nangarhar", "Nimruz", "Nurestan", "Oruzgan", "Paktia", "Paktika", "Panjshir", "Parvan", "Samangan", "Sar-e Pol", "Takhar", "Vardak", "Zabol"],
-    tocities: ["Badakhshan", "Badghis", "Baghlan", "Balkh", "Bamian", "Daykondi", "Farah", "Faryab", "Ghazni", "Ghowr", "Helmand", "Herat", "Jowzjan", "Kabul", "Kandahar", "Kapisa", "Khost", "Konar", "Kondoz", "Laghman", "Lowgar", "Nangarhar", "Nimruz", "Nurestan", "Oruzgan", "Paktia", "Paktika", "Panjshir", "Parvan", "Samangan", "Sar-e Pol", "Takhar", "Vardak", "Zabol"],
+    fromcities: [],
+    tocities: [],
   }
 
   // componentWillReceiveProps () {
@@ -43,19 +44,21 @@ class index extends Component {
     })
   }
   onFromCountryChangeHandler = e => {
-    const city = countries.countries.filter(country => country.country === e.target.value)
+    const selectedCountry = countries.filter(country => country.name === e.target.value )
+    const city = cities.filter(city => city.country === selectedCountry[0].name)
     this.setState({
       ...this.state,
       [e.target.name]: e.target.value,
-      fromcities: city[0].states
+      fromcities: city
     })
   }
   onToCountryChangeHandler = e => {
-    const city = countries.countries.filter(country => country.country === e.target.value)
+    const selectedCountry = countries.filter(country => country.name === e.target.value )
+    const city = cities.filter(city => city.country === selectedCountry[0].name)
     this.setState({
       ...this.state,
       [e.target.name]: e.target.value,
-      tocities: city[0].states
+      tocities: city
     })
   }
   toggleModal = () => {
@@ -128,8 +131,8 @@ class index extends Component {
                       value={this.state.locationCountry}
                       onChange={this.onFromCountryChangeHandler}
                     >
-                      {countries.countries.map((country, index) => (
-                      <option value={country.country} key={index}>{country.country}</option>
+                      {countries.map((country, index) => (
+                      <option value={country.name} key={index}>{country.name}</option>
                    ))}
                     </select>
                   </div>
@@ -140,8 +143,9 @@ class index extends Component {
                       value={this.state.locationCity}
                       onChange={this.onChangeHandler}
                     >
-                      {this.state.fromcities.map((city) => (
-                      <option value={city} key={city}>{city}</option>
+                      <option value=""></option>
+                      {this.state.fromcities.sort().map((city, index) => (
+                      <option value={city.name} key={index}>{city.name, city.subcountry}</option>
                      ))}
                   
                     </select>
@@ -155,8 +159,8 @@ class index extends Component {
                       value={this.state.destinationCountry}
                       onChange={this.onToCountryChangeHandler}
                     >
-                      {countries.countries.map((country, index) => (
-                      <option value={country.country} key={index}>{country.country}</option>
+                      {countries.map((country, index) => (
+                      <option value={country.name} key={index}>{country.name}</option>
                    ))}
                     </select>
                   </div>
@@ -167,8 +171,9 @@ class index extends Component {
                       value={this.state.destinationCity}
                       onChange={this.onChangeHandler}
                     >
-                      {this.state.tocities.map((city) => (
-                      <option value={city}>{city}</option>
+                      <option value=""></option>
+                      {this.state.tocities.sort().map((city, index) => (
+                      <option value={city.name} key={index}>{city.name}, {city.subcountry}</option>
                      ))}
                   
                     </select>

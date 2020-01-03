@@ -29,3 +29,14 @@
 /* .footers .links {
     margin: 0px 40px 40px;
 } */
+@media screen and (max-width: 375px) {
+    .footerdiv{
+        margin: 40px 20px;
+    }
+    .footers ul li {
+        margin: 0px 5px;
+    }
+    .footers img, .footers .links, .footers .footer_icons {
+        display: block;
+    }
+}
