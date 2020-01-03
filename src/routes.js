@@ -19,7 +19,7 @@ import Privacy from './components/pages/privacy_policy'
 import Travelers from './components/parcel/travelers'
 import HowItWorks from './components/howItWorks'
 import Faq from './components/faq'
-import ProtectedRoute from './components/auth/ProtectedRoute';
+import PrivateRoute from './components/common/privateRoute'
 
 const Routes = (props) => {
   return (
@@ -29,9 +29,10 @@ const Routes = (props) => {
       <Route exact component={Pricing} path='/pricing' />
       <Route exact component={About} path='/about' />
       <Route exact component={Parcel} path='/parcel' />
-      <Route exact component={Trips} path='/trips' />
+      <PrivateRoute exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Payment} path='/payment' />
+      <PrivateRoute exact path='/dashboard' component={Dashboard} />
       <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />
       <Route exact component={Terms} path='/terms' />
@@ -40,7 +41,7 @@ const Routes = (props) => {
       <Route exact component={Faq} path='/faq' />
       <Route exact component={Privacy} path='/privacy' />
       <Route exact component={Home} path='/' />
-      <ProtectedRoute exact component={Dashboard} path='/dashboard' isAuthenticated={props.isAuthenticated}/>
+      {/* <ProtectedRoute exact component={Dashboard} path='/dashboard' isAuthenticated={props.isAuthenticated}/> */}
     </Switch>
   )
 }

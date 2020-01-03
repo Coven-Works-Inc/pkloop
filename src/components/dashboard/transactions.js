@@ -1,22 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getTransactions } from '../../actions/transactionActions'
+import { getTransaction } from '../../actions/transActions'
 
 const Transactions = props => {
-  const [transaction, setTransaction] = useState([])
-
-  const {
-    auth: {
-      user: { _id }
-    },
-    transactions
-  } = props
-
-  useEffect(id => {
-    getTransactions(id)
-  }, [])
-
-  console.log(transactions)
   return (
     <div className='transactions'>
       <div className='table-header'>
@@ -27,7 +13,7 @@ const Transactions = props => {
         <p></p>
       </div>
       <div className='table-row'>
-        <p className='completed'>Completed</p>
+        <p className='completed'></p>
         <p>Sheldon Cooper</p>
         <p>Sender</p>
         <p>Oct 25, 2019, 12:52:02 PM</p>
@@ -41,7 +27,7 @@ const Transactions = props => {
         <p className='open'>Open</p>
       </div>
       <div className='table-row'>
-        <p className='canceled'>Declined or Canceled</p>
+        <p className='canceled'>Declined</p>
         <p>Sheldon Cooper</p>
         <p>Sender</p>
         <p>Oct 25, 2019, 12:52:02 PM</p>
@@ -60,9 +46,8 @@ const Transactions = props => {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth,
-    transactions: state.transactions
+    transaction: state.transaction
   }
 }
 
-export default connect(mapStateToProps, { getTransactions })(Transactions)
+export default connect(mapStateToProps, getTransaction)(Transactions)

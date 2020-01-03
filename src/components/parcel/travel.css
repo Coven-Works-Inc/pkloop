@@ -12,9 +12,10 @@
   background: #fff;
   height: 300px;
   width: 550px;
-  padding: 2rem;
+  padding: 1.2rem;
   display: flex;
   margin-right: 1.5rem;
+  margin-top: 2rem
 }
 
 .travel.card:nth-child(even) {

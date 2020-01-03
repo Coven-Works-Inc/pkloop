@@ -77,15 +77,15 @@ const Travelers = props => {
                 {traveler.stopOvers ? traveler.stopOvers : 'None'}
               </p>
               <p>
-                <span className='gray'>Means of transportation</span>{' '}
+                <span className='gray'>Means of transportation: </span>{' '}
                 {traveler.transport}
               </p>
               <p>
-                <span className='gray'>Size of parcel willing to carry</span>{' '}
+                <span className='gray'>Size of parcel willing to carry: </span>{' '}
                 {traveler.parcelSize}
               </p>
               <p>
-                <span className='gray'>Weight of parcel willing to carry</span>{' '}
+                <span className='gray'>Weight of parcel willing to carry: </span>{' '}
                 {traveler.parcelWeight}
               </p>
             </div>

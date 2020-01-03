@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
 import HeaderFooter from '../headerFooter'
 import Transactions from './transactions'
 import Profile from './profile'
 import Balance from './balance'
 import Support from './support'
 import { Link } from 'react-router-dom'
+import { logoutUser } from '../../actions/authActions'
 
 class Dashboard extends Component {
-
   state = {
     headerText: 'My Transactions'
   }
 
-  render() {
-    const { headerText } = this.state;
+  render () {
+    const { headerText } = this.state
 
     const changeHeader = text => {
       this.setState({
@@ -30,20 +32,34 @@ class Dashboard extends Component {
           <div className='dashboard-menu'>
             <p
               onClick={() => changeHeader('My Transactions')}
-              className={headerText === 'My Transactions' ? '' : 'lighter'}>My Transactions</p>
+              className={headerText === 'My Transactions' ? '' : 'lighter'}
+            >
+              My Transactions
+            </p>
 
             <p
               onClick={() => changeHeader('Edit Profile')}
-              className={headerText === 'Edit Profile' ? '' : 'lighter'}>Edit Profile</p>
+              className={headerText === 'Edit Profile' ? '' : 'lighter'}
+            >
+              Edit Profile
+            </p>
 
             <p
               onClick={() => changeHeader('My Balance')}
-              className={headerText === 'My Balance' ? '' : 'lighter'}>My Balance</p>
+              className={headerText === 'My Balance' ? '' : 'lighter'}
+            >
+              My Balance
+            </p>
 
             <p
               onClick={() => changeHeader('Support')}
-              className={headerText === 'Support' ? '' : 'lighter'}>Support</p>
-            <Link to="/login" style={{ textDecoration: 'none' }}><p  className='gray'>Log Out</p></Link>
+              className={headerText === 'Support' ? '' : 'lighter'}
+            >
+              Support
+            </p>
+            <p onClick={() => this.props.logoutUser()} className='gray'>
+              Log Out
+            </p>
           </div>
           {headerText === 'My Transactions' && <Transactions />}
           {headerText === 'Edit Profile' && <Profile />}
@@ -55,4 +71,9 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  }
+}
+export default connect(mapStateToProps, { logoutUser })(Dashboard)
