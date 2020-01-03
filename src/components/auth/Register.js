@@ -48,10 +48,6 @@ class Register extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.setState({
-      display: 'inline-block',
-      buttonText: 'PLEASE WAIT'
-    })
     const newUser = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
@@ -90,9 +86,9 @@ class Register extends Component {
               </p>
               </div>
               <div id='contact-form' className='py-2'>
-                {errors.message && (
+                {this.props.error && (
                   <div className='error-msg'>
-                    <p>{errors.message}</p>
+                    <p>{this.props.error}</p>
                   </div>
                 )}
                 <form onSubmit={this.handleSubmit}>
@@ -167,7 +163,7 @@ class Register extends Component {
                     />
                   </div>
                   {/* !loading &&  */}
-                  <button className='btn'>{this.state.buttonText} <span style={{display:this.state.display}} className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                  <button className='btn'>{this.props.loading ? <span style={{display:'inline-block'}} className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>: <div>SIGN UP NOW</div>} </button>
                   {/* {loading && <img
                   src={loader}
                   alt=''
@@ -236,8 +232,8 @@ Register.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   return {
     auth: state.auth,
-    errors: state.errors,
-    loading: state.loading
+    error: state.auth.error,
+    loading: state.auth.loading
   }
 }
 
