@@ -43,7 +43,7 @@ class Dashboard extends Component {
             <p
               onClick={() => changeHeader('Support')}
               className={headerText === 'Support' ? '' : 'lighter'}>Support</p>
-            <Link to="/login" style={{ textDecoration: 'none' }}><p onClick="logoutUser()" className='gray'>Log Out</p></Link>
+            <Link to="/login" style={{ textDecoration: 'none' }}><p  className='gray'>Log Out</p></Link>
           </div>
           {headerText === 'My Transactions' && <Transactions />}
           {headerText === 'Edit Profile' && <Profile />}

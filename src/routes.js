@@ -1,5 +1,6 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter, Router } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Home from './components/home'
 import Login from './components/auth/Login'
@@ -20,7 +21,7 @@ import HowItWorks from './components/howItWorks'
 import Faq from './components/faq'
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
-const Routes = () => {
+const Routes = (props) => {
   return (
     <Switch>
       <Route exact component={Login} path='/login' />
@@ -39,9 +40,17 @@ const Routes = () => {
       <Route exact component={Faq} path='/faq' />
       <Route exact component={Privacy} path='/privacy' />
       <Route exact component={Home} path='/' />
-      <ProtectedRoute exact component={Dashboard} path='/dashboard' />
+      <ProtectedRoute exact component={Dashboard} path='/dashboard' isAuthenticated={props.isAuthenticated}/>
     </Switch>
   )
 }
 
-export default Routes
+
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+      isAuthenticated: state.auth.isAuthenticated
+  }
+}
+
+export default connect(mapStateToProps, null)(withRouter(Routes))
