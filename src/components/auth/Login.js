@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import { loginUser } from '../../actions/authActions'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import Logo from '../../assets/logo/Logo.png'
+import React, { Component } from 'react';
+import { loginUser } from '../../actions/authActions';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Logo from '../../assets/logo/Logo.png';
+// import './bootstrap.min.css';
 
 class Login extends Component {
   state = {
