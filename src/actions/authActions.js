@@ -10,12 +10,6 @@ export const registerUser = (userData, history) => dispatch => {
     type: LOADING,
     payload: true
   })
-
-  dispatch({
-    type: GET_ERRORS,
-    payload: { message: '' }
-  })
-
   axios
     .post(`${BASE_URL}/auth/signup`, userData)
     .then(res => {
@@ -27,7 +21,7 @@ export const registerUser = (userData, history) => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response
-          ? err.response.data
+          ? err.response.data.message
           : { message: 'Something went wrong. Please try again' }
       })
     })
