@@ -15,9 +15,9 @@ const Cargo = () => {
           </p>
         </div>
         <div className='cargo_buttons'>
-          <Link to='/parcel' style={{ textDecoration: 'none' }}>
+          <Link to='/trips' style={{ textDecoration: 'none' }}>
             <div className='cargo_items'>
-              <h3>LIST YOUR SHIPMENT DETAILS</h3>
+              <h3>LIST YOUR TRIP</h3>
             </div>
           </Link>
           <Link to='/shippers' style={{ textDecoration: 'none' }}>

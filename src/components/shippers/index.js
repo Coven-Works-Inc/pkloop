@@ -109,10 +109,16 @@ const Parcel = props => {
     shippers: { shippers }
   } = props
 
+  // {
+  //   props.shippers.shippers &&
+  //   const {
+  //     shippers: { shippers }
+  //   } = props)
+  // }
   return (
     <HeaderFooter>
       <div className='maincontainer send-parcel'>
-        <h1>Find Travelers</h1>
+        <h1>Send Parcel By Ship</h1>
         <div className='py-2 form-group'>
           <form onSubmit={submitHandler}>
             <div className='country_div'>
@@ -225,15 +231,17 @@ const Parcel = props => {
             </div>
 
             <button className='btnQ' type='submit'>
-              Find Travellers
+              Search
             </button>
           </form>
         </div>
       </div>
 
-      {props.shippers[0] && (
-        <Shippers travelers={shippers} toggle={toggleModal} />
-      )}
+      {/* {props.shippers.shippers && (
+        <Shippers travelers={props.shippers.shippers} toggle={toggleModal} />
+      )} */}
+
+      <Shippers travelers={shippers} />
 
       <Modal show={state.modalOpen} onClose={toggleModal}>
         <h2>
