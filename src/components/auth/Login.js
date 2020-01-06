@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { loginUser } from '../../actions/authActions';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Logo from '../../assets/logo/Logo.png';
+import React, { Component } from 'react'
+import { loginUser } from '../../actions/authActions'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import Logo from '../../assets/logo/Logo.png'
 // import './bootstrap.min.css';
 
 class Login extends Component {
@@ -11,7 +11,7 @@ class Login extends Component {
     password: '',
     errors: {},
     buttonText: 'Login Now',
-    display: 'none',
+    display: 'none'
   }
 
   componentWillReceiveProps () {
@@ -38,11 +38,10 @@ class Login extends Component {
     }
 
     this.setState({
-      display:'inline-block',
-      buttonText: 'PLEASE WAIT',
+      display: 'inline-block',
+      buttonText: 'PLEASE WAIT'
     })
     this.props.loginUser(userData, this.props.history)
-    
   }
 
   render () {
@@ -99,7 +98,19 @@ class Login extends Component {
                     />
                   </div>
                   <p style={{ color: '#00bdbe' }}>Forgot password?</p>
-                  <button className='btn' type="submit"> {this.props.loading ? <span style={{display:'inline-block'}} className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>: <div>Login now</div>}</button>
+                  <button className='btn' type='submit'>
+                    {' '}
+                    {this.props.loading ? (
+                      <span
+                        style={{ display: 'inline-block' }}
+                        className='spinner-border spinner-border-sm'
+                        role='status'
+                        aria-hidden='true'
+                      ></span>
+                    ) : (
+                      <div>Login now</div>
+                    )}
+                  </button>
                 </form>
                 <p style={{ textAlign: 'center' }}>OR</p>
                 <button className='btn_google'>
@@ -109,7 +120,19 @@ class Login extends Component {
                       alt=''
                     />
                   </i>
-                  <span className='text'> Log in with Google </span>
+                  <span className='text'>Log in with Google </span>
+                </button>
+                <button
+                  className='btn_google'
+                  style={{ background: '#384af5', color: 'white' }}
+                >
+                  <i className='icon' style={{ marginLeft: '0.7rem' }}>
+                    <img
+                      src='https://img.icons8.com/color/27/000000/twitter.png'
+                      alt=''
+                    />
+                  </i>
+                  <span className='text'> Log in with Twitter</span>
                 </button>
                 <button
                   className='btn_google'
@@ -122,7 +145,6 @@ class Login extends Component {
                     />
                   </i>
                   <span className='text'> Log in with Facebook</span>
-
                 </button>
               </div>
               <div className='terms'>
