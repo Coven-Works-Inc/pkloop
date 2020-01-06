@@ -8,6 +8,7 @@ import cities from '../../world-cities_json.json';
 
 import Travelers from './travelers'
 import Modal from '../common/modal'
+import Payment from '../payment'
 
 import './parcel.css'
 import travelData from '../../travelers.json'
@@ -22,7 +23,7 @@ const Parcel = props => {
     destinationCountry: '',
     destinationCity: '',
     parcelSize: '',
-    parcelWeight: '',
+    parcelWeight: 4,
     fromCountry: '',
     additionalInfo: '',
     travelers: travelData,
@@ -153,6 +154,7 @@ const Parcel = props => {
     travelers: { travelers }
   } = props
   console.log(travelers)
+  console.log(state.parcelWeight)
 
   return (
     <HeaderFooter>
@@ -280,8 +282,13 @@ const Parcel = props => {
           <div>
             <h2>Are you sure you want to send {state.parcelWeight} pounds of weight?</h2>
             <br />
+            {/* onClick={() => props.history.push({
+              pathname: '/payment',
+              weight: state.parcelWeight
+            })} */}
             <div className="button-group">
-              <button className='btnQ medium' onClick={() => props.history.push('/payment')}>Yes, Continue</button>
+              {/* className='btnQ medium' */}
+              <button className="clearBG"><Payment weight={state.parcelWeight} /></button>
               <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
             </div>
           </div>}
