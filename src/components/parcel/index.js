@@ -23,7 +23,7 @@ const Parcel = props => {
     parcelWeight: '',
     additionalInfo: '',
     travelers: travelData,
-    filteredLocation: [],
+    filteredLocation: undefined,
     filteredDestination: [],
     countries: countriesData,
     fromcities: [],
@@ -40,9 +40,10 @@ const Parcel = props => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
-      fromcities: city
+      fromcities: city, 
+      filteredLocation: travelers.filter(traveler => traveler.locationCountry.indexOf(e.target.value) >= 0)
     })
-  }
+  };
   const onToCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value )
     const city = cities.filter(city => city.country === selectedCountry[0].name)
@@ -100,10 +101,10 @@ const Parcel = props => {
   //     })
   //   }
   // }
-
   const {
     travelers: { travelers }
   } = props
+  console.log(travelers)
 
   return (
     <HeaderFooter>
@@ -222,7 +223,7 @@ const Parcel = props => {
         </div>
         </div>
         
-        <Travelers travelers={travelers} toggle={toggleModal} />
+        <Travelers travelers={state.filteredLocation ? state.filteredLocation :  travelers} toggle={toggleModal} />
         
         
         <Modal show={state.modalOpen}
