@@ -64,7 +64,7 @@ class Header extends Component {
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/parcel'>Find Travelers</Link>
+                <Link to='/parcel'>Send Parcel</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>
@@ -100,7 +100,7 @@ class Header extends Component {
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/travelers'>Find Travelers</Link>
+                <Link to='/travelers'>Send Parcel</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>
@@ -148,7 +148,7 @@ class Header extends Component {
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/parcel'>Find Travellers</Link>
+                <Link to='/parcel'>Send Parcel</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>
@@ -182,7 +182,7 @@ class Header extends Component {
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/send'>Find Travellers</Link>
+                <Link to='/send'>Send Parcel</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>

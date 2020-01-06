@@ -1,0 +1,57 @@
+#travel-container {
+  padding: 0.5rem;
+  margin: 1rem 10rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 100%;
+  /* background: #00bdbe; */
+}
+
+.travel-card {
+  background: #fff;
+  height: 300px;
+  width: 550px;
+  padding: 1.2rem;
+  display: flex;
+  margin-right: 1.5rem;
+  margin-top: 2rem
+}
+
+.travel.card:nth-child(even) {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.travel-card .card-left {
+  margin-right: 2rem;
+}
+
+.travel-card .card-left .button {
+  border: 1px solid #0071bc;
+  background: #0071bc;
+  color: #fff;
+  text-align: center;
+  padding: 0.5rem 2rem;
+  border-radius: 3px;
+  margin-top: 2.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+#travel-card .card-right h3:nth-child(2) {
+  margin-bottom: 1rem;
+}
+
+#travel-card .card-right h3,
+#travel-card.card-right p {
+  line-height: 1.5;
+}
+
+#travel-card .card-right p {
+  font-size: 0.85rem;
+}
+
+span.gray {
+  color: #9b9b9b;
+}

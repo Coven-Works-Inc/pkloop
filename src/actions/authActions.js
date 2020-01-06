@@ -33,11 +33,11 @@ export const registerUser = (userData, history) => dispatch => {
     )
 }
 
- export const loginUser = (userData, history) => dispatch => {
-  dispatch({
-    type: LOADING,
-    payload: true
-  })
+export const loginUser = (userData, history) => dispatch => {
+  // dispatch({
+  //   type: LOADING,
+  //   payload: true
+  // })
   axios
     .post(`${BASE_URL}/auth/login`, userData)
     .then(res => {
@@ -52,9 +52,9 @@ export const registerUser = (userData, history) => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
-        payload: err.response ? 
-                  err.response.data.message :
-                  'Something went wrong' 
+        payload: err.response
+          ? err.response.data.message
+          : 'Something went wrong'
       })
     })
     .finally(() =>
@@ -180,6 +180,7 @@ export const verify = (token, history) => dispatch => {
 
 // Set logged in user
 export const setCurrentUser = (decoded, token) => dispatch => {
+  console.log(decoded)
   dispatch({
     type: SET_CURRENT_USER,
     payload: decoded

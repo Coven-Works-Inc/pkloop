@@ -5,6 +5,7 @@ import loadingReducer from './loadingReducer'
 import tripReducer from './tripReducer'
 import travelerReducer from './travelerReducer'
 import transReducer from './transReducer'
+import shipReducer from './shipReducer'
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   trips: tripReducer,
   loading: loadingReducer,
   travelers: travelerReducer,
-  transaction: transReducer
+  transaction: transReducer,
+  shippers: shipReducer
 })

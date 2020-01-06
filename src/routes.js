@@ -1,6 +1,6 @@
 import React from 'react'
-import { Switch, Route, withRouter, Router } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Switch, Route, withRouter, Router } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import Home from './components/home'
 import Login from './components/auth/Login'
@@ -18,10 +18,11 @@ import Contact from './components/pages/contact'
 import Privacy from './components/pages/privacy_policy'
 import Travelers from './components/parcel/travelers'
 import HowItWorks from './components/howItWorks'
+import Shippers from './components/shippers'
 import Faq from './components/faq'
 import PrivateRoute from './components/common/privateRoute'
 
-const Routes = (props) => {
+const Routes = props => {
   return (
     <Switch>
       <Route exact component={Login} path='/login' />
@@ -37,20 +38,21 @@ const Routes = (props) => {
       <Route exact component={Trust} path='/trust' />
       <Route exact component={Terms} path='/terms' />
       <Route exact component={HowItWorks} path='/howitworks' />
+      <Route exact component={Shippers} path='/shippers' />
       <Route exact component={Contact} path='/contact' />
       <Route exact component={Faq} path='/faq' />
       <Route exact component={Privacy} path='/privacy' />
       <Route exact component={Home} path='/' />
+
       {/* <ProtectedRoute exact component={Dashboard} path='/dashboard' isAuthenticated={props.isAuthenticated}/> */}
     </Switch>
   )
 }
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   console.log(state)
   return {
-      isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated
   }
 }
 
