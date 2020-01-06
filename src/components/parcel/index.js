@@ -21,12 +21,15 @@ const Parcel = props => {
     destinationCity: '',
     parcelSize: '',
     parcelWeight: '',
+    fromCountry: '',
     additionalInfo: '',
     travelers: travelData,
     filteredLocation: undefined,
     filteredDestination: [],
     countries: countriesData,
     fromcities: [],
+    fromCity: '',
+    toCity: '',
     tocities: [],
     modalOpen: false,
     index: 0,
@@ -41,7 +44,7 @@ const Parcel = props => {
       ...state,
       [e.target.name]: e.target.value,
       fromcities: city, 
-      filteredLocation: travelers.filter(traveler => traveler.locationCountry.indexOf(e.target.value) >= 0)
+      filteredLocation: travelers.filter(traveler => traveler.locationCountry === e.target.value)
     })
   };
   const onToCountryChangeHandler = e => {
@@ -50,14 +53,39 @@ const Parcel = props => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
-      tocities: city
+      tocities: city,
+      filteredLocation: travelers.filter(traveler => traveler.destinationCountry === e.target.value && (state.fromCountry === traveler.locationCountry || '') )
     })
   }
-  const onChangeHandler = e => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value
-    })
+  const  onChangeHandler = e => {
+    if(e.target.name === 'fromCity'){
+      setState({
+        ...state,
+        [e.target.name]: e.target.value,
+        filteredLocation: travelers.filter(traveler => traveler.locationCity === e.target.value && traveler.locationCountry === state.fromCountry)
+      })
+    } 
+    if(e.target.name === 'toCity'){
+      setState({
+        ...state,
+        [e.target.name]: e.target.value,
+        filteredLocation: travelers.filter(traveler => traveler.destinationCity === e.target.value && traveler.locationCountry === state.fromCountry && traveler.locationCity === state.fromCity)
+      })
+    };
+    if(e.target.name === 'parcelSize'){
+      setState({
+        ...state,
+        [e.target.name] : e.target.value,
+        filteredLocation: travelers.filter(traveler => traveler.parcelSize === e.target.value)
+      })
+    };
+    if(e.target.name === 'parcelWeight'){
+      setState({
+        ...state,
+        [e.target.name] : e.target.value,
+        filteredLocation: travelers.filter(traveler => traveler.parcelWeight === e.target.value)
+      })
+    }
   }
   const submitHandler = e => {
     setState({
@@ -158,11 +186,11 @@ const Parcel = props => {
                 <select
                   name='toCity'
                   value={state.toCity}
-                
+                  onChange={onChangeHandler}
                 >
                   <option value=""></option>
                   {state.tocities.sort().map((city, index) => (
-                    <option value={city.name} key={index}>{city.name},{city.subcountry}</option>
+                    <option value={city.name} key={index}>{city.name}, {city.subcountry}</option>
                   ))}
                 </select>
               </div>
