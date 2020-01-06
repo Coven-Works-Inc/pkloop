@@ -7,7 +7,7 @@ import { FETCH_TRAVELERS, GET_ERRORS, FETCH_SHIPPERS } from './types'
 import { BASE_URL } from '../config/constants'
 
 export const fetchTravelers = () => async dispatch => {
-  await axios
+  axios
     .get(`${BASE_URL}/trips`)
     .then(res => {
       dispatch({
@@ -26,12 +26,13 @@ export const fetchTravelers = () => async dispatch => {
 }
 
 export const fetchShippers = () => async dispatch => {
-  await axios
+  axios
     .get(`${BASE_URL}/trips/shippers`)
     .then(res => {
+      console.log(res.data.data[0])
       dispatch({
         type: FETCH_SHIPPERS,
-        payload: res.data.data
+        payload: res.data.data[0]
       })
 
       // console.log(res.data)
