@@ -46,7 +46,7 @@ const Parcel = props => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
-      fromcities: city, 
+      fromcities: city,
       filteredLocation: travelers.filter(traveler => traveler.locationCountry === e.target.value)
     })
   };
@@ -57,35 +57,35 @@ const Parcel = props => {
       ...state,
       [e.target.name]: e.target.value,
       tocities: city,
-      filteredLocation: travelers.filter(traveler => traveler.destinationCountry === e.target.value && (state.fromCountry === traveler.locationCountry || '') )
+      filteredLocation: travelers.filter(traveler => traveler.destinationCountry === e.target.value && (state.fromCountry === traveler.locationCountry || ''))
     })
   }
-  const  onChangeHandler = e => {
-    if(e.target.name === 'fromCity'){
+  const onChangeHandler = e => {
+    if (e.target.name === 'fromCity') {
       setState({
         ...state,
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.locationCity === e.target.value && traveler.locationCountry === state.fromCountry)
       })
-    } 
-    if(e.target.name === 'toCity'){
+    }
+    if (e.target.name === 'toCity') {
       setState({
         ...state,
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.destinationCity === e.target.value && traveler.locationCountry === state.fromCountry && traveler.locationCity === state.fromCity)
       })
     };
-    if(e.target.name === 'parcelSize'){
+    if (e.target.name === 'parcelSize') {
       setState({
         ...state,
-        [e.target.name] : e.target.value,
+        [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.parcelSize === e.target.value)
       })
     };
-    if(e.target.name === 'parcelWeight'){
+    if (e.target.name === 'parcelWeight') {
       setState({
         ...state,
-        [e.target.name] : e.target.value,
+        [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.parcelWeight === e.target.value)
       })
     }
@@ -271,8 +271,8 @@ const Parcel = props => {
         </div>
       </div>
 
-        
-        <Travelers travelers={state.filteredLocation ? state.filteredLocation :  travelers} toggle={toggleModal} />
+
+      <Travelers travelers={state.filteredLocation ? state.filteredLocation : travelers} toggle={toggleModal} connect={handleConnect} />
 
       <Modal show={state.modalOpen}
         onClose={toggleModal}>
