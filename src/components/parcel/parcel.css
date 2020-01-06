@@ -71,6 +71,12 @@
   transition: all 0.3s ease-in-out;
 }
 
+button.clearBG {
+  background-color: none !important;
+  background: none !important;
+  border: none !important;
+}
+
 .form-group input:focus {
   border: 1px solid #00bdbe;
 }
