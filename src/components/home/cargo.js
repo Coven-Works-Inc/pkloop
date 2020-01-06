@@ -1,7 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 import './cargo.css'
-
 
 const Cargo = () => {
   return (
@@ -16,12 +15,12 @@ const Cargo = () => {
           </p>
         </div>
         <div className='cargo_buttons'>
-          <Link to="/parcel" style={{ textDecoration: 'none' }}>
+          <Link to='/parcel' style={{ textDecoration: 'none' }}>
             <div className='cargo_items'>
               <h3>LIST YOUR SHIPMENT DETAILS</h3>
             </div>
           </Link>
-          <Link to="/travelers" style={{ textDecoration: 'none' }}>
+          <Link to='/shippers' style={{ textDecoration: 'none' }}>
             <div className='cargo_items'>
               <h3>SEE AVAILABLE SHIPPERS</h3>
             </div>
