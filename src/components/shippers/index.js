@@ -231,7 +231,9 @@ const Parcel = props => {
         </div>
       </div>
 
-      <Shippers travelers={shippers} toggle={toggleModal} />
+      {props.shippers[0] && (
+        <Shippers travelers={shippers} toggle={toggleModal} />
+      )}
 
       <Modal show={state.modalOpen} onClose={toggleModal}>
         <h2>
@@ -247,6 +249,9 @@ const Parcel = props => {
       </Modal>
     </HeaderFooter>
   )
+}
+
+{
 }
 
 const mapStateToProps = state => ({

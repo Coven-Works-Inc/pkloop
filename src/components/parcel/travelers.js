@@ -15,7 +15,7 @@ const Travelers = props => {
   //This function helps the user filter by location
   const getLocation = e => {
     let keyword = e.target.value.toUpperCase()
-    const filtered = this.state.travelers.filter(traveler => {
+    const filtered = travelers.filter(traveler => {
       return traveler.location.toUpperCase().indexOf(keyword) > -1
     })
 
@@ -27,7 +27,7 @@ const Travelers = props => {
   //This function helps the user filter by destination
   const getDestination = e => {
     let keyword = e.target.value.toUpperCase()
-    const filtered = this.state.travelers.filter(traveler => {
+    const filtered = travelers.filter(traveler => {
       return traveler.destination.toUpperCase().indexOf(keyword) > -1
     })
 
@@ -35,7 +35,7 @@ const Travelers = props => {
       filtered
     })
   }
-  
+
   return (
     <div id='travel-container'>
       {travelers === undefined ? (
@@ -84,7 +84,9 @@ const Travelers = props => {
                 {traveler.parcelSize}
               </p>
               <p>
-                <span className='gray'>Weight of parcel willing to carry: </span>{' '}
+                <span className='gray'>
+                  Weight of parcel willing to carry:{' '}
+                </span>{' '}
                 {traveler.parcelWeight}
               </p>
             </div>
