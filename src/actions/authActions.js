@@ -122,32 +122,32 @@ export const verify = (token, history) => dispatch => {
     )
 }
 
-// export const reset = (email, history) => dispatch => {
-//     dispatch({
-//         type: LOADING,
-//         payload: true
-//     })
+export const reset = (email, history) => dispatch => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
 
-//     dispatch({
-//         type: GET_ERRORS,
-//         payload: { message: '' }
-//     })
+    dispatch({
+        type: GET_ERRORS,
+        payload: { message: '' }
+    })
 
-//     axios
-//         .post(`${BASE_URL}/users/reset`, { email })
-//         .then(async res => {
-//             console.log(res.data)
-//             dispatch({
-//                 type: GET_ERRORS,
-//                 payload: { message: res.data.message || res.data.error }
-//             })
-//         })
-//         .catch(err => dispatch({ type: GET_ERRORS, payload: err.response ? err.response.data : { message: 'Something went wrong' } }))
-//         .finally(() => dispatch({
-//             type: LOADING,
-//             payload: false
-//         }))
-// }
+    axios
+        .post(`${BASE_URL}/users/reset`, { email })
+        .then(async res => {
+            console.log(res.data)
+            dispatch({
+                type: GET_ERRORS,
+                payload: { message: res.data.message || res.data.error }
+            })
+        })
+        .catch(err => dispatch({ type: GET_ERRORS, payload: err.response ? err.response.data : { message: 'Something went wrong' } }))
+        .finally(() => dispatch({
+            type: LOADING,
+            payload: false
+        }))
+}
 
 // export const completeReset = (password, token, history) => dispatch => {
 //     console.log(token)
