@@ -14,6 +14,8 @@ import travelData from '../../travelers.json'
 import countriesData from '../../countries.json'
 
 const Parcel = props => {
+  console.log(props)
+
   const [state, setState] = useState({
     locationCountry: '',
     locationCity: '',
@@ -33,12 +35,13 @@ const Parcel = props => {
     tocities: [],
     modalOpen: false,
     index: 0,
+    isAuthenticated: false
   })
   useEffect(() => {
     props.fetchTravelers()
   }, [])
   const onFromCountryChangeHandler = e => {
-    const selectedCountry = countries.filter(country => country.name === e.target.value )
+    const selectedCountry = countries.filter(country => country.name === e.target.value)
     const city = cities.filter(city => city.country === selectedCountry[0].name)
     setState({
       ...state,
@@ -48,7 +51,7 @@ const Parcel = props => {
     })
   };
   const onToCountryChangeHandler = e => {
-    const selectedCountry = countries.filter(country => country.name === e.target.value )
+    const selectedCountry = countries.filter(country => country.name === e.target.value)
     const city = cities.filter(city => city.country === selectedCountry[0].name)
     setState({
       ...state,
@@ -93,6 +96,23 @@ const Parcel = props => {
       modalOpen: true
     })
     e.preventDefault()
+  }
+
+  const handleConnect = () => {
+    if (!props.user.isAuthenticated) {
+      setState({
+        ...state,
+        modalOpen: true,
+        isAuthenticated: false
+      })
+    } else {
+      setState({
+        ...state,
+        modalOpen: true,
+        isAuthenticated: true
+      })
+      console.log('The weight of your parcel in pounds is: ' + state.parcelWeight)
+    }
   }
 
   // fetchCountries = () => {
@@ -157,14 +177,14 @@ const Parcel = props => {
                 <label>From (City)</label>
                 <select
                   name='fromCity'
-                  value={state.fromCity}   
-                  onChange={onChangeHandler} 
+                  value={state.fromCity}
+                  onChange={onChangeHandler}
                 >
                   <option value=""></option>
                   {state.fromcities.sort().map((city, index) => (
                     <option value={city.name} key={index}>{city.name},{city.subcountry}</option>
                   ))}
-                  
+
                 </select>
               </div>
             </div>
@@ -176,7 +196,7 @@ const Parcel = props => {
                   value={state.toCountry}
                   onChange={onToCountryChangeHandler}
                 >
-                 {countries.map((country, index) => (
+                  {countries.map((country, index) => (
                     <option value={country.name} key={index}>{country.name}</option>
                   ))}
                 </select>
@@ -216,7 +236,7 @@ const Parcel = props => {
                 <select
                   name='parcelWeight'
                   value={state.parcelWeight}
-                  onChange={onChangeHandler}    
+                  onChange={onChangeHandler}
                 >
                   <option value='1'>1</option>
                   <option value='2'>2</option>
@@ -249,27 +269,39 @@ const Parcel = props => {
             <button className='btnQ' type="submit">Find Travellers</button>
           </form>
         </div>
-        </div>
+      </div>
+
         
         <Travelers travelers={state.filteredLocation ? state.filteredLocation :  travelers} toggle={toggleModal} />
-        
-        
-        <Modal show={state.modalOpen}
-          onClose={toggleModal}>
-          <h2>Are you sure you want to send {state.parcelWeight} pounds of weight?</h2>
-          <br />
-          <div className="button-group">
-            <button className='btnQ medium'>Yes, Continue</button>
-            <button className='btnQ inverse-btnQ medium'>No, Change weight</button>
-          </div>
-        </Modal>
-        
+
+      <Modal show={state.modalOpen}
+        onClose={toggleModal}>
+        {state.isAuthenticated &&
+          <div>
+            <h2>Are you sure you want to send {state.parcelWeight} pounds of weight?</h2>
+            <br />
+            <div className="button-group">
+              <button className='btnQ medium' onClick={() => props.history.push('/payment')}>Yes, Continue</button>
+              <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
+            </div>
+          </div>}
+        {!state.isAuthenticated &&
+          <div>
+            <h2>Please login to connect with a traveller</h2>
+            <br />
+            <div className="button-group">
+              <button className='btnQ medium' onClick={() => props.history.push('/login')}>Yes, Go To Login</button>
+              <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Stay on This Page</button>
+            </div>
+          </div>}
+      </Modal>
     </HeaderFooter>
   )
 }
 
 const mapStateToProps = state => ({
-  travelers: state.travelers
+  travelers: state.travelers,
+  user: state.auth
 })
 
 export default connect(mapStateToProps, { fetchTravelers })(Parcel)

@@ -14,7 +14,7 @@ class Dashboard extends Component {
     headerText: 'My Transactions'
   }
 
-  render () {
+  render() {
     const { headerText } = this.state
 
     const changeHeader = text => {
@@ -22,6 +22,8 @@ class Dashboard extends Component {
         headerText: text
       })
     }
+
+    console.log(this.props);
 
     return (
       <HeaderFooter>
