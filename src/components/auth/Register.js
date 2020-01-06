@@ -20,14 +20,14 @@ class Register extends Component {
     errors: {},
     loading: false,
     display: 'none',
-    buttonText: 'SIGN UP NOW',
+    buttonText: 'SIGN UP NOW'
   }
 
   // componentDidUpdate() {
   //   console.log(this.props);
   // }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps () {
     // console.log(this.props);
     this.setState({
       errors: this.props.errors
@@ -61,15 +61,20 @@ class Register extends Component {
     this.props.registerUser(newUser, this.props.history)
   }
 
-  render() {
+  render () {
     const { errors } = this.state
     // console.log(errors);
 
     return (
       <div id='container'>
         <div className='left items'>
-          <div className="all-auth-content">
-            <i onClick={() => this.props.history.goBack()} className="material-icons">keyboard_backspace</i>
+          <div className='all-auth-content'>
+            <i
+              onClick={() => this.props.history.goBack()}
+              className='material-icons'
+            >
+              keyboard_backspace
+            </i>
             <div className='inner_container'>
               <div className='logo'>
                 <Link to='/'>
@@ -83,7 +88,7 @@ class Register extends Component {
                 <p>
                   PKLoop connects senders with travelers to facilitate parcel
                   delivery within 12-48 hours at the cheapest rates
-              </p>
+                </p>
               </div>
               <div id='contact-form' className='py-2'>
                 {this.props.error && (
@@ -163,7 +168,18 @@ class Register extends Component {
                     />
                   </div>
                   {/* !loading &&  */}
-                  <button className='btn'>{this.props.loading ? <span style={{display:'inline-block'}} className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>: <div>SIGN UP NOW</div>} </button>
+                  <button className='btn'>
+                    {this.props.loading ? (
+                      <span
+                        style={{ display: 'inline-block' }}
+                        className='spinner-border spinner-border-sm'
+                        role='status'
+                        aria-hidden='true'
+                      ></span>
+                    ) : (
+                      <div>SIGN UP NOW</div>
+                    )}{' '}
+                  </button>
                   {/* {loading && <img
                   src={loader}
                   alt=''
@@ -181,6 +197,19 @@ class Register extends Component {
                 </button>
                 <button
                   className='btn_google'
+                  style={{ background: '#384af5', color: 'white' }}
+                >
+                  <i className='icon' style={{ marginLeft: '0.7rem' }}>
+                    <img
+                      src='https://img.icons8.com/color/27/000000/twitter.png'
+                      alt=''
+                    />
+                  </i>
+                  <span className='text'> Sign up with Twitter</span>
+                </button>
+
+                <button
+                  className='btn_google'
                   style={{ background: '#3b5998', color: 'white' }}
                 >
                   <i className='icon' style={{ marginLeft: '0.7rem' }}>
@@ -195,9 +224,9 @@ class Register extends Component {
               <div className='terms'>
                 <p>
                   By signing up, you are indicating that you've read and
-                <br /> agree to the <span>Terms of Use</span> and{' '}
+                  <br /> agree to the <span>Terms of Use</span> and{' '}
                   <span>Privacy Policy</span>.
-              </p>
+                </p>
                 <p>
                   Already have an account?{' '}
                   <span className='sec_text'>
@@ -210,13 +239,12 @@ class Register extends Component {
                       }}
                     >
                       Log in
-                  </Link>
+                    </Link>
                   </span>
                 </p>
               </div>
             </div>
           </div>
-
         </div>
         <div className='regright items' />
       </div>
@@ -237,7 +265,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { registerUser }
-)(withRouter(Register))
+export default connect(mapStateToProps, { registerUser })(withRouter(Register))

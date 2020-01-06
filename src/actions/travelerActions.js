@@ -32,7 +32,7 @@ export const fetchShippers = () => async dispatch => {
       console.log(res.data.data[0])
       dispatch({
         type: FETCH_SHIPPERS,
-        payload: res.data.data[0]
+        payload: res.data.data
       })
 
       // console.log(res.data)
