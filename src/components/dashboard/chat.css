@@ -1,0 +1,13 @@
+.chat {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 40px 100px;
+    grid-gap: 20px;
+}
+.chat-details {
+    background-color: white;
+    padding: 20px 30px;
+}
+.chat-details h3, .chat-details h5 {
+    margin-bottom: 30px;
+}
