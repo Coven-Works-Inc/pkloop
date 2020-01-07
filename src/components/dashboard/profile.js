@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import ProfilePicture from '../../assets/default-picture.jpg'
 
-const Profile = () => {
+
+const Profile = (props) => {
+    const [state, setState] = useState(props.user)
+    const onChangeHandler = e => {
+        setState({
+            ...state,
+            [e.target.name] : e.target.value
+        });
+    };
+    const submitHandler = e => {
+        e.preventDefault()
+    }
     return (
         <div className="edit-profile">
             <div className="profile-picture">
@@ -9,13 +21,13 @@ const Profile = () => {
                 <p>Change Picture</p>
             </div>
             <div className="profile-form">
-                <form>
-                    <input type="text" placeholder="First Name" />
-                    <input type="text" placeholder="Last Name" />
-                    <input type="text" placeholder="Username" />
-                    <input type="text" placeholder="City, Country" />
-                    <input type="email" placeholder="Email Address" />
-                    <input type="tel" placeholder="Phone Number" />
+                <form onSubmit={submitHandler}>
+                    <input type="text" placeholder="First Name" value={state.firstname} name='firstname' onChange={onChangeHandler}/>
+                    <input type="text" placeholder="Last Name" value={state.lastname} name="lastname" onChange={onChangeHandler}/>
+                    <input type="text" placeholder="Username" value={state.username} onChange={onChangeHandler}/>
+                    <input type="text" placeholder="City, Country" onChange={onChangeHandler}/>
+                    <input type="email" placeholder="Email Address" value={state.email} name="email" onChange={onChangeHandler}/>
+                    <input type="tel" placeholder="Phone Number" value={state.phone} name="phone" onChange={onChangeHandler}/>
                     <button className="btnSmall">Save Changes</button>
                 </form>
             </div>
@@ -23,4 +35,9 @@ const Profile = () => {
     )
 }
 
-export default Profile;
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user
+    }
+}
+export default connect(mapStateToProps)(Profile);
