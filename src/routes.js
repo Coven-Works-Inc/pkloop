@@ -22,6 +22,7 @@ import Shippers from './components/shippers'
 import Faq from './components/faq'
 import PrivateRoute from './components/common/privateRoute'
 import Forgot from './components/auth/Forgot'
+import Chat from './components/dashboard/chat'
 
 const Routes = props => {
   return (
@@ -45,6 +46,7 @@ const Routes = props => {
       <Route exact component={Privacy} path='/privacy' />
       <Route exact component={Home} path='/' />
       <Route exact component={Forgot} path='/forgot'/>
+      <Route exact component={Chat} path='/chat' />
 
       {/* <ProtectedRoute exact component={Dashboard} path='/dashboard' isAuthenticated={props.isAuthenticated}/> */}
     </Switch>

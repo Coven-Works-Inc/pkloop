@@ -63,4 +63,9 @@
     font-weight: 500;
     font-stretch: normal;
 }
-
+.reusable-button {
+    padding: 10px 30px;
+    text-align: center;
+    width: 335px;
+    margin-bottom: 10px;
+}
