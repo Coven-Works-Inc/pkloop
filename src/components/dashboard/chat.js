@@ -118,10 +118,10 @@ const Chat = (props) => {
                   <ThemeProvider theme={theme}>
                     <div style={{width: '100%', background: 'white'}}>
                     <MessageList active>
-                      <Message authorName="Jon Smith" date="21:37"><MessageText>Hello</MessageText></Message>
+                      <Message authorName="Jon Smith" date="21:37" showMetaOnClick style={{borderRadius: '1em', padding: '5px 10px', height: 'max-content'}}><MessageText>Hello</MessageText></Message>
                     </MessageList>
                     <Row reverse>
-                      <Message isOwn deliveryStatus="seen" radiusType='first' style={{backgroundColor: '#00bdbe'}}>
+                      <Message isOwn  radiusType='single'  showMetaOnClick style={{backgroundColor: '#00bdbe', borderRadius: '1em', padding: '5px 10px', height: 'max-content'}}>
                         <MessageText>Hi!</MessageText>
                       </Message>
                     </Row>
