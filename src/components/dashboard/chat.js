@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import HeaderFooter from '../headerFooter'
-import {
-  ThemeProvider,
-  TextComposer,
-  Row,
-  IconButton,
-  AddIcon,
-  TextInput,
-  EmojiIcon,
-  SendButton,
-  Message,
-  MessageList,
-  MessageText,
-  FixedWrapper
-} from '@livechat/ui-kit'
+// import {
+//   ThemeProvider,
+//   TextComposer,
+//   Row,
+//   IconButton,
+//   AddIcon,
+//   TextInput,
+//   EmojiIcon,
+//   SendButton,
+//   Message,
+//   MessageList,
+//   MessageText,
+//   FixedWrapper
+// } from '@livechat/ui-kit'
 import './chat.css'
 import Button from '../common/button'
 
@@ -82,7 +82,7 @@ const Chat = (props) => {
         </div>
       </div>
       <div className='chat-board'>
-        <ThemeProvider theme={theme}>
+        {/* <ThemeProvider theme={theme}>
           <div style={{ width: '100%', background: 'white' }}>
             <MessageList active>
               <Message authorName="Jon Smith" date="21:37" showMetaOnClick style={{ borderRadius: '1em', padding: '5px 10px', height: 'max-content' }}><MessageText>Hello</MessageText></Message>
@@ -108,7 +108,7 @@ const Chat = (props) => {
               </Row>
             </TextComposer>
           </div>
-        </ThemeProvider>
+        </ThemeProvider> */}
       </div>
     </div>
   )
