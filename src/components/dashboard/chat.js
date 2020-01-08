@@ -75,8 +75,8 @@ const Chat = (props) => {
             <span className='gray'>Weight of parcel</span> 0-5lbs
                     </h5>
           <Button color='white' backgroundColor="#0071bc">ENTER RECEIVER'S DETAILS</Button>
-          <Button color='white' backgroundColor="#0071bc">ADD A TIP(OPTIONAL)</Button>
-          <Button color='white' backgroundColor="#abcc71">ADD INSURANCE(OPTIONAL)</Button>
+          <Button modal={props.modal} type='tip' color='white' backgroundColor="#0071bc">ADD A TIP(OPTIONAL)</Button>
+          <Button modal={props.modal} type='insurance' color='white' backgroundColor="#abcc71">ADD INSURANCE(OPTIONAL)</Button>
           <Button color='white' backgroundColor="#00bdbe">MARK AS COMPLETED</Button>
           <Button color='red' backgroundColor="white">CANCEL TRANSACTION</Button>
         </div>
