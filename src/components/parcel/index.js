@@ -17,7 +17,7 @@ import travelData from '../../travelers.json'
 import countriesData from '../../countries.json'
 
 const Parcel = props => {
-  console.log(props)
+  // console.log(props)
 
   const [state, setState] = useState({
     locationCountry: '',
@@ -33,12 +33,15 @@ const Parcel = props => {
     filteredDestination: [],
     countries: countriesData,
     fromcities: [],
+    fromCity: '',
+    toCity: '',
     tocities: [],
-    parcelCost: 0,
+    parcelCost: 24.99,
     modalOpen: false,
     index: 0,
     isAuthenticated: false,
-    travelerData: {}
+    travelerData: {},
+    runParcelCost: null
   })
   useEffect(() => {
     props.fetchTravelers()
@@ -48,11 +51,11 @@ const Parcel = props => {
     const city = cities.filter(city => city.country === selectedCountry[0].name)
     setState({
       ...state,
-      fromCountry: e.target.value,
+      [e.target.name]: e.target.value,
       fromcities: city,
       filteredLocation: travelers.filter(traveler => traveler.locationCountry === e.target.value)
     })
-    
+    handleParcelCost()
   };
   const onToCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value)
@@ -63,7 +66,7 @@ const Parcel = props => {
       tocities: city,
       filteredLocation: travelers.filter(traveler => traveler.destinationCountry === e.target.value && (state.fromCountry === traveler.locationCountry || ''))
     })
-    // await handleParcelCost()
+    handleParcelCost()
   }
   const onChangeHandler = e => {
     if (e.target.name === 'fromCity') {
@@ -72,38 +75,38 @@ const Parcel = props => {
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.locationCity === e.target.value && traveler.locationCountry === state.fromCountry)
       })
-      
-      // handleParcelCost()
+      handleParcelCost()
     }
     if (e.target.name === 'toCity') {
       setState({
         ...state,
-        toCity: e.target.value,
+        [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.destinationCity === e.target.value && traveler.locationCountry === state.fromCountry && traveler.locationCity === state.fromCity)
       })
-      // handleParcelCost()
+      handleParcelCost()
     };
     if (e.target.name === 'parcelSize') {
       setState({
         ...state,
-        parcelSize: e.target.value,
+        [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.parcelSize === e.target.value)
       })
-      // handleParcelCost()
+      handleParcelCost()
     };
     if (e.target.name === 'parcelWeight') {
       setState({
         ...state,
         parcelWeight: e.target.value,
-        filteredLocation: travelers.filter(traveler => parseInt(traveler.parcelWeight) >= parseInt(e.target.value))
+        filteredLocation: travelers.filter(traveler => Number(traveler.parcelWeight) >= Number(e.target.value)),
+        runParcelCost: handleParcelCost(e.target.value)
       })
-      // handleParcelCost()
     }
-    // handleParcelCost()
   }
   const submitHandler = e => {
-    console.log(state)
-    handleParcelCost()
+    setState({
+      ...state,
+      modalOpen: true
+    })
     e.preventDefault()
   }
 
@@ -125,55 +128,58 @@ const Parcel = props => {
         isAuthenticated: false
       })
     } else {
-      handleParcelCost()
+      setState({
+        ...state,
+        modalOpen: true,
+        isAuthenticated: true
+      })
     }
+    console.log(state.travelerData)
   }
 
-  const handleParcelCost = () => {
+  const handleParcelCost = parcelWeight => {
+    console.log('Gotcha!')
     const localMultiplier = 1.5
     const intlMultiplier = 5.99
-    const parcelWeight = parseInt(state.parcelWeight)
-    if (state.fromCountry && state.toCountry) {
-      if ((state.fromCountry === 'United States' || state.fromCountry === 'Canada') && (state.toCountry === 'United States' || state.toCountry === 'Canada')) {
-        if (parcelWeight <= 5) {
+    if (state.locationCity && state.destinationCity) {
+      if ((state.locationCountry === 'United States' || state.locationCountry === 'Canada') && (state.destinationCountry === 'United States' || state.destinationCountry === 'Canada')) {
+        if (Number(parcelWeight) <= 5) {
           setState({
             ...state,
-            modalOpen: true,
-            parcelCost: 14.99,
-            isAuthenticated: true
+            parcelCost: 14.99
           })
         } else {
-        setState({
+          setState({
             ...state,
-            modalOpen: true,
-            parcelCost: 14.99 + (parcelWeight * localMultiplier),
-            isAuthenticated: true
+            parcelCost: (14.99 + (Number(parcelWeight) * localMultiplier))
           })
         }
       } else {
-        if (parcelWeight <= 5) {
+        if (Number(parcelWeight) <= 5) {
           setState({
             ...state,
-            modalOpen: true,
-            parcelCost: 24.99,
-            isAuthenticated: true
+            parcelCost: 24.99
           })
         } else {
           setState({
             ...state,
-            modalOpen: true,
-            parcelCost: (parcelWeight * intlMultiplier),
-            isAuthenticated: true
+            parcelCost: (Number(parcelWeight) * intlMultiplier)
           })
         }
       }
     } else {
-      setState({
-        ...state,
-        modalOpen: true,
-        parcelCost: null,
-        isAuthenticated: true
-      })
+      if (Number(parcelWeight) <= 5) {
+        setState({
+          ...state,
+          parcelCost: 24.99
+        })
+      } else {
+        console.log(Number(parcelWeight) * intlMultiplier)
+        setState({
+          ...state,
+          parcelCost: (Number(parcelWeight) * intlMultiplier)
+        })
+      }
     }
   }
 
@@ -214,10 +220,11 @@ const Parcel = props => {
   const {
     travelers: { travelers }
   } = props
+  // console.log(travelers)
+  // console.log(state.parcelWeight)
 
   return (
     <HeaderFooter>
-      {console.log(state)}
       <div className='maincontainer send-parcel'>
         <h1>Find Travelers</h1>
         <div className='py-2 form-group'>
@@ -377,8 +384,6 @@ const Parcel = props => {
     </HeaderFooter>
   )
 }
-
-// TODO: Implement scroll to top when user clicks 'Okay Thanks' to choose relevant countries and cities
 
 const mapStateToProps = state => ({
   travelers: state.travelers,
