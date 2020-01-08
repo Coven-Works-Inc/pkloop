@@ -6,7 +6,6 @@ const Payment = (props) => {
   // console.log(props.location.weight)
   return (
     <div>
-      {/* <p>{props.location.weight} pounds of weight</p> */}
       <StripeCheckout
         image={require('../../assets/payment-logo.png')}
         stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"

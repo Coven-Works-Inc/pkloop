@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import HeaderFooter from '../headerFooter'
 import { connect } from 'react-redux'
 import { fetchTravelers } from '../../actions/travelerActions';
+import { Link } from 'react-router-dom'
+
 import countries from '../../countries.json'
 import cities from '../../world-cities_json.json';
 
@@ -34,6 +36,7 @@ const Parcel = props => {
     fromCity: '',
     toCity: '',
     tocities: [],
+    parcelCost: 0,
     modalOpen: false,
     index: 0,
     isAuthenticated: false
@@ -50,6 +53,7 @@ const Parcel = props => {
       fromcities: city,
       filteredLocation: travelers.filter(traveler => traveler.locationCountry === e.target.value)
     })
+    handleParcelCost()
   };
   const onToCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value)
@@ -60,6 +64,7 @@ const Parcel = props => {
       tocities: city,
       filteredLocation: travelers.filter(traveler => traveler.destinationCountry === e.target.value && (state.fromCountry === traveler.locationCountry || ''))
     })
+    handleParcelCost()
   }
   const onChangeHandler = e => {
     if (e.target.name === 'fromCity') {
@@ -68,6 +73,7 @@ const Parcel = props => {
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.locationCity === e.target.value && traveler.locationCountry === state.fromCountry)
       })
+      handleParcelCost()
     }
     if (e.target.name === 'toCity') {
       setState({
@@ -75,6 +81,7 @@ const Parcel = props => {
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.destinationCity === e.target.value && traveler.locationCountry === state.fromCountry && traveler.locationCity === state.fromCity)
       })
+      handleParcelCost()
     };
     if (e.target.name === 'parcelSize') {
       setState({
@@ -82,6 +89,7 @@ const Parcel = props => {
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.parcelSize === e.target.value)
       })
+      handleParcelCost()
     };
     if (e.target.name === 'parcelWeight') {
       setState({
@@ -89,6 +97,7 @@ const Parcel = props => {
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.parcelWeight === e.target.value)
       })
+      handleParcelCost()
     }
   }
   const submitHandler = e => {
@@ -113,6 +122,43 @@ const Parcel = props => {
         isAuthenticated: true
       })
       console.log('The weight of your parcel in pounds is: ' + state.parcelWeight)
+    }
+  }
+
+  const handleParcelCost = () => {
+    const localMultiplier = 1.5
+    const intlMultiplier = 5.99
+    if (state.locationCity && state.destinationCity) {
+      if ((state.locationCountry === 'United States' || state.locationCountry === 'Canada') && (state.destinationCountry === 'United States' || state.destinationCountry === 'Canada')) {
+        if (state.parcelWeight <= 5) {
+          setState({
+            ...state,
+            parcelCost: 14.99
+          })
+        } else {
+          setState({
+            ...state,
+            parcelCost: (14.99 + (state.parcelWeight * localMultiplier))
+          })
+        }
+      } else {
+        if (state.parcelWeight <= 5) {
+          setState({
+            ...state,
+            parcelCost: 24.99
+          })
+        } else {
+          setState({
+            ...state,
+            parcelCost: (state.parcelWeight * intlMultiplier)
+          })
+        }
+      }
+    } else {
+      setState({
+        ...state,
+        parcelCost: null
+      })
     }
   }
 
@@ -280,17 +326,28 @@ const Parcel = props => {
         onClose={toggleModal}>
         {state.isAuthenticated &&
           <div>
-            <h2>Are you sure you want to send {state.parcelWeight} pounds of weight?</h2>
+            <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs (${state.parcelCost}) </h2>
             <br />
-            {/* onClick={() => props.history.push({
-              pathname: '/payment',
-              weight: state.parcelWeight
-            })} */}
+            {/*  */}
             <div className="button-group">
-              {/* className='btnQ medium' */}
-              <button className="clearBG"><Payment weight={state.parcelWeight} /></button>
+              <button className="btnQ medium" onClick={() => props.history.push({
+                pathname: '/chat',
+                parcelCost: state.parcelCost,
+                parcel: {
+                  locationCity: state.locationCity,
+                  locationCountry: state.locationCountry,
+                  destinationCity: state.destinationCity,
+                  destinationCountry: state.destinationCountry,
+                  parcelWeight: state.parcelWeight,
+                  parcelSize: state.parcelSize
+                }
+              })}>Yes, Continue</button>
               <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
             </div>
+            {
+              state.parcelCost &&
+              <small>International pricing applies. See <Link to="\pricing" style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>pricing guide</Link></small>
+            }
           </div>}
         {!state.isAuthenticated &&
           <div>

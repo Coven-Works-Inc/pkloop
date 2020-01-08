@@ -44,9 +44,9 @@ const Routes = props => {
       <Route exact component={Contact} path='/contact' />
       <Route exact component={Faq} path='/faq' />
       <Route exact component={Privacy} path='/privacy' />
-      <Route exact component={Home} path='/' />
-      <Route exact component={Forgot} path='/forgot'/>
+      <Route exact component={Forgot} path='/forgot' />
       <Route exact component={Chat} path='/chat' />
+      <Route exact component={Home} path='/' />
 
       {/* <ProtectedRoute exact component={Dashboard} path='/dashboard' isAuthenticated={props.isAuthenticated}/> */}
     </Switch>
