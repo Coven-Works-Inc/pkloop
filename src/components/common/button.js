@@ -2,8 +2,8 @@ import React from 'react';
 import './common.css'
 
 const Button = props => {
-    return(
-        <button style={{color: props.color, backgroundColor: props.backgroundColor, border: props.backgroundColor}} className='reusable-button'>{props.children}</button>
+    return (
+        <button onClick={props.type ? () => props.modal(props.type) : null} style={{ color: props.color, backgroundColor: props.backgroundColor, border: props.backgroundColor, outline: 'none' }} className='reusable-button'>{props.children}</button>
     )
 }
 export default Button

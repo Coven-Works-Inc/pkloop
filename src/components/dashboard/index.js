@@ -15,7 +15,16 @@ import { logoutUser } from '../../actions/authActions'
 class Dashboard extends Component {
   state = {
     headerText: this.props.match.params.id ? this.props.match.params.id : 'transactions',
-    modalOpen: false
+    modalOpen: false,
+    modalType: 'insurance'
+  }
+
+  handleModal = (type) => {
+    this.setState({
+      ...this.state,
+      modalOpen: !this.state.modalOpen,
+      modalType: type
+    })
   }
 
   toggleModal = () => {
@@ -23,6 +32,10 @@ class Dashboard extends Component {
       ...this.state,
       modalOpen: !this.state.modalOpen
     })
+  }
+
+  componentDidMount() {
+
   }
 
   render() {
@@ -41,6 +54,7 @@ class Dashboard extends Component {
     }
 
     console.log(this.props);
+    const { modalType } = this.state
 
     return (
       <HeaderFooter>
@@ -94,21 +108,37 @@ class Dashboard extends Component {
             </p>
           </div>
           {headerText === 'transactions' && <Transactions />}
-          {headerText === 'chat' && <Chat toggle={this.toggleModal} />}
+          {headerText === 'chat' && <Chat modal={this.handleModal} />}
           {headerText === 'profile' && <Profile />}
           {headerText === 'balance' && <Balance />}
           {headerText === 'support' && <Support />}
         </div>
 
         <Modal show={this.state.modalOpen} onClose={this.toggleModal}>
-          <div>
-            <h2>Please login to connect with a traveller</h2>
-            <br />
-            <div className="button-group">
-              <button className='btnQ medium'>Yes, Go To Login</button>
-              <button className='btnQ inverse-btnQ medium'>No, Stay on This Page</button>
+          {
+            modalType === 'insurance' &&
+            <div>
+              <h2>You will be charged 2% of the total cost for insurance</h2>
+              <br />
+              <div className="button-group">
+                <button className='btnQ medium'>Okay, Proceed</button>
+                <button className='btnQ inverse-btnQ medium' onClick={this.toggleModal}>No, Not Interested</button>
+              </div>
             </div>
-          </div>
+          }
+          {
+            modalType === 'tip' &&
+            <div>
+              <h2>Please enter an amount to tip the traveler</h2>
+              <br />
+              <input placeholder="Enter Amount" />
+              <br />
+              <div className="button-group">
+                <button className='btnQ medium'>Tip Traveler</button>
+                <button className='btnQ inverse-btnQ medium' onClick={this.toggleModal}>No, Not Interested</button>
+              </div>
+            </div>
+          }
         </Modal>
       </HeaderFooter>
     )
