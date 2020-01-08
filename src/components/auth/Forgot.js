@@ -8,7 +8,7 @@ import Spinner from '../common/spinner'
 import axios from 'axios'
 import { BASE_URL } from '../../config/constants'
 
-class Login extends Component {
+class Forgot extends Component {
   state = {
     email: '',
     errors: {},
@@ -125,4 +125,4 @@ const mapStateToProps = state => ({
   loading: state.loading
 })
 
-export default connect(mapStateToProps, { reset })(Login)
+export default connect(mapStateToProps, { reset })(Forgot)
