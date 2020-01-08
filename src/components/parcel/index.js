@@ -33,8 +33,6 @@ const Parcel = props => {
     filteredDestination: [],
     countries: countriesData,
     fromcities: [],
-    fromCity: '',
-    toCity: '',
     tocities: [],
     parcelCost: 0,
     modalOpen: false,
@@ -50,11 +48,11 @@ const Parcel = props => {
     const city = cities.filter(city => city.country === selectedCountry[0].name)
     setState({
       ...state,
-      [e.target.name]: e.target.value,
+      fromCountry: e.target.value,
       fromcities: city,
       filteredLocation: travelers.filter(traveler => traveler.locationCountry === e.target.value)
     })
-    handleParcelCost()
+    
   };
   const onToCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value)
@@ -65,7 +63,7 @@ const Parcel = props => {
       tocities: city,
       filteredLocation: travelers.filter(traveler => traveler.destinationCountry === e.target.value && (state.fromCountry === traveler.locationCountry || ''))
     })
-    handleParcelCost()
+    // await handleParcelCost()
   }
   const onChangeHandler = e => {
     if (e.target.name === 'fromCity') {
@@ -74,38 +72,38 @@ const Parcel = props => {
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.locationCity === e.target.value && traveler.locationCountry === state.fromCountry)
       })
-      handleParcelCost()
+      
+      // handleParcelCost()
     }
     if (e.target.name === 'toCity') {
       setState({
         ...state,
-        [e.target.name]: e.target.value,
+        toCity: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.destinationCity === e.target.value && traveler.locationCountry === state.fromCountry && traveler.locationCity === state.fromCity)
       })
-      handleParcelCost()
+      // handleParcelCost()
     };
     if (e.target.name === 'parcelSize') {
       setState({
         ...state,
-        [e.target.name]: e.target.value,
+        parcelSize: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.parcelSize === e.target.value)
       })
-      handleParcelCost()
+      // handleParcelCost()
     };
     if (e.target.name === 'parcelWeight') {
       setState({
         ...state,
-        [e.target.name]: e.target.value,
+        parcelWeight: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.parcelWeight === e.target.value)
       })
-      handleParcelCost()
+      // handleParcelCost()
     }
+    // handleParcelCost()
   }
   const submitHandler = e => {
-    setState({
-      ...state,
-      modalOpen: true
-    })
+    console.log(state)
+    handleParcelCost()
     e.preventDefault()
   }
 
@@ -139,35 +137,41 @@ const Parcel = props => {
   const handleParcelCost = () => {
     const localMultiplier = 1.5
     const intlMultiplier = 5.99
-    if (state.locationCity && state.destinationCity) {
-      if ((state.locationCountry === 'United States' || state.locationCountry === 'Canada') && (state.destinationCountry === 'United States' || state.destinationCountry === 'Canada')) {
-        if (state.parcelWeight <= 5) {
+    const parcelWeight = Number(state.parcelWeight)
+    if (state.fromCountry && state.toCountry) {
+      if ((state.fromCountry === 'United States' || state.fromCountry === 'Canada') && (state.toCountry === 'United States' || state.toCountry === 'Canada')) {
+        if (parcelWeight <= 5) {
           setState({
             ...state,
+            modalOpen: true,
             parcelCost: 14.99
           })
         } else {
-          setState({
+        setState({
             ...state,
-            parcelCost: (14.99 + (state.parcelWeight * localMultiplier))
+            modalOpen: true,
+            parcelCost: (14.99 + (parcelWeight * localMultiplier))
           })
         }
       } else {
-        if (state.parcelWeight <= 5) {
+        if (parcelWeight <= 5) {
           setState({
             ...state,
+            modalOpen: true,
             parcelCost: 24.99
           })
         } else {
           setState({
             ...state,
-            parcelCost: (state.parcelWeight * intlMultiplier)
+            modalOpen: true,
+            parcelCost: (parcelWeight * intlMultiplier)
           })
         }
       }
     } else {
       setState({
         ...state,
+        modalOpen: true,
         parcelCost: null
       })
     }
@@ -210,8 +214,6 @@ const Parcel = props => {
   const {
     travelers: { travelers }
   } = props
-  console.log(travelers)
-  console.log(state.parcelWeight)
 
   return (
     <HeaderFooter>
