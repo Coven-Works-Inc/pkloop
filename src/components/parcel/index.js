@@ -10,7 +10,7 @@ import cities from '../../world-cities_json.json';
 
 import Travelers from './travelers'
 import Modal from '../common/modal'
-import Payment from '../payment'
+// import Payment from '../payment'
 
 import './parcel.css'
 import travelData from '../../travelers.json'
@@ -39,7 +39,8 @@ const Parcel = props => {
     parcelCost: 0,
     modalOpen: false,
     index: 0,
-    isAuthenticated: false
+    isAuthenticated: false,
+    travelerData: {}
   })
   useEffect(() => {
     props.fetchTravelers()
@@ -108,7 +109,17 @@ const Parcel = props => {
     e.preventDefault()
   }
 
-  const handleConnect = () => {
+  const addTravelerToState = traveler => {
+    setState({
+      ...state,
+      travelerData: traveler
+    })
+  }
+
+  const handleConnect = (traveler) => {
+    // console.log(traveler)
+    addTravelerToState(traveler)
+
     if (!props.user.isAuthenticated) {
       setState({
         ...state,
@@ -121,8 +132,8 @@ const Parcel = props => {
         modalOpen: true,
         isAuthenticated: true
       })
-      console.log('The weight of your parcel in pounds is: ' + state.parcelWeight)
     }
+    console.log(state.travelerData)
   }
 
   const handleParcelCost = () => {
@@ -324,30 +335,31 @@ const Parcel = props => {
 
       <Modal show={state.modalOpen}
         onClose={toggleModal}>
-        {state.isAuthenticated &&
+        {(state.isAuthenticated && !(state.locationCity && state.destinationCity)) &&
           <div>
-            <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs (${state.parcelCost}) </h2>
+            <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h2>
             <br />
             {/*  */}
             <div className="button-group">
               <button className="btnQ medium" onClick={() => props.history.push({
-                pathname: '/chat',
+                pathname: '/dashboard',
                 parcelCost: state.parcelCost,
-                parcel: {
-                  locationCity: state.locationCity,
-                  locationCountry: state.locationCountry,
-                  destinationCity: state.destinationCity,
-                  destinationCountry: state.destinationCountry,
-                  parcelWeight: state.parcelWeight,
-                  parcelSize: state.parcelSize
-                }
+                component: 'Chat'
               })}>Yes, Continue</button>
               <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
             </div>
-            {
-              state.parcelCost &&
-              <small>International pricing applies. See <Link to="\pricing" style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>pricing guide</Link></small>
-            }
+            {/* {
+              (state.parcelCost !== 0 && (state.parcelCost !== null)) && */}
+            <small>International pricing applies. See <Link to='/pricing' target='_blank' style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>Pricing Guide</Link></small>
+            {/* } */}
+          </div>}
+        {(state.isAuthenticated && (state.locationCity && state.destinationCity)) &&
+          <div>
+            <h2>Please choose the relevant countries and cities to continue</h2>
+            <br />
+            <div className="button-group">
+              <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>Okay, Thanks</button>
+            </div>
           </div>}
         {!state.isAuthenticated &&
           <div>
@@ -362,6 +374,8 @@ const Parcel = props => {
     </HeaderFooter>
   )
 }
+
+// TODO: Implement scroll to top when user clicks 'Okay Thanks' to choose relevant countries and cities
 
 const mapStateToProps = state => ({
   travelers: state.travelers,

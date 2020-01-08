@@ -22,7 +22,7 @@ class Header extends Component {
     })
   }
 
-  render () {
+  render() {
     const { logoutUser } = this.props
     const { menu } = this.state
     const { isAuthenticated, user } = this.props.auth
@@ -73,7 +73,7 @@ class Header extends Component {
                 <Link to='/dashboard'>Dashboard</Link>
               </li>
               <li>
-                <Link onClick={logoutUser} className='nav-link'>
+                <Link to="/login" onClick={logoutUser} className='nav-link'>
                   Logout
                 </Link>
               </li>

@@ -123,30 +123,30 @@ export const verify = (token, history) => dispatch => {
 }
 
 export const reset = (email, history) => dispatch => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+  dispatch({
+    type: LOADING,
+    payload: true
+  })
 
-    dispatch({
+  dispatch({
+    type: GET_ERRORS,
+    payload: { message: '' }
+  })
+
+  axios
+    .post(`${BASE_URL}/users/reset`, { email })
+    .then(async res => {
+      console.log(res.data)
+      dispatch({
         type: GET_ERRORS,
-        payload: { message: '' }
+        payload: { message: res.data.message || res.data.error }
+      })
     })
-
-    axios
-        .post(`${BASE_URL}/users/reset`, { email })
-        .then(async res => {
-            console.log(res.data)
-            dispatch({
-                type: GET_ERRORS,
-                payload: { message: res.data.message || res.data.error }
-            })
-        })
-        .catch(err => dispatch({ type: GET_ERRORS, payload: err.response ? err.response.data : { message: 'Something went wrong' } }))
-        .finally(() => dispatch({
-            type: LOADING,
-            payload: false
-        }))
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response ? err.response.data : { message: 'Something went wrong' } }))
+    .finally(() => dispatch({
+      type: LOADING,
+      payload: false
+    }))
 }
 
 // export const completeReset = (password, token, history) => dispatch => {
@@ -180,7 +180,7 @@ export const reset = (email, history) => dispatch => {
 
 // Set logged in user
 export const setCurrentUser = (decoded, token) => dispatch => {
-  console.log(decoded)
+  // console.log(decoded)
   dispatch({
     type: SET_CURRENT_USER,
     payload: decoded

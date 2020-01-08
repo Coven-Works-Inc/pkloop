@@ -87,6 +87,10 @@ const Pricing = () => {
               border: 'none'
             }}
           />
+          <div className="base-tagline">
+            <img src={require('../../assets/insurancetip.png')} alt="icon for insurance and tips" />
+            <small>Insurance (2%) and tips are optional</small>
+          </div>
         </div>
         <div className='price-card'>
           <h3>International</h3>

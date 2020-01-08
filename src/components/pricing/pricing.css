@@ -16,6 +16,13 @@ html, body{
     font-family: 'Arimo', sans-serif;
     background:var(--main);
 } */
+#pricing-container .price-card p {
+    margin: 0;
+}
+
+p {
+    margin: 0.5rem;
+}
 
 .py-1{ padding: 10px 0px; }
 .py-2{ padding: 20px 0px; }
@@ -25,23 +32,33 @@ html, body{
     display: flex;
     justify-content: center;
     padding-top: 4rem;
-    padding-bottom: 10rem;
+    padding-bottom: 12rem;
     height: 100%;
-
 }
 
 
-#pricing-container .price-card{
+#pricing-container .price-card {
     background:inherit;
     height: 300px;
     width: 550px;
     margin: 10px;
     padding: 2rem;
     /* display: flex; */
-    
-    
 }
 
-#pricing-container .price-card h3{
+.base-tagline {
+    margin-top: 2rem;
+}
+
+.base-tagline img {
+    width: 25px;
+    margin-right: 0.75rem;
+}
+
+.base-tagline small {
+    font-style: italic;
+}
+
+#pricing-container .price-card h3 {
     font-size: 1.8rem;
 }
