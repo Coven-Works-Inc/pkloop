@@ -56,7 +56,7 @@ const Travelers = props => {
                   />
                   <p style={{ marginTop: '2px' }}>{traveler.name}</p>
 
-                  <p onClick={props.connect} className='button'>connect</p>
+                  <p onClick={() => props.connect(traveler)} className='button'>connect</p>
                 </div>
                 <div className='card-right'>
                   <h3>
