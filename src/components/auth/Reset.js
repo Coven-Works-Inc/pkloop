@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { reset } from '../../actions/authActions'
 import { notify } from 'react-notify-toast'
-import { connect } from 'react-redux'
+
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/logo/Logo.png'
 import Spinner from '../common/spinner'
@@ -120,10 +119,4 @@ class Reset extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  error: state.errors,
-  loading: state.loading
-})
-
-export default connect(mapStateToProps, { reset })(Reset)
+export default Reset
