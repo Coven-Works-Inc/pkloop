@@ -97,7 +97,19 @@ class Login extends Component {
                       // errors={errors.password}
                     />
                   </div>
-                  <Link to='/forgot'><p style={{ color: '#00bdbe', cursor: 'pointer' }}>Forgot password?</p></Link>
+                  <Link to='/forgot'>
+                    <p
+                      style={{
+                        color: '#00bdbe',
+                        cursor: 'pointer',
+                        textDecoration: 'none',
+                        listStyle: 'none',
+                        outline: 'none'
+                      }}
+                    >
+                      Forgot password?
+                    </p>
+                  </Link>
                   <button className='btn' type='submit'>
                     {' '}
                     {this.props.loading ? (

@@ -44,8 +44,8 @@ class Verify extends Component {
         {!this.state.token && (
           <div className='empty-page'>
             <p>
-              A verification link has been sent to your mail. Follow the link to
-              verify your account
+              A link has been sent to your mail. Follow the instructions to
+              complete this process.
             </p>
             <button className='btnQ'>Resend Link</button>
           </div>
@@ -73,7 +73,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { verify }
-)(withRouter(Verify))
+export default connect(mapStateToProps, { verify })(withRouter(Verify))

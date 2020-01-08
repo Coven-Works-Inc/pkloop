@@ -122,7 +122,7 @@ export const verify = (token, history) => dispatch => {
     )
 }
 
-export const reset = (email, history) => dispatch => {
+export const reset = (data, history) => dispatch => {
   dispatch({
     type: LOADING,
     payload: true
@@ -134,19 +134,26 @@ export const reset = (email, history) => dispatch => {
   })
 
   axios
-    .post(`${BASE_URL}/users/reset`, { email })
+    .post(`${BASE_URL}/users/reset`, data)
     .then(async res => {
       console.log(res.data)
+
+      history.push('/verify')
+    })
+    .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: { message: res.data.message || res.data.error }
+        payload: err.response
+          ? err.response.data
+          : { message: 'Something went wrong' }
       })
-    })
-    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response ? err.response.data : { message: 'Something went wrong' } }))
-    .finally(() => dispatch({
-      type: LOADING,
-      payload: false
-    }))
+    )
+    .finally(() =>
+      dispatch({
+        type: LOADING,
+        payload: false
+      })
+    )
 }
 
 // export const completeReset = (password, token, history) => dispatch => {
