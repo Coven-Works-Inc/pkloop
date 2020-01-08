@@ -7,7 +7,7 @@ import Spinner from '../common/spinner'
 import axios from 'axios'
 import { BASE_URL } from '../../config/constants'
 
-class Reset extends Component {
+class Password extends Component {
   state = {
     password: '',
     confirmpassword: '',
@@ -45,7 +45,7 @@ class Reset extends Component {
   //   {this.props.message && (
   //     this.setState({ sendingEmail: false })
   //       notify.show(data.msg)
-  //     this.form.reset()
+  //     this.fPassword()
   //   )}
   // this.props.reset(data, this.props.history)
   render () {
@@ -119,4 +119,4 @@ class Reset extends Component {
   }
 }
 
-export default Reset
+export default Password
