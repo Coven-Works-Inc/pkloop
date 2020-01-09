@@ -55,7 +55,6 @@ const Parcel = props => {
       fromcities: city,
       filteredLocation: travelers.filter(traveler => traveler.locationCountry === e.target.value)
     })
-    handleParcelCost()
   };
   const onToCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value)
@@ -66,7 +65,6 @@ const Parcel = props => {
       tocities: city,
       filteredLocation: travelers.filter(traveler => traveler.destinationCountry === e.target.value && (state.fromCountry === traveler.locationCountry || ''))
     })
-    handleParcelCost()
   }
   const onChangeHandler = e => {
     if (e.target.name === 'fromCity') {
@@ -75,7 +73,6 @@ const Parcel = props => {
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.locationCity === e.target.value && traveler.locationCountry === state.fromCountry)
       })
-      handleParcelCost()
     }
     if (e.target.name === 'toCity') {
       setState({
@@ -83,7 +80,6 @@ const Parcel = props => {
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.destinationCity === e.target.value && traveler.locationCountry === state.fromCountry && traveler.locationCity === state.fromCity)
       })
-      handleParcelCost()
     };
     if (e.target.name === 'parcelSize') {
       setState({
@@ -91,14 +87,12 @@ const Parcel = props => {
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.parcelSize === e.target.value)
       })
-      handleParcelCost()
     };
     if (e.target.name === 'parcelWeight') {
       setState({
         ...state,
         parcelWeight: e.target.value,
         filteredLocation: travelers.filter(traveler => Number(traveler.parcelWeight) >= Number(e.target.value)),
-        runParcelCost: handleParcelCost(e.target.value)
       })
     }
   }
@@ -128,56 +122,62 @@ const Parcel = props => {
         isAuthenticated: false
       })
     } else {
-      setState({
-        ...state,
-        modalOpen: true,
-        isAuthenticated: true
-      })
+        handleParcelCost()
     }
-    console.log(state.travelerData)
   }
 
-  const handleParcelCost = parcelWeight => {
-    console.log('Gotcha!')
+  const handleParcelCost = () => {
     const localMultiplier = 1.5
     const intlMultiplier = 5.99
-    if (state.locationCity && state.destinationCity) {
-      if ((state.locationCountry === 'United States' || state.locationCountry === 'Canada') && (state.destinationCountry === 'United States' || state.destinationCountry === 'Canada')) {
-        if (Number(parcelWeight) <= 5) {
+    const parcelWeight = parseInt(state.parcelWeight)
+    if (state.fromCountry && state.toCountry) {
+      if ((state.fromCountry === 'United States' || state.toCountry === 'Canada') && (state.fromCountry === 'United States' || state.toCountry === 'Canada')) {
+        if (parcelWeight <= 5) {
           setState({
             ...state,
+            modalOpen: true,
+            isAuthenticated: true,
             parcelCost: 14.99
           })
         } else {
           setState({
             ...state,
-            parcelCost: (14.99 + (Number(parcelWeight) * localMultiplier))
+            modalOpen: true,
+            isAuthenticated: true,
+            parcelCost: (14.99 + (parcelWeight * localMultiplier))
           })
         }
       } else {
-        if (Number(parcelWeight) <= 5) {
+        if (parcelWeight <= 5) {
           setState({
             ...state,
+            modalOpen: true,
+            isAuthenticated: true,
             parcelCost: 24.99
           })
         } else {
           setState({
             ...state,
-            parcelCost: (Number(parcelWeight) * intlMultiplier)
+            modalOpen: true,
+            isAuthenticated: true,
+            parcelCost: parcelWeight * intlMultiplier
           })
         }
       }
     } else {
-      if (Number(parcelWeight) <= 5) {
+      if (parcelWeight <= 5) {
         setState({
           ...state,
+          modalOpen: true,
+          isAuthenticated: true,
           parcelCost: 24.99
         })
       } else {
-        console.log(Number(parcelWeight) * intlMultiplier)
         setState({
           ...state,
-          parcelCost: (Number(parcelWeight) * intlMultiplier)
+          modalOpen: true,
+          isAuthenticated: true,
+          parcelCost: parcelWeight * intlMultiplier
         })
       }
     }
