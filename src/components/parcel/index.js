@@ -95,7 +95,7 @@ const Parcel = props => {
       setState({
         ...state,
         parcelWeight: e.target.value,
-        filteredLocation: travelers.filter(traveler => traveler.parcelWeight === e.target.value)
+        filteredLocation: travelers.filter(traveler => parseInt(traveler.parcelWeight) >= parseInt(e.target.value))
       })
       // handleParcelCost()
     }
@@ -125,32 +125,29 @@ const Parcel = props => {
         isAuthenticated: false
       })
     } else {
-      setState({
-        ...state,
-        modalOpen: true,
-        isAuthenticated: true
-      })
+      handleParcelCost()
     }
-    console.log(state.travelerData)
   }
 
   const handleParcelCost = () => {
     const localMultiplier = 1.5
     const intlMultiplier = 5.99
-    const parcelWeight = Number(state.parcelWeight)
+    const parcelWeight = parseInt(state.parcelWeight)
     if (state.fromCountry && state.toCountry) {
       if ((state.fromCountry === 'United States' || state.fromCountry === 'Canada') && (state.toCountry === 'United States' || state.toCountry === 'Canada')) {
         if (parcelWeight <= 5) {
           setState({
             ...state,
             modalOpen: true,
-            parcelCost: 14.99
+            parcelCost: 14.99,
+            isAuthenticated: true
           })
         } else {
         setState({
             ...state,
             modalOpen: true,
-            parcelCost: (14.99 + (parcelWeight * localMultiplier))
+            parcelCost: 14.99 + (parcelWeight * localMultiplier),
+            isAuthenticated: true
           })
         }
       } else {
@@ -158,13 +155,15 @@ const Parcel = props => {
           setState({
             ...state,
             modalOpen: true,
-            parcelCost: 24.99
+            parcelCost: 24.99,
+            isAuthenticated: true
           })
         } else {
           setState({
             ...state,
             modalOpen: true,
-            parcelCost: (parcelWeight * intlMultiplier)
+            parcelCost: (parcelWeight * intlMultiplier),
+            isAuthenticated: true
           })
         }
       }
@@ -172,7 +171,8 @@ const Parcel = props => {
       setState({
         ...state,
         modalOpen: true,
-        parcelCost: null
+        parcelCost: null,
+        isAuthenticated: true
       })
     }
   }
@@ -217,6 +217,7 @@ const Parcel = props => {
 
   return (
     <HeaderFooter>
+      {console.log(state)}
       <div className='maincontainer send-parcel'>
         <h1>Find Travelers</h1>
         <div className='py-2 form-group'>

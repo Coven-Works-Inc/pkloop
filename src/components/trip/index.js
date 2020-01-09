@@ -145,7 +145,7 @@ class index extends Component {
                     >
                       <option value=""></option>
                       {this.state.fromcities.sort().map((city, index) => (
-                      <option value={city.name} key={index}>{city.name, city.subcountry}</option>
+                      <option value={city.name} key={index}>{city.name}, {city.subcountry}</option>
                      ))}
                   
                     </select>
