@@ -40,6 +40,7 @@ const Parcel = props => {
     modalOpen: false,
     index: 0,
     isAuthenticated: false,
+    isLocal: true,
     travelerData: {},
     runParcelCost: null
   })
@@ -91,7 +92,7 @@ const Parcel = props => {
     if (e.target.name === 'parcelWeight') {
       setState({
         ...state,
-        parcelWeight: e.target.value,
+        [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => Number(traveler.parcelWeight) >= Number(e.target.value)),
       })
     }
@@ -122,7 +123,7 @@ const Parcel = props => {
         isAuthenticated: false
       })
     } else {
-        handleParcelCost()
+      handleParcelCost()
     }
   }
 
@@ -153,6 +154,7 @@ const Parcel = props => {
             ...state,
             modalOpen: true,
             isAuthenticated: true,
+            isLocal: false,
             parcelCost: 24.99
           })
         } else {
@@ -160,6 +162,7 @@ const Parcel = props => {
             ...state,
             modalOpen: true,
             isAuthenticated: true,
+            isLocal: false,
             parcelCost: parcelWeight * intlMultiplier
           })
         }
@@ -170,6 +173,7 @@ const Parcel = props => {
           ...state,
           modalOpen: true,
           isAuthenticated: true,
+          isLocal: false,
           parcelCost: 24.99
         })
       } else {
@@ -177,6 +181,7 @@ const Parcel = props => {
           ...state,
           modalOpen: true,
           isAuthenticated: true,
+          isLocal: false,
           parcelCost: parcelWeight * intlMultiplier
         })
       }
@@ -345,7 +350,7 @@ const Parcel = props => {
 
       <Modal show={state.modalOpen}
         onClose={toggleModal}>
-        {(state.isAuthenticated && !(state.locationCity && state.destinationCity)) &&
+        {state.isAuthenticated &&
           <div>
             <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h2>
             <br />
@@ -353,23 +358,14 @@ const Parcel = props => {
             <div className="button-group">
               <button className="btnQ medium" onClick={() => props.history.push({
                 pathname: '/dashboard/chat',
-                parcelCost: state.parcelCost,
-                component: 'Chat'
+                parcelCost: state.parcelCost
               })}>Yes, Continue</button>
               <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
             </div>
-            {/* {
-              (state.parcelCost !== 0 && (state.parcelCost !== null)) && */}
-            <small>International pricing applies. See <Link to='/pricing' target='_blank' style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>Pricing Guide</Link></small>
-            {/* } */}
-          </div>}
-        {(state.isAuthenticated && (state.locationCity && state.destinationCity)) &&
-          <div>
-            <h2>Please choose the relevant countries and cities to continue</h2>
-            <br />
-            <div className="button-group">
-              <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>Okay, Thanks</button>
-            </div>
+            {
+              !state.isLocal &&
+              <small>International pricing applies. See <Link to='/pricing' target='_blank' style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>Pricing Guide</Link></small>
+            }
           </div>}
         {!state.isAuthenticated &&
           <div>
