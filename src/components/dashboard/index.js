@@ -16,7 +16,8 @@ class Dashboard extends Component {
   state = {
     headerText: this.props.match.params.id ? this.props.match.params.id : 'transactions',
     modalOpen: false,
-    modalType: 'insurance'
+    modalType: 'insurance',
+    tipAmount: 0
   }
 
   handleModal = (type) => {
@@ -33,7 +34,12 @@ class Dashboard extends Component {
       modalOpen: !this.state.modalOpen
     })
   }
-
+  onChangeHandler = (e) => {
+    this.setState({
+      ...this.state,
+      tipAmount: e.target.value
+    })
+  }
   render() {
     console.log(this.props)
     const { headerText } = this.state
@@ -48,8 +54,6 @@ class Dashboard extends Component {
     if (this.props.location.component) {
       console.log(this.props.location.component)
     }
-
-    console.log(this.props);
     const { modalType } = this.state
 
     return (
@@ -127,7 +131,7 @@ class Dashboard extends Component {
             <div>
               <h2>Please enter an amount to tip the traveler</h2>
               <br />
-              <input placeholder="Enter Amount" />
+              <input placeholder="Enter Amount" value={this.state.tipAmount}onChange={this.onChangeHandler}/>
               <br />
               <div className="button-group">
                 <button className='btnQ medium'>Tip Traveler</button>
