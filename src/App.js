@@ -3,6 +3,7 @@ import './App.css'
 import './Widescreen.css'
 import './Mobile.css'
 import Routes from './routes'
+import ScrollToTop from './utils/scrollToTop'
 
 import jwt_decode from 'jwt-decode'
 import setAuthToken from './utils/setAuthToken'
@@ -31,12 +32,13 @@ if (localStorage.jwtToken) {
   }
 }
 
-function App () {
+function App() {
   return (
     <div className='App'>
       <Provider store={store}>
         <BrowserRouter>
           <Routes />
+          <ScrollToTop />
         </BrowserRouter>
       </Provider>
     </div>

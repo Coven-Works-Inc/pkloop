@@ -344,7 +344,7 @@ const Parcel = props => {
             {/*  */}
             <div className="button-group">
               <button className="btnQ medium" onClick={() => props.history.push({
-                pathname: '/dashboard',
+                pathname: '/dashboard/chat',
                 parcelCost: state.parcelCost,
                 component: 'Chat'
               })}>Yes, Continue</button>
