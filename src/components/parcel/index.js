@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import { postParcel } from '../../actions/parcelActions'
 import HeaderFooter from '../headerFooter'
 import { connect } from 'react-redux'
-import { fetchTravelers } from '../../actions/travelerActions';
+import { fetchTravelers, getTravelers } from '../../actions/travelerActions';
 import { Link } from 'react-router-dom'
 
 import countries from '../../countries.json'
@@ -124,6 +124,7 @@ const Parcel = props => {
       })
     } else {
       handleParcelCost()
+      props.getTravelers(traveler)
     }
   }
 
@@ -358,7 +359,8 @@ const Parcel = props => {
             <div className="button-group">
               <button className="btnQ medium" onClick={() => props.history.push({
                 pathname: '/dashboard/chat',
-                parcelCost: state.parcelCost
+                parcelCost: state.parcelCost,
+                travelerData: state.travelerData
               })}>Yes, Continue</button>
               <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
             </div>
@@ -386,4 +388,4 @@ const mapStateToProps = state => ({
   user: state.auth
 })
 
-export default connect(mapStateToProps, { fetchTravelers })(Parcel)
+export default connect(mapStateToProps, { fetchTravelers, getTravelers })(Parcel)

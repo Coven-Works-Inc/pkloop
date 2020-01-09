@@ -18,7 +18,7 @@ const Profile = (props) => {
         <div className="edit-profile">
             <div className="profile-picture">
                 <img src={ProfilePicture} alt="default profile" />
-                <p>Change Picture</p>
+                <input type="file" id="fileElem"  accept="image/*" />
             </div>
             <div className="profile-form">
                 <form onSubmit={submitHandler}>

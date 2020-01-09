@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 // import HeaderFooter from '../headerFooter'
 // import {
 //   ThemeProvider,
@@ -56,6 +57,7 @@ const Chat = (props) => {
   }
   return (
     <div className='chat'>
+      {console.log(props)}
       <div className='chat-details'>
         <div>
           <h3>
@@ -114,4 +116,9 @@ const Chat = (props) => {
     </div>
   )
 }
-export default Chat;
+const mapStateToProps = state => {
+    return {
+      traveler: state.travelers.travelerData
+    }
+}
+export default connect(mapStateToProps)(Chat);

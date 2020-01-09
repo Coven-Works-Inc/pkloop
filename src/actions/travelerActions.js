@@ -2,7 +2,7 @@ import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
 // import jwt_decode from 'jwt-decode';
 
-import { FETCH_TRAVELERS, GET_ERRORS, FETCH_SHIPPERS } from './types'
+import { FETCH_TRAVELERS, GET_ERRORS, FETCH_SHIPPERS, GET_TRAVELERS } from './types'
 
 import { BASE_URL } from '../config/constants'
 
@@ -24,7 +24,13 @@ export const fetchTravelers = () => async dispatch => {
       })
     })
 }
+export const getTravelers = (travelers) => dispatch => {
+  dispatch({
+    type: GET_TRAVELERS,
+    payload: travelers
+  })
 
+}
 export const fetchShippers = () => async dispatch => {
   axios
     .get(`${BASE_URL}/trips/shippers`)
