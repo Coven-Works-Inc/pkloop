@@ -34,10 +34,6 @@ class Dashboard extends Component {
     })
   }
 
-  componentDidMount() {
-
-  }
-
   render() {
     console.log(this.props)
     const { headerText } = this.state
