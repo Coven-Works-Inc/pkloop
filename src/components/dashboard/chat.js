@@ -61,7 +61,6 @@ const Chat = (props) => {
   }
   return (
     <div className='chat'>
-      {console.log(props)}
       <div className='chat-details'>
 
         {
