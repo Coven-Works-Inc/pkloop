@@ -21,8 +21,8 @@ import HowItWorks from './components/howItWorks'
 import Shippers from './components/shippers'
 import Faq from './components/faq'
 import PrivateRoute from './components/common/privateRoute'
-import Forgot from './components/auth/Forgot'
-import Password from './components/auth/password'
+import Forgot from './components/auth/forgot'
+import Reset from './components/auth/reset'
 import Chat from './components/dashboard/chat'
 import Profile from './components/dashboard/profile'
 
@@ -47,7 +47,7 @@ const Routes = props => {
       <Route exact component={Faq} path='/faq' />
       <Route exact component={Privacy} path='/privacy' />
       <Route exact component={Forgot} path='/forgot' />
-      <Route component={Password} path='/password' />
+      <Route component={reset} path='/reset' />
       <Route exact component={Chat} path='/dashboard/chat' />
       <Route exact component={Profile} path='/dashboard/profile' />
       <Route exact component={Home} path='/' />
