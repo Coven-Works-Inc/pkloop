@@ -3,8 +3,8 @@ import { Switch, Route, withRouter, Router } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Home from './components/home'
-import Login from './components/auth/login'
-import Register from './components/auth/register'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
 import Pricing from './components/pricing'
 import Trips from './components/trip'
 import About from './components/about'
@@ -24,6 +24,7 @@ import PrivateRoute from './components/common/privateRoute'
 import Forgot from './components/auth/forgot'
 import Reset from './components/auth/reset'
 import Chat from './components/dashboard/chat'
+import Profile from './components/dashboard/profile'
 
 const Routes = props => {
   return (
@@ -36,11 +37,7 @@ const Routes = props => {
       <PrivateRoute exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Payment} path='/payment' />
-      <PrivateRoute
-        exact
-        path='/dashboard/transactions'
-        component={Dashboard}
-      />
+      <Route exact path='/dashboard/:id' component={Dashboard} />
       <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />
       <Route exact component={Terms} path='/terms' />
@@ -52,6 +49,7 @@ const Routes = props => {
       <Route exact component={Forgot} path='/forgot' />
       <Route component={reset} path='/reset' />
       <Route exact component={Chat} path='/dashboard/chat' />
+      <Route exact component={Profile} path='/dashboard/profile' />
       <Route exact component={Home} path='/' />
 
       {/* <ProtectedRoute exact component={Dashboard} path='/dashboard' isAuthenticated={props.isAuthenticated}/> */}

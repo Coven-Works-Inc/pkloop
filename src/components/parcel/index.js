@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import { postParcel } from '../../actions/parcelActions'
 import HeaderFooter from '../headerFooter'
 import { connect } from 'react-redux'
-import { fetchTravelers } from '../../actions/travelerActions';
+import { fetchTravelers, getTravelers } from '../../actions/travelerActions';
 import { Link } from 'react-router-dom'
 
 import countries from '../../countries.json'
@@ -17,7 +17,7 @@ import travelData from '../../travelers.json'
 import countriesData from '../../countries.json'
 
 const Parcel = props => {
-  console.log(props)
+  // console.log(props)
 
   const [state, setState] = useState({
     locationCountry: '',
@@ -33,12 +33,16 @@ const Parcel = props => {
     filteredDestination: [],
     countries: countriesData,
     fromcities: [],
+    fromCity: '',
+    toCity: '',
     tocities: [],
-    parcelCost: 0,
+    parcelCost: 24.99,
     modalOpen: false,
     index: 0,
     isAuthenticated: false,
-    travelerData: {}
+    isLocal: true,
+    travelerData: {},
+    runParcelCost: null
   })
   useEffect(() => {
     props.fetchTravelers()
@@ -48,11 +52,10 @@ const Parcel = props => {
     const city = cities.filter(city => city.country === selectedCountry[0].name)
     setState({
       ...state,
-      fromCountry: e.target.value,
+      [e.target.name]: e.target.value,
       fromcities: city,
       filteredLocation: travelers.filter(traveler => traveler.locationCountry === e.target.value)
     })
-    
   };
   const onToCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value)
@@ -63,7 +66,6 @@ const Parcel = props => {
       tocities: city,
       filteredLocation: travelers.filter(traveler => traveler.destinationCountry === e.target.value && (state.fromCountry === traveler.locationCountry || ''))
     })
-    // await handleParcelCost()
   }
   const onChangeHandler = e => {
     if (e.target.name === 'fromCity') {
@@ -72,38 +74,34 @@ const Parcel = props => {
         [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.locationCity === e.target.value && traveler.locationCountry === state.fromCountry)
       })
-      
-      // handleParcelCost()
     }
     if (e.target.name === 'toCity') {
       setState({
         ...state,
-        toCity: e.target.value,
+        [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.destinationCity === e.target.value && traveler.locationCountry === state.fromCountry && traveler.locationCity === state.fromCity)
       })
-      // handleParcelCost()
     };
     if (e.target.name === 'parcelSize') {
       setState({
         ...state,
-        parcelSize: e.target.value,
+        [e.target.name]: e.target.value,
         filteredLocation: travelers.filter(traveler => traveler.parcelSize === e.target.value)
       })
-      // handleParcelCost()
     };
     if (e.target.name === 'parcelWeight') {
       setState({
         ...state,
-        parcelWeight: e.target.value,
-        filteredLocation: travelers.filter(traveler => parseInt(traveler.parcelWeight) >= parseInt(e.target.value))
+        [e.target.name]: e.target.value,
+        filteredLocation: travelers.filter(traveler => Number(traveler.parcelWeight) >= Number(e.target.value)),
       })
-      // handleParcelCost()
     }
-    // handleParcelCost()
   }
   const submitHandler = e => {
-    console.log(state)
-    handleParcelCost()
+    setState({
+      ...state,
+      modalOpen: true
+    })
     e.preventDefault()
   }
 
@@ -126,6 +124,11 @@ const Parcel = props => {
       })
     } else {
       handleParcelCost()
+      props.getTravelers({
+        senderCost: state.parcelCost,
+        senderWeight: state.parcelWeight,
+        ...traveler
+      })
     }
   }
 
@@ -134,20 +137,20 @@ const Parcel = props => {
     const intlMultiplier = 5.99
     const parcelWeight = parseInt(state.parcelWeight)
     if (state.fromCountry && state.toCountry) {
-      if ((state.fromCountry === 'United States' || state.fromCountry === 'Canada') && (state.toCountry === 'United States' || state.toCountry === 'Canada')) {
+      if ((state.fromCountry === 'United States' || state.toCountry === 'Canada') && (state.fromCountry === 'United States' || state.toCountry === 'Canada')) {
         if (parcelWeight <= 5) {
           setState({
             ...state,
             modalOpen: true,
-            parcelCost: 14.99,
-            isAuthenticated: true
+            isAuthenticated: true,
+            parcelCost: 14.99
           })
         } else {
-        setState({
+          setState({
             ...state,
             modalOpen: true,
-            parcelCost: 14.99 + (parcelWeight * localMultiplier),
-            isAuthenticated: true
+            isAuthenticated: true,
+            parcelCost: (14.99 + (parcelWeight * localMultiplier)).toFixed(2)
           })
         }
       } else {
@@ -155,25 +158,38 @@ const Parcel = props => {
           setState({
             ...state,
             modalOpen: true,
-            parcelCost: 24.99,
-            isAuthenticated: true
+            isAuthenticated: true,
+            isLocal: false,
+            parcelCost: 24.99
           })
         } else {
           setState({
             ...state,
             modalOpen: true,
-            parcelCost: (parcelWeight * intlMultiplier),
-            isAuthenticated: true
+            isAuthenticated: true,
+            isLocal: false,
+            parcelCost: (parcelWeight * intlMultiplier).toFixed(2)
           })
         }
       }
     } else {
-      setState({
-        ...state,
-        modalOpen: true,
-        parcelCost: null,
-        isAuthenticated: true
-      })
+      if (parcelWeight <= 5) {
+        setState({
+          ...state,
+          modalOpen: true,
+          isAuthenticated: true,
+          isLocal: false,
+          parcelCost: 24.99
+        })
+      } else {
+        setState({
+          ...state,
+          modalOpen: true,
+          isAuthenticated: true,
+          isLocal: false,
+          parcelCost: (parcelWeight * intlMultiplier).toFixed(2)
+        })
+      }
     }
   }
 
@@ -214,10 +230,11 @@ const Parcel = props => {
   const {
     travelers: { travelers }
   } = props
+  // console.log(travelers)
+  // console.log(state.parcelWeight)
 
   return (
     <HeaderFooter>
-      {console.log(state)}
       <div className='maincontainer send-parcel'>
         <h1>Find Travelers</h1>
         <div className='py-2 form-group'>
@@ -338,7 +355,7 @@ const Parcel = props => {
 
       <Modal show={state.modalOpen}
         onClose={toggleModal}>
-        {(state.isAuthenticated && !(state.locationCity && state.destinationCity)) &&
+        {state.isAuthenticated &&
           <div>
             <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h2>
             <br />
@@ -347,22 +364,14 @@ const Parcel = props => {
               <button className="btnQ medium" onClick={() => props.history.push({
                 pathname: '/dashboard/chat',
                 parcelCost: state.parcelCost,
-                component: 'Chat'
+                travelerData: state.travelerData
               })}>Yes, Continue</button>
               <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
             </div>
-            {/* {
-              (state.parcelCost !== 0 && (state.parcelCost !== null)) && */}
-            <small>International pricing applies. See <Link to='/pricing' target='_blank' style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>Pricing Guide</Link></small>
-            {/* } */}
-          </div>}
-        {(state.isAuthenticated && (state.locationCity && state.destinationCity)) &&
-          <div>
-            <h2>Please choose the relevant countries and cities to continue</h2>
-            <br />
-            <div className="button-group">
-              <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>Okay, Thanks</button>
-            </div>
+            {
+              !state.isLocal &&
+              <small>International pricing applies. See <Link to='/pricing' target='_blank' style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>Pricing Guide</Link></small>
+            }
           </div>}
         {!state.isAuthenticated &&
           <div>
@@ -378,11 +387,9 @@ const Parcel = props => {
   )
 }
 
-// TODO: Implement scroll to top when user clicks 'Okay Thanks' to choose relevant countries and cities
-
 const mapStateToProps = state => ({
   travelers: state.travelers,
   user: state.auth
 })
 
-export default connect(mapStateToProps, { fetchTravelers })(Parcel)
+export default connect(mapStateToProps, { fetchTravelers, getTravelers })(Parcel)
