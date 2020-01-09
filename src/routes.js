@@ -50,7 +50,7 @@ const Routes = props => {
       <Route exact component={Faq} path='/faq' />
       <Route exact component={Privacy} path='/privacy' />
       <Route exact component={Forgot} path='/forgot' />
-      <Route component={reset} path='/reset' />
+      <Route component={Reset} path='/reset' />
       <Route exact component={Chat} path='/dashboard/chat' />
       <Route exact component={Home} path='/' />
 
