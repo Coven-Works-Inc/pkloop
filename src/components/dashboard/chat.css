@@ -11,3 +11,15 @@
 .chat-details h3, .chat-details h5 {
     margin-bottom: 30px;
 }
+
+.tip-modal input {
+    height: 50px;
+    border: 1px solid #cfcfcf;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 0.5rem;
+}
+
+/* .tip-modal p {
+    padding-left: 0.5rem;
+} */
