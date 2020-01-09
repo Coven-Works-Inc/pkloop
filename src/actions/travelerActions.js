@@ -29,8 +29,8 @@ export const getTravelers = (travelers) => dispatch => {
     type: GET_TRAVELERS,
     payload: travelers
   })
-
 }
+
 export const fetchShippers = () => async dispatch => {
   axios
     .get(`${BASE_URL}/trips/shippers`)
