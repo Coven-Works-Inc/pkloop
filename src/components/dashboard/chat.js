@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import HeaderFooter from '../headerFooter'
+// import HeaderFooter from '../headerFooter'
 // import {
 //   ThemeProvider,
 //   TextComposer,
@@ -22,7 +22,7 @@ const Chat = (props) => {
     headerText: 'Sender details'
   })
 
-  console.log(props.location)
+  console.log(props)
 
   const theme = {
     vars: {
@@ -82,6 +82,7 @@ const Chat = (props) => {
         </div>
       </div>
       <div className='chat-board'>
+        <p>Chat goes here</p>
         {/* <ThemeProvider theme={theme}>
           <div style={{ width: '100%', background: 'white' }}>
             <MessageList active>

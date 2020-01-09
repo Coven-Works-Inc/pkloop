@@ -37,11 +37,7 @@ const Routes = props => {
       <PrivateRoute exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Payment} path='/payment' />
-      <PrivateRoute
-        exact
-        path='/dashboard/transactions'
-        component={Dashboard}
-      />
+      <Route exact path='/dashboard/:id' component={Dashboard} />
       <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />
       <Route exact component={Terms} path='/terms' />
@@ -53,7 +49,7 @@ const Routes = props => {
       <Route exact component={Forgot} path='/forgot' />
       <Route exact component={Password} path='/password' />
       <Route exact component={Chat} path='/dashboard/chat' />
-      <Route exact component={Profile} path='/dashboard/profile'/>
+      <Route exact component={Profile} path='/dashboard/profile' />
       <Route exact component={Home} path='/' />
 
       {/* <ProtectedRoute exact component={Dashboard} path='/dashboard' isAuthenticated={props.isAuthenticated}/> */}
