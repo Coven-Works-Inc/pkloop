@@ -124,7 +124,11 @@ const Parcel = props => {
       })
     } else {
       handleParcelCost()
-      props.getTravelers(traveler)
+      props.getTravelers({
+        senderCost: state.parcelCost,
+        senderWeight: state.parcelWeight,
+        ...traveler
+      })
     }
   }
 
@@ -146,7 +150,7 @@ const Parcel = props => {
             ...state,
             modalOpen: true,
             isAuthenticated: true,
-            parcelCost: (14.99 + (parcelWeight * localMultiplier))
+            parcelCost: (14.99 + (parcelWeight * localMultiplier)).toFixed(2)
           })
         }
       } else {
@@ -164,7 +168,7 @@ const Parcel = props => {
             modalOpen: true,
             isAuthenticated: true,
             isLocal: false,
-            parcelCost: parcelWeight * intlMultiplier
+            parcelCost: (parcelWeight * intlMultiplier).toFixed(2)
           })
         }
       }
@@ -183,7 +187,7 @@ const Parcel = props => {
           modalOpen: true,
           isAuthenticated: true,
           isLocal: false,
-          parcelCost: parcelWeight * intlMultiplier
+          parcelCost: (parcelWeight * intlMultiplier).toFixed(2)
         })
       }
     }
