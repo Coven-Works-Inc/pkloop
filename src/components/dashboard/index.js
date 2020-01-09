@@ -17,7 +17,16 @@ class Dashboard extends Component {
     headerText: this.props.match.params.id ? this.props.match.params.id : 'transactions',
     modalOpen: false,
     modalType: 'insurance',
-    tipAmount: 0
+    tipAmount: 0,
+    parcelCost: this.props.traveler ? this.props.traveler.senderCost.toFixed(2) : null,
+    completed: false
+  }
+
+  markAsComplete = () => {
+    this.setState({
+      ...this.state,
+      completed: true
+    })
   }
 
   handleModal = (type) => {
@@ -34,12 +43,15 @@ class Dashboard extends Component {
       modalOpen: !this.state.modalOpen
     })
   }
+
   onChangeHandler = (e) => {
     this.setState({
       ...this.state,
-      tipAmount: e.target.value
+      tipAmount: e.target.value,
+      parcelCost: e.target.value ? (this.props.traveler.senderCost + Number(e.target.value)).toFixed(2) : this.props.traveler.senderCost
     })
   }
+
   render() {
     console.log(this.props)
     const { headerText } = this.state
@@ -108,7 +120,7 @@ class Dashboard extends Component {
             </p>
           </div>
           {headerText === 'transactions' && <Transactions />}
-          {headerText === 'chat' && <Chat modal={this.handleModal} />}
+          {headerText === 'chat' && <Chat cost={this.state.parcelCost} completed={this.state.completed} markTrans={this.markAsComplete} modal={this.handleModal} />}
           {headerText === 'profile' && <Profile />}
           {headerText === 'balance' && <Balance />}
           {headerText === 'support' && <Support />}
@@ -118,7 +130,7 @@ class Dashboard extends Component {
           {
             modalType === 'insurance' &&
             <div>
-              <h2>You will be charged 2% of the total cost for insurance</h2>
+              <h2>You will be charged 2% (${(Number(this.state.parcelCost) * 0.02).toFixed(2)}) of the total cost for insurance</h2>
               <br />
               <div className="button-group">
                 <button className='btnQ medium'>Okay, Proceed</button>
@@ -128,10 +140,12 @@ class Dashboard extends Component {
           }
           {
             modalType === 'tip' &&
-            <div>
+            <div className="tip-modal">
               <h2>Please enter an amount to tip the traveler</h2>
               <br />
-              <input placeholder="Enter Amount" value={this.state.tipAmount}onChange={this.onChangeHandler}/>
+              <input type="number" placeholder="Enter Amount" value={this.state.tipAmount} onChange={this.onChangeHandler} />
+              <br />
+              <p>Cost to send parcel: {this.state.parcelCost}</p>
               <br />
               <div className="button-group">
                 <button className='btnQ medium'>Tip Traveler</button>
@@ -147,7 +161,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    traveler: state.travelers.travelerData
   }
 }
 export default connect(mapStateToProps, { logoutUser })(Dashboard)
