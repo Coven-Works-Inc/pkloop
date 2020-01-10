@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Modal from '../common/modal'
 
 const Support = () => {
+    const [state, setState] = useState({
+        modalOpen: false
+    })
     return (
         <div className="support">
             <div className="support-header">
@@ -21,6 +25,7 @@ const Support = () => {
                 <p>Oct 25, 2019, 12:52:02 PM</p>
                 <p className="open">See details</p>
             </div>
+            <Modal show={state.modalOpen}></Modal>
         </div>
     )
 }
