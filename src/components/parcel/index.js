@@ -115,7 +115,7 @@ const Parcel = props => {
   const handleConnect = (traveler) => {
     // console.log(traveler)
     addTravelerToState(traveler)
-
+    console.log(traveler)
     if (!props.user.isAuthenticated) {
       setState({
         ...state,
@@ -123,7 +123,7 @@ const Parcel = props => {
         isAuthenticated: false
       })
     } else {
-      handleParcelCost()
+      handleParcelCost(traveler)
       props.getTravelers({
         senderCost: state.parcelCost,
         senderWeight: state.parcelWeight,
@@ -132,12 +132,12 @@ const Parcel = props => {
     }
   }
 
-  const handleParcelCost = () => {
+  const handleParcelCost = (traveler) => {
     const localMultiplier = 1.5
     const intlMultiplier = 5.99
     const parcelWeight = parseInt(state.parcelWeight)
-    if (state.fromCountry && state.toCountry) {
-      if ((state.fromCountry === 'United States' || state.toCountry === 'Canada') && (state.fromCountry === 'United States' || state.toCountry === 'Canada')) {
+    if (traveler.locationCountry && traveler.destinationCountry) {
+      if (traveler.locationCountry === 'United States' || traveler.locationCountry === 'Canada' || traveler.destinationCountry === 'United States' || traveler.destinationCountry === 'Canada') {
         if (parcelWeight <= 5) {
           setState({
             ...state,
