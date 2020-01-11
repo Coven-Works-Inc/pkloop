@@ -141,9 +141,9 @@ class Dashboard extends Component {
           {
             modalType === 'insurance' &&
             <div>
-              <h2>How much is the total cost of your parcel</h2>
+              <h2>How much is the total cost of your parcel? Range between $0 - $2000</h2>
               <input type="range" min="0" max="2000" value={this.state.parcelWorth} onChange={this.insuranceChangeHandler}/>
-              <h2>{this.state.parcelWorth}</h2>
+              <h2>parcelWorth: {this.state.parcelWorth}</h2>
               <h2>You will be charged 2% (${this.state.insuranceCost})of the total cost for insurance</h2>
               <br />
               <div className="button-group">
