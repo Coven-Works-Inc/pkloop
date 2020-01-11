@@ -137,7 +137,7 @@ const Parcel = props => {
     const intlMultiplier = 5.99
     const parcelWeight = parseInt(state.parcelWeight)
     if (traveler.locationCountry && traveler.destinationCountry) {
-      if (traveler.locationCountry === 'United States' || traveler.locationCountry === 'Canada' || traveler.destinationCountry === 'United States' || traveler.destinationCountry === 'Canada') {
+      if ((traveler.locationCountry === 'United States' || traveler.locationCountry === 'Canada') && (traveler.destinationCountry === 'United States' || traveler.destinationCountry === 'Canada')) {
         if (parcelWeight <= 5) {
           setState({
             ...state,
