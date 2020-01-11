@@ -54,7 +54,7 @@ const Travelers = props => {
                       maxWidth: '100%'
                     }}
                   />
-                  <p style={{ marginTop: '2px' }}>{traveler.name}</p>
+                  <p style={{ marginTop: '2px' }}>{traveler.username}</p>
 
                   <p onClick={() => props.connect(traveler)} className='button'>connect</p>
                 </div>

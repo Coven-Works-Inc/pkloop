@@ -19,7 +19,9 @@ class Dashboard extends Component {
     modalType: 'insurance',
     tipAmount: 0,
     parcelCost: this.props.traveler ? this.props.traveler.senderCost.toFixed(2) : null,
-    completed: false
+    completed: false,
+    parcelWorth: 0,
+    insuranceCost: 0
   }
 
   markAsComplete = () => {
@@ -51,7 +53,16 @@ class Dashboard extends Component {
       parcelCost: e.target.value ? (this.props.traveler.senderCost + Number(e.target.value)).toFixed(2) : this.props.traveler.senderCost
     })
   }
-
+  insuranceChangeHandler = e => {
+    this.setState({
+      ...this.state,
+      parcelWorth: parseInt(e.target.value),
+      insuranceCost: 0.02 * parseInt(e.target.value)
+    })
+  }
+  payInsurance = () => {
+    
+  }
   render() {
     console.log(this.props)
     const { headerText } = this.state
@@ -130,10 +141,13 @@ class Dashboard extends Component {
           {
             modalType === 'insurance' &&
             <div>
-              <h2>You will be charged 2% (${(Number(this.state.parcelCost) * 0.02).toFixed(2)}) of the total cost for insurance</h2>
+              <h2>How much is the total cost of your parcel</h2>
+              <input type="range" min="0" max="2000" value={this.state.parcelWorth} onChange={this.insuranceChangeHandler}/>
+              <h2>{this.state.insuranceCost}</h2>
+              <h2>You will be charged 2% (${this.state.insuranceCost})of the total cost for insurance</h2>
               <br />
               <div className="button-group">
-                <button className='btnQ medium'>Okay, Proceed</button>
+                <button className='btnQ medium' onClick={this.payInsurance}>Okay, Proceed</button>
                 <button className='btnQ inverse-btnQ medium' onClick={this.toggleModal}>No, Not Interested</button>
               </div>
             </div>

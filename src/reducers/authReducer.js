@@ -1,6 +1,6 @@
 import isEmpty from '../utils/validation'
 
-import { SET_CURRENT_USER, SET_TOKEN, GET_ERRORS, LOADING } from '../actions/types'
+import { SET_CURRENT_USER, SET_TOKEN, GET_ERRORS, LOADING, UPDATE_PROFILE_PICTURE } from '../actions/types'
 
 const initialState = {
   isAuthenticated: false,
@@ -8,6 +8,7 @@ const initialState = {
   error: '',
   token: '',
   loading: false,
+  data: {}
 }
 
 export default function (state = initialState, action) {
@@ -34,6 +35,12 @@ export default function (state = initialState, action) {
         ...state,
         loading: action.payload
       }
+    case UPDATE_PROFILE_PICTURE: {
+      return {
+        ...state, 
+        data: action.payload
+      }
+    }
 
     default:
       return state
