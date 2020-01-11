@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import ProfilePicture from '../../assets/default-picture.jpg'
 import axios from 'axios'
-
+import { updateProfilePicture } from '../../actions/authActions';
 
 const Profile = (props) => {
     const [state, setState] = useState(props.user)
@@ -12,19 +12,8 @@ const Profile = (props) => {
             [e.target.name]: e.target.value
         });
     };
-    const onProfilePictureChange = e => {
-        // const url = 'https://api.cloudinary.com/v1_1/dnrlun74l/image/upload';
-        const url = 'https://api.cloudinary.com/v1_1/iodigital/image/upload';
-        console.log(e.target.files)
-        let formData = new FormData()
-        let unsignedUploadPreset = 'classify'
-        formData.append('file', e.target.files[0], e.target.files[0].name)
-        formData.append('upload_preset', unsignedUploadPreset);
-        // formData.append("api_key", "123563544673959")
-        // axios.post(url, formData, { headers: { "X-Requested-With": "XMLHttpRequest" } })
-        axios.post(url, formData, { headers: { 'Content-Type': 'application/json' } })
-            .then(res => { console.log(res) })
-            .catch(err => console.log(err))
+    const onProfilePictureChange = e => {    
+        props.updateProfilePicture(e.target.files)
     }
 
     const submitHandler = e => {
@@ -57,4 +46,4 @@ const mapStateToProps = state => {
         user: state.auth.user
     }
 }
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, { updateProfilePicture })(Profile);
