@@ -70,7 +70,7 @@ class Header extends Component {
                 <Link to='/trips'>List your trip</Link>
               </li>
               <li>
-                <Link to='/dashboard'>Dashboard</Link>
+                <Link to='/dashboard/transactions'>Dashboard</Link>
               </li>
               <li>
                 <Link to="/login" onClick={logoutUser} className='nav-link'>
