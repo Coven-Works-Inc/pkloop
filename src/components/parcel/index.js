@@ -162,10 +162,10 @@ const Parcel = props => {
     const parcelWeight = parseInt(state.parcelWeight)
     if (traveler.locationCountry && traveler.destinationCountry) {
       if (
-        traveler.locationCountry === 'United States' ||
-        traveler.locationCountry === 'Canada' ||
-        traveler.destinationCountry === 'United States' ||
-        traveler.destinationCountry === 'Canada'
+        (traveler.locationCountry === 'United States' ||
+          traveler.locationCountry === 'Canada') &&
+        (traveler.destinationCountry === 'United States' ||
+          traveler.destinationCountry === 'Canada')
       ) {
         if (parcelWeight <= 5) {
           setState({
