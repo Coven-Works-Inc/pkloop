@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { loginUser } from '../../actions/authActions'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import queryString from 'query-string'
 import Logo from '../../assets/logo/Logo.png'
 // import './bootstrap.min.css';
 
@@ -12,6 +13,14 @@ class Login extends Component {
     errors: {},
     buttonText: 'Login Now',
     display: 'none'
+  }
+
+  componentWillMount () {
+    const query = queryString.parse(this.props.location.search)
+    if (query.token) {
+      window.localStorage.setItem('jwt', query.token)
+      this.props.history.push('/')
+    }
   }
 
   componentWillReceiveProps () {
@@ -29,6 +38,8 @@ class Login extends Component {
     })
   }
 
+  googleAuth = e => {}
+
   onSubmitHandler = e => {
     e.preventDefault()
 
@@ -41,7 +52,7 @@ class Login extends Component {
       display: 'inline-block',
       buttonText: 'PLEASE WAIT'
     })
-    this.props.loginUser(userData, this.props.history)
+    this.props.loginUser(userData, this.props.history, this.props)
   }
 
   render () {

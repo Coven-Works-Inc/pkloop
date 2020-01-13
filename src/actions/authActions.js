@@ -2,7 +2,13 @@ import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
 import jwt_decode from 'jwt-decode'
 
-import { GET_ERRORS, SET_CURRENT_USER, LOADING, SET_TOKEN, UPDATE_PROFILE_PICTURE } from './types'
+import {
+  GET_ERRORS,
+  SET_CURRENT_USER,
+  LOADING,
+  SET_TOKEN,
+  UPDATE_PROFILE_PICTURE
+} from './types'
 import { BASE_URL } from '../config/constants'
 
 export const registerUser = (userData, history) => dispatch => {
@@ -33,7 +39,7 @@ export const registerUser = (userData, history) => dispatch => {
     )
 }
 
-export const loginUser = (userData, history) => dispatch => {
+export const loginUser = (userData, history, props) => dispatch => {
   dispatch({
     type: LOADING,
     payload: true
@@ -47,6 +53,7 @@ export const loginUser = (userData, history) => dispatch => {
       setAuthToken(token)
       const decoded = jwt_decode(token)
       dispatch(setCurrentUser(decoded, token))
+
       history.push('/dashboard/transactions')
     })
     .catch(err => {
@@ -246,19 +253,19 @@ export const changePassword = data => dispatch => {
       })
     )
 }
-export const updateProfilePicture = (file) => dispatch => {
-  axios.post(`${BASE_URL}/users/updatePicture`, file)
-  .then(res => {
-    dispatch({
-      type: UPDATE_PROFILE_PICTURE,
-      payload: res
+export const updateProfilePicture = file => dispatch => {
+  axios
+    .post(`${BASE_URL}/users/updatePicture`, file)
+    .then(res => {
+      dispatch({
+        type: UPDATE_PROFILE_PICTURE,
+        payload: res
+      })
     })
-  })
-  .catch(err => {
-    dispatch({
-      type: GET_ERRORS,
-      payload: err.response ? err.response.data : 'Unable to upload picture'
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response ? err.response.data : 'Unable to upload picture'
+      })
     })
-  })
-
 }
