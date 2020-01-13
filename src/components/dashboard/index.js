@@ -8,9 +8,13 @@ import Profile from './profile'
 import Balance from './balance'
 import Support from './support'
 import Modal from '../common/modal'
+import './dashboard.css'
+import  uuidv4  from 'uuid/v4'
 
 import { Link } from 'react-router-dom'
 import { logoutUser } from '../../actions/authActions'
+import { addInsurance } from '../../actions/costActions'
+import { client_id, api_key } from '../../config/constants'
 
 class Dashboard extends Component {
   state = {
@@ -21,7 +25,10 @@ class Dashboard extends Component {
     parcelCost: this.props.traveler ? this.props.traveler.senderCost.toFixed(2) : null,
     completed: false,
     parcelWorth: 0,
-    insuranceCost: 0
+    insuranceCost: 0,
+    parcelItem: '',
+    checked:false,
+    insuranceSuccess: false,
   }
 
   markAsComplete = () => {
@@ -57,14 +64,47 @@ class Dashboard extends Component {
     this.setState({
       ...this.state,
       parcelWorth: parseInt(e.target.value),
-      insuranceCost: 0.02 * parseInt(e.target.value)
+      insuranceCost: parseInt((0.02 * parseInt(e.target.value)).toFixed(2))
     })
   }
-  payInsurance = () => {
+  itemChangeHandler = e => [
+    this.setState({
+      ...this.state,
+      parcelItem: e.target.value
+    })
+  ]
+  payInsurance = async () => {
+    const userData = {
+      client_id,
+      api_key,
+      customer_name: `${this.props.auth.firstname} ${this.props.auth.lastname}`,
+      firstname: this.props.auth.firstname,
+      lastname: this.props.auth.lastname,
+      items_ordered: this.state.parcelItem,
+      subtotal: this.state.parcelWorth,
+      currency: 'USD',
+      coverage_amount: this.state.insuranceCost,
+      order_number: uuidv4()
+    }
+    await this.props.addInsurance(userData)
     
   }
+  handleCheckbox = () => {
+    this.setState({
+      ...this.state,
+      checked: !this.state.checked
+    })
+  }
+  UNSAFE_componentWillReceiveProps(nextProps){
+    if(nextProps.cost.success != this.props.cost.success){
+      this.setState({
+        ...this.state,
+        insuranceSuccess: true
+      })
+      setTimeout(this.toggleModal, 1000)
+    }
+  }
   render() {
-    console.log(this.props)
     const { headerText } = this.state
 
     const changeHeader = text => {
@@ -140,14 +180,36 @@ class Dashboard extends Component {
         <Modal show={this.state.modalOpen} onClose={this.toggleModal}>
           {
             modalType === 'insurance' &&
-            <div>
-              <h2>How much is the total cost of your parcel? Range between $0 - $2000</h2>
-              <input type="range" min="0" max="2000" value={this.state.parcelWorth} onChange={this.insuranceChangeHandler}/>
-              <h2>parcelWorth: {this.state.parcelWorth}</h2>
+            <div className="insurance">
+              {this.state.insuranceSuccess ? <p style={{ color: 'green'}}>Insurance Policy successfully added</p>: <h2></h2>}
+              <label>What is the worth of your parcel? Range between $0 - $2000</label>
+              <input type="range" min="0" max="2000" defaultValue="1000" value={this.state.parcelWorth} onChange={this.insuranceChangeHandler} className="slider"/>
+              <h3>parcel Worth: {this.state.parcelWorth}</h3>
+              <br />
+              <br />
+              <label>Which items are you insuring?</label>
+              <input type="text" value={this.state.parcelItem} onChange={this.itemChangeHandler} placeholder="e.g Coffee table" className="support_input" />
               <h2>You will be charged 2% (${this.state.insuranceCost})of the total cost for insurance</h2>
               <br />
+              <label className="container">By clicking on Proceed, you agree to InsureShip <a href="https://www.insureship.com/privacy" target="_blank"> Privacy policy</a> and <a href="https://www.insureship.com/terms" target="_blank">terms</a>
+                <input type="checkbox" checked={this.state.checked} onChange={this.handleCheckbox}/> 
+                <span className="checkmark"></span>
+              </label>
               <div className="button-group">
-                <button className='btnQ medium' onClick={this.payInsurance}>Okay, Proceed</button>
+                <button className='btnQ medium' 
+                    disabled={!this.state.checked} 
+                    onClick={this.payInsurance}>
+                      {this.props.loading ? (
+                        <span
+                        style={{ display: 'inline-block' }}
+                        className='spinner-border spinner-border-sm'
+                        role='status'
+                        aria-hidden='true'
+                      ></span>
+                      ): (
+                          <div>Okay, Proceed</div>
+                      )}
+                  </button>
                 <button className='btnQ inverse-btnQ medium' onClick={this.toggleModal}>No, Not Interested</button>
               </div>
             </div>
@@ -174,9 +236,12 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
-    auth: state.auth,
-    traveler: state.travelers.travelerData
+    auth: state.auth.user,
+    loading: state.auth.loading,
+    traveler: state.travelers.travelerData,
+    cost: state.cost
   }
 }
-export default connect(mapStateToProps, { logoutUser })(Dashboard)
+export default connect(mapStateToProps, { logoutUser, addInsurance })(Dashboard)

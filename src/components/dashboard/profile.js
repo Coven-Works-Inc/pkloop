@@ -20,6 +20,7 @@ const Profile = (props) => {
     }
     return (
         <div className="edit-profile">
+            {console.log(props.data)}
             <div className="profile-picture">
                 <img src={ProfilePicture} alt="default profile" />
                 <input type="file" id="fileElem"  accept="image/*" onChange={onProfilePictureChange}/>
@@ -41,7 +42,8 @@ const Profile = (props) => {
 
 const mapStateToProps = state => {
     return {
-        user: state.auth.user
+        user: state.auth.user,
+        data: state.auth.data
     }
 }
 export default connect(mapStateToProps, { updateProfilePicture })(Profile);
