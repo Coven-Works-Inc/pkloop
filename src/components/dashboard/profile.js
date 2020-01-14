@@ -9,31 +9,33 @@ const Profile = (props) => {
     const onChangeHandler = e => {
         setState({
             ...state,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         });
     };
-    const onProfilePictureChange = e => {    
+    const onProfilePictureChange = e => {
         console.log(e.target.files[0])
         props.updateProfilePicture(e.target.files[0])    
     }
+
     const submitHandler = e => {
         e.preventDefault()
     }
+
     return (
         <div className="edit-profile">
             {console.log(props.data)}
             <div className="profile-picture">
                 <img src={ProfilePicture} alt="default profile" />
-                <input type="file" id="fileElem"  accept="image/*" onChange={onProfilePictureChange}/>
+                <input type="file" id="fileElem" accept="image/*" onChange={onProfilePictureChange} />
             </div>
             <div className="profile-form">
                 <form onSubmit={submitHandler}>
-                    <input type="text" placeholder="First Name" value={state.firstname} name='firstname' onChange={onChangeHandler}/>
-                    <input type="text" placeholder="Last Name" value={state.lastname} name="lastname" onChange={onChangeHandler}/>
-                    <input type="text" placeholder="Username" value={state.username} onChange={onChangeHandler}/>
-                    <input type="text" placeholder="City, Country" onChange={onChangeHandler}/>
-                    <input type="email" placeholder="Email Address" value={state.email} name="email" onChange={onChangeHandler}/>
-                    <input type="tel" placeholder="Phone Number" value={state.phone} name="phone" onChange={onChangeHandler}/>
+                    <input type="text" placeholder="First Name" value={state.firstname} name='firstname' onChange={onChangeHandler} />
+                    <input type="text" placeholder="Last Name" value={state.lastname} name="lastname" onChange={onChangeHandler} />
+                    <input type="text" placeholder="Username" value={state.username} onChange={onChangeHandler} />
+                    <input type="text" placeholder="City, Country" onChange={onChangeHandler} />
+                    <input type="email" placeholder="Email Address" value={state.email} name="email" onChange={onChangeHandler} />
+                    <input type="tel" placeholder="Phone Number" value={state.phone} name="phone" onChange={onChangeHandler} />
                     <button className="btnSmall">Save Changes</button>
                 </form>
             </div>
