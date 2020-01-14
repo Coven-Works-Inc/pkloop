@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import { postParcel } from '../../actions/parcelActions'
 import HeaderFooter from '../headerFooter'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { fetchShippers } from '../../actions/travelerActions'
 import countries from '../../countries.json'
 import cities from '../../world-cities_json.json'
@@ -12,6 +13,7 @@ import Modal from '../common/modal'
 import './parcel.css'
 import travelData from '../../travelers.json'
 import countriesData from '../../countries.json'
+import { fetchTravelers, getTravelers } from '../../actions/travelerActions';
 
 const Parcel = props => {
   const [state, setState] = useState({
@@ -20,16 +22,24 @@ const Parcel = props => {
     destinationCountry: '',
     destinationCity: '',
     parcelSize: '',
-    parcelWeight: '',
+    parcelWeight: 4,
+    fromCountry: '',
     additionalInfo: '',
     travelers: travelData,
-    filteredLocation: [],
+    filteredLocation: undefined,
     filteredDestination: [],
     countries: countriesData,
     fromcities: [],
+    fromCity: '',
+    toCity: '',
     tocities: [],
+    parcelCost: 24.99,
     modalOpen: false,
-    index: 0
+    index: 0,
+    isAuthenticated: false,
+    isLocal: true,
+    travelerData: {},
+    runParcelCost: null
   })
   useEffect(() => {
     props.fetchShippers()
@@ -70,6 +80,91 @@ const Parcel = props => {
     e.preventDefault()
   }
 
+  const handleConnect = (traveler) => {
+    // console.log(traveler)
+    addTravelerToState(traveler)
+    console.log(traveler)
+    if (!props.user.isAuthenticated) {
+      setState({
+        ...state,
+        modalOpen: true,
+        isAuthenticated: false
+      })
+    } else {
+      handleParcelCost(traveler)
+      props.getTravelers({
+        senderCost: state.parcelCost,
+        senderWeight: state.parcelWeight,
+        ...traveler
+      })
+    }
+  }
+  const addTravelerToState = traveler => {
+    setState({
+      ...state,
+      travelerData: traveler
+    })
+  }
+  const handleParcelCost = (traveler) => {
+    const localMultiplier = 1.5
+    const intlMultiplier = 5.99
+    const parcelWeight = parseInt(state.parcelWeight)
+    if (traveler.locationCountry && traveler.destinationCountry) {
+      if (traveler.locationCountry === 'United States' || traveler.locationCountry === 'Canada' || traveler.destinationCountry === 'United States' || traveler.destinationCountry === 'Canada') {
+        if (parcelWeight <= 5) {
+          setState({
+            ...state,
+            modalOpen: true,
+            isAuthenticated: true,
+            parcelCost: 14.99
+          })
+        } else {
+          setState({
+            ...state,
+            modalOpen: true,
+            isAuthenticated: true,
+            parcelCost: (14.99 + (parcelWeight * localMultiplier)).toFixed(2)
+          })
+        }
+      } else {
+        if (parcelWeight <= 5) {
+          setState({
+            ...state,
+            modalOpen: true,
+            isAuthenticated: true,
+            isLocal: false,
+            parcelCost: 24.99
+          })
+        } else {
+          setState({
+            ...state,
+            modalOpen: true,
+            isAuthenticated: true,
+            isLocal: false,
+            parcelCost: (parcelWeight * intlMultiplier).toFixed(2)
+          })
+        }
+      }
+    } else {
+      if (parcelWeight <= 5) {
+        setState({
+          ...state,
+          modalOpen: true,
+          isAuthenticated: true,
+          isLocal: false,
+          parcelCost: 24.99
+        })
+      } else {
+        setState({
+          ...state,
+          modalOpen: true,
+          isAuthenticated: true,
+          isLocal: false,
+          parcelCost: (parcelWeight * intlMultiplier).toFixed(2)
+        })
+      }
+    }
+  }
   // fetchCountries = () => {
   //   let countriesList = ''
   //   this.state.countries.map((country, index) => {
@@ -241,19 +336,37 @@ const Parcel = props => {
         <Shippers travelers={props.shippers.shippers} toggle={toggleModal} />
       )} */}
 
-      <Shippers travelers={shippers} />
+      <Shippers travelers={state.filteredLocation ? state.filteredLocation : shippers} toggle={toggleModal} connect={handleConnect}  />
 
-      <Modal show={state.modalOpen} onClose={toggleModal}>
-        <h2>
-          Are you sure you want to send {state.parcelWeight} pounds of weight?
-        </h2>
-        <br />
-        <div className='button-group'>
-          <button className='btnQ medium'>Yes, Continue</button>
-          <button className='btnQ inverse-btnQ medium'>
-            No, Change weight
-          </button>
-        </div>
+      <Modal show={state.modalOpen}
+        onClose={toggleModal}>
+        {state.isAuthenticated &&
+          <div>
+            <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h2>
+            <br />
+            {/*  */}
+            <div className="button-group">
+              <button className="btnQ medium" onClick={() => props.history.push({
+                pathname: '/dashboard/chat',
+                parcelCost: state.parcelCost,
+                travelerData: state.travelerData
+              })}>Yes, Continue</button>
+              <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
+            </div>
+            {
+              !state.isLocal &&
+              <small>International pricing applies. See <Link to='/pricing' target='_blank' style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>Pricing Guide</Link></small>
+            }
+          </div>}
+        {!state.isAuthenticated &&
+          <div>
+            <h2>Please login to connect with a traveller</h2>
+            <br />
+            <div className="button-group">
+              <button className='btnQ medium' onClick={() => props.history.push('/login')}>Yes, Go To Login</button>
+              <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Stay on This Page</button>
+            </div>
+          </div>}
       </Modal>
     </HeaderFooter>
   )
@@ -263,7 +376,8 @@ const Parcel = props => {
 }
 
 const mapStateToProps = state => ({
-  shippers: state.shippers
+  shippers: state.shippers,
+  user: state.auth
 })
 
-export default connect(mapStateToProps, { fetchShippers })(Parcel)
+export default connect(mapStateToProps, { fetchShippers, getTravelers })(Parcel)

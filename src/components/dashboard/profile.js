@@ -13,7 +13,8 @@ const Profile = (props) => {
         });
     };
     const onProfilePictureChange = e => {    
-        props.updateProfilePicture(e.target.files)    
+        console.log(e.target.files[0])
+        props.updateProfilePicture(e.target.files[0])    
     }
     const submitHandler = e => {
         e.preventDefault()
