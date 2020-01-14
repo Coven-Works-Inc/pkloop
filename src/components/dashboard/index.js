@@ -11,7 +11,6 @@ import Modal from '../common/modal'
 import './dashboard.css'
 import  uuidv4  from 'uuid/v4'
 
-import { Link } from 'react-router-dom'
 import { logoutUser } from '../../actions/authActions'
 import { addInsurance } from '../../actions/costActions'
 import { client_id, api_key } from '../../config/constants'
@@ -22,7 +21,7 @@ class Dashboard extends Component {
     modalOpen: false,
     modalType: 'insurance',
     tipAmount: 0,
-    parcelCost: this.props.parcelCost,
+    parcelCost: this.props.traveler ? this.props.traveler.senderCost : null,
     completed: false,
     parcelWorth: 0,
     insuranceCost: 0,
@@ -99,7 +98,8 @@ class Dashboard extends Component {
     if(nextProps.cost.success != this.props.cost.success){
       this.setState({
         ...this.state,
-        insuranceSuccess: true
+        insuranceSuccess: true,
+        parcelCost: this.state.parcelCost + this.state.insuranceCost
       })
       setTimeout(this.toggleModal, 1000)
     }
@@ -183,7 +183,7 @@ class Dashboard extends Component {
             <div className="insurance">
               {this.state.insuranceSuccess ? <p style={{ color: 'green'}}>Insurance Policy successfully added</p>: <h2></h2>}
               <label>What is the worth of your parcel? Range between $0 - $2000</label>
-              <input type="range" min="0" max="2000" defaultValue="1000" value={this.state.parcelWorth} onChange={this.insuranceChangeHandler} className="slider"/>
+              <input type="range" min="0" max="2000" value={this.state.parcelWorth} onChange={this.insuranceChangeHandler} className="slider"/>
               <h3>parcel Worth: {this.state.parcelWorth}</h3>
               <br />
               <br />
