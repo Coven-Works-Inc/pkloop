@@ -12,8 +12,9 @@ const Profile = (props) => {
             [e.target.name]: e.target.value
         });
     };
-    const onProfilePictureChange = e => {    
-        props.updateProfilePicture(e.target.files)
+    const onProfilePictureChange = e => {
+        console.log(e.target.files[0])
+        props.updateProfilePicture(e.target.files[0])    
     }
 
     const submitHandler = e => {
