@@ -9,7 +9,7 @@ export const getTransaction = () => async dispatch => {
     )
     dispatch({
       type: FETCH_TRANSACTIONS,
-      payload: response.data
+      payload: response.data.data
     })
   } catch (error) {
     dispatch({
