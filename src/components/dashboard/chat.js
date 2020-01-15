@@ -141,7 +141,7 @@ const Chat = props => {
                   }}
                   className='reusable-button'
                 >
-                  MARK AS COMPLETED
+                  CONTINUE TO PAYMENT
                 </button>
                 <button
                   style={{

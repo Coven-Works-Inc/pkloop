@@ -22,7 +22,7 @@ class Dashboard extends Component {
     modalOpen: false,
     modalType: 'insurance',
     tipAmount: 0,
-    parcelCost: this.props.parcelCost,
+    parcelCost: this.props.traveler ? this.props.traveler.senderCost : null,
     completed: false,
     parcelWorth: 0,
     insuranceCost: 0,
