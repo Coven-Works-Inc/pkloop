@@ -18,24 +18,26 @@ const Transactions = props => {
         <p></p>
       </div>
       {transaction === undefined ? (
-        <h3>Loading...</h3>
+        <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</h3>
       ) : transaction.length === 0 ? (
         <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
           You do not any transactions yet
         </h2>
       ) : (
-        <div className='table-row'>
-          <p className='completed'>{transaction.status}</p>
-          <p>{transaction.with}</p>
-          <p>{transaction.sender}</p>
-          <p>{transaction.createdAt.split('T')[0]}</p>
-          <Link to='/chat'>
-            {' '}
-            <p className='open' style={{ cursor: 'pointer' }}>
-              Open
-            </p>{' '}
-          </Link>
-        </div>
+        transaction.map((trans, index) => (
+          <div className='table-row'>
+            <p className='completed'>{trans.status}</p>
+            <p>{trans.with}</p>
+            <p>{trans.sender}</p>
+            <p>{trans.createdAt.split('T')[0]}</p>
+            <Link to='/chat'>
+              {' '}
+              <p className='open' style={{ cursor: 'pointer' }}>
+                Open
+              </p>{' '}
+            </Link>
+          </div>
+        ))
       )}
     </div>
   )
