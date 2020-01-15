@@ -12,6 +12,7 @@
     "@fortawesome/react-fontawesome": "^0.1.8",
     "@livechat/ui-kit": "^0.4.0-10",
     "axios": "^0.19.0",
+    "crypto": "^1.0.1",
     "jwt-decode": "^2.2.0",
     "qs": "^6.9.1",
     "query-string": "^6.9.0",
