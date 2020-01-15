@@ -20,10 +20,10 @@ export const registerUser = (userData, history, props) => dispatch => {
     .post(`${BASE_URL}/auth/signup`, userData)
     .then(res => {
       // console.log(res.data)
-      // const location = props.location
-      // if (location.redirect === '/parcel') {
-      //   localStorage.setItem('redirect', props.location.redirect)
-      // }
+      const location = props.location
+      if (location.redirect === '/parcel') {
+        localStorage.setItem('redirect', props.location.redirect)
+      }
       history.push('/verify')
     })
     .catch(err => {
