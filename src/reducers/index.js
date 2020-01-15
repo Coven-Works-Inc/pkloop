@@ -8,6 +8,7 @@ import transReducer from './transReducer'
 import shipReducer from './shipReducer'
 import costReducer from './costReducer'
 import balanceReducer from './balanceReducer'
+import supportReducer from './supportReducer'
 
 export default combineReducers({
   auth: authReducer,
@@ -18,5 +19,6 @@ export default combineReducers({
   transaction: transReducer,
   shippers: shipReducer,
   cost: costReducer,
-  balance: balanceReducer
+  balance: balanceReducer,
+  tickets: supportReducer
 })

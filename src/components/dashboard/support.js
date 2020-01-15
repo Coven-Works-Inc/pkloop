@@ -1,64 +1,129 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from '../common/modal'
+import { connect } from 'react-redux'
+import { submitTicket, fetchTickets } from '../../actions/supportActions'
 import './support.css'
 
-const Support = () => {
-    const [state, setState] = useState({
-        modalOpen: false,
-        subject: '',
-        bodyText: ''
+const Support = props => {
+  const [state, setState] = useState({
+    modalOpen: false,
+    subject: '',
+    message: ''
+  })
+
+  useEffect(() => {
+    props.fetchTickets()
+  }, [])
+
+  const onButtonClick = () => {
+    setState({
+      modalOpen: true
     })
-    const onButtonClick = () => {
-        setState({
-            modalOpen: true
-        })
+  }
+  const submitHandler = e => {
+    e.preventDefault()
+
+    const supportData = {
+      subject: state.subject,
+      message: state.message
     }
-    const submitHandler = (e) => {
-        e.preventDefault()
-    }
-    const onChangeHandler = e => {
-        setState({
-            ...state,
-            [e.target.name]: e.target.value
-        })
-    }
-    const onModalClose = () => {
-        setState({
-            modalOpen: false
-        })
-    }
-    return (
-        <div className="support">
-            <div className="support-header">
-                <h2>My Support Tickets</h2>
-                <button className="btnSmall" onClick={onButtonClick}>Open a new ticket</button>
-            </div>
-            <div className="table-header">
-                <p>Status</p>
-                <p>Subject</p>
-                <p>Ticket ID</p>
-                <p>Last updated</p>
-                <p></p>
-            </div>
-            <div className="table-row">
-                <p>Open</p>
-                <p>Payment Confirmation</p>
-                <p>#HPKL-240-16901</p>
-                <p>Oct 25, 2019, 12:52:02 PM</p>
-                <p className="open">See details</p>
-            </div>
-            <Modal show={state.modalOpen} onClose={onModalClose}>
-                <h2>Open a new support ticket</h2>
-                <div className="support-form__group">
-                    <form onSubmit={submitHandler}>
-                    <input type="text" className="support_input"  name="subject"placeholder="Subject" onChange={onChangeHandler} required="" />
-                    <textarea className="support_textarea" name="bodyText"  onChange={onChangeHandler} placeholder="Enter a Brief description"></textarea>
-                    <button className='btnQ medium' type="submit">Send</button>
-                    </form>
-                </div>
-            </Modal>
+
+    props.submitTicket(supportData)
+
+    setState({
+      modalOpen: false
+    })
+  }
+  const onChangeHandler = e => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    })
+  }
+  const onModalClose = () => {
+    setState({
+      modalOpen: false
+    })
+  }
+
+  const {
+    tickets: { tickets }
+  } = props
+
+  console.log(tickets)
+
+  return (
+    <div className='support'>
+      <div className='support-header'>
+        <h2>My Support Tickets</h2>
+        <button className='btnSmall' onClick={onButtonClick}>
+          Open a new ticket
+        </button>
+      </div>
+      <div className='table-header'>
+        <p>Status</p>
+        <p>Subject</p>
+        <p>Ticket ID</p>
+        <p>Created At</p>
+        <p></p>
+      </div>
+
+      {tickets === undefined ? (
+        <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>
+          {' '}
+          Loading ...{' '}
+        </h3>
+      ) : tickets.length === 0 ? (
+        <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>
+          You do not any Tickets yet
+        </h3>
+      ) : (
+        tickets.map((ticket, index) => (
+          <div className='table-row'>
+            <p>{ticket.status}</p>
+            <p>{ticket.subject}</p>
+            <p>{ticket.ticketId}</p>
+            <p>{ticket.createdAt.split('T')[0]}</p>
+            <p className='open'>See details</p>
+          </div>
+        ))
+      )}
+      <Modal show={state.modalOpen} onClose={onModalClose}>
+        <h2>Open a new support ticket</h2>
+        <div className='support-form__group'>
+          <form onSubmit={submitHandler}>
+            <input
+              type='text'
+              className='support_input'
+              name='subject'
+              placeholder='Subject'
+              onChange={onChangeHandler}
+              required=''
+            />
+            <textarea
+              className='support_textarea'
+              name='message'
+              onChange={onChangeHandler}
+              placeholder='How can we help you on this lovely day ?'
+            ></textarea>
+            <button
+              className='btnQ medium'
+              type='submit'
+              style={{ fontSize: '1rem' }}
+            >
+              Submit
+            </button>
+          </form>
         </div>
-    )
+      </Modal>
+    </div>
+  )
 }
 
-export default Support;
+const mapStateToProps = state => {
+  return {
+    tickets: state.tickets
+  }
+}
+
+export default connect(mapStateToProps, { fetchTickets, submitTicket })(Support)

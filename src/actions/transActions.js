@@ -9,7 +9,7 @@ export const getTransaction = () => async dispatch => {
     )
     dispatch({
       type: FETCH_TRANSACTIONS,
-      payload: response.data
+      payload: response.data.data
     })
   } catch (error) {
     dispatch({
@@ -18,21 +18,3 @@ export const getTransaction = () => async dispatch => {
     })
   }
 }
-
-// export const updateBalance = (data) => async dispatch => {
-//   try {
-//     const response = await axios.put(
-//       `${BASE_URL}/users/updateMyBalance`, data
-//     )
-//     dispatch({
-//       type: UPDATE_BALANCE,
-//       payload: response.data
-//     })
-//   }
-//   catch (error) {
-//     dispatch({
-//       type: GET_ERRORS,
-//       payload: error
-//     })
-//   }
-// }
