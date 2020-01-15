@@ -4,24 +4,29 @@ import { Link } from 'react-router-dom'
 //Import megged
 // import StripeCheckout from '../payment'
 import StripeCheckout from 'react-stripe-checkout'
-// import HeaderFooter from '../headerFooter'
-// import {
-//   ThemeProvider,
-//   TextComposer,
-//   Row,
-//   IconButton,
-//   AddIcon,
-//   TextInput,
-//   EmojiIcon,
-//   SendButton,
-//   Message,
-//   MessageList,
-//   MessageText,
-//   FixedWrapper
-// } from '@livechat/ui-kit'
+import { Widget } from 'react-chat-widget';
+
+import 'react-chat-widget/lib/styles.css';
+import HeaderFooter from '../headerFooter'
+import {
+  ThemeProvider,
+  TextComposer,
+  Row,
+  IconButton,
+  AddIcon,
+  TextInput,
+  EmojiIcon,
+  SendButton,
+  Message,
+  MessageList,
+  MessageText,
+  FixedWrapper,
+  Avatar
+} from '@livechat/ui-kit'
 import './chat.css'
 import Button from '../common/button'
 import Modal from '../common/modal'
+
 
 const Chat = props => {
   const [state, setState] = useState({
@@ -29,7 +34,6 @@ const Chat = props => {
     tipAmount: props.tipAmount,
     modalOpen: props.completed,
   })
-
   console.log(props)
   if (props.traveler) {
   }
@@ -180,7 +184,34 @@ const Chat = props => {
           className='chat-board'
           style={props.traveler ? {} : { alignSelf: 'center' }}
         >
-          <p>Chat goes here</p>
+          <ThemeProvider theme={theme}>
+          <div style={{ width: '100%', background: 'white' }}>
+            <MessageList active>
+              <Message authorName="Jon Smith" date="21:37" showMetaOnClick style={{ borderRadius: '1em', padding: '5px 10px', height: 'max-content' }}><MessageText>Hello</MessageText></Message>
+            </MessageList>
+            <Row reverse>
+              <Message isOwn radiusType='single' showMetaOnClick style={{ backgroundColor: '#00bdbe', borderRadius: '1em', padding: '5px 10px', height: 'max-content' }}>
+                <MessageText>Hi!</MessageText>
+              </Message>
+            </Row>
+            <TextComposer>
+              <Row align="center">
+                <IconButton fit>
+                  <AddIcon />
+                </IconButton>
+                <TextInput fill />
+                <SendButton fit />
+              </Row>
+
+              <Row verticalAlign="center" justify="right">
+                <IconButton fit>
+                  <EmojiIcon />
+                </IconButton>
+              </Row>
+            </TextComposer>
+          </div>
+        </ThemeProvider>
+          
         </div>
       )}
     </div>
