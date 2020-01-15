@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import Modal from '../common/modal'
+import * as actions from '../../actions/balanceActions'
 
 const Balance = props => {
 
   const {
-    auth: {
-      user: { balance }
-      // user: { balance, amountMade }
-    }
+    balance: { balance }
+    // user: { balance, amountMade }
   } = props
+
+  // useEffect(() => {
+  //   props.setCurrentUser()
+  // }, [])
 
   const [state, setState] = useState({
     amountMade: 0,
@@ -20,6 +23,9 @@ const Balance = props => {
 
   console.log(props)
   console.log(props.auth.user.balance)
+  // if (props.balance) {
+  console.log(props.balance.balance)
+  // }
 
   const toggleModal = () => {
     setState({
@@ -38,12 +44,22 @@ const Balance = props => {
   }
 
   const fundWallet = () => {
+    const data = {
+      amount: Number(state.amount)
+    }
+
+    props.updateBalance(data)
     setState({
       ...state,
-      balance: state.balance + Number(state.amount),
-      modalOpen: false,
-      amount: 0
+
     })
+
+    // setState({
+    //   ...state,
+    //   balance: state.balance + Number(state.amount),
+    //   modalOpen: false,
+    //   amount: 0
+    // })
   }
 
   return (
@@ -67,9 +83,7 @@ const Balance = props => {
         <div>
           <h2>How much do you want to fund your wallet with?</h2>
           <br />
-          <input type="number" name="amount" placeholder="Enter Amount" value={state.amount} onChange={onChangeHandler} />
-          <br />
-          {state.amount}
+          <input className="popupInput" type="number" name="amount" placeholder="Enter Amount" value={state.amount} onChange={onChangeHandler} />
           <br />
           <div className="button-group">
             <button className='btnQ medium' onClick={fundWallet}>Okay, Proceed</button>
@@ -82,7 +96,9 @@ const Balance = props => {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  transaction: state.transaction,
+  balance: state.balance.balance
 })
 
-export default connect(mapStateToProps)(Balance)
+export default connect(mapStateToProps, actions)(Balance)

@@ -20,10 +20,10 @@ export const registerUser = (userData, history, props) => dispatch => {
     .post(`${BASE_URL}/auth/signup`, userData)
     .then(res => {
       // console.log(res.data)
-      // const location = props.location
-      // if (location.redirect === '/parcel') {
-      //   localStorage.setItem('redirect', props.location.redirect)
-      // }
+      const location = props.location
+      if (location.redirect === '/parcel') {
+        localStorage.setItem('redirect', props.location.redirect)
+      }
       history.push('/verify')
     })
     .catch(err => {
@@ -61,6 +61,7 @@ export const loginUser = (userData, history, props) => dispatch => {
 
       const location = props.location
       if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
+        localStorage.removeItem('redirect')
         history.push('/parcel')
       } else {
         history.push('/dashboard/transactions')
