@@ -173,6 +173,11 @@ const Parcel = props => {
             parcelCost: 24.99
           })
         } else {
+          props.getTravelers({
+            senderCost: (parcelWeight * intlMultiplier).toFixed(2),
+            senderWeight: state.parcelWeight,
+            ...traveler
+          })
           setState({
             ...state,
             modalOpen: true,
@@ -184,6 +189,11 @@ const Parcel = props => {
       }
     } else {
       if (parcelWeight <= 5) {
+        props.getTravelers({
+          senderCost: 24.99,
+          senderWeight: state.parcelWeight,
+          ...traveler
+        })
         setState({
           ...state,
           modalOpen: true,
@@ -192,6 +202,11 @@ const Parcel = props => {
           parcelCost: 24.99
         })
       } else {
+        props.getTravelers({
+          senderCost: (parcelWeight * intlMultiplier).toFixed(2),
+          senderWeight: state.parcelWeight,
+          ...traveler
+        })
         setState({
           ...state,
           modalOpen: true,

@@ -97,52 +97,17 @@ const Chat = props => {
             {!props.completed && (
               <div>
                 <button
-                  style={{
-                    color: 'white',
-                    backgroundColor: '#0071bc',
-                    border: '#0071bc',
-                    outline: 'none'
-                  }}
-                  className='reusable-button'
-                >
-                  ENTER RECEIVER'S DETAILS
-                </button>
-                <button
-                  onClick={() => props.modal('tip')}
-                  style={{
-                    color: 'white',
-                    backgroundColor: '#0071bc',
-                    border: '#0071bc',
-                    outline: 'none'
-                  }}
-                  className='reusable-button'
-                >
-                  ADD A TIP(OPTIONAL)
-                </button>
-                <button
-                  onClick={() => props.modal('insurance')}
-                  style={{
-                    color: 'white',
-                    backgroundColor: '#abcc71',
-                    border: '#abcc71',
-                    outline: 'none'
-                  }}
-                  className='reusable-button'
-                >
-                  ADD INSURANCE(OPTIONAL)
-                </button>
-                <button
-                  onClick={() => props.markTrans()}
-                  style={{
-                    color: 'white',
-                    backgroundColor: '#00bdbe',
-                    border: '#00bdbe',
-                    outline: 'none'
-                  }}
-                  className='reusable-button'
-                >
-                  CONTINUE TO PAYMENT
-                </button>
+                  style={{ color: 'white', backgroundColor: "#0071bc", border: "#0071bc", outline: 'none' }}
+                  className='reusable-button'>ENTER RECEIVER'S DETAILS</button>
+                <button onClick={() => props.modal('tip')}
+                  style={{ color: 'white', backgroundColor: "#0071bc", border: "#0071bc", outline: 'none' }}
+                  className='reusable-button'>ADD A TIP(OPTIONAL)</button>
+                <button onClick={() => props.modal('insurance')}
+                  style={{ color: 'white', backgroundColor: "#abcc71", border: "#abcc71", outline: 'none' }}
+                  className='reusable-button'>ADD INSURANCE(OPTIONAL)</button>
+                <button onClick={() => props.markTrans()}
+                  style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
+                  className='reusable-button'>CONTINUE TO PAYMENT</button>
                 <button
                   style={{
                     color: 'red',
@@ -160,12 +125,12 @@ const Chat = props => {
               <StripeCheckout
                 amount={props.cost * 100}
                 image={require('../../assets/payment-logo.png')}
-                stripeKey='pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa'
-                description='Connect with a traveler'
-                name='Make payment to continue'
-                locale='auto'
-                label='Pay With Card to Continue'
-                panelLabel={'Pay $' + props.cost}
+                stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
+                description="Connect with a traveler"
+                name="Make payment to continue"
+                locale="auto"
+                label="Pay With Card to Continue"
+                // panelLabel={'Pay $' + props.cost}
                 token={() => props.history.push('/dashboard/transactions')}
               />
             )}
