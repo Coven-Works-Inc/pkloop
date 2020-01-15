@@ -43,56 +43,58 @@ const Travelers = props => {
       ) : travelers.length === 0 ? (
         <h3>No Traveler found</h3>
       ) : (
-            travelers.map((traveler, key) => (
-              <div key={key} className='travel-card'>
-                <div className='card-left'>
-                  <img
-                    src={ProfilePicture}
-                    alt=''
-                    style={{
-                      height: '150px',
-                      maxWidth: '100%'
-                    }}
-                  />
-                  <p style={{ marginTop: '2px' }}>{traveler.username}</p>
+        travelers.map((traveler, key) => (
+          <div key={key} className='travel-card'>
+            <div className='card-left'>
+              <img
+                src={ProfilePicture}
+                alt=''
+                style={{
+                  height: '150px',
+                  maxWidth: '100%'
+                }}
+              />
+              <p style={{ marginTop: '2px' }}>{traveler.username}</p>
 
-                  <p onClick={() => props.connect(traveler)} className='button'>connect</p>
-                </div>
-                <div className='card-right'>
-                  <h3>
-                    <span className='gray'>From: </span>{' '}
-                    {`${traveler.locationCity}, ${traveler.locationCountry}`}
-                  </h3>
-                  <h3>
-                    <span className='gray'>To: </span>{' '}
-                    {`${traveler.destinationCity}, ${traveler.destinationCountry}`}
-                  </h3>
-                  <p>
-                    <span className='gray'>Arrival Date: </span>{' '}
-                    {traveler.arrivalDate.split('T')[0]}
-                  </p>
-                  <p>
-                    <span className='gray'>Stopovers: </span>{' '}
-                    {traveler.stopOvers ? traveler.stopOvers : 'None'}
-                  </p>
-                  <p>
-                    <span className='gray'>Means of transportation: </span>{' '}
-                    {traveler.transport}
-                  </p>
-                  <p>
-                    <span className='gray'>Size of parcel willing to carry: </span>{' '}
-                    {traveler.parcelSize}
-                  </p>
-                  <p>
-                    <span className='gray'>
-                      Weight of parcel willing to carry:{' '}
-                    </span>{' '}
-                    {traveler.parcelWeight}
-                  </p>
-                </div>
-              </div>
-            ))
-          )}
+              <p onClick={() => props.connect(traveler)} className='button'>
+                connect
+              </p>
+            </div>
+            <div className='card-right'>
+              <h3>
+                <span className='gray'>From: </span>{' '}
+                {`${traveler.locationCity}, ${traveler.locationCountry}`}
+              </h3>
+              <h3>
+                <span className='gray'>To: </span>{' '}
+                {`${traveler.destinationCity}, ${traveler.destinationCountry}`}
+              </h3>
+              <p>
+                <span className='gray'>Arrival Date: </span>{' '}
+                {traveler.arrivalDate.split('T')[0]}
+              </p>
+              <p>
+                <span className='gray'>Stopovers: </span>{' '}
+                {traveler.stopOvers ? traveler.stopOvers : 'None'}
+              </p>
+              <p>
+                <span className='gray'>Means of transportation: </span>{' '}
+                {traveler.transport}
+              </p>
+              <p>
+                <span className='gray'>Size of parcel willing to carry: </span>{' '}
+                {traveler.parcelSize}
+              </p>
+              <p>
+                <span className='gray'>
+                  Weight of parcel willing to carry:{' '}
+                </span>{' '}
+                {traveler.parcelWeight}
+              </p>
+            </div>
+          </div>
+        ))
+      )}
     </div>
   )
 }
