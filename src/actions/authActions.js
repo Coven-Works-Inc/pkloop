@@ -61,6 +61,7 @@ export const loginUser = (userData, history, props) => dispatch => {
 
       const location = props.location
       if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
+        localStorage.removeItem('redirect')
         history.push('/parcel')
       } else {
         history.push('/dashboard/transactions')

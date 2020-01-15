@@ -10,7 +10,7 @@ import cities from '../../world-cities_json.json';
 
 import Travelers from './travelers'
 import Modal from '../common/modal'
-// import Payment from '../payment'
+import Payment from '../payment'
 
 import './parcel.css'
 import travelData from '../../travelers.json'
@@ -42,7 +42,8 @@ const Parcel = props => {
     isAuthenticated: false,
     isLocal: true,
     travelerData: {},
-    runParcelCost: null
+    runParcelCost: null,
+    fundAmount: 0
   })
   useEffect(() => {
     props.fetchTravelers()
@@ -96,6 +97,13 @@ const Parcel = props => {
         filteredLocation: travelers.filter(traveler => Number(traveler.parcelWeight) >= Number(e.target.value)),
       })
     }
+    if (e.target.name === 'fundAmount') {
+      setState({
+        ...state,
+        [e.target.name]: e.target.value,
+        filteredLocation: travelers.filter(traveler => Number(traveler.parcelWeight) >= Number(e.target.value)),
+      })
+    }
   }
   const submitHandler = e => {
     setState({
@@ -105,17 +113,21 @@ const Parcel = props => {
     e.preventDefault()
   }
 
-  const addTravelerToState = traveler => {
-    setState({
-      ...state,
-      travelerData: traveler
-    })
+  const fundWallet = () => {
+    return null;
   }
+
+  // const addTravelerToState = traveler => {
+  //   setState({
+  //     ...state,
+  //     travelerData: traveler
+  //   })
+  // }
 
   const handleConnect = (traveler) => {
     // console.log(traveler)
-    addTravelerToState(traveler)
-    console.log(traveler)
+    // addTravelerToState(traveler)
+    // console.log(traveler)
     if (!props.user.isAuthenticated) {
       setState({
         ...state,
@@ -219,6 +231,8 @@ const Parcel = props => {
       }
     }
   }
+
+  console.log(props)
 
   // fetchCountries = () => {
   //   let countriesList = ''
@@ -384,21 +398,40 @@ const Parcel = props => {
         onClose={toggleModal}>
         {state.isAuthenticated &&
           <div>
-            <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h2>
-            <br />
-            {/*  */}
-            <div className="button-group">
-              <button className="btnQ medium" onClick={() => props.history.push({
-                pathname: '/dashboard/chat',
-                parcelCost: state.parcelCost,
-                travelerData: state.travelerData
-              })}>Yes, Continue</button>
-              <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
-            </div>
             {
-              !state.isLocal &&
-              <small>International pricing applies. See <Link to='/pricing' target='_blank' style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>Pricing Guide</Link></small>
+              props.user.user.balance >= state.parcelCost &&
+              <div>
+                <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h2>
+                <br />
+                <div className="button-group">
+                  <button className="btnQ medium" onClick={() => props.history.push({
+                    pathname: '/dashboard/chat',
+                    parcelCost: state.parcelCost,
+                    travelerData: state.travelerData
+                  })}>Yes, Continue</button>
+                  <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
+                </div>
+                {
+                  !state.isLocal &&
+                  <small>International pricing applies. See <Link to='/pricing' target='_blank' style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>Pricing Guide</Link></small>
+                }
+              </div>
             }
+            {
+              props.user.user.balance < state.parcelCost &&
+              <div>
+                <h2>Your balance is insufficient to connect with a traveler. Fund your wallet to continue</h2>
+                <br />
+                <input type="number" className="popupInput" name="fundAmount" placeholder="Enter Amount" value={state.fundAmount} onChange={onChangeHandler} />
+                <br />
+                <div className="button-group">
+                  {/* <button className='btnQ medium' onClick={fundWallet}>Fund Wallet</button> */}
+                  <Payment amount={Number(state.fundAmount)} />
+                  {/* <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Ignore</button> */}
+                </div>
+              </div>
+            }
+
           </div>}
         {!state.isAuthenticated &&
           <div>

@@ -3,7 +3,7 @@ import StripeCheckout from 'react-stripe-checkout'
 import './payment.css'
 
 const Payment = (props) => {
-  // console.log(props.location.weight)
+  console.log(props)
   return (
     <div>
       <StripeCheckout
@@ -12,6 +12,7 @@ const Payment = (props) => {
         description="Connect with a traveler"
         name="Make payment to continue"
         locale="auto"
+        amount={props.amount * 100}
         token={() => props.history.push('/login')}
       />
     </div>
