@@ -27,7 +27,7 @@ class Register extends Component {
   //   console.log(this.props);
   // }
 
-  componentWillReceiveProps () {
+  componentWillReceiveProps() {
     // console.log(this.props);
     this.setState({
       errors: this.props.errors
@@ -58,12 +58,12 @@ class Register extends Component {
       confirmpassword: this.state.confirmPassword
     }
 
-    this.props.registerUser(newUser, this.props.history)
+    this.props.registerUser(newUser, this.props.history, this.props)
   }
 
-  render () {
+  render() {
     const { errors } = this.state
-    // console.log(errors);
+    // console.log(this.props);
 
     return (
       <div id='container'>
@@ -177,8 +177,8 @@ class Register extends Component {
                         aria-hidden='true'
                       ></span>
                     ) : (
-                      <div>SIGN UP NOW</div>
-                    )}{' '}
+                        <div>SIGN UP NOW</div>
+                      )}{' '}
                   </button>
                   {/* {loading && <img
                   src={loader}

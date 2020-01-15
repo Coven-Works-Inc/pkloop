@@ -403,7 +403,10 @@ const Parcel = props => {
             <h2>Please login to connect with a traveller</h2>
             <br />
             <div className="button-group">
-              <button className='btnQ medium' onClick={() => props.history.push('/login')}>Yes, Go To Login</button>
+              <button className='btnQ medium' onClick={() => props.history.push({
+                pathname: '/login',
+                redirect: '/parcel'
+              })}>Yes, Go To Login</button>
               <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Stay on This Page</button>
             </div>
           </div>}

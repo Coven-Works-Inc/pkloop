@@ -11,7 +11,7 @@ import {
 } from './types'
 import { BASE_URL } from '../config/constants'
 
-export const registerUser = (userData, history) => dispatch => {
+export const registerUser = (userData, history, props) => dispatch => {
   dispatch({
     type: LOADING,
     payload: true
@@ -20,6 +20,10 @@ export const registerUser = (userData, history) => dispatch => {
     .post(`${BASE_URL}/auth/signup`, userData)
     .then(res => {
       // console.log(res.data)
+      // const location = props.location
+      // if (location.redirect === '/parcel') {
+      //   localStorage.setItem('redirect', props.location.redirect)
+      // }
       history.push('/verify')
     })
     .catch(err => {
@@ -53,8 +57,14 @@ export const loginUser = (userData, history, props) => dispatch => {
       setAuthToken(token)
       const decoded = jwt_decode(token)
       dispatch(setCurrentUser(decoded, token))
+      console.log(props)
 
-      history.push('/dashboard/transactions')
+      const location = props.location
+      if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
+        history.push('/parcel')
+      } else {
+        history.push('/dashboard/transactions')
+      }
     })
     .catch(err => {
       dispatch({

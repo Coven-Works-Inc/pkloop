@@ -15,7 +15,7 @@ class Login extends Component {
     display: 'none'
   }
 
-  componentWillMount () {
+  componentWillMount() {
     const query = queryString.parse(this.props.location.search)
     if (query.token) {
       window.localStorage.setItem('jwt', query.token)
@@ -23,7 +23,7 @@ class Login extends Component {
     }
   }
 
-  componentWillReceiveProps () {
+  componentWillReceiveProps() {
     this.setState({
       errors: this.props.error
     })
@@ -38,7 +38,7 @@ class Login extends Component {
     })
   }
 
-  googleAuth = e => {}
+  googleAuth = e => { }
 
   onSubmitHandler = e => {
     e.preventDefault()
@@ -55,7 +55,7 @@ class Login extends Component {
     this.props.loginUser(userData, this.props.history, this.props)
   }
 
-  render () {
+  render() {
     const { errors } = this.state
 
     return (
@@ -105,7 +105,7 @@ class Login extends Component {
                       placeholder='Password'
                       value={this.state.password}
                       onChange={this.onChangeHandler}
-                      // errors={errors.password}
+                    // errors={errors.password}
                     />
                   </div>
                   <Link to='/forgot'>
@@ -131,8 +131,8 @@ class Login extends Component {
                         aria-hidden='true'
                       ></span>
                     ) : (
-                      <div>Login now</div>
-                    )}
+                        <div>Login now</div>
+                      )}
                   </button>
                 </form>
                 <p style={{ textAlign: 'center' }}>OR</p>
@@ -176,7 +176,10 @@ class Login extends Component {
                   <span className='sec_text'>
                     {' '}
                     <Link
-                      to='/register'
+                      to={{
+                        pathname: '/register',
+                        redirect: '/parcel'
+                      }}
                       style={{
                         textDecoration: 'none',
                         color: 'rgba(0, 189, 190)'
