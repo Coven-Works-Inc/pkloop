@@ -141,7 +141,7 @@ const Chat = props => {
             {props.completed && (
               <Modal show={props.completed} onClose={toggleModal}>
                   <p>Are you sure you want to pay, cancellation attracts a 5% charge</p>
-                  <button className='btnQ medium' style={{marginRight: '10px'}}>{`pay $${props.cost}`} onClick={handleParcelPayment}</button>
+                  <button className='btnQ medium' style={{marginRight: '10px'}} onClick={handleParcelPayment}>{`pay $${props.cost}`}</button>
                   <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Not Interested</button>
               </Modal>
             //   <StripeCheckout
