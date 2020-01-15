@@ -25,7 +25,7 @@ export const fetchTickets = () => async dispatch => {
     .then(res => {
       dispatch({
         type: FETCH_TICKETS,
-        payload: res.data.support
+        payload: res.data.tickets
       })
     })
     .catch(err => {

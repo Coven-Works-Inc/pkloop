@@ -49,6 +49,7 @@ const Support = props => {
   const {
     tickets: { tickets }
   } = props
+
   console.log(tickets)
 
   return (
@@ -68,7 +69,10 @@ const Support = props => {
       </div>
 
       {tickets === undefined ? (
-        <h3 style={{ textAlign: 'center', marginTop: '2rem' }}> ... </h3>
+        <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>
+          {' '}
+          Loading ...{' '}
+        </h3>
       ) : tickets.length === 0 ? (
         <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>
           You do not any Tickets yet
