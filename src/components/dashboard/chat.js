@@ -73,6 +73,11 @@ const Chat = props => {
       headerText: text
     })
   }
+  const handleParcelPayment = () => {
+    //TODO: CHECK IF ENOUGH MONEY IS IN BALANCE
+    //REDIRECT TO FUND WALLET PAGE IF NOT
+    //SUBTRACT FROM WALLET IF ENOUGH
+  }
   return (
     <div className='chat'>
       <div className='chat-details'>
@@ -136,7 +141,7 @@ const Chat = props => {
             {props.completed && (
               <Modal show={props.completed} onClose={toggleModal}>
                   <p>Are you sure you want to pay, cancellation attracts a 5% charge</p>
-                  <button className='btnQ medium' style={{marginRight: '10px'}}>{`pay $${props.cost}`}</button>
+                  <button className='btnQ medium' style={{marginRight: '10px'}}>{`pay $${props.cost}`} onClick={handleParcelPayment}</button>
                   <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Not Interested</button>
               </Modal>
             //   <StripeCheckout
