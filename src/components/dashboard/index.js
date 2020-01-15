@@ -21,10 +21,13 @@ class Dashboard extends Component {
     modalOpen: false,
     modalType: 'insurance',
     tipAmount: 0,
+    senderCost: this.props.traveler ? this.props.traveler.senderCost : null,
     parcelCost: this.props.traveler ? this.props.traveler.senderCost : null,
     completed: false,
     parcelWorth: 0,
     insuranceCost: 0,
+    tipAdded: false,
+    insuranceAdded: false,
     parcelItem: '',
     checked:false,
     insuranceSuccess: false,
@@ -56,6 +59,7 @@ class Dashboard extends Component {
     this.setState({
       ...this.state,
       tipAmount: e.target.value,
+      tipAdded: true,
       parcelCost: e.target.value ? (this.props.traveler.senderCost + Number(e.target.value)).toFixed(2) : this.props.traveler.senderCost
     })
   }
@@ -99,14 +103,14 @@ class Dashboard extends Component {
       this.setState({
         ...this.state,
         insuranceSuccess: true,
-        parcelCost: this.state.parcelCost + this.state.insuranceCost
+        parcelCost: parseInt(this.state.parcelCost) + parseInt(this.state.insuranceCost),
       })
       setTimeout(this.toggleModal, 1000)
     }
   }
   render() {
     const { headerText } = this.state
-
+    {console.log(this.state.parcelCost)}
     const changeHeader = text => {
       this.setState({
         headerText: text
@@ -171,7 +175,17 @@ class Dashboard extends Component {
             </p>
           </div>
           {headerText === 'transactions' && <Transactions />}
-          {headerText === 'chat' && <Chat cost={this.state.parcelCost} completed={this.state.completed} markTrans={this.markAsComplete} modal={this.handleModal} />}
+          {headerText === 'chat' && <Chat cost={this.state.parcelCost} 
+                                          completed={this.state.completed} 
+                                          markTrans={this.markAsComplete} 
+                                          modal={this.handleModal} 
+                                          tipAdded={this.state.tipAdded}
+                                          insuranceSuccess={this.state.insuranceSuccess}
+                                          tipAmount={this.state.tipAmount}
+                                          insuranceCost={this.state.insuranceCost}
+                                          parcelCost={this.state.parcelCost}
+                                          senderCost={this.state.senderCost}
+                                          />}
           {headerText === 'profile' && <Profile />}
           {headerText === 'balance' && <Balance />}
           {headerText === 'support' && <Support />}
