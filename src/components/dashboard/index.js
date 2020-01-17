@@ -90,7 +90,7 @@ class Dashboard extends Component {
       order_number: uuidv4()
     }
     await this.props.addInsurance(userData)
-    
+    console.log(userData)
   }
   handleCheckbox = () => {
     this.setState({
@@ -197,7 +197,7 @@ class Dashboard extends Component {
             <div className="insurance">
               {this.state.insuranceSuccess ? <p style={{ color: 'green'}}>Insurance Policy successfully added</p>: <h2></h2>}
               <label>What is the worth of your parcel? Range between $0 - $2000</label>
-              <input type="range" min="0" max="2000" value={this.state.parcelWorth} onChange={this.insuranceChangeHandler} className="slider"/>
+              <input type="range" min="0" max="1500" value={this.state.parcelWorth} onChange={this.insuranceChangeHandler} className="slider"/>
               <h3>parcel Worth: {this.state.parcelWorth}</h3>
               <br />
               <br />
