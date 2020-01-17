@@ -81,6 +81,7 @@ class index extends Component {
       stopOver1: this.state.stopOver1,
       stopOver2: this.state.stopOver2,
       stopOver3: this.state.stopOver3,
+      username: this.props.user.username,
       stopOver4: this.state.stopOver4,
       parcelSize: this.state.parcelSize,
       parcelWeight: this.state.parcelWeight,
@@ -305,7 +306,8 @@ class index extends Component {
 }
 
 const mapStateToProps = state => ({
-  trips: state.trips
+  trips: state.trips,
+  user: state.auth.user
 })
 
 export default connect(mapStateToProps, { postTrip })(index)

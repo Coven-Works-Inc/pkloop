@@ -34,7 +34,7 @@ export const addInsurance =   (userData) => dispatch => {
     //         })
     //     })
     //     .catch(err => {
-    //         dispatch({
+    //         dispatch({s
     //             type: GET_ERRORS,
     //             payload: err
     //         })
@@ -43,13 +43,15 @@ export const addInsurance =   (userData) => dispatch => {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
+            // credentials: 'include', // include, *same-origin, omit
             headers: {
             //   'Content-Type': 'application/json'
-              'Content-Type': 'application/x-www-form-urlencoded',
+              'Content-Type': 'application/x-www-form-urlencoded',  
+              'Access-Control-Allow-Origin': 'http://localhost:3000',
+            //   'Access-Control-Allow-Credentials': 'true'
             },
             body: qs.stringify(userData) // body data type must match "Content-Type" header
-          }).then(response => response.json())
+          }).then(response => console.log(response))
           .then(data => {
               dispatch({
                   type: ADD_INSURANCE,
