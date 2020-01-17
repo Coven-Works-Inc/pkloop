@@ -100,8 +100,7 @@ const Parcel = props => {
     if (e.target.name === 'fundAmount') {
       setState({
         ...state,
-        [e.target.name]: e.target.value,
-        filteredLocation: travelers.filter(traveler => Number(traveler.parcelWeight) >= Number(e.target.value)),
+        [e.target.name]: e.target.value
       })
     }
   }
@@ -399,7 +398,7 @@ const Parcel = props => {
         {state.isAuthenticated &&
           <div>
             {
-              props.user.user.balance >= state.parcelCost &&
+              Number(props.user.user.balance) >= Number(state.parcelCost) &&
               <div>
                 <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h2>
                 <br />
@@ -418,7 +417,7 @@ const Parcel = props => {
               </div>
             }
             {
-              props.user.user.balance < state.parcelCost &&
+              Number(props.user.user.balance) < Number(state.parcelCost) &&
               <div>
                 <h2>Your balance is insufficient to connect with a traveler. Fund your wallet to continue</h2>
                 <br />
@@ -426,7 +425,7 @@ const Parcel = props => {
                 <br />
                 <div className="button-group">
                   {/* <button className='btnQ medium' onClick={fundWallet}>Fund Wallet</button> */}
-                  <Payment amount={Number(state.fundAmount)} />
+                  <Payment click={toggleModal} amount={Number(state.fundAmount)} />
                   {/* <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Ignore</button> */}
                 </div>
               </div>

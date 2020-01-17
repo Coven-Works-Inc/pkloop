@@ -1,10 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import StripeCheckout from 'react-stripe-checkout'
 import './payment.css'
+import axios from 'axios'
+import { BASE_URL } from '../../config/constants'
+import * as actions from '../../actions/balanceActions'
 
 const Payment = (props) => {
-  const amountToPay = props.amount * 100
+  const amountToPay = Number(props.amount) * 100
   console.log(props)
+
+  const [state, setState] = useState({
+    amount: Number(props.amount) * 100
+  })
+
+  const onToken = (token, addresses) => {
+    console.log(token)
+    // console.log(addresses)
+    props.click()
+
+    const data = {
+      description: `Payment of $${props.amount} made by ${token.email} on ${token.created}`,
+      source: token.id,
+      currency: 'USD',
+      amount: amountToPay
+    }
+
+    console.log(data)
+    axios.post(`${BASE_URL}/payments`, data)
+      .then(response => {
+        console.log(response)
+        // if (response.data.status === 200) {
+        //   console.log()
+        // }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   return (
     <div>
       <StripeCheckout
@@ -14,8 +48,8 @@ const Payment = (props) => {
         name="Make payment to continue"
         locale="auto"
         amount={amountToPay}
-        token={() => props.history.push('/login')}
-        panelLabel={'Pay $' + amountToPay}
+        token={onToken}
+        panelLabel="Pay"
       />
     </div>
 
@@ -77,4 +111,9 @@ const Payment = (props) => {
   )
 }
 
-export default Payment
+const mapStateToProps = state => ({
+  transaction: state.transaction,
+  balance: state.balance
+})
+
+export default connect(mapStateToProps, actions)(Payment)

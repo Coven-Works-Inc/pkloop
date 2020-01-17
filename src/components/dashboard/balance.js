@@ -5,14 +5,11 @@ import * as actions from '../../actions/balanceActions'
 
 const Balance = props => {
 
-  const {
-    balance: { balance }
-    // user: { balance, amountMade }
-  } = props
+  const { balance: { user: { balance } } } = props
 
-  // useEffect(() => {
-  //   props.setCurrentUser()
-  // }, [])
+  useEffect(() => {
+    props.setCurrentUser()
+  }, [props.balance.user.balance])
 
   const [state, setState] = useState({
     amountMade: 0,
@@ -22,9 +19,9 @@ const Balance = props => {
   })
 
   console.log(props)
-  console.log(props.auth.user.balance)
-  // if (props.balance) {
-  console.log(props.balance.balance)
+  // console.log(props.auth.user.balance)
+  // // if (props.balance) {
+  // console.log(props.balance.balance)
   // }
 
   const toggleModal = () => {
@@ -49,17 +46,18 @@ const Balance = props => {
     }
 
     props.updateBalance(data)
+
     setState({
       ...state,
-
+      amount: 0
     })
 
-    // setState({
-    //   ...state,
-    //   balance: state.balance + Number(state.amount),
-    //   modalOpen: false,
-    //   amount: 0
-    // })
+    props.setCurrentUser()
+
+    setState({
+      ...state,
+      modalOpen: false
+    })
   }
 
   return (
@@ -96,9 +94,8 @@ const Balance = props => {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
   transaction: state.transaction,
-  balance: state.balance.balance
+  balance: state.balance
 })
 
 export default connect(mapStateToProps, actions)(Balance)
