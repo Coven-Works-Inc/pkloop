@@ -51,7 +51,9 @@ class Dashboard extends Component {
   toggleModal = () => {
     this.setState({
       ...this.state,
-      modalOpen: !this.state.modalOpen
+      modalOpen: !this.state.modalOpen,
+      tipAmount: 0,
+      parcelCost: this.props.traveler.senderCost,
     })
   }
 
@@ -196,7 +198,7 @@ class Dashboard extends Component {
             modalType === 'insurance' &&
             <div className="insurance">
               {this.state.insuranceSuccess ? <p style={{ color: 'green'}}>Insurance Policy successfully added</p>: <h2></h2>}
-              <label>What is the worth of your parcel? Range between $0 - $2000</label>
+              <label>What is the worth of your parcel? Range between $0 - $1500</label>
               <input type="range" min="0" max="1500" value={this.state.parcelWorth} onChange={this.insuranceChangeHandler} className="slider"/>
               <h3>parcel Worth: {this.state.parcelWorth}</h3>
               <br />
