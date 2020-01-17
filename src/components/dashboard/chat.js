@@ -42,7 +42,7 @@ const Chat = props => {
     setName(props.traveler._id)
     setRoom('New room')
 
-    socket = io('http://localhost:4000')
+    socket = io('https://aqueous-ravine-50016.herokuapp.com/')
     socket.emit('join', { name, room }, () => {
         console.log(name, room)
     })
@@ -269,7 +269,6 @@ const Chat = props => {
 const mapStateToProps = state => {
   return {
     traveler: state.travelers.travelerData,
-    user: state.chat.user
   }
 }
 export default connect(mapStateToProps, { joinChatRoom })(Chat)
