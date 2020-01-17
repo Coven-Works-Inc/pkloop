@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 //Import megged
 // import StripeCheckout from '../payment'
+import { joinChatRoom } from '../../actions/chatActions'
 import StripeCheckout from 'react-stripe-checkout'
-import { Widget } from 'react-chat-widget';
+import io from 'socket.io-client'
 
 import 'react-chat-widget/lib/styles.css';
 import HeaderFooter from '../headerFooter'
@@ -27,8 +28,34 @@ import './chat.css'
 import Button from '../common/button'
 import Modal from '../common/modal'
 
-
+const socket = io('http://localhost:4000')
 const Chat = props => {
+  const [messages, setMessages] = useState([])
+  const [message, setMessage] = useState('')
+  const [replies, setReplies] = useState([])
+  const [reply, setReply] = useState('')
+
+
+  useEffect(() => {
+    props.joinChatRoom('mosho1od', 'new 1 roooom')
+  }, [messages])
+  useEffect(() => {
+    socket.on('message', ({user, text}, callback) => {
+      setMessages([...messages, text])
+      console.log(text, messages)
+  })
+    socket.on('reply', ({ text }) => {
+      setReplies([...replies, text])
+      console.log(text, replies)
+    })
+  }, [message, reply])
+  const sendMessage = (e) => {
+    e.preventDefault()
+    if(message){
+      socket.emit('sendMessage', message, () => setMessage(''))
+    }
+    setReply(e)
+  }
   const [state, setState] = useState({
     headerText: 'Sender details',
     tipAmount: props.tipAmount,
@@ -186,21 +213,31 @@ const Chat = props => {
         >
           <ThemeProvider theme={theme}>
           <div style={{ width: '100%', background: 'white' }}>
-            <MessageList active>
-              <Message authorName="Jon Smith" date="21:37" showMetaOnClick style={{ borderRadius: '1em', padding: '5px 10px', height: 'max-content' }}><MessageText>Hello</MessageText></Message>
-            </MessageList>
+
             <Row reverse>
-              <Message isOwn radiusType='single' showMetaOnClick style={{ backgroundColor: '#00bdbe', borderRadius: '1em', padding: '5px 10px', height: 'max-content' }}>
-                <MessageText>Hi!</MessageText>
-              </Message>
+              <MessageList>
+                {messages.map(message => (
+                   <Message isOwn radiusType='single'  showMetaOnClick style={{ backgroundColor: '#00bdbe', borderRadius: '1em', padding: '5px 10px', height: 'max-content' }}>
+                     <MessageText>{message}</MessageText>
+                   </Message>
+
+                ))}
+
+              </MessageList>
             </Row>
-            <TextComposer>
+            <MessageList active>
+              {replies.map(rep => (
+                  <Message authorName="Jon Smith" date="21:37" showMetaOnClick style={{ borderRadius: '1em', padding: '5px 10px', height: 'max-content' }}><MessageText>{rep}</MessageText></Message>
+              ))}
+              
+            </MessageList>
+            <TextComposer onClick={sendMessage} onChange={(event) => setMessage(event.target.value)} >
               <Row align="center">
                 <IconButton fit>
                   <AddIcon />
                 </IconButton>
-                <TextInput fill />
-                <SendButton fit />
+                <TextInput fill/>
+                <SendButton fit/>
               </Row>
 
               <Row verticalAlign="center" justify="right">
@@ -222,4 +259,4 @@ const mapStateToProps = state => {
     traveler: state.travelers.travelerData
   }
 }
-export default connect(mapStateToProps)(Chat)
+export default connect(mapStateToProps, { joinChatRoom })(Chat)
