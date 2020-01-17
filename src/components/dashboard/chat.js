@@ -28,27 +28,40 @@ import './chat.css'
 import Button from '../common/button'
 import Modal from '../common/modal'
 
-const socket = io('http://localhost:4000')
+let socket
 const Chat = props => {
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState('')
   const [replies, setReplies] = useState([])
   const [reply, setReply] = useState('')
-
+  const [name, setName] = useState('')
+  const [room, setRoom] = useState('')
 
   useEffect(() => {
-    props.joinChatRoom('mosho1od', 'new 1 roooom')
-  }, [messages])
+
+    setName(props.traveler._id)
+    setRoom('New room')
+
+    socket = io('http://localhost:4000')
+    socket.emit('join', { name, room }, () => {
+        console.log(name, room)
+    })
+
+    return() => {
+      socket.emit('disconnect')
+      socket.off()
+    }
+  }, [props.traveler._id, name])
   useEffect(() => {
     socket.on('message', ({user, text}, callback) => {
       setMessages([...messages, text])
-      console.log(text, messages)
+      console.log(messages)
   })
     socket.on('reply', ({ text }) => {
       setReplies([...replies, text])
       console.log(text, replies)
     })
-  }, [message, reply])
+  },)
   const sendMessage = (e) => {
     e.preventDefault()
     if(message){
@@ -61,7 +74,6 @@ const Chat = props => {
     tipAmount: props.tipAmount,
     modalOpen: props.completed,
   })
-  console.log(props)
   if (props.traveler) {
   }
   const toggleModal = () => {
@@ -256,7 +268,8 @@ const Chat = props => {
 }
 const mapStateToProps = state => {
   return {
-    traveler: state.travelers.travelerData
+    traveler: state.travelers.travelerData,
+    user: state.chat.user
   }
 }
 export default connect(mapStateToProps, { joinChatRoom })(Chat)
