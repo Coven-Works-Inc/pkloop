@@ -5,18 +5,21 @@ import * as actions from '../../actions/balanceActions'
 
 const Balance = props => {
 
-  const { balance: { user: { balance } } } = props
-
-  useEffect(() => {
-    props.setCurrentUser()
-  }, [props.balance.user.balance])
+  // const { balance: { user: { balance } } } = props
 
   const [state, setState] = useState({
     amountMade: 0,
-    balance: balance,
+    // balance: balance,
     modalOpen: false,
     amount: 0
   })
+
+  const [balance, setBalance] = useState(0)
+
+  useEffect(() => {
+    props.setCurrentUser();
+    setBalance(props.balance.user.balance);
+  }, [])
 
   console.log(props)
   // console.log(props.auth.user.balance)
@@ -69,7 +72,7 @@ const Balance = props => {
       <div className='balance'>
         <div className='left-side'>
           <p>My PKLoop Balance</p>
-          <h2>${state.balance}</h2>
+          <h2>${balance}</h2>
         </div>
         <div className='right-side'>
           <button>Withdraw</button>

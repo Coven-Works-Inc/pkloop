@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import StripeCheckout from 'react-stripe-checkout'
 import './payment.css'
@@ -10,9 +10,11 @@ const Payment = (props) => {
   const amountToPay = Number(props.amount) * 100
   console.log(props)
 
-  const [state, setState] = useState({
-    amount: Number(props.amount) * 100
-  })
+  const [amount, setAmount] = useState(0)
+
+  useEffect(() => {
+    setAmount(amount)
+  }, [])
 
   const onToken = (token, addresses) => {
     console.log(token)
