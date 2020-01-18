@@ -10,11 +10,22 @@ const Payment = (props) => {
   const amountToPay = Number(props.amount) * 100
   console.log(props)
 
-  const [amount, setAmount] = useState(0)
+  const [balance, setBalance] = useState(0)
 
   useEffect(() => {
-    setAmount(amount)
+    getUserData()
   }, [])
+
+  const getUserData = () => {
+    axios.get(`${BASE_URL}/users/fetchUser`)
+      .then(response => {
+        console.log(response.data)
+        setBalance(response.data.data.balance)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
   const onToken = (token, addresses) => {
     console.log(token)
@@ -32,9 +43,7 @@ const Payment = (props) => {
     axios.post(`${BASE_URL}/payments`, data)
       .then(response => {
         console.log(response)
-        // if (response.data.status === 200) {
-        //   console.log()
-        // }
+        getUserData();
       })
       .catch(error => {
         console.log(error)
