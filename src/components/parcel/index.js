@@ -10,14 +10,16 @@ import cities from '../../world-cities_json.json';
 
 import Travelers from './travelers'
 import Modal from '../common/modal'
-import Payment from '../payment'
+
+import axios from 'axios'
+import StripeCheckout from 'react-stripe-checkout'
+import { BASE_URL } from '../../config/constants'
 
 import './parcel.css'
 import travelData from '../../travelers.json'
 import countriesData from '../../countries.json'
 
 const Parcel = props => {
-  // console.log(props)
 
   const [state, setState] = useState({
     locationCountry: '',
@@ -100,8 +102,7 @@ const Parcel = props => {
     if (e.target.name === 'fundAmount') {
       setState({
         ...state,
-        [e.target.name]: e.target.value,
-        filteredLocation: travelers.filter(traveler => Number(traveler.parcelWeight) >= Number(e.target.value)),
+        [e.target.name]: e.target.value
       })
     }
   }
@@ -113,21 +114,58 @@ const Parcel = props => {
     e.preventDefault()
   }
 
-  const fundWallet = () => {
-    return null;
+  const [walletBalance, setBalance] = useState(0)
+
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  const getUserData = () => {
+    axios.get(`${BASE_URL}/users/fetchUser`)
+      .then(response => {
+        console.log(response.data)
+        setBalance(response.data.data.balance)
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
-  // const addTravelerToState = traveler => {
-  //   setState({
-  //     ...state,
-  //     travelerData: traveler
-  //   })
-  // }
+  const fundWallet = () => {
+    const data = { amount: Number(state.amount) }
+
+    axios.put(`${BASE_URL}/users/updateMyBalance`, data)
+      .then(response => {
+        toggleModal();
+        getUserData();
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  }
+
+  const onToken = (token) => {
+    toggleModal();
+    const amountToPay = Number(state.amount) * 100;
+
+    const data = {
+      description: `Payment of $${state.amount} made by ${token.email} on ${token.created}`,
+      source: token.id,
+      currency: 'USD',
+      amount: amountToPay
+    }
+
+    axios.post(`${BASE_URL}/payments`, data)
+      .then(response => {
+        console.log(response)
+        fundWallet();
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
   const handleConnect = (traveler) => {
-    // console.log(traveler)
-    // addTravelerToState(traveler)
-    // console.log(traveler)
     if (!props.user.isAuthenticated) {
       setState({
         ...state,
@@ -232,47 +270,16 @@ const Parcel = props => {
     }
   }
 
-  console.log(props)
-
-  // fetchCountries = () => {
-  //   let countriesList = ''
-  //   this.state.countries.map((country, index) => {
-  //     countriesList += <option value={country[index]}>{country[index]}</option>
-  //   })
-  //   return countriesList
-  // }
-
   const toggleModal = () => {
     setState({
       ...state,
       modalOpen: !state.modalOpen
     })
   }
-  // const fetchCities = (type, country) => {
-  //   if (type === 'from') {
-  //     this.setState({
-  //       fromcities: [
-  //         {
-  //           name: 'New York City',
-  //           code: 'nyc'
-  //         },
-  //         {
-  //           name: 'Washington',
-  //           code: 'dc'
-  //         },
-  //         {
-  //           name: 'Texas',
-  //           code: 'tx'
-  //         }
-  //       ]
-  //     })
-  //   }
-  // }
+
   const {
     travelers: { travelers }
   } = props
-  // console.log(travelers)
-  // console.log(state.parcelWeight)
 
   return (
     <HeaderFooter>
@@ -399,7 +406,7 @@ const Parcel = props => {
         {state.isAuthenticated &&
           <div>
             {
-              props.user.user.balance >= state.parcelCost &&
+              Number(walletBalance) >= Number(state.parcelCost) &&
               <div>
                 <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h2>
                 <br />
@@ -418,20 +425,26 @@ const Parcel = props => {
               </div>
             }
             {
-              props.user.user.balance < state.parcelCost &&
+              Number(walletBalance) < Number(state.parcelCost) &&
               <div>
                 <h2>Your balance is insufficient to connect with a traveler. Fund your wallet to continue</h2>
                 <br />
                 <input type="number" className="popupInput" name="fundAmount" placeholder="Enter Amount" value={state.fundAmount} onChange={onChangeHandler} />
                 <br />
                 <div className="button-group">
-                  {/* <button className='btnQ medium' onClick={fundWallet}>Fund Wallet</button> */}
-                  <Payment amount={Number(state.fundAmount)} />
-                  {/* <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Ignore</button> */}
+                  <StripeCheckout
+                    image={require('../../assets/payment-logo.png')}
+                    stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
+                    description="Connect with a traveler"
+                    name="Make payment to continue"
+                    locale="auto"
+                    amount={Number(state.fundAmount) * 100}
+                    token={onToken}
+                    panelLabel="Pay"
+                  />
                 </div>
               </div>
             }
-
           </div>}
         {!state.isAuthenticated &&
           <div>

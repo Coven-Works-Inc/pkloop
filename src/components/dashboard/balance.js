@@ -2,30 +2,70 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import Modal from '../common/modal'
 import * as actions from '../../actions/balanceActions'
+import axios from 'axios'
+import { BASE_URL } from '../../config/constants'
+import StripeCheckout from 'react-stripe-checkout'
 
 const Balance = props => {
 
-  const {
-    balance: { balance }
-    // user: { balance, amountMade }
-  } = props
-
-  // useEffect(() => {
-  //   props.setCurrentUser()
-  // }, [])
+  // const { balance: { user: { balance } } } = props
 
   const [state, setState] = useState({
     amountMade: 0,
-    balance: balance,
     modalOpen: false,
     amount: 0
   })
 
-  console.log(props)
-  console.log(props.auth.user.balance)
-  // if (props.balance) {
-  console.log(props.balance.balance)
-  // }
+  const [balance, setBalance] = useState(0)
+
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  const getUserData = () => {
+    axios.get(`${BASE_URL}/users/fetchUser`)
+      .then(response => {
+        console.log(response.data)
+        setBalance(response.data.data.balance)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+  const fundWallet = () => {
+    const data = { amount: Number(state.amount) }
+
+    axios.put(`${BASE_URL}/users/updateMyBalance`, data)
+      .then(response => {
+        toggleModal();
+        getUserData();
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  }
+
+  const onToken = (token) => {
+    toggleModal();
+    const amountToPay = Number(state.amount) * 100;
+
+    const data = {
+      description: `Payment of $${state.amount} made by ${token.email} on ${token.created}`,
+      source: token.id,
+      currency: 'USD',
+      amount: amountToPay
+    }
+
+    axios.post(`${BASE_URL}/payments`, data)
+      .then(response => {
+        console.log(response)
+        fundWallet();
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
   const toggleModal = () => {
     setState({
@@ -43,25 +83,6 @@ const Balance = props => {
     })
   }
 
-  const fundWallet = () => {
-    const data = {
-      amount: Number(state.amount)
-    }
-
-    props.updateBalance(data)
-    setState({
-      ...state,
-
-    })
-
-    // setState({
-    //   ...state,
-    //   balance: state.balance + Number(state.amount),
-    //   modalOpen: false,
-    //   amount: 0
-    // })
-  }
-
   return (
     <div className='balance-section'>
       <div className='amount'>
@@ -71,7 +92,7 @@ const Balance = props => {
       <div className='balance'>
         <div className='left-side'>
           <p>My PKLoop Balance</p>
-          <h2>${state.balance}</h2>
+          <h2>${balance}</h2>
         </div>
         <div className='right-side'>
           <button>Withdraw</button>
@@ -86,8 +107,16 @@ const Balance = props => {
           <input className="popupInput" type="number" name="amount" placeholder="Enter Amount" value={state.amount} onChange={onChangeHandler} />
           <br />
           <div className="button-group">
-            <button className='btnQ medium' onClick={fundWallet}>Okay, Proceed</button>
-            <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>Cancel</button>
+            <StripeCheckout
+              image={require('../../assets/payment-logo.png')}
+              stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
+              description="Connect with a traveler"
+              name="Make payment to continue"
+              locale="auto"
+              amount={Number(state.amount) * 100}
+              token={onToken}
+              panelLabel="Pay"
+            />
           </div>
         </div>
       </Modal>
@@ -95,10 +124,13 @@ const Balance = props => {
   )
 }
 
-const mapStateToProps = state => ({
-  auth: state.auth,
-  transaction: state.transaction,
-  balance: state.balance.balance
-})
+const mapStateToProps = state => {
+  console.log(state)
+  return {
+    transaction: state.transaction,
+    balance: state.balance.balance,
+    update: state.balance.user
+  }
+}
 
 export default connect(mapStateToProps, actions)(Balance)
