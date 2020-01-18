@@ -10,7 +10,7 @@ import jwt_decode from 'jwt-decode'
 import setAuthToken from './utils/setAuthToken'
 import { setCurrentUser, logoutUser } from './actions/authActions'
 
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import { Provider } from 'react-redux'
 import store from './store'
@@ -38,10 +38,10 @@ function App () {
     <div className='App'>
       <Notifications />
       <Provider store={store}>
-        <BrowserRouter>
+        <Router>
           <Routes />
           <ScrollToTop />
-        </BrowserRouter>
+        </Router>
       </Provider>
     </div>
   )
