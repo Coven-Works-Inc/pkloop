@@ -21,8 +21,6 @@ import {
   Message,
   MessageList,
   MessageText,
-  FixedWrapper,
-  Avatar
 } from '@livechat/ui-kit'
 import './chat.css'
 import Button from '../common/button'
