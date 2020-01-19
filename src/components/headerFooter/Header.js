@@ -5,7 +5,6 @@ import Logo from '../../assets/logo/Logo.png'
 import { Link as Linker } from 'react-scroll'
 import { connect } from 'react-redux'
 import { logoutUser } from '../../actions/authActions'
-import Bell from '../../bell.svg'
 
 class Header extends Component {
   state = {
