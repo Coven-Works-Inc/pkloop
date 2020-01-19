@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import { postParcel } from '../../actions/parcelActions'
 import HeaderFooter from '../headerFooter'
 import { connect } from 'react-redux'
-import { fetchTravelers, getTravelers } from '../../actions/travelerActions';
+import { fetchTravelers, getTravelers, connectTraveler } from '../../actions/travelerActions';
 import { Link } from 'react-router-dom'
 
 import countries from '../../countries.json'
@@ -117,17 +117,14 @@ const Parcel = props => {
     return null;
   }
 
-  // const addTravelerToState = traveler => {
-  //   setState({
-  //     ...state,
-  //     travelerData: traveler
-  //   })
-  // }
+  const addTravelerToState = traveler => {
+    setState({
+      ...state,
+      travelerData: traveler
+    })
+  }
 
   const handleConnect = (traveler) => {
-    // console.log(traveler)
-    // addTravelerToState(traveler)
-    // console.log(traveler)
     if (!props.user.isAuthenticated) {
       setState({
         ...state,
@@ -135,6 +132,7 @@ const Parcel = props => {
         isAuthenticated: false
       })
     } else {
+      addTravelerToState(traveler)
       handleParcelCost(traveler)
     }
   }
@@ -156,7 +154,8 @@ const Parcel = props => {
             modalOpen: true,
             isAuthenticated: true,
             isLocal: true,
-            parcelCost: 14.99
+            parcelCost: 14.99,
+            travelerData: traveler
           })
         } else {
           props.getTravelers({
@@ -169,7 +168,8 @@ const Parcel = props => {
             modalOpen: true,
             isAuthenticated: true,
             isLocal: true,
-            parcelCost: (14.99 + (parcelWeight * localMultiplier)).toFixed(2)
+            parcelCost: (14.99 + (parcelWeight * localMultiplier)).toFixed(2),
+            travelerData: traveler,
           })
         }
       } else {
@@ -184,7 +184,8 @@ const Parcel = props => {
             modalOpen: true,
             isAuthenticated: true,
             isLocal: false,
-            parcelCost: 24.99
+            parcelCost: 24.99,
+            travelerData: traveler,
           })
         } else {
           props.getTravelers({
@@ -197,7 +198,8 @@ const Parcel = props => {
             modalOpen: true,
             isAuthenticated: true,
             isLocal: false,
-            parcelCost: (parcelWeight * intlMultiplier).toFixed(2)
+            parcelCost: (parcelWeight * intlMultiplier).toFixed(2),
+            travelerData: traveler,
           })
         }
       }
@@ -213,7 +215,8 @@ const Parcel = props => {
           modalOpen: true,
           isAuthenticated: true,
           isLocal: false,
-          parcelCost: 24.99
+          parcelCost: 24.99,
+          travelerData: traveler
         })
       } else {
         props.getTravelers({
@@ -226,7 +229,8 @@ const Parcel = props => {
           modalOpen: true,
           isAuthenticated: true,
           isLocal: false,
-          parcelCost: (parcelWeight * intlMultiplier).toFixed(2)
+          parcelCost: (parcelWeight * intlMultiplier).toFixed(2),
+          travelerData: traveler
         })
       }
     }
@@ -241,7 +245,18 @@ const Parcel = props => {
   //   })
   //   return countriesList
   // }
-
+  const connectToTraveler = () => {
+    props.history.push({
+      pathname: '/dashboard/chat',
+      parcelCost: state.parcelCost,
+      travelerData: state.travelerData
+    })
+   const userDetails = {
+      senderUsername: props.user.user.username,
+      travelerUsername: state.travelerData.username
+    }
+    props.connectTraveler(userDetails)
+  }
   const toggleModal = () => {
     setState({
       ...state,
@@ -404,11 +419,7 @@ const Parcel = props => {
                 <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h2>
                 <br />
                 <div className="button-group">
-                  <button className="btnQ medium" onClick={() => props.history.push({
-                    pathname: '/dashboard/chat',
-                    parcelCost: state.parcelCost,
-                    travelerData: state.travelerData
-                  })}>Yes, Continue</button>
+                  <button className="btnQ medium" onClick={connectToTraveler}>Yes, Continue</button>
                   <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
                 </div>
                 {
@@ -452,7 +463,7 @@ const Parcel = props => {
 
 const mapStateToProps = state => ({
   travelers: state.travelers,
-  user: state.auth
+  user: state.auth,
 })
 
-export default connect(mapStateToProps, { fetchTravelers, getTravelers })(Parcel)
+export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler })(Parcel)
