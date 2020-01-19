@@ -31,7 +31,7 @@ const Profile = props => {
           id='fileElem'
           accept='image/*'
           onChange={onProfilePictureChange}
-          value={state.photo}
+          // value={state.photo}
         />
       </div>
       <div className='profile-form'>

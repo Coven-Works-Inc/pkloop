@@ -3,8 +3,8 @@ import { Switch, Route, withRouter, Router } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Home from './components/home'
-import Login from './components/auth/Login'
-import Register from './components/auth/Register'
+import Login from './components/auth/login'
+import Register from './components/auth/register'
 import Pricing from './components/pricing'
 import Trips from './components/trip'
 import About from './components/about'
@@ -21,7 +21,7 @@ import HowItWorks from './components/howItWorks'
 import Shippers from './components/shippers'
 import Faq from './components/faq'
 import PrivateRoute from './components/common/privateRoute'
-import Forgot from './components/auth/Forgot'
+import Forgot from './components/auth/forgot'
 import Password from './components/auth/password'
 import Chat from './components/dashboard/chat'
 import Profile from './components/dashboard/profile'
@@ -29,7 +29,6 @@ import Profile from './components/dashboard/profile'
 const Routes = props => {
   return (
     <Switch>
-      <Route exact component={Login} path='/login' />
       <Route exact component={Register} path='/register' />
       <Route exact component={Pricing} path='/pricing' />
       <Route exact component={About} path='/about' />
@@ -48,6 +47,7 @@ const Routes = props => {
       <Route exact component={Privacy} path='/privacy' />
       <Route exact component={Forgot} path='/forgot' />
       <Route component={Password} path='/password' />
+      <Route exact component={Login} path='/login' />
       <Route exact component={Chat} path='/dashboard/chat' />
       <Route exact component={Profile} path='/dashboard/profile' />
       <Route exact component={Home} path='/' />
