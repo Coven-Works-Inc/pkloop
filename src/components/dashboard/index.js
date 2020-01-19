@@ -47,7 +47,11 @@ class Dashboard extends Component {
       modalType: type
     })
   }
-
+  addTip = () => {
+    this.setState({
+      modalOpen: false
+    })
+  }
   toggleModal = () => {
     this.setState({
       ...this.state,
@@ -58,18 +62,22 @@ class Dashboard extends Component {
   }
 
   onChangeHandler = (e) => {
-    this.setState({
-      ...this.state,
-      tipAmount: e.target.value,
-      tipAdded: true,
-      parcelCost: e.target.value ? (this.props.traveler.senderCost + Number(e.target.value)).toFixed(2) : this.props.traveler.senderCost
-    })
+    if(Number(e.target.value) >= 0){
+      this.setState({
+        ...this.state,
+        tipAmount: e.target.value,
+        tipAdded: true,
+        parcelCost: e.target.value ? (this.props.traveler.senderCost + Number(e.target.value)).toFixed(2) : this.props.traveler.senderCost
+      })
+    }
+
   }
   insuranceChangeHandler = e => {
     this.setState({
       ...this.state,
       parcelWorth: parseInt(e.target.value),
-      insuranceCost: parseInt((0.02 * parseInt(e.target.value)).toFixed(2))
+      insuranceCost: Number((0.02 * Number(e.target.value)).toFixed(2)).toFixed(2),
+      parcelCost:  e.target.value ? (this.props.traveler.senderCost + Number((0.02 * Number(e.target.value)).toFixed(2))) : this.props.traveler.senderCost
     })
   }
   itemChangeHandler = e => [
@@ -105,7 +113,6 @@ class Dashboard extends Component {
       this.setState({
         ...this.state,
         insuranceSuccess: true,
-        parcelCost: parseInt(this.state.parcelCost) + parseInt(this.state.insuranceCost),
       })
       setTimeout(this.toggleModal, 1000)
     }
@@ -240,7 +247,7 @@ class Dashboard extends Component {
               <p>Cost to send parcel: {this.state.parcelCost}</p>
               <br />
               <div className="button-group">
-                <button className='btnQ medium'>Tip Traveler</button>
+                <button className='btnQ medium' onClick={this.addTip}>Tip Traveler</button>
                 <button className='btnQ inverse-btnQ medium' onClick={this.toggleModal}>No, Not Interested</button>
               </div>
             </div>

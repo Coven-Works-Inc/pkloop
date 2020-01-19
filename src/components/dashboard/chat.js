@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-//Import megged
-// import StripeCheckout from '../payment'
 import { joinChatRoom } from '../../actions/chatActions'
-import StripeCheckout from 'react-stripe-checkout'
 import io from 'socket.io-client'
 
 import 'react-chat-widget/lib/styles.css';
-import HeaderFooter from '../headerFooter'
 import {
   ThemeProvider,
   TextComposer,
@@ -21,11 +17,8 @@ import {
   Message,
   MessageList,
   MessageText,
-  FixedWrapper,
-  Avatar
 } from '@livechat/ui-kit'
 import './chat.css'
-import Button from '../common/button'
 import Modal from '../common/modal'
 
 let socket
@@ -33,7 +26,6 @@ const Chat = props => {
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState('')
   const [replies, setReplies] = useState([])
-  const [reply, setReply] = useState('')
   const [name, setName] = useState('')
   const [room, setRoom] = useState('')
 
@@ -43,6 +35,7 @@ const Chat = props => {
     setRoom('New room')
 
     socket = io('https://aqueous-ravine-50016.herokuapp.com/')
+    // socket = io('http://localhost:8000')
     socket.emit('join', { name, room }, () => {
         console.log(name, room)
     })
@@ -57,17 +50,12 @@ const Chat = props => {
       setMessages([...messages, text])
       console.log(messages)
   })
-    socket.on('reply', ({ text }) => {
-      setReplies([...replies, text])
-      console.log(text, replies)
-    })
   },)
   const sendMessage = (e) => {
     e.preventDefault()
     if(message){
       socket.emit('sendMessage', message, () => setMessage(''))
     }
-    setReply(e)
   }
   const [state, setState] = useState({
     headerText: 'Sender details',
@@ -236,13 +224,7 @@ const Chat = props => {
                 ))}
 
               </MessageList>
-            </Row>
-            <MessageList active>
-              {replies.map(rep => (
-                  <Message authorName="Jon Smith" date="21:37" showMetaOnClick style={{ borderRadius: '1em', padding: '5px 10px', height: 'max-content' }}><MessageText>{rep}</MessageText></Message>
-              ))}
-              
-            </MessageList>
+            </Row>>
             <TextComposer onClick={sendMessage} onChange={(event) => setMessage(event.target.value)} >
               <Row align="center">
                 <IconButton fit>
