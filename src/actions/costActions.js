@@ -39,6 +39,7 @@ export const addInsurance =   (userData) => dispatch => {
     //             payload: err
     //         })
     //     })
+
         fetch(url, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             mode: 'cors', // no-cors, *cors, same-origin
