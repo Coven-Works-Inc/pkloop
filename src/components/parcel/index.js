@@ -149,6 +149,7 @@ const Parcel = props => {
       ...state,
       travelerData: traveler
     })
+  }
   const onToken = (token) => {
     toggleModal();
     const amountToPay = Number(state.amount) * 100;
@@ -474,7 +475,8 @@ const Parcel = props => {
                 </div>
               </div>
             }
-          </div>}
+          </div>
+          }
         {!state.isAuthenticated &&
           <div>
             <h2>Please login to connect with a traveller</h2>
