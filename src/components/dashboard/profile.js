@@ -1,38 +1,49 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import ProfilePicture from '../../assets/default-picture.jpg'
-import axios from 'axios'
-import { updateProfilePicture } from '../../actions/authActions'
+import { profileUpload } from '../../actions/profileActions'
 
 const Profile = props => {
   const [state, setState] = useState(props.user)
+
+
   const onChangeHandler = e => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value
-    })
+    // setState({
+    //   ...state,
+    //   [e.target.name]: e.target.value
+    // })
+
+    console.log(e.target.files[0].name)
   }
-  const onProfilePictureChange = e => {
-    console.log(e.target.files[0])
-    props.updateProfilePicture(e.target.files[0])
-  }
+  // const onProfilePictureChange = e => {
+  //   console.log(e.target.files[0])
+  //   props.updateProfilePicture(e.target.files[0])
+  // }
 
   const submitHandler = e => {
     e.preventDefault()
+
+
   }
+
+  const fd = new FormData()
 
   return (
     <div className='edit-profile'>
       {console.log(props.data)}
       <div className='profile-picture'>
-        <img src={ProfilePicture} alt='default profile' />
+        <div>
+          <img src={ProfilePicture} alt='default profile' />
+        </div>
         <input
-          type='file'
-          id='fileElem'
-          accept='image/*'
-          onChange={onProfilePictureChange}
-          // value={state.photo}
+            style={{ marginTop: '1rem', display:'block'}}
+            name='image'
+            type='file'
+            id='fileElem'
+            accept='image/*'
+            onChange={onChangeHandler}
         />
+
       </div>
       <div className='profile-form'>
         <form onSubmit={submitHandler}>
@@ -58,8 +69,21 @@ const Profile = props => {
           />
           <input
             type='text'
-            placeholder='City, Country'
+            placeholder='Street'
+            value={state.street}
             onChange={onChangeHandler}
+          />
+          <input
+              type='text'
+              placeholder='City'
+              value={state.city}
+              onChange={onChangeHandler}
+          />
+          <input
+              type='text'
+              placeholder='State'
+              value={state.state}
+              onChange={onChangeHandler}
           />
           <input
             type='email'
@@ -75,7 +99,7 @@ const Profile = props => {
             name='phone'
             onChange={onChangeHandler}
           />
-          <button className='btnSmall'>Save Changes</button>
+          <button className='btnSmall' >Save Changes</button>
         </form>
       </div>
     </div>
@@ -88,4 +112,4 @@ const mapStateToProps = state => {
     data: state.auth.data
   }
 }
-export default connect(mapStateToProps, { updateProfilePicture })(Profile)
+export default connect(mapStateToProps)(Profile)
