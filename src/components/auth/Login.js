@@ -57,7 +57,7 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state
-
+    console.log(this.props)
     return (
       <div id='container'>
         <div className='left items'>
