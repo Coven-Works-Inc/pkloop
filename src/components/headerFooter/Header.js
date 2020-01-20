@@ -8,7 +8,8 @@ import { logoutUser } from '../../actions/authActions'
 
 class Header extends Component {
   state = {
-    menu: false
+    menu: false,
+    messageCount: 1
   }
 
   onLogoutClick = e => {
@@ -77,6 +78,11 @@ class Header extends Component {
                   Logout
                 </Link>
               </li>
+              {this.state.messageCount ? 
+              <li>
+              <i className="fas fa-stack fa-bell" data-count={this.state.messageCount}></i>
+            </li> : <div></div>
+              }
             </ul>
           </div>
           <div className='menu-bars' onClick={this.showMenu}>

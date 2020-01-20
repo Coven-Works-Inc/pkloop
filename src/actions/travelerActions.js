@@ -2,7 +2,7 @@ import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
 // import jwt_decode from 'jwt-decode';
 
-import { FETCH_TRAVELERS, GET_ERRORS, FETCH_SHIPPERS, GET_TRAVELERS } from './types'
+import { FETCH_TRAVELERS, GET_ERRORS, FETCH_SHIPPERS, GET_TRAVELERS, CONNECT_TRAVELER } from './types'
 
 import { BASE_URL } from '../config/constants'
 
@@ -49,4 +49,14 @@ export const fetchShippers = () => async dispatch => {
         payload: err
       })
     })
+}
+export const connectTraveler = (userDetails) => dispatch => {
+  axios.post(`${BASE_URL}/chat`, userDetails)
+  .then(res => {
+    console.log(res)
+    dispatch({
+      type: CONNECT_TRAVELER,
+      payload: res
+    })
+  })
 }

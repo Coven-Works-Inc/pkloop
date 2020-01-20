@@ -1,4 +1,4 @@
-import { FETCH_TRAVELERS, GET_ERRORS, GET_TRAVELERS } from '../actions/types'
+import { FETCH_TRAVELERS, GET_ERRORS, GET_TRAVELERS, CONNECT_TRAVELER } from '../actions/types'
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -8,6 +8,8 @@ export default (state = {}, action) => {
       return { ...state, errors: action.payload }
     case GET_TRAVELERS:
       return {...state, travelerData: action.payload}
+    case CONNECT_TRAVELER:
+      return {...state, connectDetails: action.payload}
     default:
       return state
   }
