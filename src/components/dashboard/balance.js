@@ -76,11 +76,13 @@ const Balance = props => {
 
   const onChangeHandler = e => {
     e.preventDefault()
-
-    setState({
-      ...state,
-      [e.target.name]: e.target.value
-    })
+    if(e.target.value >= 0){
+      setState({
+        ...state,
+        [e.target.name]: e.target.value
+      })
+    }
+    
   }
 
   return (
@@ -102,11 +104,12 @@ const Balance = props => {
 
       <Modal show={state.modalOpen} onClose={toggleModal}>
         <div>
-          <h2>How much do you want to fund your wallet with?</h2>
+          <h2>How much do you want to fund your wallet with? Minimum of $29.99</h2>
           <br />
           <input className="popupInput" type="number" name="amount" placeholder="Enter Amount" value={state.amount} onChange={onChangeHandler} />
           <br />
-          <div className="button-group">
+          {state.amount  >= 29.99 ? 
+            <div className="button-group">
             <StripeCheckout
               image={require('../../assets/payment-logo.png')}
               stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
@@ -117,7 +120,9 @@ const Balance = props => {
               token={onToken}
               panelLabel="Pay"
             />
-          </div>
+          </div> : 
+            <div> A Minimum of $29.99 is required to fund wallet</div>
+          }
         </div>
       </Modal>
     </div>
