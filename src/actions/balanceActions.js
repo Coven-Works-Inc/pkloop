@@ -1,5 +1,5 @@
 import { BASE_URL } from '../config/constants'
-import { GET_ERRORS, SET_CURRENT_USER, STRIPE_PAYMENT, UPDATE_BALANCE } from './types'
+import { GET_ERRORS, SET_CURRENT_USER, STRIPE_PAYMENT, UPDATE_BALANCE, REDUCE_BALANCE } from './types'
 import axios from 'axios'
 
 export const updateBalance = (data) => dispatch => {
@@ -7,6 +7,7 @@ export const updateBalance = (data) => dispatch => {
 
     axios.put(`${BASE_URL}/users/updateMyBalance`, data)
         .then(response => {
+            console.log(response)
             dispatch({
                 type: UPDATE_BALANCE,
                 payload: response.data
@@ -20,6 +21,25 @@ export const updateBalance = (data) => dispatch => {
         })
 }
 
+export const reduceBalance = (data) => dispatch => {
+    console.log(data)
+
+    axios.put(`${BASE_URL}/users/reduceMyBalance`, data)
+        .then(response => {
+            console.log(response)
+            dispatch({
+                type: REDUCE_BALANCE,
+                payload: response.data,
+                status: response.status
+            })
+        })
+        .catch(error => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: error
+            })
+        })
+}
 export const setCurrentUser = () => dispatch => {
     console.log('...calling fetchuser')
     axios.get(`${BASE_URL}/users/fetchUser`)

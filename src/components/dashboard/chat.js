@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { joinChatRoom } from '../../actions/chatActions'
 import io from 'socket.io-client'
+import axios from 'axios'
+import { BASE_URL } from '../../config/constants'
+import { reduceBalance, updateBalance } from '../../actions/balanceActions'
 
 import 'react-chat-widget/lib/styles.css';
 import {
@@ -25,9 +28,14 @@ let socket
 const Chat = props => {
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState('')
+  const [modal, setModal] = useState(false)
   const [replies, setReplies] = useState([])
+  const [paymentSuccess, setPaymentSuccess] = useState(false)
   const [name, setName] = useState('')
   const [room, setRoom] = useState('')
+  const [cancelModal, setCancelModal] = useState(false)
+  const [balance, setBalance] = useState(0)
+  const [errorModal, setErrorModal] = useState(false)
 
   useEffect(() => {
 
@@ -51,11 +59,29 @@ const Chat = props => {
       console.log(messages)
   })
   },)
+
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  const getUserData = () => {
+    axios.get(`${BASE_URL}/users/fetchUser`)
+      .then(response => {
+        console.log(response.data)
+        setBalance(response.data.data.balance)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
   const sendMessage = (e) => {
     e.preventDefault()
     if(message){
       socket.emit('sendMessage', message, () => setMessage(''))
     }
+  }
+  const cancelTransaction = () => {
+    props.updateBalance({amount: props.parcelCost})
   }
   const [state, setState] = useState({
     headerText: 'Sender details',
@@ -71,6 +97,16 @@ const Chat = props => {
     setState({
       tipAmount: e.target.value
     })
+  }
+  const openCancelModal = () => {
+    if(paymentSuccess){
+      setCancelModal(true)
+    }
+  }
+  const gotoBalance = () => {
+    closeModal()
+    props.gotoBalance()
+    toggleModal()
   }
   const theme = {
     vars: {
@@ -96,16 +132,38 @@ const Chat = props => {
       radiusType: 'first'
     }
   }
-
+  useEffect(() => {
+    if(props.status === 200){
+        setModal(true)  
+        toggleModal()
+        setPaymentSuccess(true)
+    }
+  }, [props.status])
+  const closeModal = () => {
+    setModal(false)
+    setErrorModal(false)
+    toggleModal()
+  }
   const changeHeader = text => {
     setState({
       headerText: text
     })
   }
+  const markTrans = () => {
+    if(!paymentSuccess){
+      props.markTrans()
+    }
+  }
   const handleParcelPayment = () => {
     //TODO: CHECK IF ENOUGH MONEY IS IN BALANCE
     //REDIRECT TO FUND WALLET PAGE IF NOT
     //SUBTRACT FROM WALLET IF ENOUGH
+    const parcelCost = props.parcelCost + (0.05 * props.parcelCost)
+    if(balance >= parcelCost){
+        props.reduceBalance({ amount: parcelCost })
+    } else {
+      setErrorModal(true)
+    }
   }
   return (
     <div className='chat'>
@@ -151,9 +209,9 @@ const Chat = props => {
                 <button onClick={() => props.modal('insurance')}
                   style={{ color: 'white', backgroundColor: "#abcc71", border: "#abcc71", outline: 'none' }}
                   className='reusable-button'>{props.insuranceCost ? `INSURANCE ADDED ($${props.insuranceCost})`: 'ADD INSURANCE(OPTIONAL)'}</button>
-                <button onClick={() => props.markTrans()}
+                <button onClick={markTrans}
                   style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
-            className='reusable-button'>{`CONTINUE TO PAYMENT($${Number(props.parcelCost).toFixed(2)}) + PLATFORM CHARGES($${Number(0.05 * props.parcelCost).toFixed(2)})`}</button>
+            className='reusable-button'>{!paymentSuccess ? `CONTINUE TO PAYMENT($${Number(props.parcelCost).toFixed(2)}) + PLATFORM CHARGES($${Number(0.05 * props.parcelCost).toFixed(2)})`: `PAYMENT SUCCESSFUL`}</button>
                 <button
                   style={{
                     color: 'red',
@@ -162,6 +220,7 @@ const Chat = props => {
                     outline: 'none'
                   }}
                   className='reusable-button'
+                  onClick={openCancelModal}
                 >
                   CANCEL TRANSACTION
                 </button>
@@ -170,7 +229,7 @@ const Chat = props => {
             {props.completed && (
               <Modal show={props.completed} onClose={toggleModal}>
                   <p>{`Are you sure you want to pay, cancellation attracts a 5% $(${Number(0.05 * props.cost).toFixed(2)}) charge`}</p>
-                  <button className='btnQ medium' style={{marginRight: '10px'}} onClick={handleParcelPayment}>{`pay $${props.cost} + $${Number(0.05 * props.cost).toFixed(2)}`}</button>
+                  <button className='btnQ medium' style={{marginRight: '10px'}} onClick={handleParcelPayment}>{`pay $${Number(props.cost).toFixed(2)} + $${Number(0.05 * props.cost).toFixed(2)}`}</button>
                   <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Not Interested</button>
               </Modal>
             //   <StripeCheckout
@@ -184,6 +243,27 @@ const Chat = props => {
             //     // panelLabel={'Pay $' + props.cost}
             //     token={() => props.history.push('/dashboard/transactions')}
             //   />
+            )}
+            {modal && (
+              <Modal show={modal} onClose={closeModal}>
+                  <div>You've successfully paid for this transaction</div>
+                  <button onClick={gotoBalance} className="btnQ">View wallet balance</button>   
+              </Modal>
+            )
+            }
+            {errorModal && (
+              <Modal show={errorModal} onClose={closeModal}>
+                <div>You do not have enough fund in your wallet</div>
+                <Link to='/dashboard/balance'><button onClick={gotoBalance} className="btnQ">Fund wallet balance</button></Link>
+              </Modal>
+            )}
+            {cancelModal && (
+              <Modal show={cancelModal} onClose={closeModal}>
+                {console.log(props)}
+                {props.status === 200 && props.updateSuccess === true && (<h3 style={{color: 'green'}}>Transaction successfully cancelled</h3>)}
+                <div>Are you sure you want to cancel ?. You will stiill be charged 5% platform fee </div>
+                <button className='btnQ' onClick={cancelTransaction}>Cancel transaction</button>
+              </Modal>
             )}
           </div>
         )}
@@ -249,6 +329,8 @@ const Chat = props => {
 const mapStateToProps = state => {
   return {
     traveler: state.travelers.travelerData,
+    status: state.balance.status,
+    updateSuccess: state.balance.updateSuccess
   }
 }
-export default connect(mapStateToProps, { joinChatRoom })(Chat)
+export default connect(mapStateToProps, { joinChatRoom, reduceBalance, updateBalance })(Chat)

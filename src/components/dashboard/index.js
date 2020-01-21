@@ -46,6 +46,10 @@ class Dashboard extends Component {
     })
   }
 
+  gotoBalance = () => {
+    this.props.history.replace('/dashboard/balance')
+  }
+
   handleModal = (type) => {
     this.setState({
       ...this.state,
@@ -129,7 +133,6 @@ class Dashboard extends Component {
   }
   render() {
     const { headerText } = this.state
-    {console.log(this.state.parcelCost)}
     const changeHeader = text => {
       this.setState({
         headerText: text
@@ -201,6 +204,7 @@ class Dashboard extends Component {
                                           showModal={this.state.showModal} 
                                           tipAdded={this.state.tipAdded}
                                           close={this.closeModal}
+                                          gotoBalance={this.gotoBalance}
                                           insuranceSuccess={this.state.insuranceSuccess}
                                           tipAmount={this.state.tipAmount}
                                           insuranceCost={this.state.insuranceCost}
@@ -256,7 +260,7 @@ class Dashboard extends Component {
               <br />
               <input type="number" placeholder="Enter Amount" value={this.state.tipAmount} onChange={this.onChangeHandler} />
               <br />
-              <p>Cost to send parcel: {this.state.parcelCost}</p>
+              <p>Cost to send parcel: {Number(this.state.parcelCost).toFixed(2)}</p>
               <br />
               <div className="button-group">
                 <button className='btnQ medium' onClick={this.addTip}>Tip Traveler</button>
