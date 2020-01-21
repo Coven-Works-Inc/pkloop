@@ -82,6 +82,8 @@ const Chat = props => {
   }
   const cancelTransaction = () => {
     props.updateBalance({amount: props.parcelCost})
+    setTimeout(props.updateSuccess, false)
+    closeModal()
   }
   const [state, setState] = useState({
     headerText: 'Sender details',
@@ -142,6 +144,7 @@ const Chat = props => {
   const closeModal = () => {
     setModal(false)
     setErrorModal(false)
+    setCancelModal(false)
     toggleModal()
   }
   const changeHeader = text => {
@@ -260,7 +263,7 @@ const Chat = props => {
             {cancelModal && (
               <Modal show={cancelModal} onClose={closeModal}>
                 {console.log(props)}
-                {props.status === 200 && props.updateSuccess === true && (<h3 style={{color: 'green'}}>Transaction successfully cancelled</h3>)}
+                {props.updateSuccess === true && (<h3 style={{color: 'green'}}>Transaction successfully cancelled</h3>)}
                 <div>Are you sure you want to cancel ?. You will stiill be charged 5% platform fee </div>
                 <button className='btnQ' onClick={cancelTransaction}>Cancel transaction</button>
               </Modal>
