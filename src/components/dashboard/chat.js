@@ -30,6 +30,8 @@ const Chat = props => {
   const [message, setMessage] = useState('')
   const [modal, setModal] = useState(false)
   const [replies, setReplies] = useState([])
+  const [cancelled, setCancelled] = useState(false)
+  const [updateSuccess, setUpdateSuccess] = useState(props.updateSuccess)
   const [paymentSuccess, setPaymentSuccess] = useState(false)
   const [name, setName] = useState('')
   const [room, setRoom] = useState('')
@@ -81,9 +83,13 @@ const Chat = props => {
     }
   }
   const cancelTransaction = () => {
-    props.updateBalance({amount: props.parcelCost})
-    setTimeout(props.updateSuccess, false)
-    closeModal()
+    if(paymentSuccess){
+      props.updateBalance({amount: props.parcelCost})
+      setUpdateSuccess(false)
+      setCancelled(true)
+      setPaymentSuccess(false)
+      setTimeout(closeModal, 3000)
+    }
   }
   const [state, setState] = useState({
     headerText: 'Sender details',
@@ -225,7 +231,7 @@ const Chat = props => {
                   className='reusable-button'
                   onClick={openCancelModal}
                 >
-                  CANCEL TRANSACTION
+                  {cancelled ? `TRANSACTION CANCELLED` : `CANCEL TRANSACTION`}
                 </button>
               </div>
             )}
