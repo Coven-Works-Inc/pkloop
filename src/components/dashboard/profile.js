@@ -1,100 +1,144 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import ProfilePicture from '../../assets/default-picture.jpg'
 import { profileUpload } from '../../actions/profileActions'
 
 const Profile = props => {
-  const [state, setState] = useState(props.user)
+  const [state, setState] = useState(props.user);
+  const [photo, setPhoto] = useState('');
+  const [imageName, setImageName] = useState('Set Display Picture');
 
+
+  const fileInput = useRef(null);
+
+  const onRefClick = () => {
+    fileInput.current.click();
+  };
 
   const onChangeHandler = e => {
-    // setState({
-    //   ...state,
-    //   [e.target.name]: e.target.value
-    // })
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    })
 
-    console.log(e.target.files[0].name)
-  }
-  // const onProfilePictureChange = e => {
-  //   console.log(e.target.files[0])
-  //   props.updateProfilePicture(e.target.files[0])
-  // }
+  };
+  const onProfilePictureChange = e => {
+    setPhoto(e.target.files[0]);
+    setImageName(e.target.files[0].name);
+
+
+  };
 
   const submitHandler = e => {
-    e.preventDefault()
+    e.preventDefault();
+
+    //TODO: Get The values set up in state and push to the action for upload
+
+    const formData = {
+      image: state.image,
+      firstname: state.firstname,
+      lastname: state.lastname,
+      username: state.lastname,
+      street: state.street,
+      city: state.city,
+      state: state.state,
+      country: state.country,
+      email: state.email,
+      phone: state.phone
+    };
 
 
-  }
-
-  const fd = new FormData()
+    props.profileUpload(formData)
+  };
 
   return (
     <div className='edit-profile'>
-      {console.log(props.data)}
-      <div className='profile-picture'>
-        <div>
-          <img src={ProfilePicture} alt='default profile' />
-        </div>
+      <div className='profile-picture' style={{display:'flex', marginTop: '0.1rem'}}>
         <input
-            style={{ marginTop: '1rem', display:'block'}}
-            name='image'
+            style={{display: 'none'}}
             type='file'
             id='fileElem'
             accept='image/*'
-            onChange={onChangeHandler}
+            onChange={onProfilePictureChange}
+            ref={fileInput}
         />
+        <button
+            style={{
+              padding: '0.8rem 1rem',
+              color: '#fff',
+              borderRadius: '2px',
+              outline: 'none',
+              fontSize: '1rem',
+              backgroundColor:'rgba(0, 189, 190)'
+            }}
+            onClick={onRefClick}>
+              Browse
+        </button>
+        <div>
+          {console.log(state.image)}
+          <input style={{padding: '0.8rem 3rem', backgroundColor: '#efefef'}} placeholder={imageName} disabled/>
+        </div>
 
       </div>
       <div className='profile-form'>
         <form onSubmit={submitHandler}>
           <input
             type='text'
-            placeholder='First Name'
+            placeholder='first name'
             value={state.firstname}
             name='firstname'
             onChange={onChangeHandler}
           />
           <input
             type='text'
-            placeholder='Last Name'
+            placeholder='last name'
             value={state.lastname}
             name='lastname'
             onChange={onChangeHandler}
           />
           <input
             type='text'
-            placeholder='Username'
+            placeholder='username'
             value={state.username}
             onChange={onChangeHandler}
           />
           <input
             type='text'
-            placeholder='Street'
+            name='street'
+            placeholder='street'
             value={state.street}
             onChange={onChangeHandler}
           />
           <input
               type='text'
-              placeholder='City'
+              name={'city'}
+              placeholder='city'
               value={state.city}
               onChange={onChangeHandler}
           />
           <input
               type='text'
-              placeholder='State'
+              name={'state'}
+              placeholder='state'
               value={state.state}
               onChange={onChangeHandler}
           />
           <input
+              type={'text'}
+              name={'country'}
+              placeholder={'country'}
+            value={state.country}
+          onChange={onChangeHandler}/>
+          <input
             type='email'
-            placeholder='Email Address'
+            placeholder='email address'
             value={state.email}
             name='email'
             onChange={onChangeHandler}
           />
           <input
             type='tel'
-            placeholder='Phone Number'
+            placeholder='phone number'
             value={state.phone}
             name='phone'
             onChange={onChangeHandler}
@@ -112,4 +156,4 @@ const mapStateToProps = state => {
     data: state.auth.data
   }
 }
-export default connect(mapStateToProps)(Profile)
+export default connect(mapStateToProps, {profileUpload})(Profile)
