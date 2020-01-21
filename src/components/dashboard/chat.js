@@ -65,9 +65,7 @@ const Chat = props => {
   if (props.traveler) {
   }
   const toggleModal = () => {
-    setState({
-      modalOpen: !props.completed
-    })
+    props.close()
   }
   const onTipChange = e => {
     setState({
@@ -155,7 +153,7 @@ const Chat = props => {
                   className='reusable-button'>{props.insuranceSuccess ? `INSURANCE ADDED ($${props.insuranceCost})`: 'ADD INSURANCE(OPTIONAL)'}</button>
                 <button onClick={() => props.markTrans()}
                   style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
-            className='reusable-button'>{`CONTINUE TO PAYMENT($${props.parcelCost})`}</button>
+            className='reusable-button'>{`CONTINUE TO PAYMENT($${props.parcelCost} + $${Number(0.05 * props.parcelCost).toFixed(2)})`}</button>
                 <button
                   style={{
                     color: 'red',
@@ -171,9 +169,9 @@ const Chat = props => {
             )}
             {props.completed && (
               <Modal show={props.completed} onClose={toggleModal}>
-                  <p>Are you sure you want to pay, cancellation attracts a 5% charge</p>
-                  <button className='btnQ medium' style={{marginRight: '10px'}} onClick={handleParcelPayment}>{`pay $${props.cost}`}</button>
-                  <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Not Interested</button>
+                  <p>{`Are you sure you want to pay, cancellation attracts a 5% $(${Number(0.05 * props.cost).toFixed(2)}) charge`}</p>
+                  <button className='btnQ medium' style={{marginRight: '10px'}} onClick={handleParcelPayment}>{`pay $${props.cost} + $${Number(0.05 * props.cost).toFixed(2)}`}</button>
+                  <button className='btnQ inverse-btnQ medium' onClose={toggleModal}>No, Not Interested</button>
               </Modal>
             //   <StripeCheckout
             //     amount={props.cost * 100}

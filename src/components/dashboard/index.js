@@ -31,12 +31,18 @@ class Dashboard extends Component {
     parcelItem: '',
     checked:false,
     insuranceSuccess: false,
+    showModal: false,
   }
-
+  closeModal = () => {
+    this.setState({
+      showModal: false,
+      completed: false
+    })
+  }
   markAsComplete = () => {
     this.setState({
       ...this.state,
-      completed: true
+      completed: true,
     })
   }
 
@@ -190,8 +196,10 @@ class Dashboard extends Component {
           {headerText === 'chat' && <Chat cost={this.state.parcelCost} 
                                           completed={this.state.completed} 
                                           markTrans={this.markAsComplete} 
-                                          modal={this.handleModal} 
+                                          modal={this.handleModal}
+                                          showModal={this.state.showModal} 
                                           tipAdded={this.state.tipAdded}
+                                          close={this.closeModal}
                                           insuranceSuccess={this.state.insuranceSuccess}
                                           tipAmount={this.state.tipAmount}
                                           insuranceCost={this.state.insuranceCost}
@@ -259,12 +267,15 @@ class Dashboard extends Component {
           modalType === 'receiver' &&
             <div>
               <label>Fullname</label>
-              <input type="text"></input>
+              <input type="text" className="support_input"></input>
+              <br />
               <label>Address</label>
-              <input type="text"></input>
+              <input type="text" className="support_input" ></input>
+              <br />
               <label>Phone number</label>
-              <input type="text"></input>
-
+              <input type="text" className="support_input"></input>
+              <br />
+              <button className="btnQ medium">Add details</button>
             </div>
           }
         </Modal>
