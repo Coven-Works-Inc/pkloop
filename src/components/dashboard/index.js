@@ -57,6 +57,7 @@ class Dashboard extends Component {
       ...this.state,
       modalOpen: !this.state.modalOpen,
       tipAmount: 0,
+      insuranceCost: 0,
       parcelCost: this.props.traveler.senderCost,
     })
   }
@@ -75,7 +76,7 @@ class Dashboard extends Component {
   insuranceChangeHandler = e => {
     this.setState({
       ...this.state,
-      parcelWorth: parseInt(e.target.value),
+      parcelWorth: Number(e.target.value),
       insuranceCost: Number((0.02 * Number(e.target.value)).toFixed(2)).toFixed(2),
       parcelCost:  e.target.value ? (this.props.traveler.senderCost + Number((0.02 * Number(e.target.value)).toFixed(2))) : this.props.traveler.senderCost
     })
@@ -87,20 +88,22 @@ class Dashboard extends Component {
     })
   ]
   payInsurance = async () => {
-    const userData = {
-      client_id,
-      api_key,
-      customer_name: `${this.props.auth.firstname} ${this.props.auth.lastname}`,
-      firstname: this.props.auth.firstname,
-      lastname: this.props.auth.lastname,
-      items_ordered: this.state.parcelItem,
-      subtotal: this.state.parcelWorth,
-      currency: 'USD',
-      coverage_amount: this.state.insuranceCost,
-      order_number: uuidv4()
-    }
-    await this.props.addInsurance(userData)
-    console.log(userData)
+    // const userData = {
+    //   client_id,
+    //   api_key,
+    //   customer_name: `${this.props.auth.firstname} ${this.props.auth.lastname}`,
+    //   firstname: this.props.auth.firstname,
+    //   lastname: this.props.auth.lastname,
+    //   items_ordered: this.state.parcelItem,
+    //   subtotal: this.state.parcelWorth,
+    //   currency: 'USD',
+    //   coverage_amount: this.state.insuranceCost,
+    //   order_number: uuidv4()
+    // }
+    // await this.props.addInsurance(userData)
+    this.setState({
+      modalOpen: false
+    })
   }
   handleCheckbox = () => {
     this.setState({
@@ -252,6 +255,18 @@ class Dashboard extends Component {
               </div>
             </div>
           }
+          {
+          modalType === 'receiver' &&
+            <div>
+              <label>Fullname</label>
+              <input type="text"></input>
+              <label>Address</label>
+              <input type="text"></input>
+              <label>Phone number</label>
+              <input type="text"></input>
+
+            </div>
+          }
         </Modal>
       </HeaderFooter>
     )
@@ -259,7 +274,6 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     auth: state.auth.user,
     loading: state.auth.loading,

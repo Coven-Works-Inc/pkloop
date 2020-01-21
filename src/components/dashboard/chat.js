@@ -144,7 +144,7 @@ const Chat = props => {
             </h5>
             {!props.completed && (
               <div>
-                <button
+                <button onClick={() => props.modal('receiver')}
                   style={{ color: 'white', backgroundColor: "#0071bc", border: "#0071bc", outline: 'none' }}
                   className='reusable-button'>ENTER RECEIVER'S DETAILS</button>
                 <button onClick={() => props.modal('tip')}
