@@ -30,6 +30,8 @@ const Chat = props => {
   const [message, setMessage] = useState('')
   const [modal, setModal] = useState(false)
   const [replies, setReplies] = useState([])
+  const [cancelled, setCancelled] = useState(false)
+  const [updateSuccess, setUpdateSuccess] = useState(props.updateSuccess)
   const [paymentSuccess, setPaymentSuccess] = useState(false)
   const [name, setName] = useState('')
   const [room, setRoom] = useState('')
@@ -39,18 +41,21 @@ const Chat = props => {
 
   useEffect(() => {
 
-    setName(props.traveler._id)
-    setRoom('New room')
+    if(props.traveler){
+      setName(props.traveler._id)
+      setRoom('New room')
 
-    socket = io('https://aqueous-ravine-50016.herokuapp.com/')
-    // socket = io('http://localhost:8000')
-    socket.emit('join', { name, room }, () => {
-        console.log(name, room)
-    })
+      socket = io('https://aqueous-ravine-50016.herokuapp.com/')
+      // socket = io('http://localhost:8000')
+      socket.emit('join', { name, room }, () => {
+          console.log(name, room)
+      })
 
-    return() => {
-      socket.emit('disconnect')
-      socket.off()
+      return() => {
+        socket.emit('disconnect')
+        socket.off()
+      }
+
     }
   }, [props.traveler._id, name])
   useEffect(() => {
@@ -81,9 +86,13 @@ const Chat = props => {
     }
   }
   const cancelTransaction = () => {
-    props.updateBalance({amount: props.parcelCost})
-    setTimeout(props.updateSuccess, false)
-    closeModal()
+    if(paymentSuccess){
+      props.updateBalance({amount: props.parcelCost})
+      setUpdateSuccess(false)
+      setCancelled(true)
+      setPaymentSuccess(false)
+      setTimeout(closeModal, 3000)
+    }
   }
   const [state, setState] = useState({
     headerText: 'Sender details',
@@ -225,7 +234,7 @@ const Chat = props => {
                   className='reusable-button'
                   onClick={openCancelModal}
                 >
-                  CANCEL TRANSACTION
+                  {cancelled ? `TRANSACTION CANCELLED` : `CANCEL TRANSACTION`}
                 </button>
               </div>
             )}
