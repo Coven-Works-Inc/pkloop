@@ -21,7 +21,7 @@ export const registerUser = (userData, history, props) => dispatch => {
     .then(res => {
       // console.log(res.data)
       const location = props.location
-      if (location.redirect === '/parcel') {
+      if (location.redirect === '/parcel' || location.redirect === '/trips' || location.redirect === '/shippers') {
         localStorage.setItem('redirect', props.location.redirect)
       }
       history.push('/verify')
@@ -63,7 +63,14 @@ export const loginUser = (userData, history, props) => dispatch => {
       if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
         localStorage.removeItem('redirect')
         history.push('/parcel')
-      } else {
+      }  else if (location.redirect === '/trips' || localStorage.getItem('redirect') === '/trips') {
+        localStorage.removeItem('redirect')
+        history.push('/trips')
+      } else if (location.redirect === '/shippers' || localStorage.getItem('redirect') === '/shippers') {
+        localStorage.removeItem('redirect')
+        history.push('/shippers')
+      }
+       else {
         history.push('/dashboard/transactions')
       }
     })

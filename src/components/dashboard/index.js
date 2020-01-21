@@ -55,7 +55,8 @@ class Dashboard extends Component {
   }
   addTip = () => {
     this.setState({
-      modalOpen: false
+      modalOpen: false,
+      parcelCost: Number(this.props.traveler.senderCost) + Number(this.state.tipAmount) + Number(this.state.insuranceCost)
     })
   }
   toggleModal = () => {
@@ -72,9 +73,9 @@ class Dashboard extends Component {
     if(Number(e.target.value) >= 0){
       this.setState({
         ...this.state,
-        tipAmount: e.target.value,
+        tipAmount: Number(e.target.value),
         tipAdded: true,
-        parcelCost: e.target.value ? (this.props.traveler.senderCost + Number(e.target.value)).toFixed(2) : this.props.traveler.senderCost
+        parcelCost: Number(this.props.traveler.senderCost) + Number(this.state.tipAmount) + Number(this.state.insuranceCost)
       })
     }
 
@@ -83,17 +84,16 @@ class Dashboard extends Component {
     this.setState({
       ...this.state,
       parcelWorth: Number(e.target.value),
-      insuranceCost: Number((0.02 * Number(e.target.value)).toFixed(2)).toFixed(2),
-      parcelCost:  e.target.value ? (this.props.traveler.senderCost + Number((0.02 * Number(e.target.value)).toFixed(2))) : this.props.traveler.senderCost
+      insuranceCost: Number(0.02 * Number(e.target.value)).toFixed(2),
     })
   }
-  itemChangeHandler = e => [
+  itemChangeHandler = e => (
     this.setState({
       ...this.state,
       parcelItem: e.target.value
     })
-  ]
-  payInsurance = async () => {
+  )
+  payInsurance =  () => {
     // const userData = {
     //   client_id,
     //   api_key,
@@ -108,7 +108,8 @@ class Dashboard extends Component {
     // }
     // await this.props.addInsurance(userData)
     this.setState({
-      modalOpen: false
+      modalOpen: false,
+      parcelCost:  Number(this.props.traveler.senderCost) + Number(this.state.insuranceCost) + Number(this.state.tipAmount)
     })
   }
   handleCheckbox = () => {

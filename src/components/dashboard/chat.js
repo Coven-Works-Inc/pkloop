@@ -150,10 +150,10 @@ const Chat = props => {
                   className='reusable-button'>{props.tipAdded ? `TIP ADDED ($${props.tipAmount}) `: 'ADD TIP(OPTIONAL)'}</button>
                 <button onClick={() => props.modal('insurance')}
                   style={{ color: 'white', backgroundColor: "#abcc71", border: "#abcc71", outline: 'none' }}
-                  className='reusable-button'>{props.insuranceSuccess ? `INSURANCE ADDED ($${props.insuranceCost})`: 'ADD INSURANCE(OPTIONAL)'}</button>
+                  className='reusable-button'>{props.insuranceCost ? `INSURANCE ADDED ($${props.insuranceCost})`: 'ADD INSURANCE(OPTIONAL)'}</button>
                 <button onClick={() => props.markTrans()}
                   style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
-            className='reusable-button'>{`CONTINUE TO PAYMENT($${props.parcelCost} + $${Number(0.05 * props.parcelCost).toFixed(2)})`}</button>
+            className='reusable-button'>{`CONTINUE TO PAYMENT($${Number(props.parcelCost).toFixed(2)}) + PLATFORM CHARGES($${Number(0.05 * props.parcelCost).toFixed(2)})`}</button>
                 <button
                   style={{
                     color: 'red',
@@ -171,7 +171,7 @@ const Chat = props => {
               <Modal show={props.completed} onClose={toggleModal}>
                   <p>{`Are you sure you want to pay, cancellation attracts a 5% $(${Number(0.05 * props.cost).toFixed(2)}) charge`}</p>
                   <button className='btnQ medium' style={{marginRight: '10px'}} onClick={handleParcelPayment}>{`pay $${props.cost} + $${Number(0.05 * props.cost).toFixed(2)}`}</button>
-                  <button className='btnQ inverse-btnQ medium' onClose={toggleModal}>No, Not Interested</button>
+                  <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Not Interested</button>
               </Modal>
             //   <StripeCheckout
             //     amount={props.cost * 100}

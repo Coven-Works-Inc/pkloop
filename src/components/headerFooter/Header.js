@@ -106,7 +106,7 @@ class Header extends Component {
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/travelers'>Send Parcel</Link>
+                <Link to='/parcel'>Send Parcel</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>
