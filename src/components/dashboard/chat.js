@@ -41,18 +41,21 @@ const Chat = props => {
 
   useEffect(() => {
 
-    setName(props.traveler._id)
-    setRoom('New room')
+    if(props.traveler){
+      setName(props.traveler._id)
+      setRoom('New room')
 
-    socket = io('https://aqueous-ravine-50016.herokuapp.com/')
-    // socket = io('http://localhost:8000')
-    socket.emit('join', { name, room }, () => {
-        console.log(name, room)
-    })
+      socket = io('https://aqueous-ravine-50016.herokuapp.com/')
+      // socket = io('http://localhost:8000')
+      socket.emit('join', { name, room }, () => {
+          console.log(name, room)
+      })
 
-    return() => {
-      socket.emit('disconnect')
-      socket.off()
+      return() => {
+        socket.emit('disconnect')
+        socket.off()
+      }
+
     }
   }, [props.traveler._id, name])
   useEffect(() => {
