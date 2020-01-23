@@ -4,10 +4,10 @@ import Banner from '../common/banner'
 
 import './pages.css'
 
-const TnS = () => {
+const TnS = (props) => {
   return (
     <div className='page-body'>
-      <HeaderFooter>
+      <HeaderFooter redirect={props.location}>
         <Banner title='Trust & Safety' />
         <div className='page-container py-3'>
           <div className='py-2'>

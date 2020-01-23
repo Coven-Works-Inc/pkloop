@@ -77,9 +77,9 @@ If you are having issues verifying your phone number, please email us contact@my
     })
   }
 
-  render () {
+  render() {
     return (
-      <HeaderFooter>
+      <HeaderFooter redirect={this.props.location}>
         <div className='faq-banner'>Frequently Asked Questions</div>
         <div id='faqs' className='faqs'>
           {this.state.questions.map((question, key) => (

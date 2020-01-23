@@ -2,12 +2,12 @@ import React from 'react'
 import HeaderFooter from '../headerFooter'
 import Banner from '../common/banner'
 
-const Contact = () => {
+const Contact = (props) => {
   const handleSubmit = () => {
     console.log('form submitted')
   }
   return (
-    <HeaderFooter>
+    <HeaderFooter redirect={props.location}>
       <Banner title='Get in Touch With Us' />
       <div className='contact-content-holder'>
         <div className='contact-content'>

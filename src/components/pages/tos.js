@@ -4,21 +4,21 @@ import { Link } from 'react-router-dom'
 
 import './pages.css'
 
-const ToS = () => {
+const ToS = (props) => {
     return (
-        <HeaderFooter>
+        <HeaderFooter redirect={props.location}>
             <div className='tos-header'>
                 <h2>Terms of Service</h2>
             </div>
             <div className='tos-body'>
                 <div className='py-1'>
-                <h3>TRAVELERS, SENDERS AND RECIPIENTS</h3>
-                <p className="mb-1">Please read these terms of service carefully as they contain important
-                    information regarding your legal rights, remedies and obligations.
-                    These include various limitations and exclusions, a clause that governs
-                    the jurisdiction and venue of disputes, and obligations to comply with
+                    <h3>TRAVELERS, SENDERS AND RECIPIENTS</h3>
+                    <p className="mb-1">Please read these terms of service carefully as they contain important
+                        information regarding your legal rights, remedies and obligations.
+                        These include various limitations and exclusions, a clause that governs
+                        the jurisdiction and venue of disputes, and obligations to comply with
                     applicable laws and regulations.</p>
-                <p className="mb-2">Update: <b>{new Date().getFullYear()}</b></p>
+                    <p className="mb-2">Update: <b>{new Date().getFullYear()}</b></p>
                 </div>
 
                 <div className="py-1">
@@ -418,9 +418,9 @@ const ToS = () => {
                     <h4>Indemnification</h4>
                     <p>You agree to release, defend, indemnify, and hold PKLoop and its affiliates and subsidiaries, and their respective officers, directors, investors, employees and agents, harmless from and against any claims, liabilities, damages, losses, injuries, and expenses, including without limitation reasonable legal and professional fees, arising out of or in any way connected with.about-banner.
                         <ol>
-                            (a).Your access to or use of The PKLoop Site or Your violation of these Terms; 
-                            <li>Your User Content; Your interaction with any other Member, Sender, Traveler or Third Party or other user of the PKLoop Site or </li> 
-                            
+                            (a).Your access to or use of The PKLoop Site or Your violation of these Terms;
+                            <li>Your User Content; Your interaction with any other Member, Sender, Traveler or Third Party or other user of the PKLoop Site or </li>
+
                             <li> any Request, Offer, Acceptance or any other transaction (including but not limited to any injuries, losses, damages (direct, indirect, consequential or otherwise) of any kind between You and Members).</li>
                         </ol>
                     </p>
@@ -508,7 +508,7 @@ const ToS = () => {
 
                 <div className="py-1">
                     <h4>Priority Response</h4>
-                    <p>Our dedicated team are on hand to resolve any issue that arises throughout the order and delivery process. Expect an answer within 24 hours. For trust and safety concerns, we will expedite your ticket for a fast resolution <a href ='mailto:contact@mypkloop.com'>contact@mypkloop.com</a></p>
+                    <p>Our dedicated team are on hand to resolve any issue that arises throughout the order and delivery process. Expect an answer within 24 hours. For trust and safety concerns, we will expedite your ticket for a fast resolution <a href='mailto:contact@mypkloop.com'>contact@mypkloop.com</a></p>
                 </div>
 
                 <div className="py-1">

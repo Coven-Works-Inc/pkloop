@@ -4,9 +4,9 @@ import Banner from '../common/banner'
 import './howitworks.css'
 import Cta from '../home/cta_banner'
 
-const index = () => {
+const index = (props) => {
   return (
-    <HeaderFooter>
+    <HeaderFooter redirect={props.location}>
       <Banner title='Same Day Global Shipping!' />
       <div className='top'>
         <div className='top-how-left'>

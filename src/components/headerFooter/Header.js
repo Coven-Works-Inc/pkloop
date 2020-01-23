@@ -24,6 +24,7 @@ class Header extends Component {
   }
 
   render() {
+    console.log(this.props)
     const { logoutUser } = this.props
     const { menu } = this.state
     const { isAuthenticated, user } = this.props.auth
@@ -78,10 +79,10 @@ class Header extends Component {
                   Logout
                 </Link>
               </li>
-              {this.state.messageCount ? 
-              <li>
-              <i className="fas fa-stack fa-bell" data-count={this.state.messageCount}></i>
-            </li> : <div></div>
+              {this.state.messageCount ?
+                <li>
+                  <i className="fas fa-stack fa-bell" data-count={this.state.messageCount}></i>
+                </li> : <div></div>
               }
             </ul>
           </div>
@@ -160,7 +161,7 @@ class Header extends Component {
                 <Link to='/trips'>List your trip</Link>
               </li>
               <li>
-                <Link to='/login'>Log in</Link>
+                <Link to={{ pathname: '/login', redirect: this.props.redirect.pathname }}>Log in</Link>
               </li>
               <li>
                 <Link to='/register'>Sign up</Link>

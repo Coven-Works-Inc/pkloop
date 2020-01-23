@@ -5,9 +5,9 @@ import Cta from '../home/cta_banner'
 
 import './pricing.css'
 
-const Pricing = () => {
+const Pricing = (props) => {
   return (
-    <HeaderFooter>
+    <HeaderFooter redirect={props.location}>
       <Banner title='Pricing Guide' />
       <div id='pricing-container'>
         <div className='price-card'>
