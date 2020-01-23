@@ -25,7 +25,7 @@ import Forgot from './components/auth/Forgot'
 import Password from './components/auth/password'
 import Chat from './components/dashboard/chat'
 import Profile from './components/dashboard/profile'
-import senderChat from './components/dashboard/sender'
+import SenderChat from './components/dashboard/sender'
 import Transactions from './components/dashboard/transactions'
 
 const Routes = props => {
@@ -38,7 +38,7 @@ const Routes = props => {
       <PrivateRoute exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Payment} path='/payment' />
-      <Route exact component={senderChat} path='/dashboard/senderchat' />
+      <Route exact component={SenderChat} path='/dashboard/senderchat' />
       <Route exact path='/dashboard/:id' component={Dashboard} />
       <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />
