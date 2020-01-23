@@ -2,10 +2,10 @@ import React from 'react'
 import HeaderFooter from '../headerFooter'
 import Banner from '../common/banner'
 
-const privacy_policy = () => {
+const privacy_policy = (props) => {
   return (
     <div className='page-body'>
-      <HeaderFooter>
+      <HeaderFooter redirect={props.location}>
         <Banner title='Privacy Policy' />
         <div className='page-container'>
           <h3 className='py-1'> Privacy Policy</h3>

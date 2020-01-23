@@ -3,10 +3,10 @@ import Footer from './Footer'
 import Header from './Header'
 
 class index extends Component {
-  render () {
+  render() {
     return (
       <div>
-        <Header />
+        <Header redirect={this.props.redirect} />
         {this.props.children}
         <Footer />
       </div>

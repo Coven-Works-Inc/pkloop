@@ -6,9 +6,9 @@ import Cargo from './cargo'
 import Faqs from './faqs'
 import Cta from './cta_banner'
 
-const index = () => {
+const index = (props) => {
   return (
-    <HeaderFooter>
+    <HeaderFooter redirect={props.location}>
       <Showcase />
       <Works />
       <Cargo />

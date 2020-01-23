@@ -211,7 +211,7 @@ const Parcel = props => {
   //   } = props)
   // }
   return (
-    <HeaderFooter>
+    <HeaderFooter redirect={props.location}>
       <div className='maincontainer send-parcel'>
         <h1>Send Parcel By Ship</h1>
         <div className='py-2 form-group'>
@@ -336,7 +336,7 @@ const Parcel = props => {
         <Shippers travelers={props.shippers.shippers} toggle={toggleModal} />
       )} */}
 
-      <Shippers travelers={state.filteredLocation ? state.filteredLocation : shippers} toggle={toggleModal} connect={handleConnect}  />
+      <Shippers travelers={state.filteredLocation ? state.filteredLocation : shippers} toggle={toggleModal} connect={handleConnect} />
 
       <Modal show={state.modalOpen}
         onClose={toggleModal}>
