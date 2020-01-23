@@ -46,7 +46,7 @@ const Parcel = props => {
     isLocal: true,
     travelerData: {},
     runParcelCost: null,
-    fundAmount: 0
+    fundAmount: 29.99
   })
   useEffect(() => {
     props.fetchTravelers()
@@ -133,7 +133,7 @@ const Parcel = props => {
   }
 
   const fundWallet = () => {
-    const data = { amount: Number(state.amount) }
+    const data = { amount: Number(state.fundAmount) }
 
     axios.put(`${BASE_URL}/users/updateMyBalance`, data)
       .then(response => {
@@ -153,10 +153,10 @@ const Parcel = props => {
   }
   const onToken = (token) => {
     toggleModal();
-    const amountToPay = Number(state.amount) * 100;
+    const amountToPay = Number(state.fundAmount) * 100;
 
     const data = {
-      description: `Payment of $${state.amount} made by ${token.email} on ${token.created}`,
+      description: `Payment of $${state.fundAmount} made by ${token.email} on ${token.created}`,
       source: token.id,
       currency: 'USD',
       amount: amountToPay
@@ -474,7 +474,8 @@ const Parcel = props => {
                 <input type="number" className="popupInput" name="fundAmount" placeholder="Enter Amount" value={state.fundAmount} onChange={onChangeHandler} />
                 <br />
                 <div className="button-group">
-                  <StripeCheckout
+                  {state.fundAmount >= 29.99 ? 
+                    <StripeCheckout
                     image={require('../../assets/payment-logo.png')}
                     stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
                     description="Connect with a traveler"
@@ -483,7 +484,9 @@ const Parcel = props => {
                     amount={Number(state.fundAmount) * 100}
                     token={onToken}
                     panelLabel="Pay"
-                  />
+                  /> : 
+                  <div>Minimum of $29.99 is required to fund wallet</div>
+                  }
                 </div>
               </div>
             }

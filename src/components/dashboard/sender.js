@@ -1,10 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import HeaderFooter from '../headerFooter'
+import {
+    ThemeProvider,
+    TextComposer,
+    Row,
+    IconButton,
+    AddIcon,
+    TextInput,
+    EmojiIcon,
+    SendButton,
+    Message,
+    MessageList,
+    MessageText,
+  } from '@livechat/ui-kit'
 
-const senderChat = (props) => {
-    console.log(props)
-    return(
+const SenderChat = props => {
+    const [messages, setMessages] = useState(['', 'jkn'])
+    return (
         <HeaderFooter>
             <div className="chat">
             <div className='chat-details'>
@@ -51,6 +64,37 @@ const senderChat = (props) => {
                     className='reusable-button'>DECLINE TRANSACTION</button>
                 </div>
             </div>
+            <ThemeProvider>
+          <div style={{ width: '100%', background: 'white' }}>
+
+            <Row reverse>
+              <MessageList>
+                {messages.map(message => (
+                   <Message isOwn radiusType='single'  showMetaOnClick style={{ backgroundColor: '#00bdbe', borderRadius: '1em', padding: '5px 10px', height: 'max-content' }}>
+                     <MessageText>{message}</MessageText>
+                   </Message>
+
+                ))}
+
+              </MessageList>
+            </Row>>
+            <TextComposer>
+              <Row align="center">
+                <IconButton fit>
+                  <AddIcon />
+                </IconButton>
+                <TextInput fill/>
+                <SendButton fit/>
+              </Row>
+
+              <Row verticalAlign="center" justify="right">
+                <IconButton fit>
+                  <EmojiIcon />
+                </IconButton>
+              </Row>
+            </TextComposer>
+          </div>
+        </ThemeProvider>
         </div>
         </HeaderFooter>
     )
@@ -61,4 +105,4 @@ const mapStateToProps = (state) => {
         trip: state.trips.trip.data
     }
 }
-export default connect(mapStateToProps)(senderChat)
+export default connect(mapStateToProps, null)(SenderChat)

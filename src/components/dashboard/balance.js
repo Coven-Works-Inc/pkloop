@@ -13,7 +13,7 @@ const Balance = props => {
   const [state, setState] = useState({
     amountMade: 0,
     modalOpen: false,
-    amount: 0
+    amount: 29.99
   })
 
   const [balance, setBalance] = useState(0)
@@ -106,7 +106,7 @@ const Balance = props => {
         <div>
           <h2>How much do you want to fund your wallet with?</h2>
           <br />
-          <input className="popupInput" type="number" name="amount" placeholder="Enter Amount" value={state.amount} onChange={onChangeHandler} />
+          <input className="popupInput"   type="number" name="amount" placeholder="Enter Amount" value={state.amount} onChange={onChangeHandler} />
           <br />
           {state.amount  >= 29.99 ? 
             <div className="button-group">
