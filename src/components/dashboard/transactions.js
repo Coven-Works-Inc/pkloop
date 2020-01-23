@@ -9,13 +9,14 @@ const Transactions = props => {
     transaction: { transaction }
   } = props
 
+  useEffect(() => {
+    props.getTransaction()
+  }, [])
   const handleClick = (trans) => {
     props.getTrip(trans.tripId)
     props.history.push({
       pathname: '/dashboard/senderchat',
-      trans
     })
-    console.log(trans)
   }
   return (
     <div className='transactions'>
@@ -52,8 +53,9 @@ const Transactions = props => {
 
 const mapStateToProps = state => {
   return {
-    transaction: state.transaction
+    transaction: state.transaction,
+    trip: state.trips.trip
   }
 }
 
-export default connect(mapStateToProps, { getTransaction, getTrip })(withRouter(Transactions))
+export default connect(mapStateToProps, {getTransaction, getTrip})(withRouter(Transactions))

@@ -7,6 +7,7 @@ import {
   SET_CURRENT_USER,
   LOADING,
   SET_TOKEN,
+  SET_TRAVELER,
   POST_TRIP
 } from './types'
 import { BASE_URL } from '../config/constants'
@@ -49,10 +50,11 @@ export const postTrip = (tripData, history) => dispatch => {
     )
 }
 export const getTrip = (id) => dispatch => {
-  axios.get(`${BASE_URL}/trips/trip`, {
-    params: id
-  })
+  axios.get(`${BASE_URL}/trips/trip/${id}`)
   .then(res => {
-    console.log(res)
+    dispatch({
+      type: SET_TRAVELER,
+      payload: res.data
+    })
   })
 }
