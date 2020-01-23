@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getTransaction } from '../../actions/transActions'
+import { getTrip } from '../../actions/tripActions'
 import { Link, withRouter } from 'react-router-dom'
 
 const Transactions = props => {
@@ -9,8 +10,10 @@ const Transactions = props => {
   } = props
 
   const handleClick = (trans) => {
+    props.getTrip(trans.tripId)
     props.history.push({
       pathname: '/dashboard/senderchat',
+      trans
     })
     console.log(trans)
   }
@@ -53,4 +56,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, getTransaction)(withRouter(Transactions))
+export default connect(mapStateToProps, { getTransaction, getTrip })(withRouter(Transactions))

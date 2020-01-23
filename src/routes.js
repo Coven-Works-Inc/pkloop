@@ -38,6 +38,7 @@ const Routes = props => {
       <PrivateRoute exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Payment} path='/payment' />
+      <Route exact component={senderChat} path='/dashboard/senderchat' />
       <Route exact path='/dashboard/:id' component={Dashboard} />
       <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />
@@ -52,7 +53,6 @@ const Routes = props => {
       <Route component={Transactions} path='/dashboard/transactions' />
       <Route exact component={Login} path='/login' />
       <Route exact component={Chat} path='/dashboard/chat' />
-      <Route exact component={senderChat} path='/dashboard/senderchat' />
       <Route exact component={Profile} path='/dashboard/profile' />
       <Route exact component={Home} path='/' />
 

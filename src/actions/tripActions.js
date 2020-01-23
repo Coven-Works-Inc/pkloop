@@ -48,3 +48,11 @@ export const postTrip = (tripData, history) => dispatch => {
       })
     )
 }
+export const getTrip = (id) => dispatch => {
+  axios.get(`${BASE_URL}/trips/trip`, {
+    params: id
+  })
+  .then(res => {
+    console.log(res)
+  })
+}

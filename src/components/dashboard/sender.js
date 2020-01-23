@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import HeaderFooter from '../headerFooter'
 
 const senderChat = (props) => {
+    console.log(props)
     return(
         <HeaderFooter>
             <div className="chat">
