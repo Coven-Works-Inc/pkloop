@@ -18,3 +18,12 @@ export const getTransaction = () => async dispatch => {
     })
   }
 }
+export const postTransaction = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions`, data)
+  .then(res => {
+    console.log(res)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}

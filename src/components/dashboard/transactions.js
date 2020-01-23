@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getTransaction } from '../../actions/transActions'
-import { Link } from 'react-router-dom'
+import { getTrip } from '../../actions/tripActions'
+import { Link, withRouter } from 'react-router-dom'
 
 const Transactions = props => {
   const {
     transaction: { transaction }
   } = props
 
+  useEffect(() => {
+    props.getTransaction()
+  }, [])
+  const handleClick = (trans) => {
+    props.getTrip(trans.tripId)
+    props.history.push({
+      pathname: '/dashboard/senderchat',
+    })
+  }
   return (
     <div className='transactions'>
       <div className='table-header'>
@@ -28,14 +38,12 @@ const Transactions = props => {
           <div className='table-row'>
             <p className='completed'>{trans.status}</p>
             <p>{trans.with}</p>
-            <p>{trans.sender}</p>
-            <p>{trans.createdAt.split('T')[0]}</p>
-            <Link to='/chat'>
+            <p>{trans.role}</p>
+            <p>{trans.date}</p>
               {' '}
-              <p className='open' style={{ cursor: 'pointer' }}>
+              <p className='open' style={{ cursor: 'pointer' }} onClick={() => handleClick(trans)}>
                 Open
               </p>{' '}
-            </Link>
           </div>
         ))
       )}
@@ -45,8 +53,9 @@ const Transactions = props => {
 
 const mapStateToProps = state => {
   return {
-    transaction: state.transaction
+    transaction: state.transaction,
+    trip: state.trips.trip
   }
 }
 
-export default connect(mapStateToProps, getTransaction)(Transactions)
+export default connect(mapStateToProps, {getTransaction, getTrip})(withRouter(Transactions))

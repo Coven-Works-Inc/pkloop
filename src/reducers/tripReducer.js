@@ -1,7 +1,12 @@
-import { POST_TRIP, GET_ERRORS } from '../actions/types'
+import { POST_TRIP, GET_ERRORS, SET_TRAVELER } from '../actions/types'
 
 const initialState = {
-  message: ''
+  message: '',
+  trip: {
+    data: {
+      
+    }
+  }
 }
 
 export default function (state = initialState, action) {
@@ -15,6 +20,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         errors: action.payload
+      }
+    case SET_TRAVELER:
+      return {
+        ...state,
+        trip: action.payload
       }
     default:
       return state

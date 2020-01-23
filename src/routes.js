@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Home from './components/home'
 import Login from './components/auth/Login'
-import Register from './components/auth/register'
+import Register from './components/auth/Register'
 import Pricing from './components/pricing'
 import Trips from './components/trip'
 import About from './components/about'
@@ -21,10 +21,12 @@ import HowItWorks from './components/howItWorks'
 import Shippers from './components/shippers'
 import Faq from './components/faq'
 import PrivateRoute from './components/common/privateRoute'
-import Forgot from './components/auth/forgot'
+import Forgot from './components/auth/Forgot'
 import Password from './components/auth/password'
 import Chat from './components/dashboard/chat'
 import Profile from './components/dashboard/profile'
+import senderChat from './components/dashboard/sender'
+import Transactions from './components/dashboard/transactions'
 
 const Routes = props => {
   return (
@@ -36,6 +38,7 @@ const Routes = props => {
       <PrivateRoute exact component={Trips} path='/trips' />
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Payment} path='/payment' />
+      <Route exact component={senderChat} path='/dashboard/senderchat' />
       <Route exact path='/dashboard/:id' component={Dashboard} />
       <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />
@@ -47,6 +50,7 @@ const Routes = props => {
       <Route exact component={Privacy} path='/privacy' />
       <Route exact component={Forgot} path='/forgot' />
       <Route component={Password} path='/password' />
+      <Route component={Transactions} path='/dashboard/transactions' />
       <Route exact component={Login} path='/login' />
       <Route exact component={Chat} path='/dashboard/chat' />
       <Route exact component={Profile} path='/dashboard/profile' />
