@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 // import { postParcel } from '../../actions/parcelActions'
 import HeaderFooter from '../headerFooter'
 import { connect } from 'react-redux'
-import { fetchTravelers, getTravelers, connectTraveler } from '../../actions/travelerActions';
+import { fetchTravelers, getTravelers, connectTraveler } from '../../actions/travelerActions'
+import { postTransaction } from '../../actions/transActions'
 import { Link } from 'react-router-dom'
 
 import countries from '../../countries.json'
@@ -185,6 +186,7 @@ const Parcel = props => {
   }
 
   const handleParcelCost = (traveler) => {
+    console.log(traveler)
     const localMultiplier = 1.5
     const intlMultiplier = 5.99
     const parcelWeight = parseInt(state.parcelWeight)
@@ -302,7 +304,17 @@ const Parcel = props => {
       senderUsername: props.user.user.username,
       travelerUsername: state.travelerData.username
     }
+   const transactionData = {
+     status: 'Pending',
+     with: state.travelerData.username,
+     role: 'Sender',
+     travelerId: state.travelerData.user._id,
+     senderName: props.user.user.username,
+     trip: state.travelerData,
+     tripId: state.travelerData._id
+   }
     props.connectTraveler(userDetails)
+    props.postTransaction(transactionData)
   }
   const toggleModal = () => {
     setState({
@@ -499,4 +511,4 @@ const mapStateToProps = state => ({
   user: state.auth,
 })
 
-export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler })(Parcel)
+export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler, postTransaction })(Parcel)

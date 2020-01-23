@@ -29,7 +29,6 @@ const Chat = props => {
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState('')
   const [modal, setModal] = useState(false)
-  const [replies, setReplies] = useState([])
   const [cancelled, setCancelled] = useState(false)
   const [updateSuccess, setUpdateSuccess] = useState(props.updateSuccess)
   const [paymentSuccess, setPaymentSuccess] = useState(false)
@@ -99,8 +98,6 @@ const Chat = props => {
     tipAmount: props.tipAmount,
     modalOpen: props.completed,
   })
-  if (props.traveler) {
-  }
   const toggleModal = () => {
     props.close()
   }

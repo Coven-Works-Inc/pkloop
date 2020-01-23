@@ -104,7 +104,7 @@ const Balance = props => {
 
       <Modal show={state.modalOpen} onClose={toggleModal}>
         <div>
-          <h2>How much do you want to fund your wallet with? Minimum of $29.99</h2>
+          <h2>How much do you want to fund your wallet with?</h2>
           <br />
           <input className="popupInput" type="number" name="amount" placeholder="Enter Amount" value={state.amount} onChange={onChangeHandler} />
           <br />
@@ -121,7 +121,7 @@ const Balance = props => {
               panelLabel="Pay"
             />
           </div> : 
-            <div> A Minimum of $29.99 is required to fund wallet</div>
+            <div style={{ color: 'red' }}> A Minimum of $29.99 is required to fund wallet</div>
           }
         </div>
       </Modal>
