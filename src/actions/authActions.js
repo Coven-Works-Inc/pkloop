@@ -57,20 +57,21 @@ export const loginUser = (userData, history, props) => dispatch => {
       setAuthToken(token)
       const decoded = jwt_decode(token)
       dispatch(setCurrentUser(decoded, token))
-      console.log(props)
 
       const location = props.location
-      if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
-        localStorage.removeItem('redirect')
-        history.push('/parcel')
-      }  else if (location.redirect === '/trips' || localStorage.getItem('redirect') === '/trips') {
-        localStorage.removeItem('redirect')
-        history.push('/trips')
-      } else if (location.redirect === '/shippers' || localStorage.getItem('redirect') === '/shippers') {
-        localStorage.removeItem('redirect')
-        history.push('/shippers')
-      }
-       else {
+      // if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
+      //   localStorage.removeItem('redirect')
+      //   history.push('/parcel')
+      // }  else if (location.redirect === '/trips' || localStorage.getItem('redirect') === '/trips') {
+      //   localStorage.removeItem('redirect')
+      //   history.push('/trips')
+      // } else if (location.redirect === '/shippers' || localStorage.getItem('redirect') === '/shippers') {
+      //   localStorage.removeItem('redirect')
+      //   history.push('/shippers')
+      // }
+      if (location.redirect) {
+        history.push(`${location.redirect}`)
+      } else {
         history.push('/dashboard/transactions')
       }
     })

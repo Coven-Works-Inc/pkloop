@@ -300,19 +300,19 @@ const Parcel = props => {
       parcelCost: state.parcelCost,
       travelerData: state.travelerData
     })
-   const userDetails = {
+    const userDetails = {
       senderUsername: props.user.user.username,
       travelerUsername: state.travelerData.username
     }
-   const transactionData = {
-     status: 'Pending',
-     with: state.travelerData.username,
-     role: 'Sender',
-     travelerId: state.travelerData.user._id,
-     senderName: props.user.user.username,
-     trip: state.travelerData,
-     tripId: state.travelerData._id
-   }
+    const transactionData = {
+      status: 'Pending',
+      with: state.travelerData.username,
+      role: 'Sender',
+      travelerId: state.travelerData.user._id,
+      senderName: props.user.user.username,
+      trip: state.travelerData,
+      tripId: state.travelerData._id
+    }
     props.connectTraveler(userDetails)
     props.postTransaction(transactionData)
   }
@@ -328,7 +328,7 @@ const Parcel = props => {
   } = props
 
   return (
-    <HeaderFooter>
+    <HeaderFooter redirect={props.location}>
       <div className='maincontainer send-parcel'>
         <h1>Find Travelers</h1>
         <div className='py-2 form-group'>
@@ -474,24 +474,24 @@ const Parcel = props => {
                 <input type="number" className="popupInput" name="fundAmount" placeholder="Enter Amount" value={state.fundAmount} onChange={onChangeHandler} />
                 <br />
                 <div className="button-group">
-                  {state.fundAmount >= 29.99 ? 
+                  {state.fundAmount >= 29.99 ?
                     <StripeCheckout
-                    image={require('../../assets/payment-logo.png')}
-                    stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
-                    description="Connect with a traveler"
-                    name="Make payment to continue"
-                    locale="auto"
-                    amount={Number(state.fundAmount) * 100}
-                    token={onToken}
-                    panelLabel="Pay"
-                  /> : 
-                  <div>Minimum of $29.99 is required to fund wallet</div>
+                      image={require('../../assets/payment-logo.png')}
+                      stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
+                      description="Connect with a traveler"
+                      name="Make payment to continue"
+                      locale="auto"
+                      amount={Number(state.fundAmount) * 100}
+                      token={onToken}
+                      panelLabel="Pay"
+                    /> :
+                    <div>Minimum of $29.99 is required to fund wallet</div>
                   }
                 </div>
               </div>
             }
           </div>
-          }
+        }
         {!state.isAuthenticated &&
           <div>
             <h2>Please login to connect with a traveller</h2>

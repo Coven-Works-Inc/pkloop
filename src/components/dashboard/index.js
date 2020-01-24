@@ -9,7 +9,7 @@ import Balance from './balance'
 import Support from './support'
 import Modal from '../common/modal'
 import './dashboard.css'
-import  uuidv4  from 'uuid/v4'
+import uuidv4 from 'uuid/v4'
 
 import { logoutUser } from '../../actions/authActions'
 import { addInsurance } from '../../actions/costActions'
@@ -29,7 +29,7 @@ class Dashboard extends Component {
     tipAdded: false,
     insuranceAdded: false,
     parcelItem: '',
-    checked:false,
+    checked: false,
     insuranceSuccess: false,
     showModal: false,
   }
@@ -74,7 +74,7 @@ class Dashboard extends Component {
   }
 
   onChangeHandler = (e) => {
-    if(Number(e.target.value) >= 0){
+    if (Number(e.target.value) >= 0) {
       this.setState({
         ...this.state,
         tipAmount: Number(e.target.value),
@@ -97,7 +97,7 @@ class Dashboard extends Component {
       parcelItem: e.target.value
     })
   )
-  payInsurance =  () => {
+  payInsurance = () => {
     // const userData = {
     //   client_id,
     //   api_key,
@@ -113,7 +113,7 @@ class Dashboard extends Component {
     // await this.props.addInsurance(userData)
     this.setState({
       modalOpen: false,
-      parcelCost:  Number(this.props.traveler.senderCost) + Number(this.state.insuranceCost) + Number(this.state.tipAmount)
+      parcelCost: Number(this.props.traveler.senderCost) + Number(this.state.insuranceCost) + Number(this.state.tipAmount)
     })
   }
   handleCheckbox = () => {
@@ -122,8 +122,8 @@ class Dashboard extends Component {
       checked: !this.state.checked
     })
   }
-  UNSAFE_componentWillReceiveProps(nextProps){
-    if(nextProps.cost.success != this.props.cost.success){
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.cost.success != this.props.cost.success) {
       this.setState({
         ...this.state,
         insuranceSuccess: true,
@@ -146,7 +146,7 @@ class Dashboard extends Component {
     const { modalType } = this.state
 
     return (
-      <HeaderFooter>
+      <HeaderFooter redirect={this.props.location}>
         <div className='dashboard-header'>
           <h2>
             {headerText === 'transactions' && 'My Transactions'}
@@ -197,20 +197,20 @@ class Dashboard extends Component {
             </p>
           </div>
           {headerText === 'transactions' && <Transactions />}
-          {headerText === 'chat' && <Chat cost={this.state.parcelCost} 
-                                          completed={this.state.completed} 
-                                          markTrans={this.markAsComplete} 
-                                          modal={this.handleModal}
-                                          showModal={this.state.showModal} 
-                                          tipAdded={this.state.tipAdded}
-                                          close={this.closeModal}
-                                          gotoBalance={this.gotoBalance}
-                                          insuranceSuccess={this.state.insuranceSuccess}
-                                          tipAmount={this.state.tipAmount}
-                                          insuranceCost={this.state.insuranceCost}
-                                          parcelCost={this.state.parcelCost}
-                                          senderCost={this.state.senderCost}
-                                          />}
+          {headerText === 'chat' && <Chat cost={this.state.parcelCost}
+            completed={this.state.completed}
+            markTrans={this.markAsComplete}
+            modal={this.handleModal}
+            showModal={this.state.showModal}
+            tipAdded={this.state.tipAdded}
+            close={this.closeModal}
+            gotoBalance={this.gotoBalance}
+            insuranceSuccess={this.state.insuranceSuccess}
+            tipAmount={this.state.tipAmount}
+            insuranceCost={this.state.insuranceCost}
+            parcelCost={this.state.parcelCost}
+            senderCost={this.state.senderCost}
+          />}
           {headerText === 'profile' && <Profile />}
           {headerText === 'balance' && <Balance />}
           {headerText === 'support' && <Support />}
@@ -220,9 +220,9 @@ class Dashboard extends Component {
           {
             modalType === 'insurance' &&
             <div className="insurance">
-              {this.state.insuranceSuccess ? <p style={{ color: 'green'}}>Insurance Policy successfully added</p>: <h2></h2>}
+              {this.state.insuranceSuccess ? <p style={{ color: 'green' }}>Insurance Policy successfully added</p> : <h2></h2>}
               <label>What is the worth of your parcel? Range between $0 - $1500</label>
-              <input type="range" min="0" max="1500" value={this.state.parcelWorth} onChange={this.insuranceChangeHandler} className="slider"/>
+              <input type="range" min="0" max="1500" value={this.state.parcelWorth} onChange={this.insuranceChangeHandler} className="slider" />
               <h3>parcel Worth: {this.state.parcelWorth}</h3>
               <br />
               <br />
@@ -231,24 +231,24 @@ class Dashboard extends Component {
               <h2>You will be charged 2% (${this.state.insuranceCost})of the total cost for insurance</h2>
               <br />
               <label className="container">By clicking on Proceed, you agree to InsureShip <a href="https://www.insureship.com/privacy" target="_blank"> Privacy policy</a> and <a href="https://www.insureship.com/terms" target="_blank">terms</a>
-                <input type="checkbox" checked={this.state.checked} onChange={this.handleCheckbox}/> 
+                <input type="checkbox" checked={this.state.checked} onChange={this.handleCheckbox} />
                 <span className="checkmark"></span>
               </label>
               <div className="button-group">
-                <button className='btnQ medium' 
-                    disabled={!this.state.checked} 
-                    onClick={this.payInsurance}>
-                      {this.props.loading ? (
-                        <span
-                        style={{ display: 'inline-block' }}
-                        className='spinner-border spinner-border-sm'
-                        role='status'
-                        aria-hidden='true'
-                      ></span>
-                      ): (
-                          <div>Okay, Proceed</div>
-                      )}
-                  </button>
+                <button className='btnQ medium'
+                  disabled={!this.state.checked}
+                  onClick={this.payInsurance}>
+                  {this.props.loading ? (
+                    <span
+                      style={{ display: 'inline-block' }}
+                      className='spinner-border spinner-border-sm'
+                      role='status'
+                      aria-hidden='true'
+                    ></span>
+                  ) : (
+                      <div>Okay, Proceed</div>
+                    )}
+                </button>
                 <button className='btnQ inverse-btnQ medium' onClick={this.toggleModal}>No, Not Interested</button>
               </div>
             </div>
@@ -269,7 +269,7 @@ class Dashboard extends Component {
             </div>
           }
           {
-          modalType === 'receiver' &&
+            modalType === 'receiver' &&
             <div>
               <label>Fullname</label>
               <input type="text" className="support_input"></input>
