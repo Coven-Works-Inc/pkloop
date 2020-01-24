@@ -39,10 +39,10 @@ const Chat = props => {
   const [errorModal, setErrorModal] = useState(false)
 
   useEffect(() => {
-
+    console.log(props.traveler)
     if(props.traveler){
-      setName(props.traveler._id)
-      setRoom('New room')
+      setName(props.traveler.username)
+      setRoom(props.traveler._id)
 
       socket = io('https://aqueous-ravine-50016.herokuapp.com/')
       // socket = io('http://localhost:8000')

@@ -4,7 +4,7 @@ const initialState = {
   message: '',
   trip: {
     data: {
-      
+      _id: ''
     }
   }
 }

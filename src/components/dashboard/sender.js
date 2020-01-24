@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import HeaderFooter from '../headerFooter'
+import io from 'socket.io-client'
 import {
     ThemeProvider,
     TextComposer,
@@ -15,10 +16,46 @@ import {
     MessageText,
   } from '@livechat/ui-kit'
 
+  let socket
 const SenderChat = props => {
-    const [messages, setMessages] = useState(['', 'jkn'])
+    const [messages, setMessages] = useState([])
+    const [room, setRoom] = useState('')
+    const [name, setName] = useState('')
+    const [disabled, setDisabled] = useState(true)
+    useEffect(() => {
+
+      if(props.trip){
+        console.log(props.trip)
+        setName(props.trip.username)
+        setRoom(props.trip._id)
+  
+        socket = io('https://aqueous-ravine-50016.herokuapp.com/')
+        // socket = io('http://localhost:8000')
+        socket.emit('join', { name, room }, () => {
+            console.log(name, room)
+        })
+  
+        return() => {
+          socket.emit('disconnect')
+          socket.off()
+        }
+  
+      }
+    }, [props.trip.username, props.trip._id])
+
+    useEffect(() => {
+      socket.on('message', ({user, text}, callback) => {
+        setMessages([...messages, text])
+        console.log(messages)
+    })
+    })
+
+    const handleAccept = () => {
+      setDisabled(false)
+    }
     return (
         <HeaderFooter>
+          {console.log(name, room)}
             <div className="chat">
             <div className='chat-details'>
                 {props.trip && (
@@ -30,7 +67,7 @@ const SenderChat = props => {
                 </h3>
                 <h5>
                     <span>
-                        <span className='gray'>Traveler</span>  {props.trip.username}
+                        <span className='gray'>Sender</span>  {props.trip.username}
                     </span>
                     <br />
                     <span>
@@ -55,12 +92,12 @@ const SenderChat = props => {
                 )}
                 <div>
                     <button style={{ color: 'white', backgroundColor: "#0071bc", border: "#0071bc", outline: 'none' }}
-                    className='reusable-button'>ACCEPT TRANSACTION</button>
+                    className='reusable-button' onClick={handleAccept}>{disabled ? `ACCEPT TRANSACTION` : `TRANSACTION ACCEPTED`}</button>
                     <button style={{ color: 'white', backgroundColor: "#0071bc", border: "#0071bc", outline: 'none' }} 
-                    className='reusable-button'>VIEW RECEIVER'S DETAIL</button>
+                    className='reusable-button' disabled={disabled}>VIEW RECEIVER'S DETAIL</button>
                     <button style={{ color: 'white', backgroundColor: "#abcc71", border: "#abcc71", outline: 'none' }}
-                    className='reusable-button'>MARK AS COMPLETED</button>
-                    <button style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
+                    className='reusable-button' disabled={disabled}>MARK AS COMPLETED</button>
+                    <button style={{ color: 'red', backgroundColor: "white", border: "white", outline: 'none' }}
                     className='reusable-button'>DECLINE TRANSACTION</button>
                 </div>
             </div>
@@ -100,7 +137,6 @@ const SenderChat = props => {
     )
 }
 const mapStateToProps = (state) => {
-    console.log(state.trips)
     return {
         trip: state.trips.trip.data
     }
