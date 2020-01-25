@@ -13,6 +13,7 @@ import uuidv4 from 'uuid/v4'
 
 import { logoutUser } from '../../actions/authActions'
 import { addInsurance } from '../../actions/costActions'
+import { addReceiver } from '../../actions/tripActions'
 import { client_id, api_key } from '../../config/constants'
 
 class Dashboard extends Component {
@@ -32,6 +33,9 @@ class Dashboard extends Component {
     checked: false,
     insuranceSuccess: false,
     showModal: false,
+    fullname: '',
+    address: '',
+    phone: ''
   }
   closeModal = () => {
     this.setState({
@@ -46,8 +50,24 @@ class Dashboard extends Component {
     })
   }
 
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name] : e.target.value
+    })
+  }
   gotoBalance = () => {
     this.props.history.replace('/dashboard/balance')
+  }
+
+  addReceiverDetails = () => {
+    console.log(this.props.traveler)
+    const receiverDetails = {
+      id: this.props.traveler._id,
+      fullname: this.state.fullname,
+      address: this.state.address,
+      phone: this.state.phone
+    }
+    this.props.addReceiver(receiverDetails)
   }
 
   handleModal = (type) => {
@@ -272,15 +292,15 @@ class Dashboard extends Component {
             modalType === 'receiver' &&
             <div>
               <label>Fullname</label>
-              <input type="text" className="support_input"></input>
+              <input type="text" className="support_input" name="fullname" onChange={this.handleChange}></input>
               <br />
               <label>Address</label>
-              <input type="text" className="support_input" ></input>
+              <input type="text" className="support_input" name="address" onChange={this.handleChange}></input>
               <br />
               <label>Phone number</label>
-              <input type="text" className="support_input"></input>
+              <input type="text" className="support_input" name="phone" onChange={this.handleChange}></input>
               <br />
-              <button className="btnQ medium">Add details</button>
+              <button className="btnQ medium" onClick={this.addReceiverDetails}>Add details</button>
             </div>
           }
         </Modal>
@@ -297,4 +317,4 @@ const mapStateToProps = state => {
     cost: state.cost
   }
 }
-export default connect(mapStateToProps, { logoutUser, addInsurance })(Dashboard)
+export default connect(mapStateToProps, { logoutUser, addInsurance, addReceiver })(Dashboard)

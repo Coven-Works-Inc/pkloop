@@ -6,6 +6,8 @@ import io from 'socket.io-client'
 import axios from 'axios'
 import { BASE_URL } from '../../config/constants'
 import { reduceBalance, updateBalance } from '../../actions/balanceActions'
+import { markTravelerComplete } from '../../actions/transActions'
+import { addTravelerEarning } from '../../actions/travelerActions'
 
 import 'react-chat-widget/lib/styles.css';
 import {
@@ -37,12 +39,13 @@ const Chat = props => {
   const [cancelModal, setCancelModal] = useState(false)
   const [balance, setBalance] = useState(0)
   const [errorModal, setErrorModal] = useState(false)
+  const [markCompleteModal, setMarkCompleteModal] = useState(false)
 
   useEffect(() => {
-
+    console.log(props.traveler)
     if(props.traveler){
-      setName(props.traveler._id)
-      setRoom('New room')
+      setName(props.traveler.username)
+      setRoom(props.traveler._id)
 
       socket = io('https://aqueous-ravine-50016.herokuapp.com/')
       // socket = io('http://localhost:8000')
@@ -71,7 +74,7 @@ const Chat = props => {
   const getUserData = () => {
     axios.get(`${BASE_URL}/users/fetchUser`)
       .then(response => {
-        console.log(response.data)
+
         setBalance(response.data.data.balance)
       })
       .catch(error => {
@@ -92,6 +95,15 @@ const Chat = props => {
       setPaymentSuccess(false)
       setTimeout(closeModal, 3000)
     }
+  }
+  const markAsComplete = () => {
+    console.log(props)
+    const data = {
+      id: props.traveler._id,
+      earning: Number(props.tipAmount) + Number(props.senderCost),
+    }
+    props.markTravelerComplete(data)
+    props.addTravelerEarning(data)
   }
   const [state, setState] = useState({
     headerText: 'Sender details',
@@ -115,6 +127,9 @@ const Chat = props => {
     closeModal()
     props.gotoBalance()
     toggleModal()
+  }
+  const openMarkCompletModal = () => {
+    setMarkCompleteModal(true)
   }
   const theme = {
     vars: {
@@ -151,6 +166,7 @@ const Chat = props => {
     setModal(false)
     setErrorModal(false)
     setCancelModal(false)
+    setMarkCompleteModal(false)
     toggleModal()
   }
   const changeHeader = text => {
@@ -220,7 +236,10 @@ const Chat = props => {
                   className='reusable-button'>{props.insuranceCost ? `INSURANCE ADDED ($${props.insuranceCost})`: 'ADD INSURANCE(OPTIONAL)'}</button>
                 <button onClick={markTrans}
                   style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
-            className='reusable-button'>{!paymentSuccess ? `CONTINUE TO PAYMENT($${Number(props.parcelCost).toFixed(2)}) + PLATFORM CHARGES($${Number(0.05 * props.parcelCost).toFixed(2)})`: `PAYMENT SUCCESSFUL`}</button>
+                  className='reusable-button'>{!paymentSuccess ? `CONTINUE TO PAYMENT($${Number(props.parcelCost).toFixed(2)}) + PLATFORM CHARGES($${Number(0.05 * props.parcelCost).toFixed(2)})`: `PAYMENT SUCCESSFUL`}</button>
+                <button onClick={openMarkCompletModal}
+                  style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
+                  className='reusable-button'>MARK AS COMPLETED</button>
                 <button
                   style={{
                     color: 'red',
@@ -274,6 +293,14 @@ const Chat = props => {
                 <button className='btnQ' onClick={cancelTransaction}>Cancel transaction</button>
               </Modal>
             )}
+            {markCompleteModal && (
+              <Modal show={markCompleteModal} onClose={closeModal}>
+                <div>Are you sure the parcel is delivered?. This is irreversible </div>
+                <button className='btnQ' onClick={markAsComplete}>Yes, continue</button>
+                <button className='btnQ' onClick={closeModal}>No</button>
+              </Modal>
+            )}
+
           </div>
         )}
         {!props.traveler && (
@@ -336,10 +363,16 @@ const Chat = props => {
   )
 }
 const mapStateToProps = state => {
+  console.log(state)
   return {
     traveler: state.travelers.travelerData,
     status: state.balance.status,
     updateSuccess: state.balance.updateSuccess
   }
 }
-export default connect(mapStateToProps, { joinChatRoom, reduceBalance, updateBalance })(Chat)
+export default connect(mapStateToProps, { joinChatRoom, 
+                                        reduceBalance, 
+                                        updateBalance, 
+                                        markTravelerComplete,
+                                        addTravelerEarning 
+                                      })(Chat)

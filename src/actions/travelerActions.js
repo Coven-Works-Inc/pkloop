@@ -53,10 +53,15 @@ export const fetchShippers = () => async dispatch => {
 export const connectTraveler = (userDetails) => dispatch => {
   axios.post(`${BASE_URL}/chat`, userDetails)
   .then(res => {
-    console.log(res)
     dispatch({
       type: CONNECT_TRAVELER,
       payload: res
     })
+  })
+}
+export const addTravelerEarning = (data) => dispatch => {
+  axios.post(`${BASE_URL}/trips/earning`, data)
+  .then(res => {
+    console.log(res)
   })
 }

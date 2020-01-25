@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import HeaderFooter from '../headerFooter'
+import io from 'socket.io-client'
 import {
     ThemeProvider,
     TextComposer,
@@ -14,14 +15,74 @@ import {
     MessageList,
     MessageText,
   } from '@livechat/ui-kit'
+import Modal from '../common/modal'
+import { markSenderComplete } from '../../actions/transActions'
 
+  let socket
 const SenderChat = props => {
-    const [messages, setMessages] = useState(['', 'jkn'])
+    const [messages, setMessages] = useState([])
+    const [room, setRoom] = useState('')
+    const [name, setName] = useState('')
+    const [receiverModal, setReceiverModal] = useState(false)
+    const [disabled, setDisabled] = useState(true)
+    const [markCompleteModal, setMarkCompleteModal] = useState(false)
+    useEffect(() => {
+
+      if(props.trip){
+        console.log(props.trip)
+        setName(props.trip.username)
+        setRoom(props.trip._id)
+  
+        socket = io('https://aqueous-ravine-50016.herokuapp.com/')
+        // socket = io('http://localhost:8000')
+        socket.emit('join', { name, room }, () => {
+            console.log(name, room)
+        })
+  
+        return() => {
+          socket.emit('disconnect')
+          socket.off()
+        }
+  
+      }
+    }, [props.trip.username, props.trip._id])
+
+    useEffect(() => {
+      socket.on('message', ({user, text}, callback) => {
+        setMessages([...messages, text])
+        console.log(messages)
+    })
+    })
+
+    const openMarkCompletModal = () => {
+      setMarkCompleteModal(true)
+    }
+
+    const markAsComplete = () => {
+      console.log(props)
+      const data = {
+        id: props.trip._id,
+        earning: props.trip.earning
+      }
+      props.markSenderComplete(data)
+    }
+
+    const handleAccept = () => {
+      setDisabled(false)
+    }
+    const handleReceiver = () => {
+      setReceiverModal(true)
+    }
+    const closeModal = () => {
+      setReceiverModal(false)
+      setMarkCompleteModal(false)
+    }
     return (
-        <HeaderFooter>
+        <HeaderFooter redirect={props.location}>
+          {console.log(name, room)}
             <div className="chat">
             <div className='chat-details'>
-                {props.trip && (
+                {props.trip ? (
                     <div>
                         <h3>
                     <span className='gray'>From</span>{props.trip.locationCity}, {props.trip.locationCountry}
@@ -30,7 +91,7 @@ const SenderChat = props => {
                 </h3>
                 <h5>
                     <span>
-                        <span className='gray'>Traveler</span>  {props.trip.username}
+                        <span className='gray'>Sender</span>  {props.trip.username}
                     </span>
                     <br />
                     <span>
@@ -52,15 +113,15 @@ const SenderChat = props => {
                 </h5>
 
                     </div>
-                )}
+                ): <div> No receiver's details yet</div> }
                 <div>
                     <button style={{ color: 'white', backgroundColor: "#0071bc", border: "#0071bc", outline: 'none' }}
-                    className='reusable-button'>ACCEPT TRANSACTION</button>
+                    className='reusable-button' onClick={handleAccept}>{disabled ? `ACCEPT TRANSACTION` : `TRANSACTION ACCEPTED`}</button>
                     <button style={{ color: 'white', backgroundColor: "#0071bc", border: "#0071bc", outline: 'none' }} 
-                    className='reusable-button'>VIEW RECEIVER'S DETAIL</button>
+                    className='reusable-button' disabled={disabled} onClick={handleReceiver}>VIEW RECEIVER'S DETAIL</button>
                     <button style={{ color: 'white', backgroundColor: "#abcc71", border: "#abcc71", outline: 'none' }}
-                    className='reusable-button'>MARK AS COMPLETED</button>
-                    <button style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
+                    className='reusable-button' disabled={disabled} onClick={openMarkCompletModal}>MARK AS COMPLETED</button>
+                    <button style={{ color: 'red', backgroundColor: "white", border: "white", outline: 'none' }}
                     className='reusable-button'>DECLINE TRANSACTION</button>
                 </div>
             </div>
@@ -96,13 +157,28 @@ const SenderChat = props => {
           </div>
         </ThemeProvider>
         </div>
+        {receiverModal && (
+          <Modal show={receiverModal} onClose={closeModal}>
+              <div>
+                <h4>Receiver's name</h4> {props.trip.receiver.fullname}
+                <h4>Receiver's Address</h4>{props.trip.receiver.address}
+                <h4>Receiver's Number</h4>{props.trip.receiver.phone}
+              </div>
+          </Modal>
+        )}
+        {markCompleteModal && (
+              <Modal show={markCompleteModal} onClose={closeModal}>
+                <div>Are you sure the parcel is delivered?. This is irreversible </div>
+                <button className='btnQ' onClick={markAsComplete}>Yes, continue</button>
+                <button className='btnQ' onClick={closeModal}>No</button>
+              </Modal>
+            )}
         </HeaderFooter>
     )
 }
 const mapStateToProps = (state) => {
-    console.log(state.trips)
     return {
         trip: state.trips.trip.data
     }
 }
-export default connect(mapStateToProps, null)(SenderChat)
+export default connect(mapStateToProps, { markSenderComplete })(SenderChat)

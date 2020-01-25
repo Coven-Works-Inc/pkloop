@@ -58,3 +58,9 @@ export const getTrip = (id) => dispatch => {
     })
   })
 }
+export const addReceiver = (details) => dispatch => {
+  axios.post(`${BASE_URL}/trips/trip/receiver`, details)
+  .then(res => {
+    console.log(res)
+  })
+}
