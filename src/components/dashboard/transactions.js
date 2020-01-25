@@ -16,6 +16,7 @@ const Transactions = props => {
     props.getTrip(trans.tripId)
     props.history.push({
       pathname: '/dashboard/senderchat',
+      redirect: '/login'
     })
   }
   return (

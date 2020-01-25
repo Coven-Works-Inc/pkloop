@@ -27,3 +27,16 @@ export const postTransaction = (data) => dispatch => {
     console.log(error)
   })
 }
+
+export const markTravelerComplete = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions/completetraveler`, data)
+  .then(res => {
+    console.log(res)
+  })
+}
+export const markSenderComplete = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions/completesender`, data)
+  .then(res => {
+    console.log(res)
+  })
+}
