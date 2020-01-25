@@ -35,19 +35,19 @@ const Transactions = props => {
           You do not any transactions yet
         </h2>
       ) : (
-        transaction.map((trans, index) => (
-          <div className='table-row'>
-            <p className='completed'>{trans.status}</p>
-            <p>{trans.with}</p>
-            <p>{trans.role}</p>
-            <p>{trans.date}</p>
-              {' '}
-              <p className='open' style={{ cursor: 'pointer' }} onClick={() => handleClick(trans)}>
-                Open
+            transaction.map((trans, index) => (
+              <div key={index} className='table-row'>
+                <p className='completed'>{trans.status}</p>
+                <p>{trans.with}</p>
+                <p>{trans.role}</p>
+                <p>{trans.date}</p>
+                {' '}
+                <p className='open' style={{ cursor: 'pointer' }} onClick={() => handleClick(trans)}>
+                  Open
               </p>{' '}
-          </div>
-        ))
-      )}
+              </div>
+            ))
+          )}
     </div>
   )
 }
@@ -59,4 +59,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {getTransaction, getTrip})(withRouter(Transactions))
+export default connect(mapStateToProps, { getTransaction, getTrip })(withRouter(Transactions))

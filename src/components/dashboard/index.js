@@ -52,7 +52,7 @@ class Dashboard extends Component {
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name] : e.target.value
+      [e.target.name]: e.target.value
     })
   }
   gotoBalance = () => {
@@ -290,7 +290,8 @@ class Dashboard extends Component {
           }
           {
             modalType === 'receiver' &&
-            <div>
+            <div className="receiver-modal">
+              <h2>Please enter the details of the parcel receiver</h2>
               <label>Fullname</label>
               <input type="text" className="support_input" name="fullname" onChange={this.handleChange}></input>
               <br />
