@@ -7,7 +7,7 @@ const Profile = props => {
   const [state, setState] = useState(props.user);
   const [photo, setPhoto] = useState('');
   const [imageName, setImageName] = useState('Set Display Picture');
-
+  const [displayType, changeDisplayType] = useState('form')
 
   const fileInput = useRef(null);
 
@@ -53,99 +53,110 @@ const Profile = props => {
 
   return (
     <div className='edit-profile'>
-      <div className='profile-picture' style={{display:'flex', marginTop: '0.1rem'}}>
-        <input
-            style={{display: 'none'}}
+      <div>
+        <p
+          className={displayType === 'form' ? 'active' : 'sidemenu'}
+          onClick={() => changeDisplayType('form')}>Update Profile</p>
+        <p
+          className={displayType === 'picture' ? 'active' : 'sidemenu'}
+          onClick={() => changeDisplayType('picture')}>Update Picture</p>
+      </div>
+      {displayType === 'picture' &&
+        <div className='profile-picture' style={{ display: 'flex', marginTop: '0.1rem' }}>
+          <input
+            style={{ display: 'none' }}
             type='file'
             id='fileElem'
             accept='image/*'
             onChange={onProfilePictureChange}
             ref={fileInput}
-        />
-        <button
+          />
+          <button
             style={{
               padding: '0.8rem 1rem',
               color: '#fff',
               borderRadius: '2px',
               outline: 'none',
               fontSize: '1rem',
-              backgroundColor:'rgba(0, 189, 190)'
+              backgroundColor: 'rgba(0, 189, 190)'
             }}
             onClick={onRefClick}>
-              Browse
+            Browse
         </button>
-        <div>
-          {console.log(state.image)}
-          <input style={{padding: '0.8rem 3rem', backgroundColor: '#efefef'}} placeholder={imageName} disabled/>
+          <div>
+            {console.log(state.image)}
+            <input style={{ padding: '0.8rem 3rem', backgroundColor: '#efefef' }} placeholder={imageName} disabled />
+          </div>
         </div>
-
-      </div>
-      <div className='profile-form'>
-        <form onSubmit={submitHandler}>
-          <input
-            type='text'
-            placeholder='first name'
-            value={state.firstname}
-            name='firstname'
-            onChange={onChangeHandler}
-          />
-          <input
-            type='text'
-            placeholder='last name'
-            value={state.lastname}
-            name='lastname'
-            onChange={onChangeHandler}
-          />
-          <input
-            type='text'
-            placeholder='username'
-            value={state.username}
-            onChange={onChangeHandler}
-          />
-          <input
-            type='text'
-            name='street'
-            placeholder='street'
-            value={state.street}
-            onChange={onChangeHandler}
-          />
-          <input
+      }
+      {displayType === 'form' &&
+        <div className='profile-form'>
+          <form onSubmit={submitHandler}>
+            <input
+              type='text'
+              placeholder='first name'
+              value={state.firstname}
+              name='firstname'
+              onChange={onChangeHandler}
+            />
+            <input
+              type='text'
+              placeholder='last name'
+              value={state.lastname}
+              name='lastname'
+              onChange={onChangeHandler}
+            />
+            <input
+              type='text'
+              placeholder='username'
+              value={state.username}
+              onChange={onChangeHandler}
+            />
+            <input
+              type='text'
+              name='street'
+              placeholder='street'
+              value={state.street}
+              onChange={onChangeHandler}
+            />
+            <input
               type='text'
               name={'city'}
               placeholder='city'
               value={state.city}
               onChange={onChangeHandler}
-          />
-          <input
+            />
+            <input
               type='text'
               name={'state'}
               placeholder='state'
               value={state.state}
               onChange={onChangeHandler}
-          />
-          <input
+            />
+            <input
               type={'text'}
               name={'country'}
               placeholder={'country'}
-            value={state.country}
-          onChange={onChangeHandler}/>
-          <input
-            type='email'
-            placeholder='email address'
-            value={state.email}
-            name='email'
-            onChange={onChangeHandler}
-          />
-          <input
-            type='tel'
-            placeholder='phone number'
-            value={state.phone}
-            name='phone'
-            onChange={onChangeHandler}
-          />
-          <button className='btnSmall' >Save Changes</button>
-        </form>
-      </div>
+              value={state.country}
+              onChange={onChangeHandler} />
+            <input
+              type='email'
+              placeholder='email address'
+              value={state.email}
+              name='email'
+              onChange={onChangeHandler}
+            />
+            <input
+              type='tel'
+              placeholder='phone number'
+              value={state.phone}
+              name='phone'
+              onChange={onChangeHandler}
+            />
+            <button className='btnSmall' >Save Changes</button>
+          </form>
+        </div>
+      }
     </div>
   )
 }
@@ -156,4 +167,4 @@ const mapStateToProps = state => {
     data: state.auth.data
   }
 }
-export default connect(mapStateToProps, {profileUpload})(Profile)
+export default connect(mapStateToProps, { profileUpload })(Profile)
