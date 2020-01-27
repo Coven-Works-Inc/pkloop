@@ -6,8 +6,8 @@ import io from 'socket.io-client'
 import axios from 'axios'
 import { BASE_URL } from '../../config/constants'
 import { reduceBalance, updateBalance } from '../../actions/balanceActions'
-import { markTravelerComplete } from '../../actions/transActions'
 import { addTravelerEarning } from '../../actions/travelerActions'
+import { completeTrip } from '../../actions/tripActions'
 
 import 'react-chat-widget/lib/styles.css';
 import {
@@ -102,8 +102,8 @@ const Chat = props => {
       id: props.traveler._id,
       earning: Number(props.tipAmount) + Number(props.senderCost),
     }
-    props.markTravelerComplete(data)
     props.addTravelerEarning(data)
+    props.completeTrip(data)
   }
   const [state, setState] = useState({
     headerText: 'Sender details',
@@ -373,6 +373,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { joinChatRoom, 
                                         reduceBalance, 
                                         updateBalance, 
-                                        markTravelerComplete,
-                                        addTravelerEarning 
+                                        addTravelerEarning,
+                                        completeTrip
                                       })(Chat)

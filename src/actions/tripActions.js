@@ -64,3 +64,9 @@ export const addReceiver = (details) => dispatch => {
     console.log(res)
   })
 }
+export const completeTrip = (data) => dispatch => {
+  axios.post(`${BASE_URL}/trips/complete`, data)
+  .then(res => {
+    console.log(res)
+  })
+}
