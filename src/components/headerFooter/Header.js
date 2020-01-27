@@ -24,7 +24,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { logoutUser } = this.props
     const { menu } = this.state
     const { isAuthenticated, user } = this.props.auth

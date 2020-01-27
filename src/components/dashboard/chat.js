@@ -43,17 +43,17 @@ const Chat = props => {
 
   useEffect(() => {
     console.log(props.traveler)
-    if(props.traveler){
+    if (props.traveler) {
       setName(props.traveler.username)
       setRoom(props.traveler._id)
 
       socket = io('https://aqueous-ravine-50016.herokuapp.com/')
       // socket = io('http://localhost:8000')
       socket.emit('join', { name, room }, () => {
-          console.log(name, room)
+        console.log(name, room)
       })
 
-      return() => {
+      return () => {
         socket.emit('disconnect')
         socket.off()
       }
@@ -61,11 +61,11 @@ const Chat = props => {
     }
   }, [props.traveler._id, name])
   useEffect(() => {
-    socket.on('message', ({user, text}, callback) => {
+    socket.on('message', ({ user, text }, callback) => {
       setMessages([...messages, text])
       console.log(messages)
+    })
   })
-  },)
 
   useEffect(() => {
     getUserData()
@@ -83,13 +83,13 @@ const Chat = props => {
   }
   const sendMessage = (e) => {
     e.preventDefault()
-    if(message){
+    if (message) {
       socket.emit('sendMessage', message, () => setMessage(''))
     }
   }
   const cancelTransaction = () => {
-    if(paymentSuccess){
-      props.updateBalance({amount: props.parcelCost})
+    if (paymentSuccess) {
+      props.updateBalance({ amount: props.parcelCost })
       setUpdateSuccess(false)
       setCancelled(true)
       setPaymentSuccess(false)
@@ -119,7 +119,7 @@ const Chat = props => {
     })
   }
   const openCancelModal = () => {
-    if(paymentSuccess){
+    if (paymentSuccess) {
       setCancelModal(true)
     }
   }
@@ -156,10 +156,10 @@ const Chat = props => {
     }
   }
   useEffect(() => {
-    if(props.status === 200){
-        setModal(true)  
-        toggleModal()
-        setPaymentSuccess(true)
+    if (props.status === 200) {
+      setModal(true)
+      toggleModal()
+      setPaymentSuccess(true)
     }
   }, [props.status])
   const closeModal = () => {
@@ -175,7 +175,7 @@ const Chat = props => {
     })
   }
   const markTrans = () => {
-    if(!paymentSuccess){
+    if (!paymentSuccess) {
       props.markTrans()
     }
   }
@@ -184,8 +184,8 @@ const Chat = props => {
     //REDIRECT TO FUND WALLET PAGE IF NOT
     //SUBTRACT FROM WALLET IF ENOUGH
     const parcelCost = props.parcelCost + (0.05 * props.parcelCost)
-    if(balance >= parcelCost){
-        props.reduceBalance({ amount: parcelCost })
+    if (balance >= parcelCost) {
+      props.reduceBalance({ amount: parcelCost })
     } else {
       setErrorModal(true)
     }
@@ -230,13 +230,13 @@ const Chat = props => {
                   className='reusable-button'>ENTER RECEIVER'S DETAILS</button>
                 <button onClick={() => props.modal('tip')}
                   style={{ color: 'white', backgroundColor: "#0071bc", border: "#0071bc", outline: 'none' }}
-                  className='reusable-button'>{props.tipAdded ? `TIP ADDED ($${props.tipAmount}) `: 'ADD TIP(OPTIONAL)'}</button>
+                  className='reusable-button'>{props.tipAdded ? `TIP ADDED ($${props.tipAmount}) ` : 'ADD TIP(OPTIONAL)'}</button>
                 <button onClick={() => props.modal('insurance')}
                   style={{ color: 'white', backgroundColor: "#abcc71", border: "#abcc71", outline: 'none' }}
-                  className='reusable-button'>{props.insuranceCost ? `INSURANCE ADDED ($${props.insuranceCost})`: 'ADD INSURANCE(OPTIONAL)'}</button>
+                  className='reusable-button'>{props.insuranceCost ? `INSURANCE ADDED ($${props.insuranceCost})` : 'ADD INSURANCE(OPTIONAL)'}</button>
                 <button onClick={markTrans}
                   style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
-                  className='reusable-button'>{!paymentSuccess ? `CONTINUE TO PAYMENT($${Number(props.parcelCost).toFixed(2)}) + PLATFORM CHARGES($${Number(0.05 * props.parcelCost).toFixed(2)})`: `PAYMENT SUCCESSFUL`}</button>
+                  className='reusable-button'>{!paymentSuccess ? `CONTINUE TO PAYMENT($${Number(props.parcelCost).toFixed(2)}) + PLATFORM CHARGES($${Number(0.05 * props.parcelCost).toFixed(2)})` : `PAYMENT SUCCESSFUL`}</button>
                 <button onClick={openMarkCompletModal}
                   style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
                   className='reusable-button'>MARK AS COMPLETED</button>
@@ -256,26 +256,26 @@ const Chat = props => {
             )}
             {props.completed && (
               <Modal show={props.completed} onClose={toggleModal}>
-                  <p>{`Are you sure you want to pay, cancellation attracts a 5% $(${Number(0.05 * props.cost).toFixed(2)}) charge`}</p>
-                  <button className='btnQ medium' style={{marginRight: '10px'}} onClick={handleParcelPayment}>{`pay $${Number(props.cost).toFixed(2)} + $${Number(0.05 * props.cost).toFixed(2)}`}</button>
-                  <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Not Interested</button>
+                <p>{`Are you sure you want to pay, cancellation attracts a 5% $(${Number(0.05 * props.cost).toFixed(2)}) charge`}</p>
+                <button className='btnQ medium' style={{ marginRight: '10px' }} onClick={handleParcelPayment}>{`pay $${Number(props.cost).toFixed(2)} + $${Number(0.05 * props.cost).toFixed(2)}`}</button>
+                <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Not Interested</button>
               </Modal>
-            //   <StripeCheckout
-            //     amount={props.cost * 100}
-            //     image={require('../../assets/payment-logo.png')}
-            //     stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
-            //     description="Connect with a traveler"
-            //     name="Make payment to continue"
-            //     locale="auto"
-            //     label="Pay With Card to Continue"
-            //     // panelLabel={'Pay $' + props.cost}
-            //     token={() => props.history.push('/dashboard/transactions')}
-            //   />
+              //   <StripeCheckout
+              //     amount={props.cost * 100}
+              //     image={require('../../assets/payment-logo.png')}
+              //     stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
+              //     description="Connect with a traveler"
+              //     name="Make payment to continue"
+              //     locale="auto"
+              //     label="Pay With Card to Continue"
+              //     // panelLabel={'Pay $' + props.cost}
+              //     token={() => props.history.push('/dashboard/transactions')}
+              //   />
             )}
             {modal && (
               <Modal show={modal} onClose={closeModal}>
-                  <div>You've successfully paid for this transaction</div>
-                  <button onClick={gotoBalance} className="btnQ">View wallet balance</button>   
+                <div>You've successfully paid for this transaction</div>
+                <button onClick={gotoBalance} className="btnQ">View wallet balance</button>
               </Modal>
             )
             }
@@ -288,14 +288,14 @@ const Chat = props => {
             {cancelModal && (
               <Modal show={cancelModal} onClose={closeModal}>
                 {console.log(props)}
-                {props.updateSuccess === true && (<h3 style={{color: 'green'}}>Transaction successfully cancelled</h3>)}
-                <div>Are you sure you want to cancel ?. You will stiill be charged 5% platform fee </div>
+                {props.updateSuccess === true && (<h3 style={{ color: 'green' }}>Transaction successfully cancelled</h3>)}
+                <div>Are you sure you want to cancel? You will still be charged a 5% platform fee</div>
                 <button className='btnQ' onClick={cancelTransaction}>Cancel transaction</button>
               </Modal>
             )}
             {markCompleteModal && (
               <Modal show={markCompleteModal} onClose={closeModal}>
-                <div>Are you sure the parcel is delivered?. This is irreversible </div>
+                <div>Are you sure the parcel is delivered? This is irreversible </div>
                 <button className='btnQ' onClick={markAsComplete}>Yes, continue</button>
                 <button className='btnQ' onClick={closeModal}>No</button>
               </Modal>
@@ -326,42 +326,42 @@ const Chat = props => {
           style={props.traveler ? {} : { alignSelf: 'center' }}
         >
           <ThemeProvider theme={theme}>
-          <div style={{ width: '100%', background: 'white' }}>
+            <div style={{ width: '100%', background: 'white' }}>
 
-            <Row reverse>
-              <MessageList>
-                {messages.map(message => (
-                   <Message isOwn radiusType='single'  showMetaOnClick style={{ backgroundColor: '#00bdbe', borderRadius: '1em', padding: '5px 10px', height: 'max-content' }}>
-                     <MessageText>{message}</MessageText>
-                   </Message>
+              <Row reverse>
+                <MessageList>
+                  {messages.map(message => (
+                    <Message isOwn radiusType='single' showMetaOnClick style={{ backgroundColor: '#00bdbe', borderRadius: '1em', padding: '5px 10px', height: 'max-content' }}>
+                      <MessageText>{message}</MessageText>
+                    </Message>
 
-                ))}
+                  ))}
 
-              </MessageList>
-            </Row>>
+                </MessageList>
+              </Row>>
             <TextComposer onClick={sendMessage} onChange={(event) => setMessage(event.target.value)} >
-              <Row align="center">
-                <IconButton fit>
-                  <AddIcon />
-                </IconButton>
-                <TextInput fill/>
-                <SendButton fit/>
-              </Row>
+                <Row align="center">
+                  <IconButton fit>
+                    <AddIcon />
+                  </IconButton>
+                  <TextInput fill />
+                  <SendButton fit />
+                </Row>
 
-              <Row verticalAlign="center" justify="right">
-                <IconButton fit>
-                  <EmojiIcon />
-                </IconButton>
-              </Row>
-            </TextComposer>
-          </div>
-        </ThemeProvider>
-          
+                <Row verticalAlign="center" justify="right">
+                  <IconButton fit>
+                    <EmojiIcon />
+                  </IconButton>
+                </Row>
+              </TextComposer>
+            </div>
+          </ThemeProvider>
         </div>
       )}
     </div>
   )
 }
+
 const mapStateToProps = state => {
   console.log(state)
   return {
