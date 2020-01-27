@@ -3,8 +3,8 @@ import { Switch, Route, withRouter, Router } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Home from './components/home'
-import Login from './components/auth/login'
-import Register from './components/auth/register'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
 import Pricing from './components/pricing'
 import Trips from './components/trip'
 import About from './components/about'
@@ -21,12 +21,13 @@ import HowItWorks from './components/howItWorks'
 import Shippers from './components/shippers'
 import Faq from './components/faq'
 import PrivateRoute from './components/common/privateRoute'
-import Forgot from './components/auth/forgot'
+import Forgot from './components/auth/Forgot'
 import Password from './components/auth/password'
 import Chat from './components/dashboard/chat'
 import Profile from './components/dashboard/profile'
 import SenderChat from './components/dashboard/sender'
 import Transactions from './components/dashboard/transactions'
+import TravelerChat from './components/dashboard/traveler'
 
 const Routes = props => {
   return (
@@ -39,6 +40,7 @@ const Routes = props => {
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Payment} path='/payment' />
       <Route exact component={SenderChat} path='/dashboard/senderchat' />
+      <Route exact component={TravelerChat} path='/dashboard/travelerchat' />
       <Route exact path='/dashboard/:id' component={Dashboard} />
       <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />
