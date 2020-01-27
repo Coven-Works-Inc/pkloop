@@ -27,6 +27,7 @@ import Chat from './components/dashboard/chat'
 import Profile from './components/dashboard/profile'
 import SenderChat from './components/dashboard/sender'
 import Transactions from './components/dashboard/transactions'
+import TravelerChat from './components/dashboard/traveler'
 
 const Routes = props => {
   return (
@@ -39,6 +40,7 @@ const Routes = props => {
       <Route exact component={Verify} path='/verify' />
       <Route exact component={Payment} path='/payment' />
       <Route exact component={SenderChat} path='/dashboard/senderchat' />
+      <Route exact component={TravelerChat} path='/dashboard/travelerchat' />
       <Route exact path='/dashboard/:id' component={Dashboard} />
       <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />

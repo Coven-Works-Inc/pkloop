@@ -26,8 +26,8 @@ import {
 import './chat.css'
 import Modal from '../common/modal'
 
-let socket
-const Chat = props => {
+const  socket = io('http://localhost:4000/chat')
+const TravelerChat = props => {
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState('')
   const [modal, setModal] = useState(false)
@@ -42,24 +42,20 @@ const Chat = props => {
   const [markCompleteModal, setMarkCompleteModal] = useState(false)
 
   useEffect(() => {
-    console.log(props.traveler)
-    if(props.traveler){
       setName(props.traveler.username)
       setRoom(props.traveler._id)
 
       // socket = io('https://aqueous-ravine-50016.herokuapp.com/')
-      socket = io('http://localhost:4000/chat')
-      socket.emit('join', { name, room }, () => {
+      socket.emit('join', ({ name, room }), () => {
           console.log(name, room)
       })
 
-      return() => {
-        socket.emit('disconnect')
-        socket.off()
-      }
+      // return() => {
+      //   socket.emit('disconnect')
+      //   socket.off()
+      // }
 
-    }
-  }, [props.traveler._id, name])
+  }, [props.traveler._id, props.traveler.username])
   useEffect(() => {
     socket.on('message', ({user, text}, callback) => {
       setMessages([...messages, text])
@@ -222,14 +218,14 @@ const Chat = props => {
               )}
               <br />
               <span className='gray'>Arrival date</span>{' '}
-              {props.traveler.arrivalDate.split('T')[0]}
+              {props.traveler.arrivalDate && props.traveler.arrivalDate.split('T')[0]}
               <br />
               <span className='gray'>Means of transportation</span>{' '}
               {props.traveler.transport}
               <br />
               <span className='gray'>Size of parcel</span>{' '}
-              {props.traveler.parcelSize.charAt(0).toUpperCase()}
-              {props.traveler.parcelSize.slice(1)}
+              {props.traveler.parcelSize && props.traveler.parcelSize.charAt(0).toUpperCase()}
+              {props.traveler.parcelSize && props.traveler.parcelSize.slice(1)}
               <br />
               <span className='gray'>Weight of parcel</span>{' '}
               {props.traveler.parcelWeight}
@@ -241,13 +237,13 @@ const Chat = props => {
                   className='reusable-button'>ENTER RECEIVER'S DETAILS</button>
                 <button onClick={() => props.modal('tip')}
                   style={{ color: 'white', backgroundColor: "#0071bc", border: "#0071bc", outline: 'none' }}
-                  className='reusable-button'>{props.tipAdded ? `TIP ADDED ($${props.tipAmount}) `: 'ADD TIP(OPTIONAL)'}</button>
+                  className='reusable-button'>{props.traveler.tipAdded ? `TIP ADDED ($${props.traveler.tipAmount}) `: 'ADD TIP(OPTIONAL)'}</button>
                 <button onClick={() => props.modal('insurance')}
                   style={{ color: 'white', backgroundColor: "#abcc71", border: "#abcc71", outline: 'none' }}
-                  className='reusable-button'>{props.insuranceCost ? `INSURANCE ADDED ($${props.insuranceCost})`: 'ADD INSURANCE(OPTIONAL)'}</button>
+                  className='reusable-button'>{props.traveler.insuranceCost ? `INSURANCE ADDED ($${props.traveler.insuranceCost})`: 'ADD INSURANCE(OPTIONAL)'}</button>
                 <button onClick={markTrans}
                   style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
-                  className='reusable-button'>{!paymentSuccess ? `CONTINUE TO PAYMENT($${Number(props.parcelCost).toFixed(2)}) + PLATFORM CHARGES($${Number(0.05 * props.parcelCost).toFixed(2)})`: `PAYMENT SUCCESSFUL`}</button>
+                  className='reusable-button'>{!paymentSuccess ? `CONTINUE TO PAYMENT($${Number(props.traveler.parcelCost).toFixed(2)}) + PLATFORM CHARGES($${Number(0.05 * props.traveler.parcelCost).toFixed(2)})`: `PAYMENT SUCCESSFUL`}</button>
                 <button onClick={openMarkCompletModal}
                   style={{ color: 'white', backgroundColor: "#00bdbe", border: "#00bdbe", outline: 'none' }}
                   className='reusable-button'>MARK AS COMPLETED</button>
@@ -376,7 +372,7 @@ const Chat = props => {
 const mapStateToProps = state => {
   console.log(state)
   return {
-    traveler: state.travelers.travelerData,
+    traveler: state.trips.trip.data,
     status: state.balance.status,
     updateSuccess: state.balance.updateSuccess
   }
@@ -387,4 +383,4 @@ export default connect(mapStateToProps, { joinChatRoom,
                                         addTravelerEarning,
                                         completeTrip,
                                         updateTrans
-                                      })(Chat)
+                                      })(TravelerChat)

@@ -46,7 +46,8 @@ const Parcel = props => {
     isLocal: true,
     travelerData: {},
     runParcelCost: null,
-    fundAmount: 29.99
+    fundAmount: 29.99,
+    sameUser: false
   })
   useEffect(() => {
     props.fetchTravelers()
@@ -180,11 +181,23 @@ const Parcel = props => {
         isAuthenticated: false
       })
     } else {
-      addTravelerToState(traveler)
-      handleParcelCost(traveler)
+      if(props.user.user._id === traveler.user._id){
+        setState({
+          ...state,
+          sameUser: true
+        })
+      } else {
+        addTravelerToState(traveler)
+        handleParcelCost(traveler)
+      }
     }
   }
-
+  const closeModal = () => {
+    setState({
+      ...state,
+      sameUser: false
+    })
+  }
   const handleParcelCost = (traveler) => {
     console.log(traveler)
     const localMultiplier = 1.5
@@ -319,7 +332,7 @@ const Parcel = props => {
   const toggleModal = () => {
     setState({
       ...state,
-      modalOpen: !state.modalOpen
+      modalOpen: !state.modalOpen,
     })
   }
 
@@ -505,6 +518,7 @@ const Parcel = props => {
             </div>
           </div>}
       </Modal>
+      {state.sameUser && <Modal show={state.sameUser} onClose={closeModal}><div>Can't connect with your self</div></Modal>}
     </HeaderFooter>
   )
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getTransaction } from '../../actions/transActions'
 import { getTrip } from '../../actions/tripActions'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 const Transactions = props => {
   const {
@@ -12,12 +12,21 @@ const Transactions = props => {
   useEffect(() => {
     props.getTransaction()
   }, [])
-  const handleClick = (trans) => {
-    props.getTrip(trans.tripId)
-    props.history.push({
-      pathname: '/dashboard/senderchat',
-      redirect: '/login'
-    })
+  const handleClick = async (trans) => {
+    if(trans.role === 'Sender'){
+      props.getTrip(trans.tripId)
+      props.history.push({
+        pathname: '/dashboard/travelerchat',
+        redirect: '/login',
+        trans
+      })
+    } else {
+      props.getTrip(trans.tripId)
+      props.history.push({
+        pathname: '/dashboard/senderchat',
+        redirect: '/login'
+      })
+    }
   }
   return (
     <div className='transactions'>
@@ -55,7 +64,7 @@ const Transactions = props => {
 const mapStateToProps = state => {
   return {
     transaction: state.transaction,
-    trip: state.trips.trip
+    trip: state.trips.trip.data,
   }
 }
 

@@ -40,3 +40,12 @@ export const markSenderComplete = (data) => dispatch => {
     console.log(res)
   })
 }
+
+export const updateTrans = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions/updatetrans`, data)
+  .then(
+    res => {
+      console.log(res)
+    }
+  )
+}
