@@ -27,7 +27,7 @@ class Register extends Component {
   //   console.log(this.props);
   // }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps () {
     // console.log(this.props);
     this.setState({
       errors: this.props.errors
@@ -61,7 +61,7 @@ class Register extends Component {
     this.props.registerUser(newUser, this.props.history, this.props)
   }
 
-  render() {
+  render () {
     const { errors } = this.state
     // console.log(this.props);
 
@@ -177,49 +177,14 @@ class Register extends Component {
                         aria-hidden='true'
                       ></span>
                     ) : (
-                        <div>SIGN UP NOW</div>
-                      )}{' '}
+                      <div>SIGN UP NOW</div>
+                    )}{' '}
                   </button>
                   {/* {loading && <img
                   src={loader}
                   alt=''
                 />} */}
                 </form>
-                <p>OR</p>
-                <button className='btn_google'>
-                  <i className='icon'>
-                    <img
-                      src='https://img.icons8.com/color/30/000000/google-logo.png'
-                      alt=''
-                    />
-                  </i>
-                  <span className='text'> Sign up with Google</span>
-                </button>
-                <button
-                  className='btn_google'
-                  style={{ background: '#384af5', color: 'white' }}
-                >
-                  <i className='icon' style={{ marginLeft: '0.7rem' }}>
-                    <img
-                      src='https://img.icons8.com/color/27/000000/twitter.png'
-                      alt=''
-                    />
-                  </i>
-                  <span className='text'> Sign up with Twitter</span>
-                </button>
-
-                <button
-                  className='btn_google'
-                  style={{ background: '#3b5998', color: 'white' }}
-                >
-                  <i className='icon' style={{ marginLeft: '0.7rem' }}>
-                    <img
-                      src='https://img.icons8.com/color/27/000000/facebook-f.png'
-                      alt=''
-                    />
-                  </i>
-                  <span className='text'> Sign up with Facebook</span>
-                </button>
               </div>
               <div className='terms'>
                 <p>
