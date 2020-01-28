@@ -9,7 +9,43 @@ import {
   SET_TOKEN,
   UPDATE_PROFILE_PICTURE
 } from './types'
-import { BASE_URL } from '../config/constants'
+import { BASE_URL, LOCAL_URL } from '../config/constants'
+
+export const googleLogin = (data, history, props) => dispatch => {
+  axios
+    .post(`${LOCAL_URL}/auth/google-login`, data)
+    .then(res => {
+      console.log(res)
+      const { token, _id } = res.data.data
+      localStorage.setItem('jwtToken', token)
+      localStorage.setItem('id', _id)
+      setAuthToken(token)
+      const decoded = jwt_decode(token)
+      dispatch(setCurrentUser(decoded, token))
+      history.push('/dashboard')
+
+      // const location = props.location
+      // if (location.redirect) {
+      //   history.push(`${location.redirect}`)
+      // } else {
+      //   history.push('/dashboard/transactions')
+      // }
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response
+          ? err.response.data.message
+          : 'Something went wrong'
+      })
+    })
+    .finally(() =>
+      dispatch({
+        type: LOADING,
+        payload: false
+      })
+    )
+}
 
 export const registerUser = (userData, history, props) => dispatch => {
   dispatch({
@@ -21,7 +57,11 @@ export const registerUser = (userData, history, props) => dispatch => {
     .then(res => {
       // console.log(res.data)
       const location = props.location
-      if (location.redirect === '/parcel' || location.redirect === '/trips' || location.redirect === '/shippers') {
+      if (
+        location.redirect === '/parcel' ||
+        location.redirect === '/trips' ||
+        location.redirect === '/shippers'
+      ) {
         localStorage.setItem('redirect', props.location.redirect)
       }
       history.push('/verify')

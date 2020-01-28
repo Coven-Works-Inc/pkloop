@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { loginUser } from '../../actions/authActions'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { authenticate, isAuth } from './helpers'
 import queryString from 'query-string'
+import Google from './google'
+import Facebook from './facebook'
 import Logo from '../../assets/logo/Logo.png'
 // import './bootstrap.min.css';
 
@@ -15,7 +18,7 @@ class Login extends Component {
     display: 'none'
   }
 
-  componentWillMount() {
+  componentWillMount () {
     const query = queryString.parse(this.props.location.search)
     if (query.token) {
       window.localStorage.setItem('jwt', query.token)
@@ -23,7 +26,7 @@ class Login extends Component {
     }
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps () {
     this.setState({
       errors: this.props.error
     })
@@ -38,7 +41,7 @@ class Login extends Component {
     })
   }
 
-  googleAuth = e => { }
+  googleAuth = e => {}
 
   onSubmitHandler = e => {
     e.preventDefault()
@@ -55,7 +58,7 @@ class Login extends Component {
     this.props.loginUser(userData, this.props.history, this.props)
   }
 
-  render() {
+  render () {
     const { errors } = this.state
     console.log(this.props.location)
     return (
@@ -105,7 +108,7 @@ class Login extends Component {
                       placeholder='Password'
                       value={this.state.password}
                       onChange={this.onChangeHandler}
-                    // errors={errors.password}
+                      // errors={errors.password}
                     />
                   </div>
                   <Link to='/forgot'>
@@ -131,44 +134,14 @@ class Login extends Component {
                         aria-hidden='true'
                       ></span>
                     ) : (
-                        <div>Login now</div>
-                      )}
+                      <div>Login now</div>
+                    )}
                   </button>
                 </form>
                 <p style={{ textAlign: 'center' }}>OR</p>
-                <button className='btn_google'>
-                  <i className='icon'>
-                    <img
-                      src='https://img.icons8.com/color/30/000000/google-logo.png'
-                      alt=''
-                    />
-                  </i>
-                  <span className='text'>Log in with Google </span>
-                </button>
-                <button
-                  className='btn_google'
-                  style={{ background: '#384af5', color: 'white' }}
-                >
-                  <i className='icon' style={{ marginLeft: '0.7rem' }}>
-                    <img
-                      src='https://img.icons8.com/color/27/000000/twitter.png'
-                      alt=''
-                    />
-                  </i>
-                  <span className='text'> Log in with Twitter</span>
-                </button>
-                <button
-                  className='btn_google'
-                  style={{ background: '#3b5998', color: 'white' }}
-                >
-                  <i className='icon' style={{ marginLeft: '0.7rem' }}>
-                    <img
-                      src='https://img.icons8.com/color/27/000000/facebook-f.png'
-                      alt=''
-                    />
-                  </i>
-                  <span className='text'> Log in with Facebook</span>
-                </button>
+
+                <Google informParent={this.informParent} />
+                <Facebook />
               </div>
               <div className='terms'>
                 <p>
