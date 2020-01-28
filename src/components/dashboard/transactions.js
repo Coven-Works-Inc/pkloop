@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { getTransaction } from '../../actions/transActions'
 import { getTrip } from '../../actions/tripActions'
 import { withRouter } from 'react-router-dom'
+import DashboardHeader from './header'
+import HeaderFooter from '../headerFooter'
 
 const Transactions = props => {
   const {
@@ -29,35 +31,45 @@ const Transactions = props => {
     }
   }
   return (
-    <div className='transactions'>
-      <div className='table-header'>
-        <p>Status</p>
-        <p>With</p>
-        <p>Your role</p>
-        <p>Last message</p>
-        <p></p>
+    <HeaderFooter>
+          <div className='dashboard-header'>
+          <h2>
+            My Transactions
+          </h2>
+        </div>
+            <div>
+          <DashboardHeader />
+          <div className='transactions'>
+        <div className='table-header'>
+          <p>Status</p>
+          <p>With</p>
+          <p>Your role</p>
+          <p>Last message</p>
+          <p></p>
+        </div>
+        {transaction === undefined ? (
+          <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</h3>
+        ) : transaction.length === 0 ? (
+          <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
+            You do not any transactions yet
+          </h2>
+        ) : (
+              transaction.map((trans, index) => (
+                <div key={index} className='table-row'>
+                  <p className='completed'>{trans.status}</p>
+                  <p>{trans.with}</p>
+                  <p>{trans.role}</p>
+                  <p>{trans.date}</p>
+                  {' '}
+                  <p className='open' style={{ cursor: 'pointer' }} onClick={() => handleClick(trans)}>
+                    Open
+                </p>{' '}
+                </div>
+              ))
+            )}
       </div>
-      {transaction === undefined ? (
-        <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</h3>
-      ) : transaction.length === 0 ? (
-        <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
-          You do not any transactions yet
-        </h2>
-      ) : (
-            transaction.map((trans, index) => (
-              <div key={index} className='table-row'>
-                <p className='completed'>{trans.status}</p>
-                <p>{trans.with}</p>
-                <p>{trans.role}</p>
-                <p>{trans.date}</p>
-                {' '}
-                <p className='open' style={{ cursor: 'pointer' }} onClick={() => handleClick(trans)}>
-                  Open
-              </p>{' '}
-              </div>
-            ))
-          )}
-    </div>
+      </div>
+    </HeaderFooter>
   )
 }
 

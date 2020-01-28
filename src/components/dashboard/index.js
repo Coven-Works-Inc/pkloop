@@ -169,11 +169,7 @@ class Dashboard extends Component {
       <HeaderFooter redirect={this.props.location}>
         <div className='dashboard-header'>
           <h2>
-            {headerText === 'transactions' && 'My Transactions'}
-            {headerText === 'chat' && 'Chat'}
-            {headerText === 'profile' && 'Edit Profile'}
-            {headerText === 'balance' && 'My Balance'}
-            {headerText === 'support' && 'Support'}
+            My Transactions
           </h2>
         </div>
         <div className='dashboard-body'>
@@ -185,12 +181,12 @@ class Dashboard extends Component {
               My Transactions
             </p>
 
-            <p
+            {/* <p
               onClick={() => changeHeader('chat')}
               className={headerText === 'chat' ? '' : 'lighter'}
             >
               Chat
-            </p>
+            </p> */}
 
             <p
               onClick={() => changeHeader('profile')}

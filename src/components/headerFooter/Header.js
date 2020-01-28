@@ -18,6 +18,7 @@ class Header extends Component {
   }
 
   showMenu = () => {
+    window.scrollTo(0, 0)
     this.setState({
       menu: !this.state.menu
     })
@@ -94,7 +95,7 @@ class Header extends Component {
           <div className='mobile-menu'>
             <ul>
               <li>
-                <Link to='#works'>How it works</Link>
+                <Link to='/howitworks'>How it works</Link>
               </li>
               <li>
                 <Link to='/pricing'>Pricing</Link>
@@ -159,9 +160,9 @@ class Header extends Component {
               <li>
                 <Link to='/trips'>List your trip</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to={{ pathname: '/login', redirect: this.props.redirect.pathname }}>Log in</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to='/register'>Sign up</Link>
               </li>
@@ -176,7 +177,7 @@ class Header extends Component {
           <div className='mobile-menu'>
             <ul>
               <li>
-                <Link to='#works'>How it works</Link>
+                <Link to='/howitworks'>How it works</Link>
               </li>
               <li>
                 <Link to='/pricing'>Pricing</Link>

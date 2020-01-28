@@ -41,31 +41,30 @@ const Chat = props => {
   const [errorModal, setErrorModal] = useState(false)
   const [markCompleteModal, setMarkCompleteModal] = useState(false)
 
-  useEffect(() => {
-    console.log(props.traveler)
-    if(props.traveler){
-      setName(props.traveler.username)
-      setRoom(props.traveler._id)
+  // useEffect(() => {
+  //   console.log(props.traveler)
+  //   if(props.traveler){
+  //     setName(props.traveler.username)
+  //     setRoom(props.traveler._id)
 
-      // socket = io('https://aqueous-ravine-50016.herokuapp.com/')
-      socket = io('http://localhost:4000/chat')
-      socket.emit('join', { name, room }, () => {
-          console.log(name, room)
-      })
+  //     socket = io('https://aqueous-ravine-50016.herokuapp.com/')
+  //     socket.emit('join', { name, room }, () => {
+  //         console.log(name, room)
+  //     })
 
-      return() => {
-        socket.emit('disconnect')
-        socket.off()
-      }
+  //     return() => {
+  //       socket.emit('disconnect')
+  //       socket.off()
+  //     }
 
-    }
-  }, [props.traveler._id, name])
-  useEffect(() => {
-    socket.on('message', ({user, text}, callback) => {
-      setMessages([...messages, text])
-      console.log(messages)
-  })
-  },)
+  //   }
+  // }, [props.traveler._id, name])
+  // useEffect(() => {
+  //   socket.on('message', ({user, text}, callback) => {
+  //     setMessages([...messages, text])
+  //     console.log(messages)
+  // })
+  // },)
 
   useEffect(() => {
     getUserData()
@@ -112,6 +111,11 @@ const Chat = props => {
   })
   const toggleModal = () => {
     props.close()
+  }
+  const handleChange = (e) => {
+    setState({
+      [e.target.name]: e.target.value
+    })
   }
   const onTipChange = e => {
     setState({
@@ -336,7 +340,7 @@ const Chat = props => {
           className='chat-board'
           style={props.traveler ? {} : { alignSelf: 'center' }}
         >
-          <ThemeProvider theme={theme}>
+          {/* <ThemeProvider theme={theme}>
           <div style={{ width: '100%', background: 'white' }}>
 
             <Row reverse>
@@ -366,7 +370,17 @@ const Chat = props => {
               </Row>
             </TextComposer>
           </div>
-        </ThemeProvider>
+        </ThemeProvider> */}
+        <div className="receiver-modal">
+              <h2>Leave a message for the traveler</h2>
+              <label>Subject</label>
+              <input type="text" className="support_input" name="fullname" onChange={handleChange}></input>
+              <br />
+              <label>Text</label>
+              <textarea className="support_input" name="address" onChange={handleChange}></textarea>
+              <br />
+              <button className="btnQ medium">Send message</button>
+            </div>
           
         </div>
       )}
