@@ -261,7 +261,8 @@ a:first-child .cargo_items {
   justify-content: center;
   text-align: center;
   padding: 100px 0px;
-  background-color: #f5fafd;
+  /* background-color: #f5fafd; */
+  background-color: #fff;
 }
 
 #faqs h2 {
@@ -273,7 +274,8 @@ a:first-child .cargo_items {
 }
 
 .faqitem .question {
-  background: #fff;
+  background: #ffffff;
+  border: 1px solid #f5fafd;
   padding: 1rem 2rem;
   /* text-align: start; */
   display: flex;

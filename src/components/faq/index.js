@@ -49,7 +49,7 @@ class index extends Component {
         answer: `YES. PKLoop is available for use on iOS, Android and windows apps.`
       },
       {
-        active: `false`,
+        active: false,
         question:
           'How does my recipient get the package? I am skeptical about Package delivery',
         answer: `From the airport, your traveler can hand carry your parcel directly to the recipient and confirm delivery. If the flight number is available, GPS tracking throughout the process gives you peace of mind on Traveler’s arrival. Sender, Traveler and Recipient codes must be entered and match to complete package exchange and finalize transaction completion.

@@ -32,7 +32,7 @@ p {
     display: flex;
     justify-content: center;
     padding-top: 4rem;
-    padding-bottom: 12rem;
+    padding-bottom: 6rem;
     height: 100%;
 }
 
@@ -61,4 +61,36 @@ p {
 
 #pricing-container .price-card h3 {
     font-size: 1.8rem;
+}
+
+#pricing-container .pricing-head {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.25rem 0.75rem;
+    border-top: 1px solid #aaa;
+    border-bottom: 4px solid #aaa;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+#pricing-container .pricing-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.25rem 0.75rem;
+    border-bottom: 1px solid #aaa;
+}
+
+#pricing-container .pricing-head p:first-child,
+#pricing-container .pricing-item p:first-child {
+    color: #0071bc;
+}
+
+@media screen and (max-width: 480px) {
+    #pricing-container {
+        flex-wrap: wrap;
+    }
+
+    #pricing-container .price-card:first-child {
+        margin-bottom: 4rem;
+    }
 }

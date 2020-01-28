@@ -9,6 +9,14 @@
     justify-content: center;
     /* font-weight: bold; */
     letter-spacing: -0.87px;
+    line-height: normal;
+}
+
+@media screen and (max-width: 480px) {
+    .banner {
+        font-size: 2.5rem;
+        text-align: center;
+    }
 }
 
 .card {

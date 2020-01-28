@@ -2,3 +2,25 @@
     font-size: 20px;
     text-align: center;
 }
+
+.cta_content .cta_main {
+    text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+    .cta_content .cta_box,
+    /* .cta_content .cta_box a, */
+    .cta_content .cta_box a button {
+        width: 100%;
+    }
+
+    .cta_content .cta_box a button {
+        margin: 0px;
+    }
+
+    .cta_content .cta_box a:first-child {
+        margin-bottom: 1.5rem;
+    }
+}
+
+

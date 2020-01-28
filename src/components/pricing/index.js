@@ -8,85 +8,23 @@ import './pricing.css'
 const Pricing = (props) => {
   return (
     <HeaderFooter redirect={props.location}>
-      <Banner title='Pricing Guide' />
+      <Banner title='Pricing Guide Title' />
       <div id='pricing-container'>
         <div className='price-card'>
           <h3>US & Canada</h3>
-          <hr
-            style={{
-              marginTop: '2.5rem',
-              height: '1px',
-              background: '#aaa',
-              border: 'none'
-            }}
-          />
-          <div
-            style={{
-              marginTop: '1.5rem',
-              marginLeft: '1rem',
-              color: '#0071bc',
-              display: 'flex',
-              justifyContent: 'flex-start',
-              fontWeight: 'bold',
-              fontSize: '1.15rem'
-            }}
-          >
+          <div className="pricing-head">
             <p>WEIGHT </p>
-            <p style={{ color: '#333', marginLeft: '10rem' }}>COST</p>
+            <p>COST</p>
           </div>
 
-          <hr
-            style={{
-              marginTop: '1.5rem',
-              height: '4px',
-              background: '#aaa',
-              border: 'none'
-            }}
-          />
-          <div
-            style={{
-              marginTop: '1.5rem',
-              marginLeft: '1.2rem',
-              color: '#0071bc',
-              display: 'flex',
-              justifyContent: 'flex-start',
-              fontSize: '1rem'
-            }}
-          >
+          <div className="pricing-item">
             <p>0 - 5lbs </p>
-            <p style={{ color: '#333', marginLeft: '11rem' }}>$14.99</p>
+            <p>$14.99</p>
           </div>
-          <hr
-            style={{
-              marginTop: '1.5rem',
-              height: '1px',
-              background: '#aaa',
-              border: 'none'
-            }}
-          />
-          <div
-            style={{
-              marginTop: '1.5rem',
-              marginLeft: '1.2rem',
-              color: '#0071bc',
-              display: 'flex',
-              justifyContent: 'flex-start',
-              fontSize: '1rem'
-            }}
-          >
+          <div className="pricing-item">
             <p> > 5lbs </p>
-            <p style={{ color: '#333', marginLeft: '11.7rem' }}>
-              $14.99 + 1.5/lb
-            </p>
+            <p>$14.99 + 1.5/lb</p>
           </div>
-          <hr
-            style={{
-              marginTop: '1.5rem',
-              height: '1px',
-              background: '#aaa',
-              border: 'none'
-            }}
-          />
           <div className="base-tagline">
             <img src={require('../../assets/insurancetip.png')} alt="icon for insurance and tips" />
             <small>Insurance (2%) and tips are optional</small>
@@ -94,79 +32,19 @@ const Pricing = (props) => {
         </div>
         <div className='price-card'>
           <h3>International</h3>
-          <hr
-            style={{
-              marginTop: '2.5rem',
-              height: '1px',
-              background: '#aaa',
-              border: 'none'
-            }}
-          />
-          <div
-            style={{
-              marginTop: '1.5rem',
-              marginLeft: '1rem',
-              color: '#0071bc',
-              display: 'flex',
-              justifyContent: 'flex-start',
-              fontWeight: 'bold',
-              fontSize: '1.15rem'
-            }}
-          >
+          <div className="pricing-head">
             <p>WEIGHT </p>
-            <p style={{ color: '#333', marginLeft: '10rem' }}>COST</p>
+            <p>COST</p>
           </div>
 
-          <hr
-            style={{
-              marginTop: '1.5rem',
-              height: '4px',
-              background: '#aaa',
-              border: 'none'
-            }}
-          />
-          <div
-            style={{
-              marginTop: '1.5rem',
-              marginLeft: '1.2rem',
-              color: '#0071bc',
-              display: 'flex',
-              justifyContent: 'flex-start',
-              fontSize: '1rem'
-            }}
-          >
+          <div className="pricing-item">
             <p>0 - 5lbs </p>
-            <p style={{ color: '#333', marginLeft: '11rem' }}>$24.99</p>
+            <p>$24.99</p>
           </div>
-          <hr
-            style={{
-              marginTop: '1.5rem',
-              height: '1px',
-              background: '#aaa',
-              border: 'none'
-            }}
-          />
-          <div
-            style={{
-              marginTop: '1.5rem',
-              marginLeft: '1.2rem',
-              color: '#0071bc',
-              display: 'flex',
-              justifyContent: 'flex-start',
-              fontSize: '1rem'
-            }}
-          >
+          <div className="pricing-item">
             <p> > 5lbs </p>
-            <p style={{ color: '#333', marginLeft: '11.7rem' }}>$5.99/lb</p>
+            <p>$5.99/lb</p>
           </div>
-          <hr
-            style={{
-              marginTop: '1.5rem',
-              height: '1px',
-              background: '#aaa',
-              border: 'none'
-            }}
-          />
         </div>
       </div>
       <Cta />
