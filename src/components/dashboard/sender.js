@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import HeaderFooter from '../headerFooter'
 import io from 'socket.io-client'
+
 import {
     ThemeProvider,
     TextComposer,
@@ -17,6 +18,7 @@ import {
   } from '@livechat/ui-kit'
 import Modal from '../common/modal'
 import { markSenderComplete } from '../../actions/transActions'
+import DashboardHeader from './header'
 
   let socket
 const SenderChat = props => {
@@ -25,34 +27,38 @@ const SenderChat = props => {
     const [name, setName] = useState('')
     const [receiverModal, setReceiverModal] = useState(false)
     const [disabled, setDisabled] = useState(true)
+    const [headerText, changeHeader] = useState('')
     const [markCompleteModal, setMarkCompleteModal] = useState(false)
-    useEffect(() => {
+    const handleChange = (e) => {
+      setName(e.target.value)
+    }
+    // useEffect(() => {
 
-      if(props.trip){
-        console.log(props.trip)
-        setName(props.trip.username)
-        setRoom(props.trip._id)
+    //   if(props.trip){
+    //     console.log(props.trip)
+    //     setName(props.trip.username)
+    //     setRoom(props.trip._id)
   
-        socket = io('https://aqueous-ravine-50016.herokuapp.com/')
-        // socket = io('http://localhost:8000')
-        socket.emit('join', { name, room }, () => {
-            console.log(name, room)
-        })
+    //     socket = io('https://aqueous-ravine-50016.herokuapp.com/')
+    //     // socket = io('http://localhost:8000')
+    //     socket.emit('join', { name, room }, () => {
+    //         console.log(name, room)
+    //     })
   
-        return() => {
-          socket.emit('disconnect')
-          socket.off()
-        }
+    //     return() => {
+    //       socket.emit('disconnect')
+    //       socket.off()
+    //     }
   
-      }
-    }, [props.trip.username, props.trip._id])
+    //   }
+    // }, [props.trip.username, props.trip._id])
 
-    useEffect(() => {
-      socket.on('message', ({user, text}, callback) => {
-        setMessages([...messages, text])
-        console.log(messages)
-    })
-    })
+    // useEffect(() => {
+    //   socket.on('message', ({user, text}, callback) => {
+    //     setMessages([...messages, text])
+    //     console.log(messages)
+    // })
+    // })
 
     const openMarkCompletModal = () => {
       setMarkCompleteModal(true)
@@ -79,7 +85,12 @@ const SenderChat = props => {
     }
     return (
         <HeaderFooter redirect={props.location}>
-          {console.log(name, room)}
+          <div className='dashboard-header'>
+          <h2>
+            Sender
+          </h2>
+        </div>
+            <DashboardHeader />
             <div className="chat">
             <div className='chat-details'>
                 {props.trip ? (
@@ -125,7 +136,7 @@ const SenderChat = props => {
                     className='reusable-button'>DECLINE TRANSACTION</button>
                 </div>
             </div>
-            <ThemeProvider>
+            {/* <ThemeProvider>
           <div style={{ width: '100%', background: 'white' }}>
 
             <Row reverse>
@@ -155,15 +166,28 @@ const SenderChat = props => {
               </Row>
             </TextComposer>
           </div>
-        </ThemeProvider>
+        </ThemeProvider> */}
+        <div className="receiver-modal">
+              <h2>Leave a message for the traveler</h2>
+              <label>Subject</label>
+              <input type="text" className="support_input" name="fullname" onChange={handleChange}></input>
+              <br />
+              <label>Text</label>
+              <textarea className="support_input" name="address" onChange={handleChange}></textarea>
+              <br />
+              <button className="btnQ medium">Send message</button>
+            </div>
         </div>
         {receiverModal && (
           <Modal show={receiverModal} onClose={closeModal}>
-              <div>
+            {props.trip.receiver ? (
+                <div>
                 <h4>Receiver's name</h4> {props.trip.receiver.fullname}
                 <h4>Receiver's Address</h4>{props.trip.receiver.address}
                 <h4>Receiver's Number</h4>{props.trip.receiver.phone}
               </div>
+            ):
+            <div>The traveler is yet to add the receiver's details</div>}
           </Modal>
         )}
         {markCompleteModal && (

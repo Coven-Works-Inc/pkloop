@@ -27,6 +27,8 @@ import Chat from './components/dashboard/chat'
 import Profile from './components/dashboard/profile'
 import SenderChat from './components/dashboard/sender'
 import Transactions from './components/dashboard/transactions'
+import Balance from './components/dashboard/balance'
+import Support from './components/dashboard/support'
 import TravelerChat from './components/dashboard/traveler'
 
 const Routes = props => {
@@ -41,7 +43,6 @@ const Routes = props => {
       <Route exact component={Payment} path='/payment' />
       <Route exact component={SenderChat} path='/dashboard/senderchat' />
       <Route exact component={TravelerChat} path='/dashboard/travelerchat' />
-      <Route exact path='/dashboard/:id' component={Dashboard} />
       <Route exact component={Travelers} path='/travelers' />
       <Route exact component={Trust} path='/trust' />
       <Route exact component={Terms} path='/terms' />
@@ -53,6 +54,9 @@ const Routes = props => {
       <Route exact component={Forgot} path='/forgot' />
       <Route component={Password} path='/password' />
       <Route component={Transactions} path='/dashboard/transactions' />
+      <Route component={Profile} path='/dashboard/profile' />
+      <Route component={Balance} path='/dashboard/balance' />
+      <Route component={Support} path='/dashboard/support' />
       <Route exact component={Login} path='/login' />
       <Route exact component={Chat} path='/dashboard/chat' />
       <Route exact component={Profile} path='/dashboard/profile' />

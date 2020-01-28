@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { joinChatRoom } from '../../actions/chatActions'
 import io from 'socket.io-client'
 import axios from 'axios'
+import HeaderFooter from '../headerFooter'
 import { BASE_URL } from '../../config/constants'
 import { reduceBalance, updateBalance } from '../../actions/balanceActions'
 import { addTravelerEarning } from '../../actions/travelerActions'
@@ -25,8 +26,9 @@ import {
 } from '@livechat/ui-kit'
 import './chat.css'
 import Modal from '../common/modal'
+import DashboardHeader from './header'
 
-const  socket = io('http://localhost:4000/chat')
+let socket
 const TravelerChat = props => {
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState('')
@@ -41,32 +43,36 @@ const TravelerChat = props => {
   const [errorModal, setErrorModal] = useState(false)
   const [markCompleteModal, setMarkCompleteModal] = useState(false)
 
-  useEffect(() => {
-      setName(props.traveler.username)
-      setRoom(props.traveler._id)
+  
+  // useEffect(() => {
+  //     setName(props.traveler.username)
+  //     setRoom(props.traveler._id)
 
-      // socket = io('https://aqueous-ravine-50016.herokuapp.com/')
-      socket.emit('join', ({ name, room }), () => {
-          console.log(name, room)
-      })
+  //     socket = io('https://aqueous-ravine-50016.herokuapp.com/')
+  //     socket.emit('join', ({ name, room }), () => {
+  //         console.log(name, room)
+  //     })
 
-      // return() => {
-      //   socket.emit('disconnect')
-      //   socket.off()
-      // }
+  //     // return() => {
+  //     //   socket.emit('disconnect')
+  //     //   socket.off()
+  //     // }
 
-  }, [props.traveler._id, props.traveler.username])
-  useEffect(() => {
-    socket.on('message', ({user, text}, callback) => {
-      setMessages([...messages, text])
-      console.log(messages)
-  })
-  },)
+  // }, [props.traveler._id, props.traveler.username])
+  // useEffect(() => {
+  //   socket.on('message', ({user, text}, callback) => {
+  //     setMessages([...messages, text])
+  //     console.log(messages)
+  // })
+  // },)
 
   useEffect(() => {
     getUserData()
   }, [])
 
+  const handleChange = (e) => {
+    setName(e.target.value)
+  }
   const getUserData = () => {
     axios.get(`${BASE_URL}/users/fetchUser`)
       .then(response => {
@@ -198,7 +204,10 @@ const TravelerChat = props => {
     }
   }
   return (
-    <div className='chat'>
+    <HeaderFooter>
+            <div>
+        <DashboardHeader />
+        <div className='chat'>
       <div className='chat-details'>
         {props.traveler && (
           <div>
@@ -332,7 +341,7 @@ const TravelerChat = props => {
           className='chat-board'
           style={props.traveler ? {} : { alignSelf: 'center' }}
         >
-          <ThemeProvider theme={theme}>
+          {/* <ThemeProvider theme={theme}>
           <div style={{ width: '100%', background: 'white' }}>
 
             <Row reverse>
@@ -362,11 +371,22 @@ const TravelerChat = props => {
               </Row>
             </TextComposer>
           </div>
-        </ThemeProvider>
-          
+        </ThemeProvider> */}
+          <div className="receiver-modal">
+              <h2>Leave a message for the Sender</h2>
+              <label>Subject</label>
+              <input type="text" className="support_input" name="fullname" onChange={handleChange}></input>
+              <br />
+              <label>Text</label>
+              <textarea className="support_input" name="address" onChange={handleChange}></textarea>
+              <br />
+              <button className="btnQ medium">Send message</button>
+            </div>
         </div>
       )}
     </div>
+    </div>
+    </HeaderFooter>
   )
 }
 const mapStateToProps = state => {
