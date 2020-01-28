@@ -1,4 +1,4 @@
-@media (max-width: 375px){
+@media (max-width: 480px){
 #navbar {
     padding: 2rem;
 }
@@ -180,21 +180,24 @@ body{
     font-size: 0.44rem;
 }
 
-#faqs{
+/* #faqs{
     display: none
-}
-
+} */
 
 .faqitem {
-        background: #fff;
-        padding: 0rem 2rem;
-        text-align: start;
-        margin: 0.20rem 20rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+    /* background: #f5fafd; */
+    padding: 0rem 2rem;
+    text-align: start;
+    margin-top: 0.75rem;
+    /* margin: 0.20rem 20rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; */
+}
 
+.faqitem:first-child {
+    margin-top: 0rem;
+}
 
 .cta_send .main{
     font-size: 1.9rem;
