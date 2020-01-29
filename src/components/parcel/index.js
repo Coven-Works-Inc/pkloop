@@ -15,7 +15,7 @@ import Modal from '../common/modal'
 import axios from 'axios'
 import StripeCheckout from 'react-stripe-checkout'
 import { BASE_URL } from '../../config/constants'
-
+import { reduceBalance, updateBalance } from '../../actions/balanceActions'
 import './parcel.css'
 import travelData from '../../travelers.json'
 import countriesData from '../../countries.json'
@@ -47,7 +47,14 @@ const Parcel = props => {
     travelerData: {},
     runParcelCost: null,
     fundAmount: 29.99,
-    sameUser: false
+    sameUser: false,
+    parcelWorth: 0,
+    parcelItem: '',
+    insuranceCost: '',
+    checked: false,
+    modal1: false,
+    modal2: false,
+    totalCost: 0
   })
   useEffect(() => {
     props.fetchTravelers()
@@ -122,6 +129,7 @@ const Parcel = props => {
     getUserData()
   }, [])
 
+
   const getUserData = () => {
     axios.get(`${BASE_URL}/users/fetchUser`)
       .then(response => {
@@ -181,15 +189,16 @@ const Parcel = props => {
         isAuthenticated: false
       })
     } else {
-      if(props.user.user._id === traveler.user._id){
-        setState({
-          ...state,
-          sameUser: true
-        })
-      } else {
+      // if(props.user.user._id === traveler.user._id){
+      //   setState({
+      //     ...state,
+      //     sameUser: true
+      //   })
+      // } 
+      // else {
         addTravelerToState(traveler)
         handleParcelCost(traveler)
-      }
+      // }
     }
   }
   const closeModal = () => {
@@ -209,6 +218,7 @@ const Parcel = props => {
           props.getTravelers({
             senderCost: 14.99,
             senderWeight: state.parcelWeight,
+            modal1: true,
             ...traveler
           })
           setState({
@@ -216,13 +226,16 @@ const Parcel = props => {
             modalOpen: true,
             isAuthenticated: true,
             isLocal: true,
+            modal1: true,
             parcelCost: 14.99,
+            totalCost: 14.99,
             travelerData: traveler
           })
         } else {
           props.getTravelers({
             senderCost: (14.99 + (parcelWeight * localMultiplier)).toFixed(2),
             senderWeight: state.parcelWeight,
+            modal1: true,
             ...traveler
           })
           setState({
@@ -230,7 +243,9 @@ const Parcel = props => {
             modalOpen: true,
             isAuthenticated: true,
             isLocal: true,
+            modal1: true,
             parcelCost: (14.99 + (parcelWeight * localMultiplier)).toFixed(2),
+            totalCost: (14.99 + (parcelWeight * localMultiplier)).toFixed(2),
             travelerData: traveler,
           })
         }
@@ -238,29 +253,35 @@ const Parcel = props => {
         if (parcelWeight <= 5) {
           props.getTravelers({
             senderCost: 24.99,
+            modal1: true,
             senderWeight: state.parcelWeight,
             ...traveler
           })
           setState({
             ...state,
             modalOpen: true,
+            modal1: true,
             isAuthenticated: true,
             isLocal: false,
             parcelCost: 24.99,
+            totalCost: 24.99,
             travelerData: traveler,
           })
         } else {
           props.getTravelers({
             senderCost: (parcelWeight * intlMultiplier).toFixed(2),
             senderWeight: state.parcelWeight,
+            modal1: true,
             ...traveler
           })
           setState({
             ...state,
             modalOpen: true,
             isAuthenticated: true,
+            modal1: true,
             isLocal: false,
             parcelCost: (parcelWeight * intlMultiplier).toFixed(2),
+            totalCost: (parcelWeight * intlMultiplier).toFixed(2),
             travelerData: traveler,
           })
         }
@@ -270,20 +291,24 @@ const Parcel = props => {
         props.getTravelers({
           senderCost: 24.99,
           senderWeight: state.parcelWeight,
+          modal1: true,
           ...traveler
         })
         setState({
           ...state,
           modalOpen: true,
           isAuthenticated: true,
+          modal1: true,
           isLocal: false,
           parcelCost: 24.99,
+          totalCost: 24.99,
           travelerData: traveler
         })
       } else {
         props.getTravelers({
           senderCost: (parcelWeight * intlMultiplier).toFixed(2),
           senderWeight: state.parcelWeight,
+          modal1: true,
           ...traveler
         })
         setState({
@@ -291,7 +316,9 @@ const Parcel = props => {
           modalOpen: true,
           isAuthenticated: true,
           isLocal: false,
+          modal1: true,
           parcelCost: (parcelWeight * intlMultiplier).toFixed(2),
+          totalCost: (parcelWeight * intlMultiplier).toFixed(2),
           travelerData: traveler
         })
       }
@@ -308,26 +335,40 @@ const Parcel = props => {
   //   return countriesList
   // }
   const connectToTraveler = () => {
-    props.history.push({
-      pathname: '/dashboard/chat',
-      parcelCost: state.parcelCost,
-      travelerData: state.travelerData
-    })
+    // props.history.push({
+    //   pathname: '/dashboard/chat',
+    //   parcelCost: state.parcelCost,
+    //   travelerData: state.travelerData
+    // })
+    // const userDetails = {
+    //   senderUsername: props.user.user.username,
+    //   travelerUsername: state.travelerData.username
+    // }
+    // const transactionData = {
+    //   status: 'Pending',
+    //   with: state.travelerData.username,
+    //   role: 'Sender',
+    //   travelerId: state.travelerData.user._id,
+    //   senderName: props.user.user.username,
+    //   trip: state.travelerData,
+    //   tripId: state.travelerData._id
+    // }
     const userDetails = {
-      senderUsername: props.user.user.username,
-      travelerUsername: state.travelerData.username
+      tripId: state.travelerData._id,
+      id: state.travelerData.user._id,
+      earning: state.parcelCost,
+      username: state.travelerData.username
     }
-    const transactionData = {
-      status: 'Pending',
-      with: state.travelerData.username,
-      role: 'Sender',
-      travelerId: state.travelerData.user._id,
-      senderName: props.user.user.username,
-      trip: state.travelerData,
-      tripId: state.travelerData._id
-    }
+    console.log(userDetails)
     props.connectTraveler(userDetails)
-    props.postTransaction(transactionData)
+    const totalCost = Number(state.totalCost) + (0.05 * Number(state.totalCost))
+    props.reduceBalance({ amount: totalCost})
+    // props.postTransaction(transactionData)
+    setState({
+      modal1: false,
+      modal2: true
+    })
+    console.log(state)
   }
   const toggleModal = () => {
     setState({
@@ -335,7 +376,28 @@ const Parcel = props => {
       modalOpen: !state.modalOpen,
     })
   }
+  const itemChangeHandler = e => (
+    setState({
+      ...state,
+      parcelItem: e.target.value
+    })
+  )
 
+  const insuranceChangeHandler = e => {
+    setState({
+      ...state,
+      parcelWorth: Number(e.target.value),
+      insuranceCost: Number(0.02 * Number(e.target.value)).toFixed(2),
+      totalCost: (Number(state.parcelCost) + (0.02 * Number(e.target.value))).toFixed(2)
+    })
+  }
+
+  const handleCheckbox = () => {
+    setState({
+      ...state,
+      checked: !state.checked
+    })
+  }
   const {
     travelers: { travelers }
   } = props
@@ -367,7 +429,7 @@ const Parcel = props => {
                   onChange={onChangeHandler}
                 >
                   <option value=""></option>
-                  {state.fromcities.sort().map((city, index) => (
+                  { state.fromcities && state.fromcities.sort().map((city, index) => (
                     <option value={city.name} key={index}>{city.name},{city.subcountry}</option>
                   ))}
 
@@ -395,7 +457,7 @@ const Parcel = props => {
                   onChange={onChangeHandler}
                 >
                   <option value=""></option>
-                  {state.tocities.sort().map((city, index) => (
+                  {state.tocities && state.tocities.sort().map((city, index) => (
                     <option value={city.name} key={index}>{city.name}, {city.subcountry}</option>
                   ))}
                 </select>
@@ -467,12 +529,37 @@ const Parcel = props => {
             {
               Number(walletBalance) >= Number(state.parcelCost) &&
               <div>
-                <h2>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h2>
-                <br />
-                <div className="button-group">
-                  <button className="btnQ medium" onClick={connectToTraveler}>Yes, Continue</button>
-                  <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
-                </div>
+                {
+                  state.modal1 && (
+                    <div>
+                        <h3>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h3>
+                        <br />
+                        <h3>Total cost: ${Number(state.totalCost)}</h3>
+                        <label className="container">Add insurance
+                          <input type="checkbox" checked={state.checked} onChange={handleCheckbox} />
+                          <span className="checkmark"></span>
+                        </label>
+                        {state.checked && (
+                              <div>
+                              <label>What is the worth of your parcel? Range between $0 - $1500</label>
+                              <input type="range" min="0" max="1500" value={state.parcelWorth} onChange={insuranceChangeHandler} className="slider" />
+                              <h4>parcel Worth: {state.parcelWorth}</h4>
+                              <br />
+                              <label>Which items are you insuring?</label>
+                              <input type="text" value={state.parcelItem} onChange={itemChangeHandler} placeholder="e.g Coffee table" className="support_input" />
+                              <h3>You will be charged 2% (${state.insuranceCost})of the total cost for insurance</h3>
+                              <br />
+                            </div>
+                        )}
+                        <div className="button-group">
+                          <button className="btnQ medium" onClick={connectToTraveler}>Pay ${state.totalCost} + ${(0.05 * Number(state.totalCost)).toFixed(2)}</button>
+                          <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
+                        </div>
+                    </div>
+                  ) 
+
+                }
+
                 {
                   !state.isLocal &&
                   <small>International pricing applies. See <Link to='/pricing' target='_blank' style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>Pricing Guide</Link></small>
@@ -518,7 +605,7 @@ const Parcel = props => {
             </div>
           </div>}
       </Modal>
-      {state.sameUser && <Modal show={state.sameUser} onClose={closeModal}><div>Can't connect with your self</div></Modal>}
+      {/* {state.sameUser && <Modal show={state.sameUser} onClose={closeModal}><div>Can't connect with your self</div></Modal>} */}
     </HeaderFooter>
   )
 }
@@ -528,4 +615,4 @@ const mapStateToProps = state => ({
   user: state.auth,
 })
 
-export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler, postTransaction })(Parcel)
+export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler, postTransaction, reduceBalance })(Parcel)
