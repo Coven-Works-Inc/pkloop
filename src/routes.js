@@ -3,7 +3,7 @@ import { Switch, Route, withRouter, Router } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Home from './components/home'
-import Login from './components/auth/Login'
+import Login from './components/auth/login'
 import Register from './components/auth/register'
 import Pricing from './components/pricing'
 import Trips from './components/trip'
@@ -11,7 +11,7 @@ import About from './components/about'
 import Parcel from './components/parcel'
 import Verify from './components/verify'
 import Payment from './components/payment'
-import Dashboard from './components/dashboard'
+import Notification from './components/dashboard/notification'
 import Trust from './components/pages/trust'
 import Terms from './components/pages/tos'
 import Contact from './components/pages/contact'
@@ -57,6 +57,7 @@ const Routes = props => {
       <Route component={Profile} path='/dashboard/profile' />
       <Route component={Balance} path='/dashboard/balance' />
       <Route component={Support} path='/dashboard/support' />
+      <Route component={Notification} path='/dashboard/notification' />
       <Route exact component={Login} path='/login' />
       <Route exact component={Chat} path='/dashboard/chat' />
       <Route exact component={Profile} path='/dashboard/profile' />
