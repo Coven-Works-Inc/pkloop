@@ -160,9 +160,9 @@ class Header extends Component {
               <li>
                 <Link to='/trips'>List your trip</Link>
               </li>
-              {/* <li>
+              <li>
                 <Link to={{ pathname: '/login', redirect: this.props.redirect.pathname }}>Log in</Link>
-              </li> */}
+              </li>
               <li>
                 <Link to='/register'>Sign up</Link>
               </li>
@@ -195,7 +195,7 @@ class Header extends Component {
                 <Link to='/trips'>List your trip</Link>
               </li>
               <li>
-                <Link to='/login'>Log in</Link>
+                <Link to={{ pathname: '/login', redirect: this.props.redirect.pathname }}>Log in</Link>
               </li>
               <li>
                 <Link to='/signup'>Sign up</Link>

@@ -5,6 +5,8 @@ import { profileUpload } from '../../actions/profileActions'
 import DashboardHeader from './header'
 import HeaderFooter from '../headerFooter'
 
+import Notification from './notification'
+
 const Profile = props => {
   const [state, setState] = useState(props.user)
   const [photo, setPhoto] = useState('')
@@ -50,12 +52,13 @@ const Profile = props => {
   }
 
   return (
-    <HeaderFooter>
+    <HeaderFooter redirect={props.location}>
       <div className='dashboard-header'>
         <h2>Edit Profile</h2>
       </div>
       <div>
         <DashboardHeader />
+        <Notification />
         <div className='edit-profile'>
           <div>
             <p
@@ -83,7 +86,6 @@ const Profile = props => {
                 accept='image/*'
                 onChange={onProfilePictureChange}
                 ref={fileInput}
-                onClick={onRefClick}
               />
               <button
                 style={{
@@ -106,7 +108,6 @@ const Profile = props => {
                   disabled
                 />
               </div>
-              <button>Submit</button>
             </div>
           )}
           {displayType === 'form' && (
