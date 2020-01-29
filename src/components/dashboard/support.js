@@ -3,6 +3,8 @@ import Modal from '../common/modal'
 import { connect } from 'react-redux'
 import { submitTicket, fetchTickets } from '../../actions/supportActions'
 import './support.css'
+import DashboardHeader from './header'
+import HeaderFooter from '../headerFooter'
 
 const Support = props => {
   const [state, setState] = useState({
@@ -53,7 +55,15 @@ const Support = props => {
   console.log(tickets)
 
   return (
-    <div className='support'>
+    <HeaderFooter>
+      <div className='dashboard-header'>
+          <h2>
+            Support
+          </h2>
+        </div>
+      <div>
+      <DashboardHeader />
+      <div className='support'>
       <div className='support-header'>
         <h2>My Support Tickets</h2>
         <button className='btnSmall' onClick={onButtonClick}>
@@ -117,6 +127,8 @@ const Support = props => {
         </div>
       </Modal>
     </div>
+    </div>
+    </HeaderFooter>
   )
 }
 

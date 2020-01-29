@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import ProfilePicture from '../../assets/default-picture.jpg'
 import { profileUpload } from '../../actions/profileActions'
+import DashboardHeader from './header'
+import HeaderFooter from '../headerFooter'
 
 const Profile = props => {
   const [state, setState] = useState(props.user);
@@ -52,7 +54,15 @@ const Profile = props => {
   };
 
   return (
-    <div className='edit-profile'>
+    <HeaderFooter>
+      <div className='dashboard-header'>
+          <h2>
+            Edit Profile
+          </h2>
+        </div>
+      <div>
+      <DashboardHeader />
+      <div className='edit-profile'>
       <div>
         <p
           className={displayType === 'form' ? 'active' : 'sidemenu'}
@@ -158,6 +168,8 @@ const Profile = props => {
         </div>
       }
     </div>
+    </div>
+    </HeaderFooter>
   )
 }
 

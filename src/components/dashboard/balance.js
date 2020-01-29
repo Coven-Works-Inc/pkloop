@@ -5,6 +5,8 @@ import * as actions from '../../actions/balanceActions'
 import axios from 'axios'
 import { BASE_URL } from '../../config/constants'
 import StripeCheckout from 'react-stripe-checkout'
+import DashboardHeader from './header'
+import HeaderFooter from '../headerFooter'
 
 const Balance = props => {
 
@@ -86,7 +88,15 @@ const Balance = props => {
   }
 
   return (
-    <div className='balance-section'>
+    <HeaderFooter>
+      <div className='dashboard-header'>
+          <h2>
+            Balance
+          </h2>
+        </div>
+      <div>
+      <DashboardHeader />
+      <div className='balance-section'>
       <div className='amount'>
         <p>Amount made so far</p>
         <h2>${state.amountMade}</h2>
@@ -94,7 +104,7 @@ const Balance = props => {
       <div className='balance'>
         <div className='left-side'>
           <p>My PKLoop Balance</p>
-          <h2>${balance}</h2>
+          <h2>${Number(balance).toFixed(2)}</h2>
         </div>
         <div className='right-side'>
           <button>Withdraw</button>
@@ -126,6 +136,8 @@ const Balance = props => {
         </div>
       </Modal>
     </div>
+    </div>
+    </HeaderFooter>
   )
 }
 
