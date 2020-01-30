@@ -1,6 +1,6 @@
 import React from 'react'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import axios from 'axios'
+import { connect } from 'react-redux'
 import { facebookLogin } from '../../actions/authActions'
 // import { FACEBOOK_APP_ID, LOCAL_URL } from '../../config/constants'
 
