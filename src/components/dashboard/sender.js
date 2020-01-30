@@ -1,33 +1,35 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import HeaderFooter from '../headerFooter'
-import io from 'socket.io-client'
 
-import {
-  ThemeProvider,
-  TextComposer,
-  Row,
-  IconButton,
-  AddIcon,
-  TextInput,
-  EmojiIcon,
-  SendButton,
-  Message,
-  MessageList,
-  MessageText,
-} from '@livechat/ui-kit'
+// import io from 'socket.io-client'
+
+// import {
+//   ThemeProvider,
+//   TextComposer,
+//   Row,
+//   IconButton,
+//   AddIcon,
+//   TextInput,
+//   EmojiIcon,
+//   SendButton,
+//   Message,
+//   MessageList,
+//   MessageText,
+// } from '@livechat/ui-kit'
 import Modal from '../common/modal'
 import { markSenderComplete } from '../../actions/transActions'
+import { handleTransactionRequest } from '../../actions/transActions'
 import DashboardHeader from './header'
 
-let socket
+// let socket
 const SenderChat = props => {
-  const [messages, setMessages] = useState([])
-  const [room, setRoom] = useState('')
+  // const [messages, setMessages] = useState([])
+  // const [room, setRoom] = useState('')
   const [name, setName] = useState('')
   const [receiverModal, setReceiverModal] = useState(false)
   const [disabled, setDisabled] = useState(true)
-  const [headerText, changeHeader] = useState('')
+  // const [headerText, changeHeader] = useState('')
   const [markCompleteModal, setMarkCompleteModal] = useState(false)
   const handleChange = (e) => {
     setName(e.target.value)
@@ -75,7 +77,13 @@ const SenderChat = props => {
     props.markSenderComplete(data)
   }
 
-  const handleAccept = () => {
+  const handleAccept = (id, action) => {
+    const data = {
+      senderId: id,
+      action: action
+    }
+    console.log(data)
+    props.handleTransactionRequest(data)
     setDisabled(false)
   }
   const handleReceiver = () => {
@@ -98,9 +106,9 @@ const SenderChat = props => {
           {props.trip ? (
             <div>
               <h3>
-                <span className='gray'>From</span>{props.trip.locationCity}, {props.trip.locationCountry}
+                <span className='gray'>From </span>{props.trip.locationCity}, {props.trip.locationCountry}
                 <br />
-                <span className='gray'>To</span>  {props.trip.destinationCity}, {props.trip.destinationCountry}
+                <span className='gray'>To </span>  {props.trip.destinationCity}, {props.trip.destinationCountry}
               </h3>
               <h5>
                 <span>
@@ -108,11 +116,13 @@ const SenderChat = props => {
                 </span>
                 <br />
                 <span>
-                  <span className='gray'>Arrival date</span>  {props.trip.arrivalDate}
+                  <span className='gray'>Arrival date</span>  {props.trip.arrivalDate && props.trip.arrivalDate.split('T')[0]}
                 </span>
                 <br />
                 <span>
-                  <span className='gray'>Means of transportation</span>  {props.trip.transport}
+                  <span className='gray'>Means of transportation</span>  {
+                    props.trip.transport &&
+                    props.trip.transport.charAt(0).toUpperCase() + props.trip.transport.slice(1)}
                 </span>
                 <br />
                 <span>
@@ -129,7 +139,7 @@ const SenderChat = props => {
           ) : <div> No receiver's details yet</div>}
           <div>
             <button style={{ color: 'white', backgroundColor: "#0071bc", border: "#0071bc", outline: 'none' }}
-              className='reusable-button' onClick={handleAccept}>{disabled ? `ACCEPT TRANSACTION` : `TRANSACTION ACCEPTED`}</button>
+              className='reusable-button' onClick={() => handleAccept(props.trip._id, 'accept')}>{disabled ? `ACCEPT TRANSACTION` : `TRANSACTION ACCEPTED`}</button>
             <button style={{ color: 'white', backgroundColor: "#0071bc", border: "#0071bc", outline: 'none' }}
               className='reusable-button' disabled={disabled} onClick={handleReceiver}>VIEW RECEIVER'S DETAIL</button>
             <button style={{ color: 'white', backgroundColor: "#abcc71", border: "#abcc71", outline: 'none' }}
@@ -207,4 +217,4 @@ const mapStateToProps = (state) => {
     trip: state.trips.trip.data
   }
 }
-export default connect(mapStateToProps, { markSenderComplete })(SenderChat)
+export default connect(mapStateToProps, { markSenderComplete, handleTransactionRequest })(SenderChat)

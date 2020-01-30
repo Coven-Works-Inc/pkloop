@@ -56,6 +56,7 @@ const Parcel = props => {
     modal2: false,
     totalCost: 0
   })
+
   useEffect(() => {
     props.fetchTravelers()
   }, [])
@@ -160,6 +161,7 @@ const Parcel = props => {
       travelerData: traveler
     })
   }
+
   const onToken = (token) => {
     toggleModal();
     const amountToPay = Number(state.fundAmount) * 100;
@@ -182,6 +184,7 @@ const Parcel = props => {
   }
 
   const handleConnect = (traveler) => {
+    console.log(traveler)
     if (!props.user.isAuthenticated) {
       setState({
         ...state,
@@ -189,16 +192,15 @@ const Parcel = props => {
         isAuthenticated: false
       })
     } else {
-      // if(props.user.user._id === traveler.user._id){
-      //   setState({
-      //     ...state,
-      //     sameUser: true
-      //   })
-      // } 
-      // else {
+      if (props.user.user._id === traveler.user._id) {
+        setState({
+          ...state,
+          sameUser: true
+        })
+      } else {
         addTravelerToState(traveler)
         handleParcelCost(traveler)
-      // }
+      }
     }
   }
   const closeModal = () => {
@@ -335,24 +337,23 @@ const Parcel = props => {
   //   return countriesList
   // }
   const connectToTraveler = () => {
-    // props.history.push({
-    //   pathname: '/dashboard/chat',
-    //   parcelCost: state.parcelCost,
-    //   travelerData: state.travelerData
-    // })
-    // const userDetails = {
-    //   senderUsername: props.user.user.username,
-    //   travelerUsername: state.travelerData.username
-    // }
-    // const transactionData = {
-    //   status: 'Pending',
-    //   with: state.travelerData.username,
-    //   role: 'Sender',
-    //   travelerId: state.travelerData.user._id,
-    //   senderName: props.user.user.username,
-    //   trip: state.travelerData,
-    //   tripId: state.travelerData._id
-    // }
+
+    props.history.push({
+      pathname: '/dashboard/travelerchat',
+      parcelCost: state.parcelCost,
+      travelerData: state.travelerData
+    })
+    
+    const transactionData = {
+      status: 'Pending',
+      with: state.travelerData.username,
+      role: 'Sender',
+      travelerId: state.travelerData.user._id,
+      senderName: props.user.user.username,
+      trip: state.travelerData,
+      tripId: state.travelerData._id
+    }
+    
     const userDetails = {
       tripId: state.travelerData._id,
       id: state.travelerData.user._id,
@@ -370,6 +371,7 @@ const Parcel = props => {
     })
     console.log(state)
   }
+  
   const toggleModal = () => {
     setState({
       ...state,

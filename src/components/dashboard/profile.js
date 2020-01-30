@@ -58,7 +58,7 @@ const Profile = props => {
       </div>
       <div>
         <DashboardHeader />
-        <Notification />
+        {/* <Notification message="Sender wants you to deliver a parcel" /> */}
         <div className='edit-profile'>
           <div>
             <p

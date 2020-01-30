@@ -12,7 +12,7 @@ class Verify extends Component {
     errors: {}
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push('/dashboard')
     }
@@ -23,7 +23,7 @@ class Verify extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push('/dashboard')
     }
@@ -35,12 +35,12 @@ class Verify extends Component {
     }
   }
 
-  render () {
+  render() {
     const { errors } = this.state
     console.log(errors)
 
     return (
-      <HeaderFooter>
+      <HeaderFooter redirect={this.props.location}>
         {!this.state.token && (
           <div className='empty-page'>
             <p>
