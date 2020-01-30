@@ -1,7 +1,7 @@
 import React from 'react'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import axios from 'axios'
-import { FACEBOOK_APP_SECRET, LOCAL_URL } from '../../config/constants'
+import { FACEBOOK_APP_ID, LOCAL_URL } from '../../config/constants'
 
 const Facebook = ({ informParent = f => f }) => {
   const responseFacebook = response => {
@@ -23,7 +23,7 @@ const Facebook = ({ informParent = f => f }) => {
   return (
     <div>
       <FacebookLogin
-        appId={FACEBOOK_APP_SECRET}
+        appId={FACEBOOK_APP_ID}
         autoLoad={false}
         callback={responseFacebook}
         render={renderProps => (

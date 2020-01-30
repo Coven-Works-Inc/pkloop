@@ -5,4 +5,4 @@ export const api_key =
 export const client_id = '77060'
 export const GOOGLE_ID =
   '63269528024-s5erg6d08tdp0h19o9g8hvjq0rrc0knd.apps.googleusercontent.com'
-export const FACEBOOK_APP_SECRET = 'a6fb7830b0fea14c18bd6d2d7ee9f712'
+export const FACEBOOK_APP_ID = '499891913979433'
