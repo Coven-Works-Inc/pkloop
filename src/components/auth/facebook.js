@@ -1,29 +1,20 @@
 import React from 'react'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import axios from 'axios'
-import { FACEBOOK_APP_ID, LOCAL_URL } from '../../config/constants'
+import { facebookLogin } from '../../actions/authActions'
+// import { FACEBOOK_APP_ID, LOCAL_URL } from '../../config/constants'
 
-const Facebook = ({ informParent = f => f }) => {
+const Facebook = ({ facebookLogin }) => {
   const responseFacebook = response => {
-    console.log(response)
-    axios({
-      method: 'POST',
-      url: `${LOCAL_URL}/facebook-login`,
-      data: { userID: response.userID, accessToken: response.accessToken }
-    })
-      .then(response => {
-        console.log('FACEBOOK SIGNIN SUCCESS', response)
-        // inform parent component
-        informParent(response)
-      })
-      .catch(error => {
-        console.log('FACEBOOK SIGNIN ERROR', error.response)
-      })
+    const data = {
+      idToken: { userID: response.userID, accessToken: response.accessToken }
+    }
+    facebookLogin(data)
   }
   return (
     <div>
       <FacebookLogin
-        appId={FACEBOOK_APP_ID}
+        appId={process.env.FACEBOOK_APP_ID}
         autoLoad={false}
         callback={responseFacebook}
         render={renderProps => (
@@ -50,4 +41,10 @@ const Facebook = ({ informParent = f => f }) => {
   )
 }
 
-export default Facebook
+const mapStateToProps = state => {
+  return {
+    prop: state.prop
+  }
+}
+
+export default connect(mapStateToProps, { facebookLogin })(Facebook)
