@@ -65,7 +65,7 @@ const Support = props => {
       </div>
       <div>
         <DashboardHeader />
-        <Notification />
+        {/* <Notification message="Sender wants you to deliver a parcel" /> */}
         <div className='support'>
           <div className='support-header'>
             <h2>My Support Tickets</h2>

@@ -6,14 +6,13 @@ import { withRouter } from 'react-router-dom'
 import DashboardHeader from './header'
 import HeaderFooter from '../headerFooter'
 
-import Notification from './notification'
+// import Notification from './notification'
 
 const Transactions = props => {
+  // const [transStatus, changeTransStatus] = useState('pending')
   const {
     transaction: { transaction }
   } = props
-
-  console.log(props)
 
   useEffect(() => {
     props.getTransaction()
@@ -43,13 +42,14 @@ const Transactions = props => {
       </div>
       <div>
         <DashboardHeader />
-        <Notification message="Sender wants you to deliver a parcel" />
+        {/* <Notification message="Sender wants you to deliver a parcel" /> */}
         <div className='transactions'>
           <div className='table-header'>
             <p>Status</p>
-            <p>With</p>
-            <p>Your role</p>
-            <p>Last message</p>
+            <p>Sender</p>
+            <p>Traveler</p>
+            <p>Amount Due</p>
+            <p>Amount Paid</p>
             <p></p>
           </div>
           {transaction === undefined ? (
@@ -60,15 +60,15 @@ const Transactions = props => {
           </h2>
           ) : (
                 transaction.map((trans, index) => (
-                  <div key={index} className='table-row'>
+                  <div key={index} className={trans.status === 'Pending' ? 'table-row pending-row' : 'table-row'}>
                     <p className='completed'>{trans.status}</p>
                     <p>{trans.with}</p>
                     <p>{trans.role}</p>
-                    <p>{trans.date}</p>
+                    <p>{trans.date.split('T')[0]}</p>
                     {' '}
                     <p className='open' style={{ cursor: 'pointer' }} onClick={() => handleClick(trans)}>
-                      Open
-                </p>{' '}
+                      {trans.status === 'Pending' ? 'View Details' : 'Open'}
+                    </p>{' '}
                   </div>
                 ))
               )}
@@ -79,11 +79,9 @@ const Transactions = props => {
 }
 
 const mapStateToProps = state => {
-  console.log(state.auth)
   return {
     transaction: state.transaction,
-    trip: state.trips.trip.data,
-    auth: state.auth
+    trip: state.trips.trip.data
   }
 }
 

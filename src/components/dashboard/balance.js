@@ -98,7 +98,7 @@ const Balance = props => {
       </div>
       <div>
         <DashboardHeader />
-        <Notification />
+        {/* <Notification message="Sender wants you to deliver a parcel" /> */}
         <div className='balance-section'>
           <div className='amount'>
             <p>Amount made so far</p>

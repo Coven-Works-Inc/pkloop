@@ -49,6 +49,7 @@ const Parcel = props => {
     fundAmount: 29.99,
     sameUser: false
   })
+
   useEffect(() => {
     props.fetchTravelers()
   }, [])
@@ -152,6 +153,7 @@ const Parcel = props => {
       travelerData: traveler
     })
   }
+
   const onToken = (token) => {
     toggleModal();
     const amountToPay = Number(state.fundAmount) * 100;
@@ -174,6 +176,7 @@ const Parcel = props => {
   }
 
   const handleConnect = (traveler) => {
+    console.log(traveler)
     if (!props.user.isAuthenticated) {
       setState({
         ...state,
@@ -181,7 +184,7 @@ const Parcel = props => {
         isAuthenticated: false
       })
     } else {
-      if(props.user.user._id === traveler.user._id){
+      if (props.user.user._id === traveler.user._id) {
         setState({
           ...state,
           sameUser: true
@@ -309,7 +312,7 @@ const Parcel = props => {
   // }
   const connectToTraveler = () => {
     props.history.push({
-      pathname: '/dashboard/chat',
+      pathname: '/dashboard/travelerchat',
       parcelCost: state.parcelCost,
       travelerData: state.travelerData
     })

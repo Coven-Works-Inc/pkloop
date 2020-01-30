@@ -20,32 +20,50 @@ export const getTransaction = () => async dispatch => {
 }
 export const postTransaction = (data) => dispatch => {
   axios.post(`${BASE_URL}/transactions`, data)
-  .then(res => {
-    console.log(res)
-  })
-  .catch(error => {
-    console.log(error)
-  })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(error => {
+      console.log(error)
+    })
 }
 
 export const markTravelerComplete = (data) => dispatch => {
   axios.post(`${BASE_URL}/transactions/completetraveler`, data)
-  .then(res => {
-    console.log(res)
-  })
+    .then(res => {
+      console.log(res)
+    })
 }
 export const markSenderComplete = (data) => dispatch => {
   axios.post(`${BASE_URL}/transactions/completesender`, data)
-  .then(res => {
-    console.log(res)
-  })
+    .then(res => {
+      console.log(res)
+    })
 }
 
 export const updateTrans = (data) => dispatch => {
   axios.post(`${BASE_URL}/transactions/updatetrans`, data)
-  .then(
-    res => {
-      console.log(res)
-    }
-  )
+    .then(
+      res => {
+        console.log(res)
+      }
+    )
+}
+
+// For the accept and reject endpoints
+// /transactions/respond
+// Body
+// id: user id of the sender
+// action: either 'accept' or 'decline'
+
+export const handleTransactionRequest = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions/respond`, data)
+    .then(res => {
+      console.log(res.data)
+      dispatch({
+        type: 'TRANSACTION RESPONSE',
+        payload: res.data
+      })
+    })
+    .catch(err => dispatch({ type: 'GET_ERRORS', payload: err }));
 }

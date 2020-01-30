@@ -604,6 +604,36 @@ a:nth-child(2) .cta_items {
   font-weight: bold;
 }
 
+.pending-row {
+  background-color: #00bdbe;
+  color: #ffffff;
+  -webkit-animation: bg-flash 1s infinite;  /* Safari 4+ */
+  -moz-animation: bg-flash 1s infinite;  /* Fx 5+ */
+  -o-animation: bg-flash 1s infinite;  /* Opera 12+ */
+  animation: bg-flash 1s infinite;  /* IE 10+, Fx 29+ */
+}
+
+.pending-row p.open,
+.pending-row p.complete,
+.pending-row p.pending,
+.pending-row p.completed {
+  color: #ffffff;
+  -webkit-animation: para-flash 1s infinite;  /* Safari 4+ */
+  -moz-animation: para-flash 1s infinite;  /* Fx 5+ */
+  -o-animation: para-flash 1s infinite;  /* Opera 12+ */
+  animation: para-flash 1s infinite;  /* IE 10+, Fx 29+ */
+}
+
+@keyframes bg-flash {
+  0%, 30% { background-color: #00bdbe; color: #ffffff; }
+  70%, 100% { background-color: #ffffff; color: #212529; }
+}
+
+@keyframes para-flash {
+  0%, 30% { color: #ffffff; }
+  70%, 100% { color: #212529; }
+}
+
 /* END OF User Dashboard Styles */
 
 /* Terms of Service Styles */
