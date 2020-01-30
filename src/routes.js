@@ -34,7 +34,7 @@ import TravelerChat from './components/dashboard/traveler'
 const Routes = props => {
   return (
     <Switch>
-      <Route exact component={Register} path='/register' />
+      <Route exact component={Register} path='/Register' />
       <Route exact component={Pricing} path='/pricing' />
       <Route exact component={About} path='/about' />
       <Route exact component={Parcel} path='/parcel' />
@@ -51,14 +51,14 @@ const Routes = props => {
       <Route exact component={Contact} path='/contact' />
       <Route exact component={Faq} path='/faq' />
       <Route exact component={Privacy} path='/privacy' />
-      <Route exact component={Forgot} path='/forgot' />
+      <Route exact component={Forgot} path='/Forgot' />
       <Route component={Password} path='/password' />
       <Route component={Transactions} path='/dashboard/transactions' />
       <Route component={Profile} path='/dashboard/profile' />
       <Route component={Balance} path='/dashboard/balance' />
       <Route component={Support} path='/dashboard/support' />
       <Route component={Notification} path='/dashboard/notification' />
-      <Route exact component={Login} path='/login' />
+      <Route exact component={Login} path='/Login' />
       <Route exact component={Chat} path='/dashboard/chat' />
       <Route exact component={Profile} path='/dashboard/profile' />
       <Route exact component={Home} path='/' />
