@@ -13,6 +13,7 @@
     "@livechat/ui-kit": "^0.4.0-10",
     "axios": "^0.19.0",
     "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "node": "^12.14.1",

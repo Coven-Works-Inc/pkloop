@@ -2,10 +2,10 @@ import React from 'react'
 import GoogleLogin from 'react-google-login'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { GOOGLE_ID, BASE_URL, LOCAL_URL } from '../../config/constants'
+// import { GOOGLE_ID, BASE_URL, LOCAL_URL } from '../../config/constants'
 import { googleLogin } from '../../actions/authActions'
 
-const Google = ({ informParent = f => f, googleLogin }) => {
+const Google = ({ googleLogin }) => {
   const responseGoogle = response => {
     const data = {
       idToken: response.tokenId
@@ -14,7 +14,7 @@ const Google = ({ informParent = f => f, googleLogin }) => {
   }
   return (
     <GoogleLogin
-      clientId={GOOGLE_ID}
+      clientId={process.env.GOOGLE_ID}
       render={renderProps => (
         <button
           style={{
@@ -41,9 +41,9 @@ const Google = ({ informParent = f => f, googleLogin }) => {
   )
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
-    prop: state.prop
+    user: state.auth.user
   }
 }
 

@@ -13,7 +13,43 @@ import { BASE_URL, LOCAL_URL } from '../config/constants'
 
 export const googleLogin = (data, history, props) => dispatch => {
   axios
-    .post(`${LOCAL_URL}/auth/google-login`, data)
+    .post(`${BASE_URL}/auth/google-login`, data)
+    .then(res => {
+      console.log(res)
+      const { token, _id } = res.data.data
+      localStorage.setItem('jwtToken', token)
+      localStorage.setItem('id', _id)
+      setAuthToken(token)
+      const decoded = jwt_decode(token)
+      dispatch(setCurrentUser(decoded, token))
+      history.push('/dashboard')
+
+      // const location = props.location
+      // if (location.redirect) {
+      //   history.push(`${location.redirect}`)
+      // } else {
+      //   history.push('/dashboard/transactions')
+      // }
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response
+          ? err.response.data.message
+          : 'Something went wrong'
+      })
+    })
+    .finally(() =>
+      dispatch({
+        type: LOADING,
+        payload: false
+      })
+    )
+}
+
+export const facebookLogin = (data, history, props) => dispatch => {
+  axios
+    .post(`${BASE_URL}/auth/facebook-login`, data)
     .then(res => {
       console.log(res)
       const { token, _id } = res.data.data

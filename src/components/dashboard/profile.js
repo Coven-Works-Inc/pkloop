@@ -8,33 +8,30 @@ import HeaderFooter from '../headerFooter'
 import Notification from './notification'
 
 const Profile = props => {
-  const [state, setState] = useState(props.user);
-  const [photo, setPhoto] = useState('');
-  const [imageName, setImageName] = useState('Set Display Picture');
+  const [state, setState] = useState(props.user)
+  const [photo, setPhoto] = useState('')
+  const [imageName, setImageName] = useState('Set Display Picture')
   const [displayType, changeDisplayType] = useState('form')
 
-  const fileInput = useRef(null);
+  const fileInput = useRef(null)
 
   const onRefClick = () => {
-    fileInput.current.click();
-  };
+    fileInput.current.click()
+  }
 
   const onChangeHandler = e => {
     setState({
       ...state,
       [e.target.name]: e.target.value
     })
-
-  };
+  }
   const onProfilePictureChange = e => {
-    setPhoto(e.target.files[0]);
-    setImageName(e.target.files[0].name);
-
-
-  };
+    setPhoto(e.target.files[0])
+    setImageName(e.target.files[0].name)
+  }
 
   const submitHandler = e => {
-    e.preventDefault();
+    e.preventDefault()
 
     //TODO: Get The values set up in state and push to the action for upload
 
@@ -49,18 +46,15 @@ const Profile = props => {
       country: state.country,
       email: state.email,
       phone: state.phone
-    };
-
+    }
 
     props.profileUpload(formData)
-  };
+  }
 
   return (
     <HeaderFooter redirect={props.location}>
       <div className='dashboard-header'>
-        <h2>
-          Edit Profile
-          </h2>
+        <h2>Edit Profile</h2>
       </div>
       <div>
         <DashboardHeader />
@@ -69,13 +63,22 @@ const Profile = props => {
           <div>
             <p
               className={displayType === 'form' ? 'active' : 'sidemenu'}
-              onClick={() => changeDisplayType('form')}>Update Profile</p>
+              onClick={() => changeDisplayType('form')}
+            >
+              Update Profile
+            </p>
             <p
               className={displayType === 'picture' ? 'active' : 'sidemenu'}
-              onClick={() => changeDisplayType('picture')}>Update Picture</p>
+              onClick={() => changeDisplayType('picture')}
+            >
+              Update Picture
+            </p>
           </div>
-          {displayType === 'picture' &&
-            <div className='profile-picture' style={{ display: 'flex', marginTop: '0.1rem' }}>
+          {displayType === 'picture' && (
+            <div
+              className='profile-picture'
+              style={{ display: 'flex', marginTop: '0.1rem' }}
+            >
               <input
                 style={{ display: 'none' }}
                 type='file'
@@ -93,16 +96,21 @@ const Profile = props => {
                   fontSize: '1rem',
                   backgroundColor: 'rgba(0, 189, 190)'
                 }}
-                onClick={onRefClick}>
+                onClick={onRefClick}
+              >
                 Browse
-        </button>
+              </button>
               <div>
                 {console.log(state.image)}
-                <input style={{ padding: '0.8rem 3rem', backgroundColor: '#efefef' }} placeholder={imageName} disabled />
+                <input
+                  style={{ padding: '0.8rem 3rem', backgroundColor: '#efefef' }}
+                  placeholder={imageName}
+                  disabled
+                />
               </div>
             </div>
-          }
-          {displayType === 'form' &&
+          )}
+          {displayType === 'form' && (
             <div className='profile-form'>
               <form onSubmit={submitHandler}>
                 <input
@@ -151,7 +159,8 @@ const Profile = props => {
                   name={'country'}
                   placeholder={'country'}
                   value={state.country}
-                  onChange={onChangeHandler} />
+                  onChange={onChangeHandler}
+                />
                 <input
                   type='email'
                   placeholder='email address'
@@ -166,10 +175,10 @@ const Profile = props => {
                   name='phone'
                   onChange={onChangeHandler}
                 />
-                <button className='btnSmall' >Save Changes</button>
+                <button className='btnSmall'>Save Changes</button>
               </form>
             </div>
-          }
+          )}
         </div>
       </div>
     </HeaderFooter>
