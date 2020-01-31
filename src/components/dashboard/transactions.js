@@ -16,6 +16,13 @@ const Transactions = props => {
   // const [transStatus, changeTransStatus] = useState('pending')
   const [modal, setModal] = useState(false)
   const [sender, setSender] = useState({})
+  const [success, setSuccess] = useState(false)
+  useEffect(() => {
+      if(props.transaction.res){
+        setSuccess(true)
+      }
+      console.log(props.transaction.res)
+  }, [props.transaction.res])
   const showTrip = (notif) => {
     props.getTrip(notif.tripId)
     setModal(true)
@@ -69,9 +76,6 @@ const Transactions = props => {
   return (
     <HeaderFooter redirect={props.location}>
       <div className='dashboard-header'>
-        {props.notifs.map(notif => (
-          <div> <Notification message={notif.notify} showTripDetails={() => showTrip(notif)}/> </div>
-        ))}
         <h2>
           My Transactions
           </h2>
@@ -79,6 +83,9 @@ const Transactions = props => {
       <div>
         <DashboardHeader />
         {/* <Notification message="Sender wants you to deliver a parcel" /> */}
+        {props.notifs.map(notif => (
+          <div> <Notification message={notif.notify} showTripDetails={() => showTrip(notif)}/> </div>
+        ))}
         <div className='transactions'>
           <div className='table-header'>
             <p>Status</p>
@@ -111,10 +118,19 @@ const Transactions = props => {
         </div>
       </div>
       <Modal show={modal} onClose={closeModal}>
-          {props.trip.username}
+          {success && <div style={{ color: 'green'}}>{props.transaction.res.message}</div>}
+          Sender<h5>{sender.sender}</h5>
+          From<h5>{props.trip.locationCountry} , {props.trip.locationCity}</h5>
+          To<h5>{props.trip.destinationCountry} , {props.trip.destinationCity}</h5>
+          Arrival Date<h5>{props.trip.arrivalDate && props.trip.arrivalDate.split('T')[0]}</h5>
+          Parcel Size<h5>{props.trip.parcelSize}</h5>
+          Parcel weight<h5>{props.trip.parcelWeight}</h5>
+          Means of Transportation<h5>{props.trip.transport}</h5>
           <br />
-          <button className='btnQ' onClick={acceptRequest}>Accept</button>
-          <button className='inverse-btnQ' onClick={declineRequest}>Decline</button>
+          <div className="button-group">
+            <button className='btnQ' onClick={acceptRequest}>Accept</button>
+            <button className='btnQ inverse-btnQ' onClick={declineRequest}>Decline</button>
+          </div>
       </Modal>
     </HeaderFooter>
   )
@@ -125,7 +141,7 @@ const mapStateToProps = state => {
   return {
     transaction: state.transaction,
     trip: state.trips.trip.data,
-    notifs: state.auth.user.notifications
+    notifs: state.auth.user.notifications,
   }
 }
 

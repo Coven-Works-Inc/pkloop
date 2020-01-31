@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { BASE_URL } from '../config/constants'
-import { FETCH_TRANSACTIONS, GET_ERRORS } from './types'
+import { FETCH_TRANSACTIONS, GET_ERRORS, TRANSACTION_RESPONSE } from './types'
 
 export const getTransaction = () => async dispatch => {
   try {
@@ -59,11 +59,17 @@ export const updateTrans = (data) => dispatch => {
 export const handleTransactionRequest = (data) => dispatch => {
   axios.post(`${BASE_URL}/transactions/respond`, data)
     .then(res => {
-      console.log(res.data)
+      console.log(res.data.data)
       dispatch({
-        type: 'TRANSACTION RESPONSE',
-        payload: res.data
+        type: TRANSACTION_RESPONSE,
+        payload: res.data.data
       })
     })
     .catch(err => dispatch({ type: 'GET_ERRORS', payload: err }));
+}
+export const redeemCode = (data) => {
+    axios.post(`${BASE_URL}/transactions/redeemcode`, data)
+    .then(res => {
+      console.log(res)
+    })
 }
