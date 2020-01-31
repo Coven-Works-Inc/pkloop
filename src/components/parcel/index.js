@@ -62,6 +62,18 @@ const Parcel = props => {
   useEffect(() => {
     props.fetchTravelers()
   }, [])
+  useEffect(() => {
+    setTimeout(() => {
+      if(modal){
+        setModal(false)
+        setState({
+          ...state,
+          modal1: false,
+          modalOpen: false
+        })
+      }
+    }, 1000)
+  },[modal])
   const onFromCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value)
     const city = cities.filter(city => city.country === selectedCountry[0].name)
@@ -166,6 +178,13 @@ const Parcel = props => {
     setState({
       ...state,
       travelerData: traveler
+    })
+  }
+
+  const messageChangeHandler = (e) => {
+    setState({
+      ...state,
+      message: e.target.value
     })
   }
 
@@ -367,7 +386,7 @@ const Parcel = props => {
       travelerId: state.travelerData.user._id,
       amount: state.parcelCost,
       username: state.travelerData.username,
-      message: "new request"
+      message: state.message
     }
     console.log(userDetails)
     props.connectTraveler(userDetails)
@@ -558,7 +577,7 @@ const Parcel = props => {
                               <br />
                             </div>
                         )}
-                        <textarea></textarea>
+                        <textarea className="support_input" placeholder="Leave a message for traveler" onChange={messageChangeHandler}></textarea>
                         <div className="button-group">
                           <button className="btnQ medium" onClick={connectToTraveler}>Pay ${state.totalCost} + ${(0.05 * Number(state.totalCost)).toFixed(2)}</button>
                           <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
@@ -568,10 +587,10 @@ const Parcel = props => {
 
                 }
 
-                {
+                {/* {
                   !state.isLocal &&
                   <small>International pricing applies. See <Link to='/pricing' target='_blank' style={{ color: '#00bdbe', cursor: 'pointer', textDecoration: 'none' }}>Pricing Guide</Link></small>
-                }
+                } */}
               </div>
             }
             {
