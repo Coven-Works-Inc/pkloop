@@ -7,9 +7,12 @@ import Modal from '../common/modal'
 
 import './dashboard.css'
 
-const Redeem = (props) => {
+const Tips = (props) => {
 
-    const [code, updateCode] = useState('')
+    const [input, updateInput] = useState({
+        amount: 0,
+        email: ''
+    })
     const [modalOpen, setModal] = useState(false)
 
     const toggleModal = () => {
@@ -18,35 +21,38 @@ const Redeem = (props) => {
 
     const handleInputChange = e => {
         e.preventDefault()
-        updateCode(e.target.value)
+        updateInput({
+            ...input,
+            [e.target.name]: e.target.value
+        })
     }
 
-    const redeemCode = () => {
+    const tipTraveler = () => {
         // call redeem code action
     }
 
     return (
         <HeaderFooter redirect={props.location}>
             <div className='dashboard-header'>
-                <h2>Redeem Codes</h2>
+                <h2>Give Tips</h2>
             </div>
             <div>
                 <DashboardHeader />
 
-                <div className='redeem-main'>
-                    <h5>Enter the code sent to your mail to complete the transaction</h5>
+                <div className='tips-main'>
+                    <h5>Enter traveler email to give tip</h5>
                     <div>
-                        <input type='tel' maxLength="6" onChange={handleInputChange} />
-                        <button onClick={redeemCode}> Submit Code </button>
+                        <input type='email' name="email" placeholder="Traveler Email" onChange={handleInputChange} />
+                        <input type='tel' name="amount" placeholder="Tip Amount" onChange={handleInputChange} />
+                        <button onClick={tipTraveler}> Tip Traveler </button>
                     </div>
-
                 </div>
             </div>
             <Modal show={modalOpen} onClose={toggleModal}>
-                <h5>Code matched perfectly</h5>
+                <h5>Tip successfully sent</h5>
             </Modal>
         </HeaderFooter>
     )
 }
 
-export default Redeem;
+export default Tips;
