@@ -67,7 +67,7 @@ export const handleTransactionRequest = (data) => dispatch => {
     })
     .catch(err => dispatch({ type: 'GET_ERRORS', payload: err }));
 }
-export const redeemCode = (data) => {
+export const redeemCode = (data) => dispatch => {
     axios.post(`${BASE_URL}/transactions/redeemcode`, data)
     .then(res => {
       console.log(res)

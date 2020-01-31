@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { redeemCode } from '../../actions/transActions'
 // import { Link } from 'react-router-dom'
 
 import DashboardHeader from './header'
@@ -21,8 +23,12 @@ const Redeem = (props) => {
         updateCode(e.target.value)
     }
 
-    const redeemCode = () => {
+    const redeemUserCode = () => {
         // call redeem code action
+        const data = {
+            code
+        }
+        props.redeemCode(data)
     }
 
     return (
@@ -34,8 +40,8 @@ const Redeem = (props) => {
                 <DashboardHeader />
 
                 <div className='redeem-main'>
-                    <input type='tel' maxLength="6" onChange={handleInputChange} />
-                    <button onClick={redeemCode}> Redeem Code </button>
+                    <input type='tel' maxLength="8" onChange={handleInputChange} />
+                    <button onClick={redeemUserCode}> Redeem Code </button>
                 </div>
             </div>
             <Modal show={modalOpen} onClose={toggleModal}>
@@ -45,4 +51,4 @@ const Redeem = (props) => {
     )
 }
 
-export default Redeem;
+export default connect(null, { redeemCode })(Redeem);
