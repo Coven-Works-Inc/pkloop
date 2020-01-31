@@ -1,7 +1,8 @@
-import { FETCH_TRANSACTIONS, GET_ERRORS, TRANSACTION_RESPONSE } from '../actions/types'
+import { FETCH_TRANSACTIONS, GET_ERRORS, TRANSACTION_RESPONSE, REDEEM_CODE } from '../actions/types'
 
 const initialState = {
-  res: {}
+  res: {},
+  success: false
 }
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -12,6 +13,8 @@ export default (state = initialState, action) => {
     case TRANSACTION_RESPONSE:
       console.log(action.payload)
       return {...state, res: action.payload}
+    case REDEEM_CODE:
+      return { ...state, success: true} 
     default:
       return state
   }

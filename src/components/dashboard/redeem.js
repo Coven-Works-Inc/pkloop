@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { redeemCode } from '../../actions/transActions'
 // import { Link } from 'react-router-dom'
@@ -13,7 +13,16 @@ const Redeem = (props) => {
 
     const [code, updateCode] = useState('')
     const [modalOpen, setModal] = useState(false)
+    
+    useEffect(() => {
+        if(props.transaction.success){
+            setModal(true)
+            setTimeout(() => {
+                setModal(false)
+            }, 3000)
+        }
 
+    },[props.transaction.success])
     const toggleModal = () => {
         setModal(!modalOpen)
     }
@@ -40,8 +49,12 @@ const Redeem = (props) => {
                 <DashboardHeader />
 
                 <div className='redeem-main'>
-                    <input type='tel' maxLength="8" onChange={handleInputChange} />
-                    <button onClick={redeemUserCode}> Redeem Code </button>
+                    <h5>Enter the code sent to your mail to complete the transaction</h5>
+                    <div>
+                        <input type='tel' maxLength="8" onChange={handleInputChange} />
+                        <button onClick={redeemUserCode}> Redeem Code </button>
+                    </div>
+
                 </div>
             </div>
             <Modal show={modalOpen} onClose={toggleModal}>
@@ -50,5 +63,9 @@ const Redeem = (props) => {
         </HeaderFooter>
     )
 }
-
-export default connect(null, { redeemCode })(Redeem);
+const mapStateToProps = (state) => {
+    return {
+        transaction: state.transaction
+    }
+}
+export default connect(mapStateToProps, { redeemCode })(Redeem);

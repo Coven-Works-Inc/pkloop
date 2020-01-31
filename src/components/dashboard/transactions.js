@@ -18,14 +18,18 @@ const Transactions = props => {
   const [sender, setSender] = useState({})
   const [success, setSuccess] = useState(false)
   useEffect(() => {
-      if(props.transaction.res){
+      if(props.transaction.res.status){
         setSuccess(true)
+        setTimeout(() => {
+          setModal(false)
+        }, 3000)
       }
       console.log(props.transaction.res)
   }, [props.transaction.res])
   const showTrip = (notif) => {
     props.getTrip(notif.tripId)
     setModal(true)
+    console.log(notif)
     setSender(notif)
   }
   const closeModal = () =>{
@@ -118,7 +122,7 @@ const Transactions = props => {
         </div>
       </div>
       <Modal show={modal} onClose={closeModal}>
-          {success && <div style={{ color: 'green'}}>{props.transaction.res.message}</div>}
+          {success && <div style={{ color: 'green'}}>Transaction successful</div>}
           Sender<h5>{sender.sender}</h5>
           From<h5>{props.trip.locationCountry} , {props.trip.locationCity}</h5>
           To<h5>{props.trip.destinationCountry} , {props.trip.destinationCity}</h5>
