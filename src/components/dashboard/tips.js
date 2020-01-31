@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { addTip } from '../../actions/transActions'
 // import { Link } from 'react-router-dom'
 
 import DashboardHeader from './header'
@@ -29,6 +31,11 @@ const Tips = (props) => {
 
     const tipTraveler = () => {
         // call redeem code action
+        const data = {
+            amount: Number(input.amount),
+            email: input.email
+        }
+        props.addTip(data)
     }
 
     return (
@@ -55,4 +62,4 @@ const Tips = (props) => {
     )
 }
 
-export default Tips;
+export default connect(null, { addTip })(Tips);

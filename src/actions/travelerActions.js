@@ -2,7 +2,7 @@ import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
 // import jwt_decode from 'jwt-decode';
 
-import { FETCH_TRAVELERS, GET_ERRORS, FETCH_SHIPPERS, GET_TRAVELERS, CONNECT_TRAVELER } from './types'
+import { FETCH_TRAVELERS, GET_ERRORS, FETCH_SHIPPERS, GET_TRAVELERS, CONNECT_TRAVELER, TRANSACTION_RESPONSE } from './types'
 
 import { BASE_URL } from '../config/constants'
 
@@ -78,6 +78,11 @@ export const addTravelerEarning = (data) => dispatch => {
 export const respondToRequest = (data) => dispatch => {
   axios.post(`${BASE_URL}/transactions/respond`, data)
   .then(res => {
+    console.log(res)
+    dispatch({
+      type: TRANSACTION_RESPONSE,
+      payload: res.data
+    })
     console.log(res)
   })
 }
