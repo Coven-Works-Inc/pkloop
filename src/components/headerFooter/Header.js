@@ -18,13 +18,13 @@ class Header extends Component {
   }
 
   showMenu = () => {
+    window.scrollTo(0, 0)
     this.setState({
       menu: !this.state.menu
     })
   }
 
   render() {
-    console.log(this.props)
     const { logoutUser } = this.props
     const { menu } = this.state
     const { isAuthenticated, user } = this.props.auth
@@ -95,7 +95,7 @@ class Header extends Component {
           <div className='mobile-menu'>
             <ul>
               <li>
-                <Link to='#works'>How it works</Link>
+                <Link to='/howitworks'>How it works</Link>
               </li>
               <li>
                 <Link to='/pricing'>Pricing</Link>
@@ -177,7 +177,7 @@ class Header extends Component {
           <div className='mobile-menu'>
             <ul>
               <li>
-                <Link to='#works'>How it works</Link>
+                <Link to='/howitworks'>How it works</Link>
               </li>
               <li>
                 <Link to='/pricing'>Pricing</Link>
@@ -195,7 +195,7 @@ class Header extends Component {
                 <Link to='/trips'>List your trip</Link>
               </li>
               <li>
-                <Link to='/login'>Log in</Link>
+                <Link to={{ pathname: '/login', redirect: this.props.redirect.pathname }}>Log in</Link>
               </li>
               <li>
                 <Link to='/signup'>Sign up</Link>

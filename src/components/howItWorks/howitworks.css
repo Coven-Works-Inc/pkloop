@@ -43,6 +43,22 @@
   color: #4a4a4a;
 }
 
+@media screen and (max-width: 480px) {
+  .top {
+    flex-wrap: wrap-reverse;
+  }
+
+  .top > .top_right {
+    margin-left: 0rem;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  .top > .top-how-left {
+    width: 100%;
+  }
+}
+
 .mission {
   display: flex;
   background: #f5fafd;

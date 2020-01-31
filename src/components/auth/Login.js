@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { loginUser } from '../../actions/authActions'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { authenticate, isAuth } from './helpers'
 import queryString from 'query-string'
+import Google from './google'
+import Facebook from './facebook'
 import Logo from '../../assets/logo/Logo.png'
 // import './bootstrap.min.css';
 
@@ -57,7 +60,6 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state
-    console.log(this.props.location)
     return (
       <div id='container'>
         <div className='left items'>
@@ -136,39 +138,9 @@ class Login extends Component {
                   </button>
                 </form>
                 <p style={{ textAlign: 'center' }}>OR</p>
-                <button className='btn_google'>
-                  <i className='icon'>
-                    <img
-                      src='https://img.icons8.com/color/30/000000/google-logo.png'
-                      alt=''
-                    />
-                  </i>
-                  <span className='text'>Log in with Google </span>
-                </button>
-                <button
-                  className='btn_google'
-                  style={{ background: '#384af5', color: 'white' }}
-                >
-                  <i className='icon' style={{ marginLeft: '0.7rem' }}>
-                    <img
-                      src='https://img.icons8.com/color/27/000000/twitter.png'
-                      alt=''
-                    />
-                  </i>
-                  <span className='text'> Log in with Twitter</span>
-                </button>
-                <button
-                  className='btn_google'
-                  style={{ background: '#3b5998', color: 'white' }}
-                >
-                  <i className='icon' style={{ marginLeft: '0.7rem' }}>
-                    <img
-                      src='https://img.icons8.com/color/27/000000/facebook-f.png'
-                      alt=''
-                    />
-                  </i>
-                  <span className='text'> Log in with Facebook</span>
-                </button>
+
+                <Google informParent={this.informParent} />
+                <Facebook />
               </div>
               <div className='terms'>
                 <p>

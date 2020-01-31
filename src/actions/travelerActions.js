@@ -50,8 +50,17 @@ export const fetchShippers = () => async dispatch => {
       })
     })
 }
+// export const connectTraveler = (userDetails) => dispatch => {
+//   axios.post(`${BASE_URL}/chat`, userDetails)
+//   .then(res => {
+//     dispatch({
+//       type: CONNECT_TRAVELER,
+//       payload: res
+//     })
+//   })
+// }
 export const connectTraveler = (userDetails) => dispatch => {
-  axios.post(`${BASE_URL}/chat`, userDetails)
+  axios.post(`${BASE_URL}/transactions/connect`, userDetails)
   .then(res => {
     dispatch({
       type: CONNECT_TRAVELER,
@@ -61,6 +70,13 @@ export const connectTraveler = (userDetails) => dispatch => {
 }
 export const addTravelerEarning = (data) => dispatch => {
   axios.post(`${BASE_URL}/trips/earning`, data)
+  .then(res => {
+    console.log(res)
+  })
+}
+
+export const respondToRequest = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions/respond`, data)
   .then(res => {
     console.log(res)
   })

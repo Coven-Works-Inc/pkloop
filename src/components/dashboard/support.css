@@ -1,10 +1,8 @@
 .support-form__group {
   margin: 10px;
 }
-.support_input {
-  font-family: 'Roboto', sans-serif;
+/* .support_input {
   color: #333;
-  font-size: 1.2rem;
   border: 1px solid black;
   margin: 10px inherit;
   margin-bottom: 20px;
@@ -13,8 +11,24 @@
   background-color: #ffffff;
   width: 100%;
   display: block;
-  transition: all 0.3s;
+} */
+
+.receiver-modal h2 {
+  margin-bottom: 2rem;
 }
+
+.support_input {
+  display: block;
+  font-size: 1.2rem;
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  border: 1px solid #dddddd;
+  padding: 1rem;
+  margin-bottom: 10px;
+  transition: all 0.3s;
+  outline: none;
+}
+
 .support_textarea {
   font-family: 'Roboto', sans-serif;
   color: #333;

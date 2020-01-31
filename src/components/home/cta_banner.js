@@ -7,7 +7,7 @@ const Cta = () => {
     <div className='cta_send'>
       <div className='cta_content'>
         <div>
-          <p className='cta_main'>Ready to send or deliver a parcel?</p>
+          <h2 className='cta_main'>Ready to send or deliver a parcel?</h2>
         </div>
         <div className='cta_box'>
           <Link to='/parcel' style={{ textDecoration: 'none' }}>

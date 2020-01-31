@@ -261,7 +261,8 @@ a:first-child .cargo_items {
   justify-content: center;
   text-align: center;
   padding: 100px 0px;
-  background-color: #f5fafd;
+  /* background-color: #f5fafd; */
+  background-color: #fff;
 }
 
 #faqs h2 {
@@ -273,7 +274,8 @@ a:first-child .cargo_items {
 }
 
 .faqitem .question {
-  background: #fff;
+  background: #ffffff;
+  border: 1px solid #f5fafd;
   padding: 1rem 2rem;
   /* text-align: start; */
   display: flex;
@@ -602,6 +604,36 @@ a:nth-child(2) .cta_items {
   font-weight: bold;
 }
 
+.pending-row {
+  background-color: #00bdbe;
+  color: #ffffff;
+  -webkit-animation: bg-flash 1s infinite;  /* Safari 4+ */
+  -moz-animation: bg-flash 1s infinite;  /* Fx 5+ */
+  -o-animation: bg-flash 1s infinite;  /* Opera 12+ */
+  animation: bg-flash 1s infinite;  /* IE 10+, Fx 29+ */
+}
+
+.pending-row p.open,
+.pending-row p.complete,
+.pending-row p.pending,
+.pending-row p.completed {
+  color: #ffffff;
+  -webkit-animation: para-flash 1s infinite;  /* Safari 4+ */
+  -moz-animation: para-flash 1s infinite;  /* Fx 5+ */
+  -o-animation: para-flash 1s infinite;  /* Opera 12+ */
+  animation: para-flash 1s infinite;  /* IE 10+, Fx 29+ */
+}
+
+@keyframes bg-flash {
+  0%, 30% { background-color: #00bdbe; color: #ffffff; }
+  70%, 100% { background-color: #ffffff; color: #212529; }
+}
+
+@keyframes para-flash {
+  0%, 30% { color: #ffffff; }
+  70%, 100% { color: #212529; }
+}
+
 /* END OF User Dashboard Styles */
 
 /* Terms of Service Styles */
@@ -674,12 +706,44 @@ a:nth-child(2) .cta_items {
 
 .edit-profile {
   margin: 4rem auto;
-  width: 70%;
+  width: 50%;
   max-width: 1140px;
   background-color: #fff;
   padding: 5rem;
   display: flex;
   align-items: flex-start;
+}
+
+.edit-profile .sidemenu {
+  border: 2px solid rgba(136, 160, 160, 0.25);
+  color: rgb(136, 160, 160);
+  margin: 10px;
+  padding: 12px 25px;
+  /* border-radius: 50px; */
+  font-weight: lighter;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.edit-profile .active {
+  border: 2px solid rgba(0, 189, 190, 0.25);
+  margin: 10px;
+  padding: 12px 25px;
+  /* border-radius: 50px; */
+  font-weight: lighter;
+  font-size: 1rem;
+  color: #00bdbe;
+  cursor: pointer;
+}
+
+.edit-profile .sidemenu:hover {
+  color: #00bdbe;
+  background-color: #fff;
+  border: 2px solid rgba(0, 189, 190, 0.5);
+}
+
+.edit-profile .profile-picture {
+  margin-left: 4rem;
 }
 
 .edit-profile .profile-picture p {

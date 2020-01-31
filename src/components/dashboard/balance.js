@@ -5,6 +5,10 @@ import * as actions from '../../actions/balanceActions'
 import axios from 'axios'
 import { BASE_URL } from '../../config/constants'
 import StripeCheckout from 'react-stripe-checkout'
+import DashboardHeader from './header'
+import HeaderFooter from '../headerFooter'
+
+import Notification from './notification'
 
 const Balance = props => {
 
@@ -76,56 +80,67 @@ const Balance = props => {
 
   const onChangeHandler = e => {
     e.preventDefault()
-    if(e.target.value >= 0){
+    if (e.target.value >= 0) {
       setState({
         ...state,
         [e.target.name]: e.target.value
       })
     }
-    
+
   }
 
   return (
-    <div className='balance-section'>
-      <div className='amount'>
-        <p>Amount made so far</p>
-        <h2>${state.amountMade}</h2>
+    <HeaderFooter redirect={props.location}>
+      <div className='dashboard-header'>
+        <h2>
+          Balance
+          </h2>
       </div>
-      <div className='balance'>
-        <div className='left-side'>
-          <p>My PKLoop Balance</p>
-          <h2>${balance}</h2>
-        </div>
-        <div className='right-side'>
-          <button>Withdraw</button>
-          <button onClick={toggleModal}>Fund Balance</button>
-        </div>
-      </div>
+      <div>
+        <DashboardHeader />
+        {/* <Notification message="Sender wants you to deliver a parcel" /> */}
+        <div className='balance-section'>
+          <div className='amount'>
+            <p>Amount made so far</p>
+            <h2>${state.amountMade}</h2>
+          </div>
+          <div className='balance'>
+            <div className='left-side'>
+              <p>My PKLoop Balance</p>
+              <h2>${Number(balance).toFixed(2)}</h2>
+            </div>
+            <div className='right-side'>
+              <button>Withdraw</button>
+              <button onClick={toggleModal}>Fund Balance</button>
+            </div>
+          </div>
 
-      <Modal show={state.modalOpen} onClose={toggleModal}>
-        <div>
-          <h2>How much do you want to fund your wallet with?</h2>
-          <br />
-          <input className="popupInput"   type="number" name="amount" placeholder="Enter Amount" value={state.amount} onChange={onChangeHandler} />
-          <br />
-          {state.amount  >= 29.99 ? 
-            <div className="button-group">
-            <StripeCheckout
-              image={require('../../assets/payment-logo.png')}
-              stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
-              description="Connect with a traveler"
-              name="Make payment to continue"
-              locale="auto"
-              amount={Number(state.amount) * 100}
-              token={onToken}
-              panelLabel="Pay"
-            />
-          </div> : 
-            <div style={{ color: 'red' }}> A Minimum of $29.99 is required to fund wallet</div>
-          }
+          <Modal show={state.modalOpen} onClose={toggleModal}>
+            <div>
+              <h2>How much do you want to fund your wallet with?</h2>
+              <br />
+              <input className="popupInput" type="number" name="amount" placeholder="Enter Amount" value={state.amount} onChange={onChangeHandler} />
+              <br />
+              {state.amount >= 29.99 ?
+                <div className="button-group">
+                  <StripeCheckout
+                    image={require('../../assets/payment-logo.png')}
+                    stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
+                    description="Connect with a traveler"
+                    name="Make payment to continue"
+                    locale="auto"
+                    amount={Number(state.amount) * 100}
+                    token={onToken}
+                    panelLabel="Pay"
+                  />
+                </div> :
+                <div style={{ color: 'red' }}> A Minimum of $29.99 is required to fund wallet</div>
+              }
+            </div>
+          </Modal>
         </div>
-      </Modal>
-    </div>
+      </div>
+    </HeaderFooter>
   )
 }
 

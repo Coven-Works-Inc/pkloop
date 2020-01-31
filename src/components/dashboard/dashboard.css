@@ -106,3 +106,55 @@ button:disabled {
 .insurance h3 {
     text-align: center;
 }
+
+
+/* STYLE FOR NOTIFICATIONS COMPONENT */
+
+.notifications {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  width: fit-content;
+  max-width: 60%;
+  background-color: rgba(0, 113, 188);
+  color: #ffffff;
+  border-radius: 4px;
+}
+
+.notifications > p:first-child {
+  font-weight: bold;
+}
+
+.notifications button {
+  background: #ffffff;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ffffff;
+  margin-left: 2rem;
+  border-radius: 2px;
+}
+
+/* .notifications button.accept {
+  background: #00bdbe;
+  border: 1px solid #00bdbe;
+  color: #ffffff;
+}
+
+.notifications button.decline {
+  background: red;
+  border: 1px solid red;
+  color: #ffffff;
+} */
+
+.notifications button:hover {
+  transform: scale(0.95);
+}
+
+@media screen and (max-width: 480px) {
+  .notifications {
+    max-width: 85%;
+    flex-wrap: wrap;
+  }
+}
+
+/*** END OF STYLE FOR NOTIFICATIONS COMPONENT ***/

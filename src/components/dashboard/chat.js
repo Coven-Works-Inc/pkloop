@@ -6,9 +6,9 @@ import io from 'socket.io-client'
 import axios from 'axios'
 import { BASE_URL } from '../../config/constants'
 import { reduceBalance, updateBalance } from '../../actions/balanceActions'
-import { markTravelerComplete } from '../../actions/transActions'
 import { addTravelerEarning } from '../../actions/travelerActions'
-
+import { completeTrip } from '../../actions/tripActions'
+import { updateTrans } from '../../actions/transActions'
 import 'react-chat-widget/lib/styles.css';
 import {
   ThemeProvider,
@@ -41,31 +41,30 @@ const Chat = props => {
   const [errorModal, setErrorModal] = useState(false)
   const [markCompleteModal, setMarkCompleteModal] = useState(false)
 
-  useEffect(() => {
-    console.log(props.traveler)
-    if(props.traveler){
-      setName(props.traveler.username)
-      setRoom(props.traveler._id)
+  // useEffect(() => {
+  //   console.log(props.traveler)
+  //   if(props.traveler){
+  //     setName(props.traveler.username)
+  //     setRoom(props.traveler._id)
 
-      socket = io('https://aqueous-ravine-50016.herokuapp.com/')
-      // socket = io('http://localhost:8000')
-      socket.emit('join', { name, room }, () => {
-          console.log(name, room)
-      })
+  //     socket = io('https://aqueous-ravine-50016.herokuapp.com/')
+  //     socket.emit('join', { name, room }, () => {
+  //         console.log(name, room)
+  //     })
 
-      return() => {
-        socket.emit('disconnect')
-        socket.off()
-      }
+  //     return() => {
+  //       socket.emit('disconnect')
+  //       socket.off()
+  //     }
 
-    }
-  }, [props.traveler._id, name])
-  useEffect(() => {
-    socket.on('message', ({user, text}, callback) => {
-      setMessages([...messages, text])
-      console.log(messages)
-  })
-  },)
+  //   }
+  // }, [props.traveler._id, name])
+  // useEffect(() => {
+  //   socket.on('message', ({user, text}, callback) => {
+  //     setMessages([...messages, text])
+  //     console.log(messages)
+  // })
+  // },)
 
   useEffect(() => {
     getUserData()
@@ -102,8 +101,8 @@ const Chat = props => {
       id: props.traveler._id,
       earning: Number(props.tipAmount) + Number(props.senderCost),
     }
-    props.markTravelerComplete(data)
     props.addTravelerEarning(data)
+    props.completeTrip(props.traveler._id)
   }
   const [state, setState] = useState({
     headerText: 'Sender details',
@@ -112,6 +111,11 @@ const Chat = props => {
   })
   const toggleModal = () => {
     props.close()
+  }
+  const handleChange = (e) => {
+    setState({
+      [e.target.name]: e.target.value
+    })
   }
   const onTipChange = e => {
     setState({
@@ -183,9 +187,20 @@ const Chat = props => {
     //TODO: CHECK IF ENOUGH MONEY IS IN BALANCE
     //REDIRECT TO FUND WALLET PAGE IF NOT
     //SUBTRACT FROM WALLET IF ENOUGH
+    const data = {
+      id: props.traveler._id,
+      tipAmount: props.tipAmount,
+      tipAdded: props.tipAdded ? true: false,
+      insuranceAmount: Number(props.insuranceCost),
+      insuranceAdded: props.insuranceCost ? true : false,
+      totalCost: props.parcelCost,
+      parcelCost: props.senderCost
+    }
     const parcelCost = props.parcelCost + (0.05 * props.parcelCost)
     if(balance >= parcelCost){
         props.reduceBalance({ amount: parcelCost })
+        console.log(data)
+        props.updateTrans(data)
     } else {
       setErrorModal(true)
     }
@@ -325,7 +340,7 @@ const Chat = props => {
           className='chat-board'
           style={props.traveler ? {} : { alignSelf: 'center' }}
         >
-          <ThemeProvider theme={theme}>
+          {/* <ThemeProvider theme={theme}>
           <div style={{ width: '100%', background: 'white' }}>
 
             <Row reverse>
@@ -355,7 +370,17 @@ const Chat = props => {
               </Row>
             </TextComposer>
           </div>
-        </ThemeProvider>
+        </ThemeProvider> */}
+        <div className="receiver-modal">
+              <h2>Leave a message for the traveler</h2>
+              <label>Subject</label>
+              <input type="text" className="support_input" name="fullname" onChange={handleChange}></input>
+              <br />
+              <label>Text</label>
+              <textarea className="support_input" name="address" onChange={handleChange}></textarea>
+              <br />
+              <button className="btnQ medium">Send message</button>
+            </div>
           
         </div>
       )}
@@ -373,6 +398,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { joinChatRoom, 
                                         reduceBalance, 
                                         updateBalance, 
-                                        markTravelerComplete,
-                                        addTravelerEarning 
+                                        addTravelerEarning,
+                                        completeTrip,
+                                        updateTrans
                                       })(Chat)

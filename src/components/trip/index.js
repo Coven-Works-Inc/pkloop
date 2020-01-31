@@ -116,7 +116,7 @@ class index extends Component {
   render () {
     const { message } = this.props
     return (
-      <HeaderFooter>
+      <HeaderFooter redirect={this.props.location}>
         <Banner title='List Your Trip' />
         <section id='list_form'>
           <div className='trip_container'>

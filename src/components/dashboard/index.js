@@ -52,7 +52,7 @@ class Dashboard extends Component {
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name] : e.target.value
+      [e.target.name]: e.target.value
     })
   }
   gotoBalance = () => {
@@ -169,11 +169,7 @@ class Dashboard extends Component {
       <HeaderFooter redirect={this.props.location}>
         <div className='dashboard-header'>
           <h2>
-            {headerText === 'transactions' && 'My Transactions'}
-            {headerText === 'chat' && 'Chat'}
-            {headerText === 'profile' && 'Edit Profile'}
-            {headerText === 'balance' && 'My Balance'}
-            {headerText === 'support' && 'Support'}
+            My Transactions
           </h2>
         </div>
         <div className='dashboard-body'>
@@ -185,12 +181,12 @@ class Dashboard extends Component {
               My Transactions
             </p>
 
-            <p
+            {/* <p
               onClick={() => changeHeader('chat')}
               className={headerText === 'chat' ? '' : 'lighter'}
             >
               Chat
-            </p>
+            </p> */}
 
             <p
               onClick={() => changeHeader('profile')}
@@ -290,7 +286,8 @@ class Dashboard extends Component {
           }
           {
             modalType === 'receiver' &&
-            <div>
+            <div className="receiver-modal">
+              <h2>Please enter the details of the parcel receiver</h2>
               <label>Fullname</label>
               <input type="text" className="support_input" name="fullname" onChange={this.handleChange}></input>
               <br />
