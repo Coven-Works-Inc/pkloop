@@ -934,3 +934,34 @@ a:nth-child(2) .cta_items {
 }
 
 /* END OF COMMON */
+
+/* REDEEM CODE STARTS HERE */
+
+.redeem-main {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 7.5rem;
+}
+
+.redeem-main button {
+  padding: 0.8rem 1rem;
+  color: #fff;
+  border-radius: 2px;
+  outline: none;
+  font-size: 1rem;
+  background-color: rgba(0, 189, 190);
+}
+
+.redeem-main button:hover {
+  transform: scale(0.98)
+}
+
+.redeem-main input {
+  outline: none;
+  min-width: 240px;
+  padding-left: 1rem;
+  letter-spacing: 0.1rem;
+}
+
+/* END OF REDEEM CODE */
