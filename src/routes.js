@@ -30,6 +30,8 @@ import Transactions from './components/dashboard/transactions'
 import Balance from './components/dashboard/balance'
 import Support from './components/dashboard/support'
 import TravelerChat from './components/dashboard/traveler'
+import Redeem from './components/dashboard/redeem'
+import Tips from './components/dashboard/tips'
 
 const Routes = props => {
   return (
@@ -57,6 +59,8 @@ const Routes = props => {
       <Route component={Profile} path='/dashboard/profile' />
       <Route component={Balance} path='/dashboard/balance' />
       <Route component={Support} path='/dashboard/support' />
+      <Route component={Redeem} path='/dashboard/redeem' />
+      <Route component={Tips} path='/dashboard/tips' />
       <Route component={Notification} path='/dashboard/notification' />
       <Route exact component={Login} path='/Login' />
       <Route exact component={Chat} path='/dashboard/chat' />

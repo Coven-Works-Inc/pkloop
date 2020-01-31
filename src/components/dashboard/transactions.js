@@ -2,14 +2,47 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getTransaction } from '../../actions/transActions'
 import { getTrip } from '../../actions/tripActions'
+import { respondToRequest} from '../../actions/travelerActions'
 import { withRouter } from 'react-router-dom'
 import DashboardHeader from './header'
 import HeaderFooter from '../headerFooter'
+import Notification from './notification'
+import Modal from '../common/modal'
+
 
 // import Notification from './notification'
 
 const Transactions = props => {
   // const [transStatus, changeTransStatus] = useState('pending')
+  const [modal, setModal] = useState(false)
+  const [sender, setSender] = useState({})
+  const showTrip = (notif) => {
+    props.getTrip(notif.tripId)
+    setModal(true)
+    setSender(notif)
+  }
+  const closeModal = () =>{
+    setModal(false)
+  }
+  const acceptRequest = () => {
+    const data = {
+      senderId: sender.sender,
+      tripId: sender.tripId,
+      action: 'accept',
+      amount: sender.amount
+    }
+    props.respondToRequest(data)
+  }
+  const declineRequest = () => {
+    const data = {
+      senderId: sender.sender,
+      tripId: sender.tripId,
+      action: 'decline',
+      amount: sender.amount
+    }
+    props.respondToRequest(data)
+
+  }
   const {
     transaction: { transaction }
   } = props
@@ -36,6 +69,9 @@ const Transactions = props => {
   return (
     <HeaderFooter redirect={props.location}>
       <div className='dashboard-header'>
+        {props.notifs.map(notif => (
+          <div> <Notification message={notif.notify} showTripDetails={() => showTrip(notif)}/> </div>
+        ))}
         <h2>
           My Transactions
           </h2>
@@ -74,15 +110,23 @@ const Transactions = props => {
               )}
         </div>
       </div>
+      <Modal show={modal} onClose={closeModal}>
+          {props.trip.username}
+          <br />
+          <button className='btnQ' onClick={acceptRequest}>Accept</button>
+          <button className='inverse-btnQ' onClick={declineRequest}>Decline</button>
+      </Modal>
     </HeaderFooter>
   )
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
     transaction: state.transaction,
-    trip: state.trips.trip.data
+    trip: state.trips.trip.data,
+    notifs: state.auth.user.notifications
   }
 }
 
-export default connect(mapStateToProps, { getTransaction, getTrip })(withRouter(Transactions))
+export default connect(mapStateToProps, { getTransaction, getTrip, respondToRequest })(withRouter(Transactions))

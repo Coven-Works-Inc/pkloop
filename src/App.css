@@ -934,3 +934,82 @@ a:nth-child(2) .cta_items {
 }
 
 /* END OF COMMON */
+
+/* REDEEM CODE STARTS HERE */
+
+.redeem-main {
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 7.5rem;
+  text-align: center;
+}
+
+.redeem-main > div {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.redeem-main button {
+  padding: 0.8rem 1rem;
+  color: #fff;
+  border-radius: 2px;
+  outline: none;
+  font-size: 1rem;
+  background-color: rgba(0, 189, 190);
+}
+
+.redeem-main button:hover {
+  transform: scale(0.98)
+}
+
+.redeem-main input {
+  outline: none;
+  min-width: 240px;
+  padding-left: 1rem;
+  letter-spacing: 0.1rem;
+}
+
+/* END OF REDEEM CODE */
+
+/* TIPS CODE STARTS HERE */
+
+.tips-main {
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 7.5rem;
+  text-align: center;
+}
+
+.tips-main > div {
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.tips-main button {
+  padding: 0.8rem 1rem;
+  color: #fff;
+  border-radius: 2px;
+  outline: none;
+  font-size: 1rem;
+  background-color: rgba(0, 189, 190);
+  display: block;
+  width: 100%;
+}
+
+.tips-main button:hover {
+  transform: scale(0.98)
+}
+
+.tips-main input {
+  outline: none;
+  min-width: 300px;
+  height: 47px;
+  padding-left: 1rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* END OF TIPS CODE */
