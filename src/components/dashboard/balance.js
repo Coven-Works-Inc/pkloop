@@ -8,7 +8,7 @@ import StripeCheckout from 'react-stripe-checkout'
 import DashboardHeader from './header'
 import HeaderFooter from '../headerFooter'
 
-import Notification from './notification'
+// import Notification from './notification'
 
 const Balance = props => {
 
