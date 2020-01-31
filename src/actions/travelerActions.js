@@ -74,3 +74,10 @@ export const addTravelerEarning = (data) => dispatch => {
     console.log(res)
   })
 }
+
+export const respondToRequest = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions/respond`, data)
+  .then(res => {
+    console.log(res)
+  })
+}

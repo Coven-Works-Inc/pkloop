@@ -22,6 +22,7 @@ import countriesData from '../../countries.json'
 
 const Parcel = props => {
 
+  const [modal, setModal] = useState(false)
   const [state, setState] = useState({
     locationCountry: '',
     locationCity: '',
@@ -54,7 +55,8 @@ const Parcel = props => {
     checked: false,
     modal1: false,
     modal2: false,
-    totalCost: 0
+    totalCost: 0,
+    message: ''
   })
 
   useEffect(() => {
@@ -130,6 +132,11 @@ const Parcel = props => {
     getUserData()
   }, [])
 
+  useEffect(() => {
+    if(props.status === 200){
+        setModal(true) 
+    }
+  }, [props.status])
 
   const getUserData = () => {
     axios.get(`${BASE_URL}/users/fetchUser`)
@@ -208,6 +215,7 @@ const Parcel = props => {
       ...state,
       sameUser: false
     })
+    setModal(false)
   }
   const handleParcelCost = (traveler) => {
     console.log(traveler)
@@ -338,37 +346,34 @@ const Parcel = props => {
   // }
   const connectToTraveler = () => {
 
-    props.history.push({
-      pathname: '/dashboard/travelerchat',
-      parcelCost: state.parcelCost,
-      travelerData: state.travelerData
-    })
+    // props.history.push({
+    //   pathname: '/dashboard/travelerchat',
+    //   parcelCost: state.parcelCost,
+    //   travelerData: state.travelerData
+    // })
     
-    const transactionData = {
-      status: 'Pending',
-      with: state.travelerData.username,
-      role: 'Sender',
-      travelerId: state.travelerData.user._id,
-      senderName: props.user.user.username,
-      trip: state.travelerData,
-      tripId: state.travelerData._id
-    }
+    // const transactionData = {
+    //   status: 'Pending',
+    //   with: state.travelerData.username,
+    //   role: 'Sender',
+    //   travelerId: state.travelerData.user._id,
+    //   senderName: props.user.user.username,
+    //   trip: state.travelerData,
+    //   tripId: state.travelerData._id
+    // }
     
     const userDetails = {
       tripId: state.travelerData._id,
-      id: state.travelerData.user._id,
-      earning: state.parcelCost,
-      username: state.travelerData.username
+      travelerId: state.travelerData.user._id,
+      amount: state.parcelCost,
+      username: state.travelerData.username,
+      message: "new request"
     }
     console.log(userDetails)
     props.connectTraveler(userDetails)
     const totalCost = Number(state.totalCost) + (0.05 * Number(state.totalCost))
     props.reduceBalance({ amount: totalCost})
-    // props.postTransaction(transactionData)
-    setState({
-      modal1: false,
-      modal2: true
-    })
+    // props.postTransaction(transactionData))
     console.log(state)
   }
   
@@ -553,6 +558,7 @@ const Parcel = props => {
                               <br />
                             </div>
                         )}
+                        <textarea></textarea>
                         <div className="button-group">
                           <button className="btnQ medium" onClick={connectToTraveler}>Pay ${state.totalCost} + ${(0.05 * Number(state.totalCost)).toFixed(2)}</button>
                           <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
@@ -607,6 +613,12 @@ const Parcel = props => {
             </div>
           </div>}
       </Modal>
+      {modal && (
+              <Modal show={modal} onClose={closeModal}>
+                  <div>You've successfully paid for this transaction</div> 
+              </Modal>
+            )
+            }
       {/* {state.sameUser && <Modal show={state.sameUser} onClose={closeModal}><div>Can't connect with your self</div></Modal>} */}
     </HeaderFooter>
   )
@@ -615,6 +627,7 @@ const Parcel = props => {
 const mapStateToProps = state => ({
   travelers: state.travelers,
   user: state.auth,
+  status: state.balance.status,
 })
 
 export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler, postTransaction, reduceBalance })(Parcel)
