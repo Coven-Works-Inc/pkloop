@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { addTip } from '../../actions/transActions'
 // import { Link } from 'react-router-dom'
@@ -10,6 +10,15 @@ import Modal from '../common/modal'
 import './dashboard.css'
 
 const Tips = (props) => {
+
+    useEffect(() => {
+        if(props.tip){
+            setModal(true)
+        }
+        setTimeout(() => {
+            setModal(false)
+        }, 3000)
+    }, [props.tip])
 
     const [input, updateInput] = useState({
         amount: 0,
@@ -62,4 +71,9 @@ const Tips = (props) => {
     )
 }
 
-export default connect(null, { addTip })(Tips);
+const mapStateToProps = state => {
+    return {
+        tip: state.transaction.tipSuccess
+    }
+}
+export default connect(mapStateToProps, { addTip })(Tips);

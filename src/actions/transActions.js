@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { BASE_URL } from '../config/constants'
-import { FETCH_TRANSACTIONS, GET_ERRORS, TRANSACTION_RESPONSE, REDEEM_CODE } from './types'
+import { FETCH_TRANSACTIONS, GET_ERRORS, TRANSACTION_RESPONSE, REDEEM_CODE, TIP_SUCCESS } from './types'
 
 export const getTransaction = () => async dispatch => {
   try {
@@ -80,6 +80,9 @@ export const redeemCode = (data) => dispatch => {
 export const addTip = (data) => dispatch => {
   axios.post(`${BASE_URL}/transactions/addtip`, data)
   .then(res => {
-    console.log(res)
+    dispatch({
+      type: TIP_SUCCESS,
+      payload: res.data.status
+    })
   })
 }
