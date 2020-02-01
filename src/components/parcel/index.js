@@ -394,12 +394,10 @@ const Parcel = props => {
       amount: Number(state.insuranceCost),
       total: state.parcelWorth
     }
-    console.log(userDetails)
     props.connectTraveler(userDetails)
     const totalCost = Number(state.totalCost) + (0.05 * Number(state.totalCost))
     props.reduceBalance({ amount: totalCost})
     if(state.checked){
-      console.log(insuranceData)
       props.addInsurance(insuranceData)
     }
     // props.postTransaction(transactionData))
