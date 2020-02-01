@@ -4,6 +4,7 @@ import HeaderFooter from '../headerFooter'
 import { connect } from 'react-redux'
 import { fetchTravelers, getTravelers, connectTraveler } from '../../actions/travelerActions'
 import { postTransaction } from '../../actions/transActions'
+import { addInsurance } from '../../actions/costActions'
 import { Link } from 'react-router-dom'
 
 import countries from '../../countries.json'
@@ -388,10 +389,17 @@ const Parcel = props => {
       username: state.travelerData.username,
       message: state.message
     }
-    console.log(userDetails)
+    const insuranceData = {
+      item: state.parcelItem,
+      amount: Number(state.insuranceCost),
+      total: state.parcelWorth
+    }
     props.connectTraveler(userDetails)
     const totalCost = Number(state.totalCost) + (0.05 * Number(state.totalCost))
     props.reduceBalance({ amount: totalCost})
+    if(state.checked){
+      props.addInsurance(insuranceData)
+    }
     // props.postTransaction(transactionData))
     console.log(state)
   }
@@ -649,4 +657,4 @@ const mapStateToProps = state => ({
   status: state.balance.status,
 })
 
-export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler, postTransaction, reduceBalance })(Parcel)
+export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler,addInsurance, postTransaction, reduceBalance })(Parcel)
