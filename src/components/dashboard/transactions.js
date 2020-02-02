@@ -50,7 +50,8 @@ const Transactions = props => {
       senderId: sender.sender,
       tripId: sender.tripId,
       action: 'decline',
-      amount: sender.amount
+      amount: sender.amount,
+      notifId: sender._id
     }
     props.respondToRequest(data)
 
