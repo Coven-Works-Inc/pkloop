@@ -40,7 +40,8 @@ const Transactions = props => {
       senderId: sender.sender,
       tripId: sender.tripId,
       action: 'accept',
-      amount: sender.amount
+      amount: sender.amount,
+      notifId: sender._id
     }
     props.respondToRequest(data)
   }
@@ -123,7 +124,7 @@ const Transactions = props => {
       </div>
       <Modal show={modal} onClose={closeModal}>
           {success && <div style={{ color: 'green'}}>Transaction successful</div>}
-          Sender<h5>{sender.sender}</h5>
+          Sender<h5>{sender.username ? sender.username : sender.sender}</h5>
           From<h5>{props.trip.locationCountry} , {props.trip.locationCity}</h5>
           To<h5>{props.trip.destinationCountry} , {props.trip.destinationCity}</h5>
           Arrival Date<h5>{props.trip.arrivalDate && props.trip.arrivalDate.split('T')[0]}</h5>
