@@ -113,7 +113,7 @@ class Header extends Component {
                 <Link to='/trips'>List your trip</Link>
               </li>
               <li>
-                <Link to='/dashboard'>Dashboard</Link>
+                <Link to='/dashboard/transactions'>Dashboard</Link>
               </li>
               <li>
                 <p
@@ -189,7 +189,7 @@ class Header extends Component {
                 <Link to='/about'>About us</Link>
               </li>
               <li>
-                <Link to='/send'>Send Parcel</Link>
+                <Link to='/parcel'>Send Parcel</Link>
               </li>
               <li>
                 <Link to='/trips'>List your trip</Link>
@@ -198,7 +198,7 @@ class Header extends Component {
                 <Link to={{ pathname: '/login', redirect: this.props.redirect.pathname }}>Log in</Link>
               </li>
               <li>
-                <Link to='/signup'>Sign up</Link>
+                <Link to='/register'>Sign up</Link>
               </li>
             </ul>
           </div>
