@@ -65,7 +65,7 @@ export const updateTrans = data => dispatch => {
 
 export const handleTransactionRequest = data => dispatch => {
   axios
-    .post(`${BASE_URL}/transactions/respond`, data)
+    .post(`${process.env.BASE_URL}/transactions/respond`, data)
     .then(res => {
       console.log(res.data.data)
       dispatch({
@@ -76,16 +76,18 @@ export const handleTransactionRequest = data => dispatch => {
     .catch(err => dispatch({ type: 'GET_ERRORS', payload: err }))
 }
 export const redeemCode = data => dispatch => {
-  axios.post(`${BASE_URL}/transactions/redeemcode`, data).then(res => {
-    dispatch({
-      type: REDEEM_CODE,
-      payload: res.data
+  axios
+    .post(`${process.env.BASE_URL}/transactions/redeemcode`, data)
+    .then(res => {
+      dispatch({
+        type: REDEEM_CODE,
+        payload: res.data
+      })
+      console.log(res)
     })
-    console.log(res)
-  })
 }
 export const addTip = data => dispatch => {
-  axios.post(`${BASE_URL}/transactions/addtip`, data).then(res => {
+  axios.post(`${process.env.BASE_URL}/transactions/addtip`, data).then(res => {
     dispatch({
       type: TIP_SUCCESS,
       payload: res.data.status
