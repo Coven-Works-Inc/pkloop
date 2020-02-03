@@ -22,7 +22,7 @@ const About = (props) => {
               Economy-sharing is at an all-time frenzy. Our Founder knows life can be a
               balancing act between unplanned emergencies, importance of Same-Day Delivery,
                rapid transit times as well as saving on shipping.
-          </h2>
+            </h2>
           </div>
           <div className='top_right'>
             <p>
