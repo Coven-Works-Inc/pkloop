@@ -54,9 +54,15 @@ body{
     display: none;
 }
 
-#works h2{
+#works h2, #faqs h2 {
     font-size: 2rem;
     margin-top: 30px;
+}
+
+#faqs h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 0rem;
 }
 
 #works {
@@ -102,28 +108,24 @@ body{
     width: 100%;
     align-items: center;
     justify-content: flex-start;
-    margin-bottom: 25px;
-
-
+    margin-top: 2rem;
+    margin-left: 2rem;
 }
 
 #works_box .works_item:nth-child(2) img{
     margin-top: 0px;
 }
 
-
-
 #works_box .works_item img{
-    height: 60px;
-    width: 60px;
-    
+    max-height: 35px;
 }
 
-#works_box .works_item:first-child img{
-    height: 67px;
+#works_box .works_item:first-child img {
+    max-height: 45px;
 }
 
-#works_box .works_item p{
+#works_box .works_item p {
+    margin: 0px 0px 0px 0px;
     font-size: 1.1rem;
     line-height: 1.2rem;
     margin-left: 12px;
@@ -153,7 +155,7 @@ body{
     display: none;
 }
 
-.cargo_buttons{
+.cargo_buttons {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -161,8 +163,12 @@ body{
     text-align: center;
 }
 
+.cargo_buttons > a {
+    width: 100%;
+}
+
 .cargo_items{
-    padding: 1rem 1.5rem;
+    /* padding: 1rem 1.5rem; */
     border: 1px solid #00bdbe;
     margin: 0.625rem;
     border-radius: 4px;
@@ -225,7 +231,6 @@ body{
     border: 1px solid #00bdbe;
     padding: 1rem 1.5rem;
     border-radius: 4px;
-    font-size: 0.7rem;
     text-align: center;
     
 }
@@ -240,22 +245,25 @@ body{
     
 }
 
-.footer{
+.footers {
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     /* justify-content: space-around; */
-    align-items: center;
+    /* align-items: center; */
     /* padding: 1rem; */
 }
 
-.footer img{
+.footers img {
     height: 100%;
     margin: 0rem 0rem 0rem 0rem;
+    display: block;
 }
 
-.footer ul.links {
-  display: none;
-  /* margin: 0 1.2rem; */
-  
+.footers ul.links {
+  /* display: none; */
+  margin: 0 1.2rem;
+  width: 100%;
 }
 
 .footerdiv hr{ 
@@ -357,6 +365,39 @@ body{
 
 .balance-section .amount {
     margin: 0;
+}
+
+.about-body .top {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.about-body .top .top_left {
+    margin-left: 0rem;
+    margin-bottom: 2rem;
+}
+
+.about-body .mission {
+    flex-wrap: wrap;
+    height: fit-content;
+}
+
+.about-body .mission .mission_left {
+    margin-left: 0rem;
+    margin-right: 0rem;
+    width: 100%;
+}
+
+.about-body .mission .mission_left img {
+    width: 100%;
+}
+
+.about-body .mission .mission_right {
+    padding: 2rem;
+}
+
+.about-body .mission .mission_right p {
+    line-height: 1.5rem;
 }
 
 }
