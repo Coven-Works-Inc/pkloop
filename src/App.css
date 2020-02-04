@@ -266,6 +266,7 @@ a:first-child .cargo_items {
 }
 
 #faqs h2 {
+  margin: 0rem 2rem;
   margin-bottom: 3.5rem;
 }
 
