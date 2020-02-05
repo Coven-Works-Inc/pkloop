@@ -68,7 +68,7 @@ const Parcel = props => {
   }, [])
   useEffect(() => {
     setTimeout(() => {
-      if(modal){
+      if (modal) {
         setModal(false)
         setState({
           ...state,
@@ -77,7 +77,7 @@ const Parcel = props => {
         })
       }
     }, 1000)
-  },[modal])
+  }, [modal])
   const onFromCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value)
     const city = cities.filter(city => city.country === selectedCountry[0].name)
@@ -149,8 +149,8 @@ const Parcel = props => {
   }, [])
 
   useEffect(() => {
-    if(props.status === 200){
-        setModal(true) 
+    if (props.status === 200) {
+      setModal(true)
     }
   }, [props.status])
 
@@ -374,7 +374,7 @@ const Parcel = props => {
     //   parcelCost: state.parcelCost,
     //   travelerData: state.travelerData
     // })
-    
+
     // const transactionData = {
     //   status: 'Pending',
     //   with: state.travelerData.username,
@@ -384,7 +384,7 @@ const Parcel = props => {
     //   trip: state.travelerData,
     //   tripId: state.travelerData._id
     // }
-    
+
     const userDetails = {
       tripId: state.travelerData._id,
       travelerId: state.travelerData.user._id,
@@ -407,7 +407,7 @@ const Parcel = props => {
     // props.postTransaction(transactionData))
     console.log(state)
   }
-  
+
   const toggleModal = () => {
     setState({
       ...state,
@@ -482,7 +482,7 @@ const Parcel = props => {
                   onChange={onChangeHandler}
                 >
                   <option value=""></option>
-                  { state.fromcities && state.fromcities.sort().map((city, index) => (
+                  {state.fromcities && state.fromcities.sort().map((city, index) => (
                     <option value={city.name} key={index}>{city.name},{city.subcountry}</option>
                   ))}
 
@@ -567,7 +567,7 @@ const Parcel = props => {
               </div>
             </div>
 
-            <button className='btnQ' type="submit">Find Travellers</button>
+            <button className='btnQ' type="submit">Find Travelers</button>
           </form>
         </div>
       </div>
@@ -613,10 +613,16 @@ const Parcel = props => {
                         <h6>5% platform charges included</h6>
                         <div className="button-group">
                           <button className="btnQ medium" onClick={connectToTraveler}>{state.totalAndTip === 0? `Pay $${Number(state.totalCost).toFixed(2)} + $${(0.05 * Number(state.totalCost)).toFixed(2)}` : `Pay ${Number(state.totalAndTip).toFixed(2)} + $${(0.05 * Number(state.totalAndTip)).toFixed(2)}`}</button>
-                          <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
+                          <button className="btnQ inverse-btnQ medium" onClick={toggleModal}>No, Change weight</button>
                         </div>
+                      )}
+                      <textarea className="support_input" placeholder="Leave a message for traveler" onChange={messageChangeHandler}></textarea>
+                      <div className="button-group">
+                        <button className="btnQ medium" onClick={connectToTraveler}>Pay ${state.totalCost} + ${(0.05 * Number(state.totalCost)).toFixed(2)}</button>
+                        <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
+                      </div>
                     </div>
-                  ) 
+                  )
 
                 }
 
@@ -666,11 +672,11 @@ const Parcel = props => {
           </div>}
       </Modal>
       {modal && (
-              <Modal show={modal} onClose={closeModal}>
-                  <div>You've successfully paid for this transaction</div> 
-              </Modal>
-            )
-            }
+        <Modal show={modal} onClose={closeModal}>
+          <div>You've successfully paid for this transaction</div>
+        </Modal>
+      )
+      }
       {/* {state.sameUser && <Modal show={state.sameUser} onClose={closeModal}><div>Can't connect with your self</div></Modal>} */}
     </HeaderFooter>
   )
@@ -682,4 +688,4 @@ const mapStateToProps = state => ({
   status: state.balance.status,
 })
 
-export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler,addInsurance, postTransaction, reduceBalance })(Parcel)
+export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler, addInsurance, postTransaction, reduceBalance })(Parcel)
