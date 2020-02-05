@@ -112,6 +112,8 @@ body {
   height: 50px;
   border: 1px #ddd solid;
   font-size: 1rem;
+  background: #ffffff;
+  border-radius: 0px;
 }
 #contact-form input:focus {
   outline: none;
@@ -186,4 +188,11 @@ body {
   margin: 0px;
   color: rgb(177, 2, 46);
   text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+  .all-auth-content {
+    width: 90%;
+    margin-top: 7.5rem;
+  }
 }

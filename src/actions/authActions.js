@@ -193,10 +193,10 @@ export const verify = (token, history) => dispatch => {
     payload: true
   })
 
-  dispatch({
-    type: GET_ERRORS,
-    payload: { message: '' }
-  })
+  // dispatch({
+  //   type: GET_ERRORS,
+  //   payload: { message: '' }
+  // })
 
   axios
     .post(`${process.env.BASE_URL}/auth/verify`, { token })

@@ -30,3 +30,6 @@
     color: rgb(241, 74, 74);
 }
 
+.tos-body ol li {
+    margin-top: 0.5rem;
+}
