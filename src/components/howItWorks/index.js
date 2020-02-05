@@ -10,15 +10,14 @@ const index = (props) => {
       <Banner title='Same Day Global Shipping!' />
       <div className='top'>
         <div className='top-how-left'>
-          <h3 className='how-h3'>DO YOU HAVE ENOUGH TIME TO PLAN AHEAD? </h3>
-          <h3 className='how-h3 py-1'>
-            INDIVIDUALS OR AGENCIES SHIPPING CONTAINERS OR CARGO?{' '}
+          <h3 className='how-h3'>Do you have enough time to plan ahead?</h3>
+          <h3 className='how-h3 py-1'>Individuals or agencies chipping containers or cargo? {' '}
           </h3>
           <h3 className='how-h3 py-1'>
-            LIST YOUR DETAILS/SERVICES ON PK LOOP FOR FREE.{' '}
+            List your details/services on PKLoop for free.{' '}
           </h3>
           <h3 className='how-h3 py-1'>
-            CUSTOMERS LOOKING TO USE THESE SERVICES, FIND THEM HERE FOR FREE!
+            Customers looking to use these services, find them here for free!
           </h3>
           <br />
           <p>
@@ -27,13 +26,13 @@ const index = (props) => {
             paid by the Sender. (Enter amount under TIP function)
           </p>
           <br />
-          <p>
+          <p style={{ color: 'rgba(0, 113, 188)' }}>
             Possible Check-in questions while boarding an international flight:
             As a traveler, the item will be considered yours until hand
             delivered to Sender’s recipient.
           </p>
           <br />
-          <p>
+          <p style={{ color: 'rgba(0, 113, 188)' }}>
             You simply carry the item as you would do for a family member or a
             friend. All packages without exclusion must be inspected. For any
             questions, do not hesitate to contact us
@@ -87,7 +86,7 @@ const index = (props) => {
             be able to contact you.
           </p>
           <br />
-          <p style={{ color: 'red' }}>
+          <p style={{ color: 'rgba(0, 113, 188)' }}>
             The sender has to guarantee that the item’s recipient will be
             present at the agreed time and place of delivery.
           </p>
@@ -131,7 +130,7 @@ const index = (props) => {
             will be able to contact you.
           </p>
           <br />
-          <p className='how-p'>
+          <p className='how-p' style={{ color: 'rgba(0, 113, 188)' }}>
             Sample Fees Calculator Letters and documents within USA and Canada:
             $14.99 Packages within the USA ($14.99 + $1.5/pound) For example.
             Sending a 10 lb parcel will cost $14.99 + ($1.5/lb x10 lbs) = $29.99
