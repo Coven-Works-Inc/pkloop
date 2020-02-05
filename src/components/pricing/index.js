@@ -23,7 +23,7 @@ const Pricing = (props) => {
           </div>
           <div className="pricing-item">
             <p> > 5lbs </p>
-            <p>$14.99 + 1.5/lb</p>
+            <p>$14.99 + $1.5/lb</p>
           </div>
           <div className="base-tagline">
             <img src={require('../../assets/insurancetip.png')} alt="icon for insurance and tips" />
