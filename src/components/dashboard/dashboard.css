@@ -25,8 +25,8 @@
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   background: #00bdbe;
   border: 1px solid #00bdbe;
   border-radius: 50%;
@@ -34,8 +34,8 @@
 }
 
 .slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   background: #00bdbe;
   border: 1px solid #00bdbe;
   border-radius: 50%;
@@ -48,6 +48,7 @@ padding-left: 35px;
 padding-top: 0px;
 cursor: pointer;
 font-size: 18px;
+height: 30px;
 -webkit-user-select: none;
 -moz-user-select: none;
 -ms-user-select: none;

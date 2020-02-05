@@ -1,16 +1,11 @@
 import axios from 'axios'
-import {
-  FETCH_TRANSACTIONS,
-  GET_ERRORS,
-  TRANSACTION_RESPONSE,
-  REDEEM_CODE,
-  TIP_SUCCESS
-} from './types'
+import { BASE_URL } from '../config/constants'
+import { FETCH_TRANSACTIONS, GET_ERRORS, TRANSACTION_RESPONSE, REDEEM_CODE, TIP_SUCCESS } from './types'
 
 export const getTransaction = () => async dispatch => {
   try {
     const response = await axios.get(
-      `${process.env.BASE_URL}/transactions/fetchMyTransactions`
+      `${BASE_URL}/transactions/fetchMyTransactions`
     )
     dispatch({
       type: FETCH_TRANSACTIONS,
@@ -23,9 +18,8 @@ export const getTransaction = () => async dispatch => {
     })
   }
 }
-export const postTransaction = data => dispatch => {
-  axios
-    .post(`${process.env.BASE_URL}/transactions`, data)
+export const postTransaction = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions`, data)
     .then(res => {
       console.log(res)
     })
@@ -34,27 +28,26 @@ export const postTransaction = data => dispatch => {
     })
 }
 
-export const markTravelerComplete = data => dispatch => {
-  axios
-    .post(`${process.env.BASE_URL}/transactions/completetraveler`, data)
+export const markTravelerComplete = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions/completetraveler`, data)
     .then(res => {
       console.log(res)
     })
 }
-export const markSenderComplete = data => dispatch => {
-  axios
-    .post(`${process.env.BASE_URL}/transactions/completesender`, data)
+export const markSenderComplete = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions/completesender`, data)
     .then(res => {
       console.log(res)
     })
 }
 
-export const updateTrans = data => dispatch => {
-  axios
-    .post(`${process.env.BASE_URL}/transactions/updatetrans`, data)
-    .then(res => {
-      console.log(res)
-    })
+export const updateTrans = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions/updatetrans`, data)
+    .then(
+      res => {
+        console.log(res)
+      }
+    )
 }
 
 // For the accept and reject endpoints
@@ -63,9 +56,8 @@ export const updateTrans = data => dispatch => {
 // id: user id of the sender
 // action: either 'accept' or 'decline'
 
-export const handleTransactionRequest = data => dispatch => {
-  axios
-    .post(`${process.env.BASE_URL}/transactions/respond`, data)
+export const handleTransactionRequest = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions/respond`, data)
     .then(res => {
       console.log(res.data.data)
       dispatch({
@@ -73,11 +65,10 @@ export const handleTransactionRequest = data => dispatch => {
         payload: res.data.data
       })
     })
-    .catch(err => dispatch({ type: 'GET_ERRORS', payload: err }))
+    .catch(err => dispatch({ type: 'GET_ERRORS', payload: err }));
 }
-export const redeemCode = data => dispatch => {
-  axios
-    .post(`${process.env.BASE_URL}/transactions/redeemcode`, data)
+export const redeemCode = (data) => dispatch => {
+    axios.post(`${BASE_URL}/transactions/redeemcode`, data)
     .then(res => {
       dispatch({
         type: REDEEM_CODE,
@@ -86,8 +77,9 @@ export const redeemCode = data => dispatch => {
       console.log(res)
     })
 }
-export const addTip = data => dispatch => {
-  axios.post(`${process.env.BASE_URL}/transactions/addtip`, data).then(res => {
+export const addTip = (data) => dispatch => {
+  axios.post(`${BASE_URL}/transactions/addtip`, data)
+  .then(res => {
     dispatch({
       type: TIP_SUCCESS,
       payload: res.data.status

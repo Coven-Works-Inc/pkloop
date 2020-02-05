@@ -10,6 +10,7 @@ import {
   SET_TRAVELER,
   POST_TRIP
 } from './types'
+import { BASE_URL } from '../config/constants'
 
 export const postTrip = (tripData, history) => dispatch => {
   // dispatch({
@@ -25,7 +26,7 @@ export const postTrip = (tripData, history) => dispatch => {
   console.log(tripData)
 
   axios
-    .post(`${process.env.BASE_URL}/trips`, tripData)
+    .post(`${BASE_URL}/trips`, tripData)
     .then(res => {
       dispatch({
         type: POST_TRIP,
@@ -48,23 +49,24 @@ export const postTrip = (tripData, history) => dispatch => {
       })
     )
 }
-export const getTrip = id => dispatch => {
-  axios.get(`${process.env.BASE_URL}/trips/trip/${id}`).then(res => {
+export const getTrip = (id) => dispatch => {
+  axios.get(`${BASE_URL}/trips/trip/${id}`)
+  .then(res => {
     dispatch({
       type: SET_TRAVELER,
       payload: res.data
     })
   })
 }
-export const addReceiver = details => dispatch => {
-  axios
-    .post(`${process.env.BASE_URL}/trips/trip/receiver`, details)
-    .then(res => {
-      console.log(res)
-    })
+export const addReceiver = (details) => dispatch => {
+  axios.post(`${BASE_URL}/trips/trip/receiver`, details)
+  .then(res => {
+    console.log(res)
+  })
 }
-export const completeTrip = data => dispatch => {
-  axios.post(`${process.env.BASE_URL}/trips/complete`, data).then(res => {
+export const completeTrip = (data) => dispatch => {
+  axios.post(`${BASE_URL}/trips/complete`, data)
+  .then(res => {
     console.log(res)
   })
 }

@@ -9,10 +9,11 @@ import {
   SET_TOKEN,
   UPDATE_PROFILE_PICTURE
 } from './types'
+import { BASE_URL, LOCAL_URL } from '../config/constants'
 
 export const googleLogin = (data, history, props) => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/auth/google-login`, data)
+    .post(`${BASE_URL}/auth/google-login`, data)
     .then(res => {
       console.log(res)
       const { token, _id } = res.data.data
@@ -48,7 +49,7 @@ export const googleLogin = (data, history, props) => dispatch => {
 
 export const facebookLogin = (data, history, props) => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/auth/facebook-login`, data)
+    .post(`${BASE_URL}/auth/facebook-login`, data)
     .then(res => {
       console.log(res)
       const { token, _id } = res.data.data
@@ -88,7 +89,7 @@ export const registerUser = (userData, history, props) => dispatch => {
     payload: true
   })
   axios
-    .post(`${process.env.BASE_URL}/auth/signup`, userData)
+    .post(`${BASE_URL}/auth/signup`, userData)
     .then(res => {
       // console.log(res.data)
       const location = props.location
@@ -124,7 +125,7 @@ export const loginUser = (userData, history, props) => dispatch => {
     payload: true
   })
   axios
-    .post(`${process.env.BASE_URL}/auth/login`, userData)
+    .post(`${BASE_URL}/auth/login`, userData)
     .then(res => {
       const { token, _id } = res.data.data
       localStorage.setItem('jwtToken', token)
@@ -171,7 +172,7 @@ export const loginUser = (userData, history, props) => dispatch => {
 //         // console.log('fetch')
 
 //         axios
-//             .get(`${process.env.BASE_URL}/users/fetch`)
+//             .get(`${BASE_URL}/users/fetch`)
 //             .then(async res => {
 //                 // const { token } = localStorage
 //                 await dispatch(setCurrentUser(res.data.data, res.data.data.token))
@@ -199,7 +200,7 @@ export const verify = (token, history) => dispatch => {
   // })
 
   axios
-    .post(`${process.env.BASE_URL}/auth/verify`, { token })
+    .post(`${BASE_URL}/auth/verify`, { token })
     .then(async res => {
       // console.log(res)
       // setTimeout(() => {
@@ -235,7 +236,7 @@ export const reset = (data, history) => dispatch => {
   })
 
   axios
-    .post(`${process.env.BASE_URL}/users/reset`, data)
+    .post(`${BASE_URL}/users/reset`, data)
     .then(async res => {
       console.log(res.data)
 
@@ -270,7 +271,7 @@ export const reset = (data, history) => dispatch => {
 //     })
 
 //     axios
-//         .post(`${process.env.BASE_URL}/users/password`, { password, token })
+//         .post(`${BASE_URL}/users/password`, { password, token })
 //         .then(async res => {
 //             console.log(res.data)
 //             if (!res.data.status) dispatch({
@@ -326,7 +327,7 @@ export const changePassword = data => dispatch => {
   })
 
   axios
-    .patch(`${process.env.BASE_URL}/users/update`, data)
+    .patch(`${BASE_URL}/users/update`, data)
     .then(res => {
       const { data } = res
       console.log(data)
@@ -349,7 +350,7 @@ export const changePassword = data => dispatch => {
 }
 export const updateProfilePicture = file => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/users/updatePicture`, file)
+    .post(`${BASE_URL}/users/updatePicture`, file)
     .then(res => {
       dispatch({
         type: UPDATE_PROFILE_PICTURE,
