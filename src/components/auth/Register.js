@@ -188,9 +188,9 @@ class Register extends Component {
               </div>
               <div className='terms'>
                 <p>
-                  By signing up, you are indicating that you've read and
-                  <br /> agree to the <span>Terms of Use</span> and{' '}
-                  <span>Privacy Policy</span>.
+                  By signing up, you are indicating that you've read and <br /> agree to the 
+                  <Link to='/terms' style={{ textDecoration: 'none', color: 'rgba(0, 189, 190)' }}>Terms of Use</Link> and{' '}
+                  <Link to='/privacy' style={{ textDecoration: 'none', color: 'rgba(0, 189, 190)' }}>Privacy Policy</Link>.
                 </p>
                 <p>
                   Already have an account?{' '}
