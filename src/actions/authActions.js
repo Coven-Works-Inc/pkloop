@@ -119,7 +119,6 @@ export const registerUser = (userData, history, props) => dispatch => {
 }
 
 export const loginUser = (userData, history, props) => dispatch => {
-  console.log(process.env.REACT_APP_BASE_URL)
   dispatch({
     type: LOADING,
     payload: true
