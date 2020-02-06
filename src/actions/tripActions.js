@@ -25,7 +25,7 @@ export const postTrip = (tripData, history) => dispatch => {
   console.log(tripData)
 
   axios
-    .post(`${process.env.BASE_URL}/trips`, tripData)
+    .post(`${process.env.REACT_APP_BASE_URL}/trips`, tripData)
     .then(res => {
       dispatch({
         type: POST_TRIP,
@@ -49,7 +49,7 @@ export const postTrip = (tripData, history) => dispatch => {
     )
 }
 export const getTrip = id => dispatch => {
-  axios.get(`${process.env.BASE_URL}/trips/trip/${id}`).then(res => {
+  axios.get(`${process.env.REACT_APP_BASE_URL}/trips/trip/${id}`).then(res => {
     dispatch({
       type: SET_TRAVELER,
       payload: res.data
@@ -58,13 +58,13 @@ export const getTrip = id => dispatch => {
 }
 export const addReceiver = details => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/trips/trip/receiver`, details)
+    .post(`${process.env.REACT_APP_BASE_URL}/trips/trip/receiver`, details)
     .then(res => {
       console.log(res)
     })
 }
 export const completeTrip = data => dispatch => {
-  axios.post(`${process.env.BASE_URL}/trips/complete`, data).then(res => {
+  axios.post(`${process.env.REACT_APP_BASE_URL}/trips/complete`, data).then(res => {
     console.log(res)
   })
 }
