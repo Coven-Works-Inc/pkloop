@@ -10,7 +10,7 @@ import {
 export const getTransaction = () => async dispatch => {
   try {
     const response = await axios.get(
-      `${process.env.BASE_URL}/transactions/fetchMyTransactions`
+      `${process.env.REACT_APP_BASE_URL}/transactions/fetchMyTransactions`
     )
     dispatch({
       type: FETCH_TRANSACTIONS,
@@ -25,7 +25,7 @@ export const getTransaction = () => async dispatch => {
 }
 export const postTransaction = data => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/transactions`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/transactions`, data)
     .then(res => {
       console.log(res)
     })
@@ -36,14 +36,14 @@ export const postTransaction = data => dispatch => {
 
 export const markTravelerComplete = data => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/transactions/completetraveler`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/transactions/completetraveler`, data)
     .then(res => {
       console.log(res)
     })
 }
 export const markSenderComplete = data => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/transactions/completesender`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/transactions/completesender`, data)
     .then(res => {
       console.log(res)
     })
@@ -51,7 +51,7 @@ export const markSenderComplete = data => dispatch => {
 
 export const updateTrans = data => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/transactions/updatetrans`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/transactions/updatetrans`, data)
     .then(res => {
       console.log(res)
     })
@@ -65,7 +65,7 @@ export const updateTrans = data => dispatch => {
 
 export const handleTransactionRequest = data => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/transactions/respond`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/transactions/respond`, data)
     .then(res => {
       console.log(res.data.data)
       dispatch({
@@ -77,7 +77,7 @@ export const handleTransactionRequest = data => dispatch => {
 }
 export const redeemCode = data => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/transactions/redeemcode`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/transactions/redeemcode`, data)
     .then(res => {
       dispatch({
         type: REDEEM_CODE,
@@ -87,7 +87,7 @@ export const redeemCode = data => dispatch => {
     })
 }
 export const addTip = data => dispatch => {
-  axios.post(`${process.env.BASE_URL}/transactions/addtip`, data).then(res => {
+  axios.post(`${process.env.REACT_APP_BASE_URL}/transactions/addtip`, data).then(res => {
     dispatch({
       type: TIP_SUCCESS,
       payload: res.data.status

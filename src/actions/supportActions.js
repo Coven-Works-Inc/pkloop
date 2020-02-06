@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const submitTicket = data => async dispatch => {
   await axios
-    .post(`${process.env.BASE_URL}/support/submit`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/support/submit`, data)
     .then(res => {
       dispatch({
         type: POST_SUPPORT,
@@ -20,7 +20,7 @@ export const submitTicket = data => async dispatch => {
 
 export const fetchTickets = () => async dispatch => {
   await axios
-    .get(`${process.env.BASE_URL}/support/fetchSupport`)
+    .get(`${process.env.REACT_APP_BASE_URL}/support/fetchSupport`)
     .then(res => {
       dispatch({
         type: FETCH_TICKETS,
