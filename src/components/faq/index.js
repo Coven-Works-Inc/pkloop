@@ -3,13 +3,15 @@ import React, { Component } from 'react'
 import HeaderFooter from '../headerFooter'
 import './faq.css'
 
+import { Link } from 'react-router-dom'
+
 class index extends Component {
   state = {
     questions: [
       {
         active: true,
         question: 'HOW DOES IT WORK?',
-        answer: `PKLoop Connects Senders looking to ship parcels with Travelers already traveling to the destination. PKLoop facilitates package delivery within 12-48 hours at the lowest cost. Visit Our HOW IT WORKS page (please insert link) for a more detailed description of the PKLoop process. Our Motto: Good vibes only! Make money while you Travel the world. 
+        answer: `PKLoop Connects Senders looking to ship parcels with Travelers already traveling to the destination. PKLoop facilitates package delivery within 12-48 hours at the lowest cost. Visit Our 'How It Works' page for a more detailed description of the PKLoop process. Our Motto: Good vibes only! Make money while you Travel the world. 
         
         Monetize the space in your hand luggage or suitcase. Make an extra $200-$400 with already scheduled travel plans. 
 
@@ -36,7 +38,7 @@ class index extends Component {
       {
         active: false,
         question: 'What Safety Guidelines are in Place for PKLoop Users.',
-        answer: `Please visit our Trust and Safety Page (TRUST and SAFETY link)`
+        answer: `Please visit our Trust and Safety Page`
       },
       {
         active: false,
@@ -60,12 +62,16 @@ class index extends Component {
         active: false,
         question:
           'How do I verify my phone number, reset my password OR delete my account',
-        answer: `If you forget your password, please go here or click "reset password" on the login page and we’ll email you a secure password reset link.
-If you are having issues verifying your phone number, please email us contact@mypkloop.com. To delete your account, please send a request to our customer service team and we will facilitate your request
-`
+        answer: `If you forget your password, please click reset password on the login page and we'll 
+        email you a secure password reset link. If you are having issues verifying your phone number, 
+        please email us contact@mypkloop.com. To delete your account, please send a request to our 
+        customer service team and we will facilitate your request
+        `
       }
     ]
   }
+
+  // <a href='/forgot' style="color: rgba(0, 189, 190)">
 
   toggleAnswer = index => {
     let question = { ...this.state.questions[index] }
