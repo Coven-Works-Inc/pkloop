@@ -5,7 +5,7 @@ import qs from 'qs'
 
 export const addInsurance = userData => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/transactions/payinsurance`, userData)
+    .post(`${process.env.REACT_APP_BASE_URL}/transactions/payinsurance`, userData)
     .then(res => {
       console.log(res)
     })

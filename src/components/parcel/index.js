@@ -60,6 +60,7 @@ const Parcel = props => {
     totalAndTip: 0,
     message: '',
     tipAmount: 0,
+    tipChecked: false,
   })
 
   useEffect(() => {
@@ -67,7 +68,7 @@ const Parcel = props => {
   }, [])
   useEffect(() => {
     setTimeout(() => {
-      if(modal){
+      if (modal) {
         setModal(false)
         setState({
           ...state,
@@ -76,7 +77,7 @@ const Parcel = props => {
         })
       }
     }, 1000)
-  },[modal])
+  }, [modal])
   const onFromCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value)
     const city = cities.filter(city => city.country === selectedCountry[0].name)
@@ -148,8 +149,8 @@ const Parcel = props => {
   }, [])
 
   useEffect(() => {
-    if(props.status === 200){
-        setModal(true) 
+    if (props.status === 200) {
+      setModal(true)
     }
   }, [props.status])
 
@@ -373,7 +374,7 @@ const Parcel = props => {
     //   parcelCost: state.parcelCost,
     //   travelerData: state.travelerData
     // })
-    
+
     // const transactionData = {
     //   status: 'Pending',
     //   with: state.travelerData.username,
@@ -383,13 +384,14 @@ const Parcel = props => {
     //   trip: state.travelerData,
     //   tripId: state.travelerData._id
     // }
-    
+
     const userDetails = {
       tripId: state.travelerData._id,
       travelerId: state.travelerData.user._id,
       amount: state.parcelCost,
       username: state.travelerData.username,
-      message: state.message
+      message: state.message,
+      tip: Number(state.tipAmount)
     }
     const insuranceData = {
       item: state.parcelItem,
@@ -405,7 +407,7 @@ const Parcel = props => {
     // props.postTransaction(transactionData))
     console.log(state)
   }
-  
+
   const toggleModal = () => {
     setState({
       ...state,
@@ -433,6 +435,12 @@ const Parcel = props => {
     setState({
       ...state,
       checked: !state.checked
+    })
+  }
+  const handleTipCheckbox = () => {
+    setState({
+      ...state,
+      tipChecked: !state.tipChecked
     })
   }
   const onTipChange = (e) => {
@@ -474,7 +482,7 @@ const Parcel = props => {
                   onChange={onChangeHandler}
                 >
                   <option value=""></option>
-                  { state.fromcities && state.fromcities.sort().map((city, index) => (
+                  {state.fromcities && state.fromcities.sort().map((city, index) => (
                     <option value={city.name} key={index}>{city.name},{city.subcountry}</option>
                   ))}
 
@@ -559,7 +567,7 @@ const Parcel = props => {
               </div>
             </div>
 
-            <button className='btnQ' type="submit">Find Travellers</button>
+            <button className='btnQ' type="submit">Find Travelers</button>
           </form>
         </div>
       </div>
@@ -580,8 +588,12 @@ const Parcel = props => {
                         <h3 style={{ display: state.checked ?" none" : "block"}}>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h3>
                         <h3>Total cost: ${state.totalAndTip === 0 ? Number(state.totalCost): state.totalAndTip}</h3>
                         <textarea style={{ display: state.checked ?" none" : "block"}} className="support_input" placeholder="Leave a message for traveler" onChange={messageChangeHandler}></textarea>
-                        <label className="container">Add insurance and/or tip
+                        <label className="container">Add insurance
                           <input type="checkbox" checked={state.checked} onChange={handleCheckbox} />
+                          <span className="checkmark"></span>
+                        </label>
+                        <label className="container">Add  tip
+                          <input type="checkbox" checked={state.tipChecked} onChange={handleTipCheckbox} />
                           <span className="checkmark"></span>
                         </label>
                         {state.checked && (
@@ -591,18 +603,20 @@ const Parcel = props => {
                               <h4>parcel Worth: {state.parcelWorth}</h4>
                               <label>Which items are you insuring?</label>
                               <input type="text" value={state.parcelItem} onChange={itemChangeHandler} placeholder="e.g Coffee table" className="support_input" />
-                              <h4>You will be charged 2% (${state.insuranceCost})of the total cost for insurance</h4>
-                              Enter an amount to tip traveler<input type="number" className="popupInput" name="fundAmount" placeholder="Enter Amount" value={state.tipAmount} onChange={onTipChange} />
+                              <h5>You will be charged 2% (${state.insuranceCost})of the total cost for insurance</h5>
+                              By clicking on Proceed, you agree to InsureShip <a href="https://www.insureship.com/privacy" target="_blank"> Privacy policy</a> and <a href="https://www.insureship.com/terms" target="_blank">terms</a>
                             </div>
                         )}
+                        {state.tipChecked && (
+                             <div><h5>Enter an amount to tip traveler</h5><input type="number" className="support_input" name="fundAmount" placeholder="Enter Amount" value={state.tipAmount} onChange={onTipChange} /></div>
+                        )}
                         <h6>5% platform charges included</h6>
-                        <label className="container">By clicking on Proceed, you agree to InsureShip <a href="https://www.insureship.com/privacy" target="_blank"> Privacy policy</a> and <a href="https://www.insureship.com/terms" target="_blank">terms</a></label>
                         <div className="button-group">
                           <button className="btnQ medium" onClick={connectToTraveler}>{state.totalAndTip === 0? `Pay $${Number(state.totalCost).toFixed(2)} + $${(0.05 * Number(state.totalCost)).toFixed(2)}` : `Pay ${Number(state.totalAndTip).toFixed(2)} + $${(0.05 * Number(state.totalAndTip)).toFixed(2)}`}</button>
-                          <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
+                          <button className="btnQ inverse-btnQ medium" onClick={toggleModal}>No, Change weight</button>
                         </div>
                     </div>
-                  ) 
+                  )
 
                 }
 
@@ -652,11 +666,11 @@ const Parcel = props => {
           </div>}
       </Modal>
       {modal && (
-              <Modal show={modal} onClose={closeModal}>
-                  <div>You've successfully paid for this transaction</div> 
-              </Modal>
-            )
-            }
+        <Modal show={modal} onClose={closeModal}>
+          <div>You've successfully paid for this transaction</div>
+        </Modal>
+      )
+      }
       {/* {state.sameUser && <Modal show={state.sameUser} onClose={closeModal}><div>Can't connect with your self</div></Modal>} */}
     </HeaderFooter>
   )
@@ -668,4 +682,4 @@ const mapStateToProps = state => ({
   status: state.balance.status,
 })
 
-export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler,addInsurance, postTransaction, reduceBalance })(Parcel)
+export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler, addInsurance, postTransaction, reduceBalance })(Parcel)

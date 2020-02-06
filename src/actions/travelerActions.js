@@ -13,7 +13,7 @@ import {
 
 export const fetchTravelers = () => async dispatch => {
   axios
-    .get(`${process.env.BASE_URL}/trips`)
+    .get(`${process.env.REACT_APP_BASE_URLL}/trips`)
     .then(res => {
       dispatch({
         type: FETCH_TRAVELERS,
@@ -38,7 +38,7 @@ export const getTravelers = travelers => dispatch => {
 
 export const fetchShippers = () => async dispatch => {
   axios
-    .get(`${process.env.BASE_URL}/trips/shippers`)
+    .get(`${process.env.REACT_APP_BASE_URL}/trips/shippers`)
     .then(res => {
       console.log(res.data.data[0])
       dispatch({
@@ -66,7 +66,7 @@ export const fetchShippers = () => async dispatch => {
 // }
 export const connectTraveler = userDetails => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/transactions/connect`, userDetails)
+    .post(`${process.env.REACT_APP_BASE_URL}/transactions/connect`, userDetails)
     .then(res => {
       dispatch({
         type: CONNECT_TRAVELER,
@@ -75,13 +75,13 @@ export const connectTraveler = userDetails => dispatch => {
     })
 }
 export const addTravelerEarning = data => dispatch => {
-  axios.post(`${process.env.BASE_URL}/trips/earning`, data).then(res => {
+  axios.post(`${process.env.REACT_APP_BASE_URL}/trips/earning`, data).then(res => {
     console.log(res)
   })
 }
 
 export const respondToRequest = data => dispatch => {
-  axios.post(`${process.env.BASE_URL}/transactions/respond`, data).then(res => {
+  axios.post(`${process.env.REACT_APP_BASE_URL}/transactions/respond`, data).then(res => {
     console.log(res)
     dispatch({
       type: TRANSACTION_RESPONSE,

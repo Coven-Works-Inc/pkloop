@@ -12,7 +12,7 @@ import {
 
 export const googleLogin = (data, history, props) => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/auth/google-login`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data)
     .then(res => {
       console.log(res)
       const { token, _id } = res.data.data
@@ -48,7 +48,7 @@ export const googleLogin = (data, history, props) => dispatch => {
 
 export const facebookLogin = (data, history, props) => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/auth/facebook-login`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/auth/facebook-login`, data)
     .then(res => {
       console.log(res)
       const { token, _id } = res.data.data
@@ -88,7 +88,7 @@ export const registerUser = (userData, history, props) => dispatch => {
     payload: true
   })
   axios
-    .post(`${process.env.BASE_URL}/auth/signup`, userData)
+    .post(`${process.env.REACT_APP_BASE_URL}/auth/signup`, userData)
     .then(res => {
       // console.log(res.data)
       const location = props.location
@@ -119,12 +119,13 @@ export const registerUser = (userData, history, props) => dispatch => {
 }
 
 export const loginUser = (userData, history, props) => dispatch => {
+  console.log(process.env.REACT_APP_BASE_URL)
   dispatch({
     type: LOADING,
     payload: true
   })
   axios
-    .post(`${process.env.BASE_URL}/auth/login`, userData)
+    .post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, userData)
     .then(res => {
       const { token, _id } = res.data.data
       localStorage.setItem('jwtToken', token)
@@ -199,7 +200,7 @@ export const verify = (token, history) => dispatch => {
   // })
 
   axios
-    .post(`${process.env.BASE_URL}/auth/verify`, { token })
+    .post(`${process.env.REACT_APP_BASE_URL}/auth/verify`, { token })
     .then(async res => {
       // console.log(res)
       // setTimeout(() => {
@@ -235,7 +236,7 @@ export const reset = (data, history) => dispatch => {
   })
 
   axios
-    .post(`${process.env.BASE_URL}/users/reset`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/users/reset`, data)
     .then(async res => {
       console.log(res.data)
 
@@ -326,7 +327,7 @@ export const changePassword = data => dispatch => {
   })
 
   axios
-    .patch(`${process.env.BASE_URL}/users/update`, data)
+    .patch(`${process.env.REACT_APP_BASE_URL}/users/update`, data)
     .then(res => {
       const { data } = res
       console.log(data)
@@ -349,7 +350,7 @@ export const changePassword = data => dispatch => {
 }
 export const updateProfilePicture = file => dispatch => {
   axios
-    .post(`${process.env.BASE_URL}/users/updatePicture`, file)
+    .post(`${process.env.REACT_APP_BASE_URL}/users/updatePicture`, file)
     .then(res => {
       dispatch({
         type: UPDATE_PROFILE_PICTURE,
