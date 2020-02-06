@@ -398,11 +398,11 @@ const Parcel = props => {
     //   trip: state.travelerData,
     //   tripId: state.travelerData._id
     // }
-
+    const earning = state.totalAndTip === 0 ? state.parcelCost : Number(state.parcelCost) + Number(state.tipAmount)
     const userDetails = {
       tripId: state.travelerData._id,
       travelerId: state.travelerData.user._id,
-      amount: state.parcelCost,
+      amount: earning,
       username: state.travelerData.username,
       message: state.message,
       tip: Number(state.tipAmount)
