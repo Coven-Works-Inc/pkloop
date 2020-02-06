@@ -125,7 +125,7 @@ export const loginUser = (userData, history, props) => dispatch => {
     payload: true
   })
   axios
-    .post(`${process.env.REACT_APP_BASE_URL}/api/auth/login`, userData)
+    .post(`${process.env.REACT_APP_BASE_URL}/auth/login`, userData)
     .then(res => {
       const { token, _id } = res.data.data
       localStorage.setItem('jwtToken', token)

@@ -77,6 +77,20 @@ const Parcel = props => {
         })
       }
     }, 1000)
+    setState({
+      ...state,
+      parcelWorth: 0,
+      parcelItem: '',
+      insuranceCost: '',
+      checked: false,
+      modal1: false,
+      modal2: false,
+      totalCost: 0,
+      totalAndTip: 0,
+      message: '',
+      tipAmount: 0,
+      tipChecked: false,
+    })
   }, [modal])
   const onFromCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value)
@@ -405,7 +419,6 @@ const Parcel = props => {
       props.addInsurance(insuranceData)
     }
     // props.postTransaction(transactionData))
-    console.log(state)
   }
 
   const toggleModal = () => {
@@ -612,7 +625,12 @@ const Parcel = props => {
                         )}
                         <h6>5% platform charges included</h6>
                         <div className="button-group">
-                          <button className="btnQ medium" onClick={connectToTraveler}>{state.totalAndTip === 0? `Pay $${Number(state.totalCost).toFixed(2)} + $${(0.05 * Number(state.totalCost)).toFixed(2)}` : `Pay ${Number(state.totalAndTip).toFixed(2)} + $${(0.05 * Number(state.totalAndTip)).toFixed(2)}`}</button>
+                        <button className="btnQ medium" onClick={connectToTraveler}>{props.loading ? (<span
+                        style={{ display: 'inline-block' }}
+                        className='spinner-border spinner-border-sm'
+                        role='status'
+                        aria-hidden='true'
+                      ></span>) : state.totalAndTip === 0? `Pay $${Number(state.totalCost).toFixed(2)} + $${(0.05 * Number(state.totalCost)).toFixed(2)}` : `Pay ${Number(state.totalAndTip).toFixed(2)} + $${(0.05 * Number(state.totalAndTip)).toFixed(2)}`}</button>
                           <button className="btnQ inverse-btnQ medium" onClick={toggleModal}>No, Change weight</button>
                         </div>
                     </div>
@@ -679,6 +697,7 @@ const Parcel = props => {
 const mapStateToProps = state => ({
   travelers: state.travelers,
   user: state.auth,
+  loading: state.auth.loading,
   status: state.balance.status,
 })
 

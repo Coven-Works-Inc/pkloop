@@ -8,12 +8,13 @@ import {
   FETCH_SHIPPERS,
   GET_TRAVELERS,
   CONNECT_TRAVELER,
-  TRANSACTION_RESPONSE
+  TRANSACTION_RESPONSE,
+  LOADING
 } from './types'
 
 export const fetchTravelers = () => async dispatch => {
   axios
-    .get(`${process.env.REACT_APP_BASE_URLL}/trips`)
+    .get(`${process.env.REACT_APP_BASE_URL}/trips`)
     .then(res => {
       dispatch({
         type: FETCH_TRAVELERS,
@@ -65,12 +66,22 @@ export const fetchShippers = () => async dispatch => {
 //   })
 // }
 export const connectTraveler = userDetails => dispatch => {
+  dispatch({
+    type: LOADING,
+    payload: true
+  })
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/transactions/connect`, userDetails)
     .then(res => {
       dispatch({
         type: CONNECT_TRAVELER,
         payload: res
+      })
+    })
+    .finally(() => {
+      dispatch({
+        type: LOADING,
+        payload: false
       })
     })
 }
