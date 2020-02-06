@@ -8,10 +8,7 @@ import StripeCheckout from 'react-stripe-checkout'
 import DashboardHeader from './header'
 import HeaderFooter from '../headerFooter'
 
-// import Notification from './notification'
-
 const Balance = props => {
-
   // const { balance: { user: { balance } } } = props
 
   const [state, setState] = useState({
@@ -27,7 +24,8 @@ const Balance = props => {
   }, [])
 
   const getUserData = () => {
-    axios.get(`${BASE_URL}/users/fetchUser`)
+    axios
+      .get(`${BASE_URL}/users/fetchUser`)
       .then(response => {
         console.log(response.data)
         setBalance(response.data.data.balance)
@@ -40,19 +38,20 @@ const Balance = props => {
   const fundWallet = () => {
     const data = { amount: Number(state.amount) }
 
-    axios.put(`${BASE_URL}/users/updateMyBalance`, data)
+    axios
+      .put(`${BASE_URL}/users/updateMyBalance`, data)
       .then(response => {
-        toggleModal();
-        getUserData();
+        toggleModal()
+        getUserData()
       })
       .catch(error => {
         console.log(error)
-      });
+      })
   }
 
-  const onToken = (token) => {
-    toggleModal();
-    const amountToPay = Number(state.amount) * 100;
+  const onToken = token => {
+    toggleModal()
+    const amountToPay = Number(state.amount) * 100
 
     const data = {
       description: `Payment of $${state.amount} made by ${token.email} on ${token.created}`,
@@ -61,10 +60,11 @@ const Balance = props => {
       amount: amountToPay
     }
 
-    axios.post(`${BASE_URL}/payments`, data)
+    axios
+      .post(`${BASE_URL}/payments`, data)
       .then(response => {
         console.log(response)
-        fundWallet();
+        fundWallet()
       })
       .catch(error => {
         console.log(error)
@@ -86,15 +86,12 @@ const Balance = props => {
         [e.target.name]: e.target.value
       })
     }
-
   }
 
   return (
     <HeaderFooter redirect={props.location}>
       <div className='dashboard-header'>
-        <h2>
-          Balance
-          </h2>
+        <h2>Balance</h2>
       </div>
       <div>
         <DashboardHeader />
@@ -119,23 +116,34 @@ const Balance = props => {
             <div>
               <h2>How much do you want to fund your wallet with?</h2>
               <br />
-              <input className="popupInput" type="number" name="amount" placeholder="Enter Amount" value={state.amount} onChange={onChangeHandler} />
+              <input
+                className='popupInput'
+                type='number'
+                name='amount'
+                placeholder='Enter Amount'
+                value={state.amount}
+                onChange={onChangeHandler}
+              />
               <br />
-              {state.amount >= 29.99 ?
-                <div className="button-group">
+              {state.amount >= 29.99 ? (
+                <div className='button-group'>
                   <StripeCheckout
                     image={require('../../assets/payment-logo.png')}
-                    stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
-                    description="Connect with a traveler"
-                    name="Make payment to continue"
-                    locale="auto"
+                    stripeKey='pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa'
+                    description='Connect with a traveler'
+                    name='Make payment to continue'
+                    locale='auto'
                     amount={Number(state.amount) * 100}
                     token={onToken}
-                    panelLabel="Pay"
+                    panelLabel='Pay'
                   />
-                </div> :
-                <div style={{ color: 'red' }}> A Minimum of $29.99 is required to fund wallet</div>
-              }
+                </div>
+              ) : (
+                <div style={{ color: 'red' }}>
+                  {' '}
+                  A Minimum of $29.99 is required to fund wallet
+                </div>
+              )}
             </div>
           </Modal>
         </div>

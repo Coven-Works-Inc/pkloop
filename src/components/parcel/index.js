@@ -77,20 +77,6 @@ const Parcel = props => {
         })
       }
     }, 1000)
-    setState({
-      ...state,
-      parcelWorth: 0,
-      parcelItem: '',
-      insuranceCost: '',
-      checked: false,
-      modal1: false,
-      modal2: false,
-      totalCost: 0,
-      totalAndTip: 0,
-      message: '',
-      tipAmount: 0,
-      tipChecked: false,
-    })
   }, [modal])
   const onFromCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value)
@@ -165,6 +151,20 @@ const Parcel = props => {
   useEffect(() => {
     if (props.status === 200) {
       setModal(true)
+          setState({
+      ...state,
+      parcelWorth: 0,
+      parcelItem: '',
+      insuranceCost: '',
+      checked: false,
+      modal1: false,
+      modal2: false,
+      totalCost: 0,
+      totalAndTip: 0,
+      message: '',
+      tipAmount: 0,
+      tipChecked: false,
+    })
     }
   }, [props.status])
 
@@ -633,6 +633,12 @@ const Parcel = props => {
                       ></span>) : state.totalAndTip === 0? `Pay $${Number(state.totalCost).toFixed(2)} + $${(0.05 * Number(state.totalCost)).toFixed(2)}` : `Pay ${Number(state.totalAndTip).toFixed(2)} + $${(0.05 * Number(state.totalAndTip)).toFixed(2)}`}</button>
                           <button className="btnQ inverse-btnQ medium" onClick={toggleModal}>No, Change weight</button>
                         </div>
+                      )}
+                      <textarea className="support_input" placeholder="Leave a message for traveler" onChange={messageChangeHandler}></textarea>
+                      <div className="button-group">
+                        <button className="btnQ medium" onClick={connectToTraveler}>Pay ${state.totalCost} + ${(0.05 * Number(state.totalCost)).toFixed(2)}</button>
+                        <button className='btnQ inverse-btnQ medium' onClick={toggleModal}>No, Change weight</button>
+                      </div>
                     </div>
                   )
 

@@ -329,8 +329,8 @@ const ToS = (props) => {
                     <p><span>International Packages ($5.99/pound) For example. Sending a 10 lb parcel will cost $5.99/lb x10 lbs = $59.99</span></p>
                     <p></p>
                     <p>Surcharge Fee, in order to provide a quality service, PKLoop may increase a “surcharge fee” per category of packages based on the demand (total available shipments) and supply (total available Travelers).</p>
-                    <h4>Fees</h4>
-                    <p>The following components that make up the Total Fees must be contained in, and fully described in the Traveler’s Offer. When Accepted, the Traveler’s Offer establishes the final and total amounts to which the Sender agrees.</p>
+
+                    <h6>The following components that make up the Total Fees must be contained in, and fully described in the Traveler’s Offer. When Accepted, the Traveler’s Offer establishes the final and total amounts to which the Sender agrees.</h6>
                     <ol>
                         <li>Service Fee: This is as service fee charged by and retained by PKLoop for the use of its Site by Senders and Travelers. Fees are collected by PKLoop from Senders and deducted from remaining amounts remitted to Travelers by PKLoop as the Traveler’s limited payment collection agent as described above. Service Fees are non-refundable and do not exceed 5% of the transaction. PKLoop shall receive a commission equivalent to 24% of the Traveler’s fee.” <span>E.g Traveler Fee $14.99, Sevice fee $0.75; Sender pays $15.75; PKLoop takes $3.75, Traveler earns $12.</span></li>
                         <li>Traveler’s Fee: The Traveler’s Fee is the amount Senders agree to pay Travelers for helping the Sender. As set forth above, PKLoop may estimate a Traveler’s Fee for planning purposes, but the actual Traveler’s Fee is set by the Traveler in the Offer. The Service Fee and Traveler’s Fee may collectively be referred to by PKLoop as the “Fees.” <span>E.g Traveler Fee $14.99, Sevice fee $0.75; Sender pays $15.75; PKLoop takes $3.75, Traveler earns $12.</span></li>
