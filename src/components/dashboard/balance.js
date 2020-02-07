@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import Modal from '../common/modal'
 import * as actions from '../../actions/balanceActions'
 import axios from 'axios'
-import { BASE_URL } from '../../config/constants'
 import StripeCheckout from 'react-stripe-checkout'
 import DashboardHeader from './header'
 import HeaderFooter from '../headerFooter'
@@ -25,7 +24,7 @@ const Balance = props => {
 
   const getUserData = () => {
     axios
-      .get(`${BASE_URL}/users/fetchUser`)
+      .get(`${process.env.REACT_APP_BASE_URL}/users/fetchUser`)
       .then(response => {
         console.log(response.data)
         setBalance(response.data.data.balance)
@@ -39,7 +38,7 @@ const Balance = props => {
     const data = { amount: Number(state.amount) }
 
     axios
-      .put(`${BASE_URL}/users/updateMyBalance`, data)
+      .put(`${process.env.REACT_APP_BASE_URL}/users/updateMyBalance`, data)
       .then(response => {
         toggleModal()
         getUserData()
@@ -61,7 +60,7 @@ const Balance = props => {
     }
 
     axios
-      .post(`${BASE_URL}/payments`, data)
+      .post(`${process.env.REACT_APP_BASE_URL}/payments`, data)
       .then(response => {
         console.log(response)
         fundWallet()
