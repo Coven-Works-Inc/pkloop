@@ -12,18 +12,17 @@ class Verify extends Component {
     errors: {}
   }
 
-  componentDidMount() {
+  componentDidMount () {
+    if (this.state.token) {
+      this.props.verify(this.state.token, this.props.history)
+    }
+
     if (this.props.auth.isAuthenticated) {
       this.props.history.push('/dashboard')
     }
-
-    if (this.state.token) {
-      console.log(this.state.token)
-      this.props.verify(this.state.token, this.props.history)
-    }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push('/dashboard')
     }
@@ -35,7 +34,7 @@ class Verify extends Component {
     }
   }
 
-  render() {
+  render () {
     const { errors } = this.state
     console.log(errors)
 

@@ -15,7 +15,6 @@ import Modal from '../common/modal'
 
 import axios from 'axios'
 import StripeCheckout from 'react-stripe-checkout'
-import { BASE_URL } from '../../config/constants'
 import { reduceBalance, updateBalance } from '../../actions/balanceActions'
 import './parcel.css'
 import travelData from '../../travelers.json'
@@ -169,7 +168,7 @@ const Parcel = props => {
   }, [props.status])
 
   const getUserData = () => {
-    axios.get(`${BASE_URL}/users/fetchUser`)
+    axios.get(`${process.env.REACT_APP_BASE_URL}/users/fetchUser`)
       .then(response => {
         console.log(response.data)
         setBalance(response.data.data.balance)
@@ -182,7 +181,7 @@ const Parcel = props => {
   const fundWallet = () => {
     const data = { amount: Number(state.fundAmount) }
 
-    axios.put(`${BASE_URL}/users/updateMyBalance`, data)
+    axios.put(`${process.env.REACT_APP_BASE_URL}/users/updateMyBalance`, data)
       .then(response => {
         toggleModal();
         getUserData();
@@ -217,7 +216,7 @@ const Parcel = props => {
       amount: amountToPay
     }
 
-    axios.post(`${BASE_URL}/payments`, data)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/payments`, data)
       .then(response => {
         console.log(response)
         fundWallet();
