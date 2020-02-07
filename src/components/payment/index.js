@@ -17,7 +17,7 @@ const Payment = (props) => {
   }, [])
 
   const getUserData = () => {
-    axios.get(`${BASE_URL}/users/fetchUser`)
+    axios.get(`${process.env.REACT_APP_BASE_URL}/users/fetchUser`)
       .then(response => {
         console.log(response.data)
         setBalance(response.data.data.balance)
@@ -40,7 +40,7 @@ const Payment = (props) => {
     }
 
     console.log(data)
-    axios.post(`${BASE_URL}/payments`, data)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/payments`, data)
       .then(response => {
         console.log(response)
         getUserData();

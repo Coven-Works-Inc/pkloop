@@ -71,7 +71,7 @@ const Chat = props => {
   }, [])
 
   const getUserData = () => {
-    axios.get(`${BASE_URL}/users/fetchUser`)
+    axios.get(`${process.env.REACT_APP_BASE_URL}/users/fetchUser`)
       .then(response => {
 
         setBalance(response.data.data.balance)
