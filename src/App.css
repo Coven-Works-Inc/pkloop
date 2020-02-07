@@ -425,6 +425,17 @@ a:nth-child(2) .cta_items {
   width: 50%;
 }
 
+@media screen and (max-width: 480px) {
+  .empty-page {
+    width: 100%;
+  }
+
+  .empty-page p {
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+}
+
 /* User Dashboard Styles */
 
 .dashboard-header,
