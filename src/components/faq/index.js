@@ -11,12 +11,13 @@ class index extends Component {
       {
         active: true,
         question: 'HOW DOES IT WORK?',
-        answer: `PKLoop Connects Senders looking to ship parcels with Travelers already traveling to the destination. PKLoop facilitates package delivery within 12-48 hours at the lowest cost. Visit Our 'How It Works' page for a more detailed description of the PKLoop process. Our Motto: Good vibes only! Make money while you Travel the world. 
-        
-        Monetize the space in your hand luggage or suitcase. Make an extra $200-$400 with already scheduled travel plans. 
-
-
-        For Cargo and Container Shipment: Individuals and Companies can freely advertise and list your upcoming shipment dates for Senders to find and contact you`
+        answer: `PKLoop Connects Senders looking to ship parcels with Travelers already traveling to 
+        the destination. PKLoop facilitates package delivery within 12-48 hours at the lowest cost. 
+        Visit Our 'How It Works' page for a more detailed description of the PKLoop process. Our Motto: 
+        Good vibes only! Make money while you Travel the world. Monetize the space in your hand luggage 
+        or suitcase. Make an extra $200-$400 with already scheduled travel plans. For Cargo and Container 
+        Shipment: Individuals and Companies can freely advertise and list your upcoming shipment dates 
+        for Senders to find and contact you`
       },
       {
         active: false,
