@@ -1,4 +1,4 @@
-import { FETCH_TRANSACTIONS, GET_ERRORS, TRANSACTION_RESPONSE, REDEEM_CODE, TIP_SUCCESS } from '../actions/types'
+import { FETCH_TRANSACTIONS, GET_ERRORS, TRANSACTION_RESPONSE, REDEEM_CODE, TIP_SUCCESS, GET_NOTIF } from '../actions/types'
 
 const initialState = {
   res: {},
@@ -17,6 +17,8 @@ export default (state = initialState, action) => {
       return { ...state, success: true} 
     case TIP_SUCCESS:
       return { ...state, tipSuccess: action.payload}
+    case GET_NOTIF: 
+      return { ...state, notif: action.payload}
     default:
       return state
   }
