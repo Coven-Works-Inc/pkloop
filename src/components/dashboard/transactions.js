@@ -100,6 +100,7 @@ const Transactions = props => {
         ))}
         <div className='transactions'>
           <div className='table-header'>
+            <p>Date</p>
             <p>Status</p>
             <p>Sender</p>
             <p>Traveler</p>
@@ -116,14 +117,12 @@ const Transactions = props => {
           ) : (
                 transaction.map((trans, index) => (
                   <div key={index} className={trans.status === 'Pending' ? 'table-row pending-row' : 'table-row'}>
-                    <p className='completed'>{trans.status}</p>
-                    <p>{trans.with}</p>
-                    <p>{trans.role}</p>
                     <p>{trans.date.split('T')[0]}</p>
-                    {' '}
-                    <p className='open' style={{ cursor: 'pointer' }} onClick={() => handleClick(trans)}>
-                      {trans.status === 'Pending' ? 'View Details' : 'Open'}
-                    </p>{' '}
+                    <p className='completed'>{trans.status}</p>
+                    <p>{trans.sender}</p>
+                    <p>{trans.traveler}</p>
+                    <p>{Number(trans.amountDue).toFixed(2)}</p>
+                    <p>0</p>
                   </div>
                 ))
               )}
