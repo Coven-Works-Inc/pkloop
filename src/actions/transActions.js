@@ -4,7 +4,8 @@ import {
   GET_ERRORS,
   TRANSACTION_RESPONSE,
   REDEEM_CODE,
-  TIP_SUCCESS
+  TIP_SUCCESS,
+  GET_NOTIF
 } from './types'
 
 export const getTransaction = () => async dispatch => {
@@ -91,6 +92,16 @@ export const addTip = data => dispatch => {
     dispatch({
       type: TIP_SUCCESS,
       payload: res.data.status
+    })
+  })
+}
+export const getNotif = () => dispatch => {
+  axios.get(`${process.env.REACT_APP_BASE_URL}/transactions/notif`)
+  .then(res => {
+    console.log(res)
+    dispatch({
+      type: GET_NOTIF,
+      payload: res.data.notif
     })
   })
 }

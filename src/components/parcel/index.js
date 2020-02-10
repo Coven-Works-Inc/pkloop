@@ -23,6 +23,7 @@ import countriesData from '../../countries.json'
 const Parcel = props => {
 
   const [modal, setModal] = useState(false)
+  const [walletBalance, setBalance] = useState(0)
   const [state, setState] = useState({
     locationCountry: '',
     locationCity: '',
@@ -47,7 +48,7 @@ const Parcel = props => {
     isLocal: true,
     travelerData: {},
     runParcelCost: null,
-    fundAmount: 29.99,
+    fundAmount: 29.99 - Number(walletBalance),
     sameUser: false,
     parcelWorth: 0,
     parcelItem: '',
@@ -141,7 +142,6 @@ const Parcel = props => {
     e.preventDefault()
   }
 
-  const [walletBalance, setBalance] = useState(0)
 
   useEffect(() => {
     getUserData()
@@ -400,6 +400,7 @@ const Parcel = props => {
     const earning = state.totalAndTip === 0 ? state.parcelCost : Number(state.parcelCost) + Number(state.tipAmount)
     const userDetails = {
       tripId: state.travelerData._id,
+      parcelWeight: state.parcelWeight,
       travelerId: state.travelerData.user._id,
       amount: earning,
       username: state.travelerData.username,
@@ -632,7 +633,6 @@ const Parcel = props => {
                       ></span>) : state.totalAndTip === 0? `Pay $${Number(state.totalCost).toFixed(2)} + $${(0.05 * Number(state.totalCost)).toFixed(2)}` : `Pay ${Number(state.totalAndTip).toFixed(2)} + $${(0.05 * Number(state.totalAndTip)).toFixed(2)}`}</button>
                           <button className="btnQ inverse-btnQ medium" onClick={toggleModal}>No, Change weight</button>
                         </div>
-                      <textarea className="support_input" placeholder="Leave a message for traveler" onChange={messageChangeHandler}></textarea>
                     </div>
                   )
 
@@ -652,7 +652,7 @@ const Parcel = props => {
                 <input type="number" className="popupInput" name="fundAmount" placeholder="Enter Amount" value={state.fundAmount} onChange={onChangeHandler} />
                 <br />
                 <div className="button-group">
-                  {state.fundAmount >= 29.99 ?
+                  {Number(state.fundAmount) + Number(walletBalance) >= 29.99 ?
                     <StripeCheckout
                       image={require('../../assets/payment-logo.png')}
                       stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
@@ -663,7 +663,7 @@ const Parcel = props => {
                       token={onToken}
                       panelLabel="Pay"
                     /> :
-                    <div>Minimum of $29.99 is required to fund wallet</div>
+                    <div>{`Minimum of $${29.99 - Number(walletBalance)} is required to fund wallet`}</div>
                   }
                 </div>
               </div>
