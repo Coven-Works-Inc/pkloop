@@ -97,7 +97,7 @@ const Balance = props => {
         {/* <Notification message="Sender wants you to deliver a parcel" /> */}
         <div className='balance-section'>
           <div className='amount'>
-            <p>Amount made so far</p>
+            <p>Amount made(all time)</p>
             <h2>${state.amountMade}</h2>
           </div>
           <div className='balance'>
@@ -124,7 +124,7 @@ const Balance = props => {
                 onChange={onChangeHandler}
               />
               <br />
-              {state.amount >= 29.99 ? (
+              {state.amount + Number(balance) >= 29.99 ? (
                 <div className='button-group'>
                   <StripeCheckout
                     image={require('../../assets/payment-logo.png')}
@@ -140,7 +140,7 @@ const Balance = props => {
               ) : (
                 <div style={{ color: 'red' }}>
                   {' '}
-                  A Minimum of $29.99 is required to fund wallet
+                  {`A Minimum of $${29.99 - Number(balance)} is required to fund wallet`}
                 </div>
               )}
             </div>
