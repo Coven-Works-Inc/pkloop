@@ -104,8 +104,8 @@ const Transactions = props => {
             <p>Status</p>
             <p>Sender</p>
             <p>Traveler</p>
-            <p>Amount Due</p>
-            <p>Amount Paid</p>
+            <p>Amount Due($)</p>
+            <p>Amount Paid($)</p>
             <p></p>
           </div>
           {transaction === undefined ? (
