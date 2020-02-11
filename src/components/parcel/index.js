@@ -146,7 +146,13 @@ const Parcel = props => {
   useEffect(() => {
     getUserData()
   }, [])
-
+  useEffect(() => {
+    if(!state.checked){
+      setState({
+         
+      })
+    }
+  }, [state.checked])
   useEffect(() => {
     if (props.status === 200) {
       setModal(true)
