@@ -99,13 +99,14 @@ const Transactions = props => {
           <div> <Notification message={notif.notify} showTripDetails={() => showTrip(notif)}/> </div>
         ))}
         <div className='transactions'>
+          <h2 style={{ textAlign: "center"}}>Traveler transaction</h2>
           <div className='table-header'>
             <p>Date</p>
             <p>Status</p>
             <p>Sender</p>
             <p>Traveler</p>
-            <p>Amount Due</p>
-            <p>Amount Paid</p>
+            <p>Amount Due($)</p>
+            <p>Amount Paid($)</p>
             <p></p>
           </div>
           {transaction === undefined ? (
@@ -115,8 +116,10 @@ const Transactions = props => {
               You do not any transactions yet
           </h2>
           ) : (
-                transaction.map((trans, index) => (
-                  <div key={index} className={trans.status === 'Pending' ? 'table-row pending-row' : 'table-row'}>
+                <div>
+                  {transaction.map((trans, index) => (
+                  trans.sender === props.username && (
+                    <div key={index} className={trans.status === 'Pending' ? 'table-row pending-row' : 'table-row'}>
                     <p>{trans.date.split('T')[0]}</p>
                     <p className='completed'>{trans.status}</p>
                     <p>{trans.sender}</p>
@@ -124,7 +127,43 @@ const Transactions = props => {
                     <p>{Number(trans.amountDue).toFixed(2)}</p>
                     <p>0</p>
                   </div>
-                ))
+                  )
+                ))}
+                </div>  
+              )}
+        </div>
+        <div className='transactions'>
+          <h3 style={{ textAlign: "center"}}>Sender transaction</h3>
+          <div className='table-header'>
+            <p>Date</p>
+            <p>Status</p>
+            <p>Sender</p>
+            <p>Traveler</p>
+            <p>Amount Due($)</p>
+            <p>Amount Paid($)</p>
+            <p></p>
+          </div>
+          {transaction === undefined ? (
+            <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</h3>
+          ) : transaction.length === 0 ? (
+            <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
+              You do not any transactions yet
+          </h2>
+          ) : (
+                <div>
+                  {transaction.map((trans, index) => (
+                  trans.traveler === props.username && (
+                    <div key={index} className={trans.status === 'Pending' ? 'table-row pending-row' : 'table-row'}>
+                    <p>{trans.date.split('T')[0]}</p>
+                    <p className='completed'>{trans.status}</p>
+                    <p>{trans.sender}</p>
+                    <p>{trans.traveler}</p>
+                    <p>{Number(trans.amountDue).toFixed(2)}</p>
+                    <p>0</p>
+                  </div>
+                  )
+                ))}
+                </div>  
               )}
         </div>
       </div>
@@ -152,6 +191,7 @@ const Transactions = props => {
 const mapStateToProps = state => {
   console.log(state)
   return {
+    username: state.auth.user.username,
     transaction: state.transaction,
     trip: state.trips.trip.data,
     notifs: state.transaction.notif,

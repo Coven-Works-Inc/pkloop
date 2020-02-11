@@ -146,7 +146,27 @@ const Parcel = props => {
   useEffect(() => {
     getUserData()
   }, [])
-
+  useEffect(() => {
+    if(!state.checked){
+      console.log(state.parcelCost)
+      setState({
+        ...state,
+         totalCost: state.parcelCost,
+         parcelWorth:0,
+         insuranceCost: 0
+      })
+    }
+  }, [state.checked])
+  useEffect(() => {
+    if(!state.tipChecked){
+      console.log(state.parcelCost)
+      setState({
+        ...state,
+         totalAndTip: state.parcelCost + state.insuranceCost,
+         tipAmount:0
+      })
+    }
+  }, [state.tipChecked])
   useEffect(() => {
     if (props.status === 200) {
       setModal(true)
@@ -445,6 +465,7 @@ const Parcel = props => {
   }
 
   const handleCheckbox = () => {
+    console.log(state)
     setState({
       ...state,
       checked: !state.checked
@@ -599,7 +620,7 @@ const Parcel = props => {
                   state.modal1 && (
                     <div>
                         <h3 style={{ display: state.checked ?" none" : "block"}}>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h3>
-                        <h3>Total cost: ${state.totalAndTip === 0 ? Number(state.totalCost): state.totalAndTip}</h3>
+                        <h3>Total cost: ${state.tipAmount === 0 ? Number(state.totalCost): state.totalAndTip}</h3>
                         <textarea style={{ display: state.checked ?" none" : "block"}} className="support_input" placeholder="Leave a message for traveler" onChange={messageChangeHandler}></textarea>
                         <label className="container">Add insurance
                           <input type="checkbox" checked={state.checked} onChange={handleCheckbox} />
