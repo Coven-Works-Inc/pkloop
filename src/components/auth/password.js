@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import Logo from '../../assets/logo/Logo.png'
 import Spinner from '../common/spinner'
 import axios from 'axios'
-import { BASE_URL } from '../../config/constants'
 
 class Password extends Component {
   state = {
@@ -30,7 +29,7 @@ class Password extends Component {
     }
 
     axios
-      .post(`${BASE_URL}/auth/password/${token}`, data)
+      .post(`${process.env.REACT_APP_BASE_URL}/auth/password/${token}`, data)
       .then(res => {
         console.log(res)
         this.setState({ confirming: false })
