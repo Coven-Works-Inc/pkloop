@@ -113,7 +113,7 @@ const Transactions = props => {
             <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</h3>
           ) : transaction.length === 0 ? (
             <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
-              You do not any transactions yet
+              You do not have any transactions yet
           </h2>
           ) : (
                 <div>
@@ -147,7 +147,7 @@ const Transactions = props => {
             <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</h3>
           ) : transaction.length === 0 ? (
             <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
-              You do not any transactions yet
+              You do not have any transactions yet
           </h2>
           ) : (
                 <div>
