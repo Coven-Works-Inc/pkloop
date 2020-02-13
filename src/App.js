@@ -5,6 +5,7 @@ import './Mobile.css'
 import Routes from './routes'
 import Notifications from 'react-notify-toast'
 import ScrollToTop from './utils/scrollToTop'
+import { Helmet } from 'helmet'
 
 import jwt_decode from 'jwt-decode'
 import setAuthToken from './utils/setAuthToken'
@@ -34,6 +35,11 @@ if (localStorage.jwtToken) {
 }
 
 function App () {
+  ;<Helmet>
+    <meta charSet='utf-8' />
+    <title>MyPkloop | Parcel Delivery</title>
+    <link rel='canonical' href='https://mypkloop.com' />
+  </Helmet>
   return (
     <div className='App'>
       <Notifications />
