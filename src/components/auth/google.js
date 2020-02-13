@@ -14,7 +14,7 @@ const Google = ({ googleLogin }) => {
   }
   return (
     <GoogleLogin
-      clientId={process.env.REACT_APP_GOOGLE_ID}
+      clientId={`${process.env.REACT_APP_GOOGLE_ID}`}
       render={renderProps => (
         <button
           style={{
