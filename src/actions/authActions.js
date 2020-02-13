@@ -14,7 +14,10 @@ export const googleLogin = (data, history, props) => dispatch => {
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data)
     .then(res => {
-      console.log(res)
+      console.log('First :', res.data.token)
+      console.log('Second :', res.data._id)
+      console.log('Third :', res.data.data.token)
+      console.log('Fourth :', res.data.data._id)
       const { token, _id } = res.data.data
       localStorage.setItem('jwtToken', token)
       localStorage.setItem('id', _id)
