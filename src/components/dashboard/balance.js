@@ -6,14 +6,16 @@ import axios from 'axios'
 import StripeCheckout from 'react-stripe-checkout'
 import DashboardHeader from './header'
 import HeaderFooter from '../headerFooter'
+import Connect from '../../assets/connect.png'
 
 const Balance = props => {
   // const { balance: { user: { balance } } } = props
-
+  const url = 'https://connect.stripe.com/express/oauth/authorize?redirect_uri=http://localhost:3000&client_id=ca_32D88BD1qLklliziD7gYQvctJIhWBSQ7&state={STATE_VALUE}&stripe_user[business_type]=individual'
   const [state, setState] = useState({
     amountMade: 0,
     modalOpen: false,
-    amount: 29.99
+    amount: 29.99,
+    openConnect: false
   })
 
   const [balance, setBalance] = useState(0)
@@ -77,6 +79,13 @@ const Balance = props => {
     })
   }
 
+  const withdrawFund = () => {
+    setState({
+      ...state,
+      openConnect: true
+    })
+  }
+
   const onChangeHandler = e => {
     e.preventDefault()
     if (e.target.value >= 0) {
@@ -106,7 +115,7 @@ const Balance = props => {
               <h2>${Number(balance).toFixed(2)}</h2>
             </div>
             <div className='right-side'>
-              <button>Withdraw</button>
+              <button onClick={withdrawFund}>Withdraw</button>
               <button onClick={toggleModal}>Fund Balance</button>
             </div>
           </div>
@@ -144,6 +153,9 @@ const Balance = props => {
                 </div>
               )}
             </div>
+          </Modal>
+          <Modal show={state.openConnect}>
+                <a href={url}><img src={Connect} /> </a>
           </Modal>
         </div>
       </div>

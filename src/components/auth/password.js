@@ -22,6 +22,7 @@ class Password extends Component {
   onSubmitHandler = e => {
     e.preventDefault()
     const { token } = this.props.match.params
+    console.log(token)
     this.setState({ confirming: true })
 
     const data = {
