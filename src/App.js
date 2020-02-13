@@ -35,11 +35,13 @@ if (localStorage.jwtToken) {
 }
 
 function App () {
-  ;<Helmet>
-    <meta charSet='utf-8' />
-    <title>MyPkloop | Parcel Delivery</title>
-    <link rel='canonical' href='https://mypkloop.com' />
-  </Helmet>
+  const head = () => (
+    <Helmet>
+      <meta charSet='utf-8' />
+      <title>MyPkloop | Parcel Delivery</title>
+      <link rel='canonical' href='https://mypkloop.com' />
+    </Helmet>
+  )
   return (
     <div className='App'>
       <Notifications />
