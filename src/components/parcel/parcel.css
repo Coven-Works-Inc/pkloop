@@ -152,7 +152,6 @@ button.clearBG {
   display: grid;
   grid-template-columns: repeat(3,1fr);
   grid-column-gap: 0px;
-  margin-bottom: 50px;
 }
 .inverse-btnQ{
   background-color: white;
@@ -175,4 +174,18 @@ button.clearBG {
   border: 0.5px solid rgba(0, 189, 190, 0.4);
   border-radius: 4px;
   color: #424242;
+}
+button:disabled,
+button[disabled]{
+  background-color: #00bdbe;
+  color: white;
+  opacity: 0.6;
+}
+.table-header {
+  position: relative;
+  left:20px;
+}
+.table-header-shift{
+  position: relative;
+  left: 35px;
 }
