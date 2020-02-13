@@ -14,7 +14,7 @@ const Facebook = ({ facebookLogin }) => {
   return (
     <div>
       <FacebookLogin
-        appId={process.env.FACEBOOK_APP_ID}
+        appId={`${process.env.REACT_APP_FACEBOOK_APP_ID}`}
         autoLoad={false}
         callback={responseFacebook}
         render={renderProps => (
