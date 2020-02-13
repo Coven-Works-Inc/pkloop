@@ -651,7 +651,7 @@ const Parcel = props => {
                         className='spinner-border spinner-border-sm'
                         role='status'
                         aria-hidden='true'
-                      ></span>) : state.totalAndTip === 0? `Pay $${Number(state.totalCost).toFixed(2)} + $${(0.05 * Number(state.totalCost)).toFixed(2)}` : `Pay ${Number(state.totalAndTip).toFixed(2)} + $${(0.05 * Number(state.totalAndTip)).toFixed(2)}`}</button>
+                      ></span>) : state.tipAmount === 0? `Pay $${Number(state.totalCost).toFixed(2)} + $${(0.05 * Number(state.totalCost)).toFixed(2)}` : `Pay ${Number(state.totalAndTip).toFixed(2)} + $${(0.05 * Number(state.totalAndTip)).toFixed(2)}`}</button>
                           <button className="btnQ inverse-btnQ medium" onClick={toggleModal}>No, Change weight</button>
                         </div>
                     </div>
