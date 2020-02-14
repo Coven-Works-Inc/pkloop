@@ -104,7 +104,7 @@ class index extends Component {
             </div>
           ))}
           <div className='full-faq'>
-            <p><a href='http://ifemide.com/ShippingCostComparison.pdf' target='_blank'>Download Full FAQ</a></p>
+            <p><a href='http://ifemide.com/PKLOOP_FREQUENTLY_ASKED_QUESTIONS.pdf' target='_blank'>Download Full FAQ</a></p>
           </div>
         </div>
       </HeaderFooter>
