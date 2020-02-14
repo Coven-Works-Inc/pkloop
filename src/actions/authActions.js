@@ -10,51 +10,78 @@ import {
   UPDATE_PROFILE_PICTURE
 } from './types'
 
-export const googleLogin = (data, history, props) => dispatch => {
-  axios
-    .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data)
-    .then(res => {
-      console.log('First :', res.data.token)
-      console.log('Second :', res.data._id)
-      console.log('Third :', res.data.data.token)
-      console.log('Fourth :', res.data.data._id)
-      const { token, _id } = res.data.data
-      localStorage.setItem('jwtToken', token)
-      localStorage.setItem('id', _id)
-      setAuthToken(token)
-      const decoded = jwt_decode(token)
-      dispatch(setCurrentUser(decoded, token))
-      const location = props.location
-      // if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/parcel')
-      // }  else if (location.redirect === '/trips' || localStorage.getItem('redirect') === '/trips') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/trips')
-      // } else if (location.redirect === '/shippers' || localStorage.getItem('redirect') === '/shippers') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/shippers')
-      // }
-      if (location.redirect) {
-        history.push(`${location.redirect}`)
-      } else {
-        history.push('/dashboard/transactions')
-      }
+export const googleLogin = (data, history, props) => async dispatch => {
+  const result = await axios.post(
+    `${process.env.REACT_APP_BASE_URL}/auth/google-login`,
+    data
+  )
+  if (!result)
+    return dispatch({
+      type: GET_ERRORS,
+      payload: 'Failed connectioon with Google servers, please try again'
     })
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response
-          ? err.response.data.message
-          : 'Something went wrong'
-      })
+
+  try {
+    const token = result.data.data.token
+    const decoded = jwt_decode(token)
+
+    console.log(token)
+    console.log(result.data.data._id)
+
+    localStorage.setItem('jwtToken', token)
+    localStorage.setItem('id', result.data.data._id)
+    setAuthToken(token)
+    dispatch(setCurrentUser(decoded, token))
+
+    history.push('/dashboard/transactions')
+  } catch (error) {
+    dispatch({
+      type: GET_ERRORS,
+      payload: error
     })
-    .finally(() =>
-      dispatch({
-        type: LOADING,
-        payload: false
-      })
-    )
+  }
+  // .then(res => {
+  //   console.log('First :', res.data.token)
+  //   console.log('Second :', res.data._id)
+  //   console.log('Third :', res.data.data.token)
+  //   console.log('Fourth :', res.data.data._id)
+  //   const { token, _id } = res.data.data
+  //   localStorage.setItem('jwtToken', token)
+  //   localStorage.setItem('id', _id)
+  //   setAuthToken(token)
+  //   const decoded = jwt_decode(token)
+  //   dispatch(setCurrentUser(decoded, token))
+  //   const location = props.location
+  //   // if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
+  //   //   localStorage.removeItem('redirect')
+  //   //   history.push('/parcel')
+  //   // }  else if (location.redirect === '/trips' || localStorage.getItem('redirect') === '/trips') {
+  //   //   localStorage.removeItem('redirect')
+  //   //   history.push('/trips')
+  //   // } else if (location.redirect === '/shippers' || localStorage.getItem('redirect') === '/shippers') {
+  //   //   localStorage.removeItem('redirect')
+  //   //   history.push('/shippers')
+  //   // }
+  //   if (location.redirect) {
+  //     history.push(`${location.redirect}`)
+  //   } else {
+  //     history.push('/dashboard/transactions')
+  //   }
+  // })
+  // .catch(err => {
+  //   dispatch({
+  //     type: GET_ERRORS,
+  //     payload: err.response
+  //       ? err.response.data.message
+  //       : 'Something went wrong'
+  //   })
+  // })
+  // .finally(() =>
+  //   dispatch({
+  //     type: LOADING,
+  //     payload: false
+  //   })
+  // )
 }
 
 export const facebookLogin = (data, history, props) => dispatch => {
