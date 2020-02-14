@@ -61,11 +61,19 @@ const Parcel = props => {
     message: '',
     tipAmount: 0,
     tipChecked: false,
+    disabled: false
   })
 
   useEffect(() => {
     props.fetchTravelers()
   }, [])
+  useEffect(() => {
+    console.log(state)
+    setState({
+      ...state,
+      disabled: Number(walletBalance) > 0 && state.totalAndTip > Number(walletBalance)
+    })
+  }, [state.totalAndTip])
   useEffect(() => {
     setTimeout(() => {
       if (modal) {
@@ -151,7 +159,8 @@ const Parcel = props => {
       console.log(state.parcelCost)
       setState({
         ...state,
-         totalCost: state.parcelCost,
+         totalCost: state.parcelCost + state.tipAmount,
+         totalAndTip: state.parcelCost + state.tipAmount,
          parcelWorth:0,
          insuranceCost: 0
       })
@@ -162,7 +171,8 @@ const Parcel = props => {
       console.log(state.parcelCost)
       setState({
         ...state,
-         totalAndTip: state.parcelCost + state.insuranceCost,
+        totalCost: Number(state.parcelCost) + Number(state.insuranceCost),
+         totalAndTip: Number(state.parcelCost) + Number(state.insuranceCost),
          tipAmount:0
       })
     }
@@ -460,7 +470,7 @@ const Parcel = props => {
       parcelWorth: Number(e.target.value),
       insuranceCost: Number(0.02 * Number(e.target.value)).toFixed(2),
       totalCost: (Number(state.parcelCost) + (0.02 * Number(e.target.value))).toFixed(2),
-      totalAndTip: Number(state.totalAndTip) === 0 ? Number(Number(state.parcelCost) + Number(state.totalAndTip) - Number(state.insuranceCost) +  (0.02 * Number(e.target.value))).toFixed(2) : Number(Number(state.totalAndTip) - Number(state.insuranceCost) +  (0.02 * Number(e.target.value))).toFixed(2)
+      totalAndTip: Number(state.totalAndTip) === 0 ? Number(Number(state.parcelCost) + Number(state.totalAndTip) - Number(state.insuranceCost) +  (0.02 * Number(e.target.value))).toFixed(2) : Number(Number(state.totalAndTip) - Number(state.insuranceCost) +  (0.02 * Number(e.target.value))).toFixed(2),
     })
   }
 
@@ -482,7 +492,7 @@ const Parcel = props => {
       setState({
         ...state,
         tipAmount: Number(e.target.value),
-        totalAndTip: Number(Number(state.totalCost) + Number(e.target.value)).toFixed(2)
+        totalAndTip: Number(Number(state.totalCost) + Number(e.target.value)).toFixed(2),
       })
     }
   }
@@ -646,14 +656,18 @@ const Parcel = props => {
                         )}
                         <h6>5% platform charges included</h6>
                         <div className="button-group">
-                        <button className="btnQ medium" onClick={connectToTraveler}>{props.loading ? (<span
+                        <button className="btnQ medium"
+                        disabled={state.disabled}
+                        onClick={connectToTraveler}>{props.loading ? (<span
                         style={{ display: 'inline-block' }}
                         className='spinner-border spinner-border-sm'
                         role='status'
                         aria-hidden='true'
-                      ></span>) : state.totalAndTip === 0? `Pay $${Number(state.totalCost).toFixed(2)} + $${(0.05 * Number(state.totalCost)).toFixed(2)}` : `Pay ${Number(state.totalAndTip).toFixed(2)} + $${(0.05 * Number(state.totalAndTip)).toFixed(2)}`}</button>
+                      ></span>) : state.tipAmount === 0? `Pay $${Number(state.totalCost).toFixed(2)} + $${(0.05 * Number(state.totalCost)).toFixed(2)}` : `Pay ${Number(state.totalAndTip).toFixed(2)} + $${(0.05 * Number(state.totalAndTip)).toFixed(2)}`}</button>
                           <button className="btnQ inverse-btnQ medium" onClick={toggleModal}>No, Change weight</button>
                         </div>
+                        {/* {state.totalCost >= Number(walletBalance) && Number(state.tipAmount) !== 0 && <h5>You need an addtional ${Number(state.totalCost - Number(walletBalance)).toFixed(2)} to continue with this transaction</h5>} */}
+                        {state.totalAndTip >= Number(walletBalance) && <h6 style={{ color: 'red'}}>You need an addtional ${Number(state.totalAndTip - Number(walletBalance)).toFixed(2)} to continue with this transaction</h6>}
                     </div>
                   )
 

@@ -50,10 +50,7 @@ const Redeem = (props) => {
 
                 <div className='redeem-main'>
                     <h5>Enter the 8-digit code sent to your email to complete the transaction</h5>
-                    <ol>
-                        <li>First 4 digit sent to your email</li>
-                        <li>Get the last 4-digit from sender</li>
-                    </ol>
+                    <h5>(First 4-digit sent to your email and last 4-digit from sender)</h5>
                     <div>
                         <input type='tel' maxLength="8" onChange={handleInputChange} />
                         <button onClick={redeemUserCode}> Redeem Code </button>

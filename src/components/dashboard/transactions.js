@@ -99,27 +99,27 @@ const Transactions = props => {
           <div> <Notification message={notif.notify} showTripDetails={() => showTrip(notif)}/> </div>
         ))}
         <div className='transactions'>
-          <h2 style={{ textAlign: "center"}}>Traveler transaction</h2>
+          <h2 style={{ textAlign: "center"}}>Sender transaction</h2>
           <div className='table-header'>
             <p>Date</p>
             <p>Status</p>
-            <p>Sender</p>
-            <p>Traveler</p>
-            <p>Amount Due($)</p>
-            <p>Amount Paid($)</p>
+            <p className="table-header-shift">Sender</p>
+            <p className="table-header-shift">Traveler</p>
+            <p className="table-header-shift">Amount Due($)</p>
+            <p className="table-header-shift">Amount Paid($)</p>
             <p></p>
           </div>
           {transaction === undefined ? (
             <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</h3>
           ) : transaction.length === 0 ? (
             <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
-              You do not any transactions yet
+              You do not have any transactions yet
           </h2>
           ) : (
                 <div>
                   {transaction.map((trans, index) => (
                   trans.sender === props.username && (
-                    <div key={index} className={trans.status === 'Pending' ? 'table-row pending-row' : 'table-row'}>
+                    <div key={index} className='table-row'>
                     <p>{trans.date.split('T')[0]}</p>
                     <p className='completed'>{trans.status}</p>
                     <p>{trans.sender}</p>
@@ -133,21 +133,21 @@ const Transactions = props => {
               )}
         </div>
         <div className='transactions'>
-          <h3 style={{ textAlign: "center"}}>Sender transaction</h3>
+          <h3 style={{ textAlign: "center"}}>Traveler transaction</h3>
           <div className='table-header'>
             <p>Date</p>
             <p>Status</p>
-            <p>Sender</p>
-            <p>Traveler</p>
-            <p>Amount Due($)</p>
-            <p>Amount Paid($)</p>
+            <p className="table-header-shift">Sender</p>
+            <p className="table-header-shift">Traveler</p>
+            <p className="table-header-shift">Amount Due($)</p>
+            <p className="table-header-shift">Amount Paid($)</p>
             <p></p>
           </div>
           {transaction === undefined ? (
             <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</h3>
           ) : transaction.length === 0 ? (
             <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
-              You do not any transactions yet
+              You do not have any transactions yet
           </h2>
           ) : (
                 <div>
@@ -176,8 +176,9 @@ const Transactions = props => {
           Arrival Date<h5>{props.trip.arrivalDate && props.trip.arrivalDate.split('T')[0]}</h5>
           Parcel Size<h5>{props.trip.parcelSize}</h5>
           Parcel weight<h5>{sender.parcelWeight}</h5>
+          Maximum Parcel weight<h5>{props.trip.parcelWeight}</h5>
           Means of Transportation<h5>{props.trip.transport}</h5>
-          Tip<h5>{sender.tip}</h5>
+          Tip<h5>${sender.tip}</h5>
           <br />
           <div className="button-group">
             <button className='btnQ' onClick={acceptRequest}>Accept</button>

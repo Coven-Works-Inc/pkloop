@@ -39,7 +39,7 @@ class Forgot extends Component {
     }
 
     axios
-      .post(`${BASE_URL}/auth/reset`, data)
+      .post(`${process.env.REACT_APP_BASE_URL}/auth/reset`, data)
       .then(res => {
         console.log(res)
         this.setState({ isSending: false })
