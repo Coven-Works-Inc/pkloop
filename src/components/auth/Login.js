@@ -23,6 +23,10 @@ class Login extends Component {
     if (query.token) {
       window.localStorage.setItem('jwt', query.token)
       this.props.history.push('/')
+    } else {
+      if (window.localStorage.jwtToken && window.localStorage.id) {
+        this.props.history.push('dashboard/transactions')
+      }
     }
   }
 
@@ -40,8 +44,6 @@ class Login extends Component {
       [e.target.name]: e.target.value
     })
   }
-
-  googleAuth = e => {}
 
   onSubmitHandler = e => {
     e.preventDefault()
