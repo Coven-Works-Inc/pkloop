@@ -84,4 +84,9 @@ import {
         })
       })
   }
-  
+export const payoutFund = (data) => dispatch => {
+    axios.post(`${process.env.REACT_APP_BASE_URL}/payments/payout`, data)
+    .then(res => {
+      console.log(res)
+    })
+}

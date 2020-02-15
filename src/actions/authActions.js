@@ -369,3 +369,9 @@ export const connectStripe = (data) => dispatch => {
     console.log(res)
   })
 }
+export const getStripeId = () => dispatch => {
+  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/stripe`)
+  .then(res => {
+    console.log(res)
+  })
+}
