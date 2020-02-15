@@ -14,16 +14,24 @@ export const googleLogin = (data, history, props) => async dispatch => {
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data)
     .then(res => {
+      // Save to localStorage
       const { token, _id } = res.data.data
+      // Set token to ls
       localStorage.setItem('jwtToken', token)
       localStorage.setItem('id', _id)
+      // Set token to Auth header
       setAuthToken(token)
+      // Decode token to get user data
       const decoded = jwt_decode(token)
-      dispatch(setCurrentUser(decoded, token))
-
-     history.push('/dashboard/transactions')
+      // Set current user
+      dispatch(setCurrentUser(decoded))
     })
-    .catch(err => {console.log(err)})
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    )
 }
 
 export const facebookLogin = (data, history, props) => dispatch => {
@@ -275,16 +283,10 @@ export const reset = (data, history) => dispatch => {
 // }
 
 // Set logged in user
-export const setCurrentUser = (decoded, token) => dispatch => {
-  // console.log(decoded)
+export const setCurrentUser = decoded => dispatch => {
   dispatch({
     type: SET_CURRENT_USER,
     payload: decoded
-  })
-
-  dispatch({
-    type: SET_TOKEN,
-    payload: token
   })
 }
 
