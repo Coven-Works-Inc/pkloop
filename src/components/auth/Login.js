@@ -20,15 +20,12 @@ class Login extends Component {
 
   componentWillMount () {
     const query = queryString.parse(this.props.location.search)
-    if (query.token) {
+    if (window.localStorage.jwtToken || window.localStorage.id) {
+      console.log(window.localStorage.jwtToken)
+      this.props.history.push('/dashboard/transactions')
+    } else if (query.token) {
       window.localStorage.setItem('jwt', query.token)
       this.props.history.push('/')
-    }
-  }
-
-  componentDidMount () {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/dashboard/transactions')
     }
   }
 
