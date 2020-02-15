@@ -4,7 +4,8 @@ import {
     SET_CURRENT_USER,
     STRIPE_PAYMENT,
     UPDATE_BALANCE,
-    REDUCE_BALANCE
+    REDUCE_BALANCE,
+    PAYMENT_SUCCESS
   } from './types'
   import axios from 'axios'
   
@@ -84,4 +85,13 @@ import {
         })
       })
   }
-  
+export const payoutFund = (data) => dispatch => {
+    axios.post(`${process.env.REACT_APP_BASE_URL}/payments/payout`, data)
+    .then(res => {
+      console.log(res)
+      dispatch({
+        type: PAYMENT_SUCCESS,
+        payload: res.data.status
+      })
+    })
+}

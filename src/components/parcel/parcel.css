@@ -181,11 +181,11 @@ button[disabled]{
   color: white;
   opacity: 0.6;
 }
-.table-header {
+.transactions .table-header {
   position: relative;
   left:20px;
 }
-.table-header-shift{
+.transactions .table-header-shift{
   position: relative;
   left: 35px;
 }
