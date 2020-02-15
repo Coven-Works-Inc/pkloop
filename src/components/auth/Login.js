@@ -41,8 +41,6 @@ class Login extends Component {
     })
   }
 
-  googleAuth = e => {}
-
   onSubmitHandler = e => {
     e.preventDefault()
 

@@ -10,49 +10,27 @@ import {
   UPDATE_PROFILE_PICTURE
 } from './types'
 
-export const googleLogin = (data, history, props) => dispatch => {
+export const googleLogin = (data, history, props) => async dispatch => {
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data)
     .then(res => {
-      console.log('First :', res.data.token)
-      console.log('Second :', res.data._id)
-      console.log('Third :', res.data.data.token)
-      console.log('Fourth :', res.data.data._id)
+      // Save to localStorage
       const { token, _id } = res.data.data
+      // Set token to ls
       localStorage.setItem('jwtToken', token)
       localStorage.setItem('id', _id)
+      // Set token to Auth header
       setAuthToken(token)
+      // Decode token to get user data
       const decoded = jwt_decode(token)
-      dispatch(setCurrentUser(decoded, token))
-      const location = props.location
-      // if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/parcel')
-      // }  else if (location.redirect === '/trips' || localStorage.getItem('redirect') === '/trips') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/trips')
-      // } else if (location.redirect === '/shippers' || localStorage.getItem('redirect') === '/shippers') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/shippers')
-      // }
-      if (location.redirect) {
-        history.push(`${location.redirect}`)
-      } else {
-        history.push('/dashboard/transactions')
-      }
+      // Set current user
+      dispatch(setCurrentUser(decoded))
+      history.push('/')
     })
-    .catch(err => {
+    .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response
-          ? err.response.data.message
-          : 'Something went wrong'
-      })
-    })
-    .finally(() =>
-      dispatch({
-        type: LOADING,
-        payload: false
+        payload: err.response.data
       })
     )
 }
@@ -306,16 +284,10 @@ export const reset = (data, history) => dispatch => {
 // }
 
 // Set logged in user
-export const setCurrentUser = (decoded, token) => dispatch => {
-  // console.log(decoded)
+export const setCurrentUser = decoded => dispatch => {
   dispatch({
     type: SET_CURRENT_USER,
     payload: decoded
-  })
-
-  dispatch({
-    type: SET_TOKEN,
-    payload: token
   })
 }
 
@@ -381,4 +353,16 @@ export const updateProfilePicture = file => dispatch => {
         payload: err.response ? err.response.data : 'Unable to upload picture'
       })
     })
+}
+export const connectStripe = (data) => dispatch => {
+  axios.post(`${process.env.REACT_APP_BASE_URL}/payments/connect`, data)
+  .then(res => {
+    console.log(res)
+  })
+}
+export const getStripeId = () => dispatch => {
+  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/stripe`)
+  .then(res => {
+    console.log(res)
+  })
 }
