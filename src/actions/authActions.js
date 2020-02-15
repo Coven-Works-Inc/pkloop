@@ -11,10 +11,6 @@ import {
 } from './types'
 
 export const googleLogin = (data, history, props) => async dispatch => {
-  dispatch({
-    type: LOADING,
-    payload: true
-  })
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data)
     .then(res => {
@@ -25,37 +21,9 @@ export const googleLogin = (data, history, props) => async dispatch => {
       const decoded = jwt_decode(token)
       dispatch(setCurrentUser(decoded, token))
 
-      const location = props.location
-      // if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/parcel')
-      // }  else if (location.redirect === '/trips' || localStorage.getItem('redirect') === '/trips') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/trips')
-      // } else if (location.redirect === '/shippers' || localStorage.getItem('redirect') === '/shippers') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/shippers')
-      // }
-      if (location.redirect) {
-        history.push(`${location.redirect}`)
-      } else {
-        history.push('/dashboard/transactions')
-      }
+     history.push('/dashboard/transactions')
     })
-    .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response
-          ? err.response.data.message
-          : 'Something went wrong'
-      })
-    })
-    .finally(() =>
-      dispatch({
-        type: LOADING,
-        payload: false
-      })
-    )
+    .catch(err => {console.log(err)})
 }
 
 export const facebookLogin = (data, history, props) => dispatch => {
