@@ -23,10 +23,12 @@ class Login extends Component {
     if (query.token) {
       window.localStorage.setItem('jwt', query.token)
       this.props.history.push('/')
-    } else {
-      if (window.localStorage.jwtToken && window.localStorage.id) {
-        this.props.history.push('dashboard/transactions')
-      }
+    }
+  }
+
+  componentDidMount () {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard')
     }
   }
 

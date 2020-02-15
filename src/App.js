@@ -22,7 +22,7 @@ if (localStorage.jwtToken) {
   // decode token and get user info and expiration
   const decoded = jwt_decode(localStorage.jwtToken)
   // // SET USER and is Authenticated
-  store.dispatch(setCurrentUser(decoded, localStorage.jwtToken))
+  store.dispatch(setCurrentUser(decoded))
   // Check for expired token
   const currentTime = Date.now() / 1000
   if (decoded.exp < currentTime) {
