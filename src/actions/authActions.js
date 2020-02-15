@@ -363,3 +363,9 @@ export const updateProfilePicture = file => dispatch => {
       })
     })
 }
+export const connectStripe = (data) => dispatch => {
+  axios.post(`${process.env.REACT_APP_BASE_URL}/payments/connect`, data)
+  .then(res => {
+    console.log(res)
+  })
+}

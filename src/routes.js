@@ -32,6 +32,7 @@ import Support from './components/dashboard/support'
 import TravelerChat from './components/dashboard/traveler'
 import Redeem from './components/dashboard/redeem'
 import Tips from './components/dashboard/tips'
+import StripeConnect from './components/dashboard/stripeConnect'
 
 const Routes = props => {
   return (
@@ -65,6 +66,7 @@ const Routes = props => {
       <Route exact component={Login} path='/Login' />
       <Route exact component={Chat} path='/dashboard/chat' />
       <Route exact component={Profile} path='/dashboard/profile' />
+      <Route component={StripeConnect} path='/dashboard/connect' />
       <Route exact component={Home} path='/' />
 
       {/* <ProtectedRoute exact component={Dashboard} path='/dashboard' isAuthenticated={props.isAuthenticated}/> */}
