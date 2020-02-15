@@ -45,6 +45,9 @@ const Pricing = (props) => {
             <p> > 5lbs </p>
             <p>$5.99/lb</p>
           </div>
+          <div className='base-tagline'>
+            <p><a href='http://ifemide.com/ShippingCostComparison.pdf' target='_blank'>Download Shipping Cost Comparison</a></p>
+          </div>
         </div>
       </div>
       <Cta />
