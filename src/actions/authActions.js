@@ -25,6 +25,7 @@ export const googleLogin = (data, history, props) => async dispatch => {
       const decoded = jwt_decode(token)
       // Set current user
       dispatch(setCurrentUser(decoded))
+      history.push('/')
     })
     .catch(err =>
       dispatch({
