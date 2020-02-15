@@ -27,8 +27,9 @@ class Login extends Component {
   }
 
   componentDidMount () {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/dashboard')
+    if (window.localStorage.jwtToken || window.localStorage.id) {
+      console.log(window.localStorage.jwtToken)
+      this.props.history.push('/dashboard/transactions')
     }
   }
 
