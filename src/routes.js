@@ -55,7 +55,7 @@ const Routes = props => {
       <Route exact component={Faq} path='/faq' />
       <Route exact component={Privacy} path='/privacy' />
       <Route exact component={Forgot} path='/Forgot' />
-      <Route component={Password} path='/password' />
+      <Route component={Password} path='/password/:token' />
       <Route component={Transactions} path='/dashboard/transactions' />
       <Route component={Profile} path='/dashboard/profile' />
       <Route component={Balance} path='/dashboard/balance' />

@@ -19,27 +19,59 @@ const Balance = props => {
     amount: 29.99,
     openConnect: false,
     openWithdraw: false,
-    withdrawalAmount: 50
+    withdrawalAmount: 50,
+    paymentSuccess: false,
+    insufficientBalance: false
   })
 
   const [balance, setBalance] = useState(0)
+  const [amountMade, setAmountMade] = useState(0)
 
   useEffect(() => {
     getUserData()
   }, [])
-
+  useEffect(() => {
+    if(props.paymentSuccess){
+      setState({
+        ...state,
+        paymentSuccess: true
+      })
+      getUserData()
+    } 
+      setTimeout(() => {
+        closeSuccessModal()
+      }, 3000)
+  }, [props.paymentSuccess])
+  const closeSuccessModal = () => {
+    setState({
+      ...state,
+      paymentSuccess: false,
+      openConnect: false,
+      openWithdraw: false
+    })
+  }
   const getUserData = () => {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/users/fetchUser`)
       .then(response => {
         console.log(response.data)
         setBalance(response.data.data.balance)
+        setAmountMade(response.data.data.amountMade)
       })
       .catch(error => {
         console.log(error)
       })
   }
+  const closeAllModals = () => {
+    setState({
+      ...state,
+      openConnect: false,
+      openWithdraw: false,
+      insufficientBalance: false,
 
+
+    })
+  }
   const fundWallet = () => {
     const data = { amount: Number(state.amount) }
 
@@ -80,18 +112,22 @@ const Balance = props => {
     setState({
       ...state,
       modalOpen: !state.modalOpen,
-      openConnect: false,
-      openWithdraw: false
-
     })
   }
 
   const withdrawFund = () => {
     if(props.stripeUserId){
-      setState({
-        ...state,
-        openWithdraw: true
-      })
+      if(Number(balance) > 50){
+        setState({
+          ...state,
+          openWithdraw: true
+        })
+      } else {
+        setState({
+          ...state,
+          insufficientBalance: true
+        })
+      }
     } else {
       setState({
         ...state,
@@ -125,6 +161,7 @@ const Balance = props => {
       destination: props.stripeUserId
     }
     props.payoutFund(data)
+    getUserData()
   }
   return (
     <HeaderFooter redirect={props.location}>
@@ -137,7 +174,7 @@ const Balance = props => {
         <div className='balance-section'>
           <div className='amount'>
             <p>Amount made(all time)</p>
-            <h2>${state.amountMade}</h2>
+            <h2>${amountMade}</h2>
           </div>
           <div className='balance'>
             <div className='left-side'>
@@ -163,7 +200,7 @@ const Balance = props => {
                 onChange={onChangeHandler}
               />
               <br />
-              {state.amount + Number(balance) >= 29.99 ? (
+              {Number(state.amount) + Number(balance) >= 29.99 ? (
                 <div className='button-group'>
                   <StripeCheckout
                     image={require('../../assets/payment-logo.png')}
@@ -184,14 +221,22 @@ const Balance = props => {
               )}
             </div>
           </Modal>
-          <Modal show={state.openConnect} onClose={toggleModal}> 
+          <Modal show={state.openConnect} onClose={closeAllModals}> 
                 <a href={url}><img src={Connect} /> </a>
           </Modal>
-          <Modal show={state.openWithdraw} onClose={toggleModal}>
+          <Modal show={state.openWithdraw} onClose={closeAllModals}>
                 <form onSubmit={submitHandler}>
                     <input type="number" className="support_input" value={state.withdrawalAmount} onChange={handleInputChange}></input>
                     <button type="submit" className="btnQ">Proceed to withdraw</button>
                 </form>
+          </Modal>
+          {props.paymentSuccess && (
+            <Modal show={state.paymentSuccess} onClose={closeSuccessModal}>
+                <h5>Congrats, your payout was successful</h5>     
+            </Modal>
+          )}
+          <Modal show={state.insufficientBalance} onClose={closeAllModals}> 
+                <h5>Minimum withdrawal amount is $50</h5>
           </Modal>
         </div>
       </div>
@@ -205,6 +250,7 @@ const mapStateToProps = state => {
     stripeUserId: state.auth.user.stripeUserId,
     transaction: state.transaction,
     balance: state.balance.balance,
+    paymentSuccess: state.balance.paymentSuccess,
     update: state.balance.user
   }
 }
