@@ -5,7 +5,9 @@ import {
     STRIPE_PAYMENT,
     UPDATE_BALANCE,
     REDUCE_BALANCE,
-    PAYMENT_SUCCESS
+    PAYMENT_SUCCESS,
+    PAYOUT_ERROR,
+    IS_LOADING
   } from './types'
   import axios from 'axios'
   
@@ -86,6 +88,10 @@ import {
       })
   }
 export const payoutFund = (data) => dispatch => {
+    dispatch({
+      type: IS_LOADING,
+      payload: true
+    })
     axios.post(`${process.env.REACT_APP_BASE_URL}/payments/payout`, data)
     .then(res => {
       console.log(res)
@@ -94,4 +100,17 @@ export const payoutFund = (data) => dispatch => {
         payload: res.data.status
       })
     })
+    .catch(err => {
+      dispatch({
+        type: PAYOUT_ERROR,
+        payload: { message: "we are unable to process your request now"}
+      })
+    })
+    .finally(() => {
+      dispatch({
+        type: IS_LOADING,
+        payload:false
+      })
+    })
+    
 }
