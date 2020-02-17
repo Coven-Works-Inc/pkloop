@@ -10,7 +10,7 @@ import {
   UPDATE_PROFILE_PICTURE
 } from './types'
 
-export const googleLogin = (data, history, props) => async dispatch => {
+export const googleLogin = (data, history, props) => dispatch => {
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data)
     .then(res => {
@@ -30,7 +30,7 @@ export const googleLogin = (data, history, props) => async dispatch => {
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.message
       })
     )
 }
