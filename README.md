@@ -21,8 +21,8 @@ Database: MongoDB (Atlas)
 Staging: Heroku
 Live: Digital Ocean
 
-HOW TO RUN:
-==========
+INSTALLATION: HOW TO RUN:
+========================
 Clone or download project
 cd into folder where you cloned the project and run npm ci (if you choose npm: npm is not your friend) or yarn(recommended) (if you prefer yarn)
 
@@ -36,9 +36,6 @@ Main Modules
       *Email and Password
 
 
-
-Installation
-------------
 
 
 How to Contribute
