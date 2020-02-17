@@ -12,7 +12,8 @@ import Connect from '../../assets/connect.png'
 
 const Balance = props => {
   // const { balance: { user: { balance } } } = props
-  const url = 'https://dashboard.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_G5xbYGir14T6X3N1BNHW6K0a3LMsrayQ&scope=read_write'
+  const url =
+    'https://dashboard.stripe.com/express/oauth/authorize?response_type=code&client_id=pk_live_LYJ9SGqqQIPBDokhAzDCBiIS008lZBDc9Z&scope=read_write'
   const [state, setState] = useState({
     amountMade: 0,
     modalOpen: false,
@@ -31,16 +32,16 @@ const Balance = props => {
     getUserData()
   }, [])
   useEffect(() => {
-    if(props.paymentSuccess){
+    if (props.paymentSuccess) {
       setState({
         ...state,
         paymentSuccess: true
       })
       getUserData()
-    } 
-      setTimeout(() => {
-        closeSuccessModal()
-      }, 3000)
+    }
+    setTimeout(() => {
+      closeSuccessModal()
+    }, 3000)
   }, [props.paymentSuccess])
   const closeSuccessModal = () => {
     setState({
@@ -67,9 +68,7 @@ const Balance = props => {
       ...state,
       openConnect: false,
       openWithdraw: false,
-      insufficientBalance: false,
-
-
+      insufficientBalance: false
     })
   }
   const fundWallet = () => {
@@ -111,13 +110,13 @@ const Balance = props => {
   const toggleModal = () => {
     setState({
       ...state,
-      modalOpen: !state.modalOpen,
+      modalOpen: !state.modalOpen
     })
   }
 
   const withdrawFund = () => {
-    if(props.stripeUserId){
-      if(Number(balance) > 50){
+    if (props.stripeUserId) {
+      if (Number(balance) > 50) {
         setState({
           ...state,
           openWithdraw: true
@@ -145,16 +144,16 @@ const Balance = props => {
       })
     }
   }
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const amount = Number(e.target.value)
-    if(amount <= Number(balance) && amount >= 50){
+    if (amount <= Number(balance) && amount >= 50) {
       setState({
         ...state,
         withdrawalAmount: Number(e.target.value)
       })
     }
   }
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault()
     const data = {
       amount: state.withdrawalAmount,
@@ -216,27 +215,37 @@ const Balance = props => {
               ) : (
                 <div style={{ color: 'red' }}>
                   {' '}
-                  {`A Minimum of $${29.99 - Number(balance)} is required to fund wallet`}
+                  {`A Minimum of $${29.99 -
+                    Number(balance)} is required to fund wallet`}
                 </div>
               )}
             </div>
           </Modal>
-          <Modal show={state.openConnect} onClose={closeAllModals}> 
-                <a href={url}><img src={Connect} /> </a>
+          <Modal show={state.openConnect} onClose={closeAllModals}>
+            <a href={url}>
+              <img src={Connect} />{' '}
+            </a>
           </Modal>
           <Modal show={state.openWithdraw} onClose={closeAllModals}>
-                <form onSubmit={submitHandler}>
-                    <input type="number" className="support_input" value={state.withdrawalAmount} onChange={handleInputChange}></input>
-                    <button type="submit" className="btnQ">Proceed to withdraw</button>
-                </form>
+            <form onSubmit={submitHandler}>
+              <input
+                type='number'
+                className='support_input'
+                value={state.withdrawalAmount}
+                onChange={handleInputChange}
+              ></input>
+              <button type='submit' className='btnQ'>
+                Proceed to withdraw
+              </button>
+            </form>
           </Modal>
           {props.paymentSuccess && (
             <Modal show={state.paymentSuccess} onClose={closeSuccessModal}>
-                <h5>Congrats, your payout was successful</h5>     
+              <h5>Congrats, your payout was successful</h5>
             </Modal>
           )}
-          <Modal show={state.insufficientBalance} onClose={closeAllModals}> 
-                <h5>Minimum withdrawal amount is $50</h5>
+          <Modal show={state.insufficientBalance} onClose={closeAllModals}>
+            <h5>Minimum withdrawal amount is $50</h5>
           </Modal>
         </div>
       </div>
@@ -255,4 +264,6 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { actions, getStripeId, payoutFund })(Balance)
+export default connect(mapStateToProps, { actions, getStripeId, payoutFund })(
+  Balance
+)
