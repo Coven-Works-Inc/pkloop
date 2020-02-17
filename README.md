@@ -32,7 +32,9 @@ Main Modules
 -------------
                                         
 - Authentication and Authorization
+
     *Registration*
+    
       *Email and Password
 
 
