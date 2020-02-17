@@ -1,4 +1,11 @@
-import { GET_ERRORS, UPDATE_BALANCE, SET_CURRENT_USER, STRIPE_PAYMENT, REDUCE_BALANCE } from '../actions/types'
+import 
+    { GET_ERRORS, 
+    UPDATE_BALANCE, 
+    SET_CURRENT_USER, 
+    STRIPE_PAYMENT, 
+    REDUCE_BALANCE,
+    PAYMENT_SUCCESS  
+} from '../actions/types'
 
 export default (state = {}, action) => {
     switch (action.type) {
@@ -12,6 +19,8 @@ export default (state = {}, action) => {
             return { ...state, payment: action.payload }
         case GET_ERRORS:
             return { ...state, errors: action.payload }
+        case PAYMENT_SUCCESS:
+            return { ...state, paymentSuccess: action.payload }
         default:
             return state
     }

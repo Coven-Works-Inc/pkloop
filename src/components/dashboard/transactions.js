@@ -103,10 +103,9 @@ const Transactions = props => {
           <div className='table-header'>
             <p>Date</p>
             <p>Status</p>
-            <p className="table-header-shift">Sender</p>
-            <p className="table-header-shift">Traveler</p>
-            <p className="table-header-shift">Amount Due($)</p>
-            <p className="table-header-shift">Amount Paid($)</p>
+            <p>Sender</p>
+            <p>Traveler</p>
+            <p>Amount Paid($)</p>
             <p></p>
           </div>
           {transaction === undefined ? (
@@ -125,7 +124,6 @@ const Transactions = props => {
                     <p>{trans.sender}</p>
                     <p>{trans.traveler}</p>
                     <p>{Number(trans.amountDue).toFixed(2)}</p>
-                    <p>0</p>
                   </div>
                   )
                 ))}
