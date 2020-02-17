@@ -21,6 +21,12 @@ Database: MongoDB (Atlas)
 Staging: Heroku
 Live: Digital Ocean
 
+HOW TO RUN:
+==========
+Clone or download project
+cd into folder where you cloned the project and run npm ci (if you choose npm: npm is not your friend) or yarn(recommended) (if you prefer yarn)
+
+
 
 Main Modules
 -------------
@@ -29,27 +35,19 @@ Main Modules
     *Registration*
       *Email and Password
 
-- Be awesome
-- Make things faster
+
 
 Installation
 ------------
 
-Install $project by running:
 
-    install project
-
-Contribute
+How to Contribute
 ----------
 
-- Issue Tracker: github.com/$project/$project/issues
-- Source Code: github.com/$project/$project
 
 Support
 -------
-
-If you are having issues, please let us know.
-We have a mailing list located at: project@google-groups.com
+If you have any issues, reach out to contact@mypkloop.com
 
 License
 -------
