@@ -35,7 +35,7 @@ Main Modules
 
     *Registration*
     
-      *Email and Password
+    *Email and Password*
 
 
 
