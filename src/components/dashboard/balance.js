@@ -226,17 +226,21 @@ const Balance = props => {
             </a>
           </Modal>
           <Modal show={state.openWithdraw} onClose={closeAllModals}>
-            <form onSubmit={submitHandler}>
-              <input
-                type='number'
-                className='support_input'
-                value={state.withdrawalAmount}
-                onChange={handleInputChange}
-              ></input>
-              <button type='submit' className='btnQ'>
-                Proceed to withdraw
-              </button>
-            </form>
+                {props.payoutError && <h6 style={{ color: 'red'}}>{props.payoutError.message}</h6>}
+                <h6>Enter an amount to withdraw</h6>
+                <form onSubmit={submitHandler}>
+                    <input type="number" className="support_input" value={state.withdrawalAmount} onChange={handleInputChange}></input>
+                    <button type="submit" className="btnQ">{props.isLoading ? (<span
+                        style={{ display: 'inline-block' }}
+                        className='spinner-border spinner-border-sm'
+                        role='status'
+                        aria-hidden='true'
+                      ></span>)
+                    : (
+                      <span>Withdraw</span>
+                    )}
+                    </button>
+                </form>
           </Modal>
           {props.paymentSuccess && (
             <Modal show={state.paymentSuccess} onClose={closeSuccessModal}>
@@ -259,7 +263,9 @@ const mapStateToProps = state => {
     transaction: state.transaction,
     balance: state.balance.balance,
     paymentSuccess: state.balance.paymentSuccess,
-    update: state.balance.user
+    update: state.balance.user,
+    isLoading: state.balance.isLoading,
+    payoutError: state.balance.payoutError
   }
 }
 
