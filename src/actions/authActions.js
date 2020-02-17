@@ -13,10 +13,12 @@ import {
 export const googleLogin = (data, history, props) => dispatch => {
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data)
-    .then(res => {
+    .then(async res => {
+      console.log(res)
       // Save to localStorage
       const { token, _id } = res.data.data
       // Set token to ls
+      console.log(token, _id)
       localStorage.setItem('jwtToken', token)
       localStorage.setItem('id', _id)
       // Set token to Auth header
@@ -24,13 +26,16 @@ export const googleLogin = (data, history, props) => dispatch => {
       // Decode token to get user data
       const decoded = jwt_decode(token)
       // Set current user
-      dispatch(setCurrentUser(decoded))
-      history.push('/')
+      await dispatch({
+	type: SET_CURRENT_USER,
+	payload: decoded
+	})
+      history.push('/dashboard/transactions')
     })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.message
+        payload:'Google login Error'
       })
     )
 }
