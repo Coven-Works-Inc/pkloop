@@ -4,7 +4,9 @@ import
     SET_CURRENT_USER, 
     STRIPE_PAYMENT, 
     REDUCE_BALANCE,
-    PAYMENT_SUCCESS  
+    PAYMENT_SUCCESS,
+    IS_LOADING,
+    PAYOUT_ERROR  
 } from '../actions/types'
 
 export default (state = {}, action) => {
@@ -21,6 +23,10 @@ export default (state = {}, action) => {
             return { ...state, errors: action.payload }
         case PAYMENT_SUCCESS:
             return { ...state, paymentSuccess: action.payload }
+        case IS_LOADING:
+            return {...state, isLoading: action.payload }
+        case PAYOUT_ERROR: 
+            return { ...state, payoutError: action.payload }
         default:
             return state
     }
