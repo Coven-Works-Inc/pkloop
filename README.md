@@ -1,68 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+PKLOOP
+========
+Same day global package delivery through trusted travelers around the world.
 
-In the project directory, you can run:
+The PKLOOP APP is focused on helping travelers connect seamlessly with senders and get their parcels delivered effectively
 
-### `yarn start`
+HOW EASY IT IS TO USE:
+======================
+Log onto the Platform, Fund your wallet. 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Search for a trusted traveler and connect with the traveler.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Make payment to the platform and get parcel sent.
 
-### `yarn test`
+TOOLS (TECH STACK):
+===================
+Frontend: React and Redux
+Backend: Nodejs (Express)
+Database: MongoDB (Atlas)
+Staging: Heroku
+Live: Digital Ocean
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+INSTALLATION: HOW TO RUN:
+========================
+Clone or download project
+cd into folder where you cloned the project and run npm ci (if you choose npm: npm is not your friend) or yarn(recommended) (if you prefer yarn)
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Main Modules
+-------------
+                                        
+- Authentication and Authorization
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    *Registration*
+    
+      Email and Password
+      Google and Facebook Oauth
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+How to Contribute
+----------
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+Support
+-------
+If you have any issues, reach out to contact@mypkloop.com
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+License
+-------
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The project is licensed under the BSD license.
