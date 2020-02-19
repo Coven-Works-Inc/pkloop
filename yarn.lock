@@ -5286,7 +5286,7 @@ hide-powered-by@1.1.0:
   resolved "https://registry.yarnpkg.com/hide-powered-by/-/hide-powered-by-1.1.0.tgz#be3ea9cab4bdb16f8744be873755ca663383fa7a"
   integrity sha512-Io1zA2yOA1YJslkr+AJlWSf2yWFkKjvkcL9Ni1XSUqnGLr/qRQe2UI3Cn/J9MsJht7yEVCe0SscY1HgVMujbgg==
 
-history@^4.9.0:
+history@^4.10.1, history@^4.9.0:
   version "4.10.1"
   resolved "https://registry.yarnpkg.com/history/-/history-4.10.1.tgz#33371a65e3a83b267434e2b3f3b1b4c58aad4cf3"
   integrity sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==
@@ -7468,10 +7468,10 @@ node-releases@^1.1.29, node-releases@^1.1.44:
   dependencies:
     semver "^6.3.0"
 
-node@^12.14.1:
-  version "12.14.1"
-  resolved "https://registry.yarnpkg.com/node/-/node-12.14.1.tgz#bafc71741ce7daac66e0144de402ee017780cc8c"
-  integrity sha512-+988MfwaXko1BOLXkGnzrl4eNuTw5oLVJe/VoGc1xDFl1nHchMoF1r9IuXAOH72qOPRUxgf2ZfuKRrlquZeZlw==
+node@^12.15.0:
+  version "12.16.0"
+  resolved "https://registry.yarnpkg.com/node/-/node-12.16.0.tgz#63041ce2176745698d20662ac522593f5ee866d9"
+  integrity sha512-jziWHn9r7kV/AYziUiltTL/rnMC246hmVVQp87aL26pIFJiQPP33pDrRHbexXrwdhWxXeM808ZO1o8Tl6jkurw==
   dependencies:
     node-bin-setup "^1.0.0"
 
@@ -9204,6 +9204,11 @@ react-router-dom@^5.1.2:
     react-router "5.1.2"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
+
+react-router-redux@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-4.0.8.tgz#227403596b5151e182377dab835b5d45f0f8054e"
+  integrity sha1-InQDWWtRUeGCN32rg1tdRfD4BU4=
 
 react-router@5.1.2:
   version "5.1.2"

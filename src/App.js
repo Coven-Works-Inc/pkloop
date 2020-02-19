@@ -16,6 +16,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 
+import history from './history'
+
 if (localStorage.jwtToken) {
   // Set auth token as header
   setAuthToken(localStorage.jwtToken)
@@ -46,7 +48,7 @@ function App () {
     <div className='App'>
       <Notifications />
       <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <Routes />
           <ScrollToTop />
         </Router>
