@@ -1,6 +1,7 @@
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
 import jwt_decode from 'jwt-decode'
+import history from '../history'
 
 import {
   GET_ERRORS,
@@ -10,7 +11,7 @@ import {
   UPDATE_PROFILE_PICTURE
 } from './types'
 
-export const googleLogin = (data, history, props) => dispatch => {
+export const googleLogin = data => dispatch => {
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data)
     .then(async res => {
@@ -27,15 +28,15 @@ export const googleLogin = (data, history, props) => dispatch => {
       const decoded = jwt_decode(token)
       // Set current user
       await dispatch({
-	type: SET_CURRENT_USER,
-	payload: decoded
-	})
-      history.push('/dashboard/transactions')
+        type: SET_CURRENT_USER,
+        payload: decoded
+      })
+      history.push('/')
     })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload:'Google login Error'
+        payload: 'Google login Error'
       })
     )
 }
@@ -359,15 +360,15 @@ export const updateProfilePicture = file => dispatch => {
       })
     })
 }
-export const connectStripe = (data) => dispatch => {
-  axios.post(`${process.env.REACT_APP_BASE_URL}/payments/connect`, data)
-  .then(res => {
-    console.log(res)
-  })
+export const connectStripe = data => dispatch => {
+  axios
+    .post(`${process.env.REACT_APP_BASE_URL}/payments/connect`, data)
+    .then(res => {
+      console.log(res)
+    })
 }
 export const getStripeId = () => dispatch => {
-  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/stripe`)
-  .then(res => {
+  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/stripe`).then(res => {
     console.log(res)
   })
 }

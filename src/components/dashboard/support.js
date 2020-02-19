@@ -6,8 +6,6 @@ import './support.css'
 import DashboardHeader from './header'
 import HeaderFooter from '../headerFooter'
 
-import Notification from './notification'
-
 const Support = props => {
   const [state, setState] = useState({
     modalOpen: false,
@@ -17,7 +15,7 @@ const Support = props => {
 
   useEffect(() => {
     props.fetchTickets()
-  }, [])
+  })
 
   const onButtonClick = () => {
     setState({
