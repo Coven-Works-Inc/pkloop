@@ -1,34 +1,36 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Faqs extends Component {
   state = {
     questions: [
       {
         active: true,
-        question: 'HOW DOES IT WORK?',
-        answer: `PKLoop Connects Senders looking to ship parcels with Travelers already traveling to the destination. PKLoop facilitates package delivery within 12-48 hours at the lowest cost. Visit Our HOW IT WORKS page (please insert link) for a more detailed description of the PKLoop process. Our Motto: Good vibes only! Make money while you Travel the world. 
-        
-        Monetize the space in your hand luggage or suitcase. Make an extra $200-$400 with already scheduled travel plans. 
-
-
-        For Cargo and Container Shipment: Individuals and Companies can freely advertise and list your upcoming shipment dates for Senders to find and contact you`
+        question: <p>How does PKLoop work?</p>,
+        answer: <p>PKLoop Connects Senders looking to ship parcels with Travelers already traveling to
+        the destination. PKLoop facilitates package delivery within 12-48 hours at the lowest cost.
+        Visit Our <Link to='/howitworks'>How It Works</Link> page for a more detailed description of the PKLoop process. Our Motto:
+                          Good vibes only! Make money while you Travel the world. Monetize the space in your hand luggage
+                          or suitcase. Make an extra $200-$400 with already scheduled travel plans. For Cargo and Container
+                          Shipment: Individuals and Companies can freely advertise and list your upcoming shipment dates
+        for Senders to find and contact you</p>
       },
       {
         active: false,
-        question: 'Is the PKloop app free to use?',
-        answer: `YES. PKLoop is 100% Free to access. Travelers list your trips for FREE, Cargo and Container Shipping Companies or Individuals can advertise and List your container shipment dates for FREE! For Senders, after you get matched with a traveler, agree on a transaction Fee and PKLoop collects payment on the traveler’s behalf. `
+        question: <p>Is the PKloop app free to use?</p>,
+        answer: <p>YES. PKLoop is 100% Free to access. Travelers list your trips for FREE, Cargo and Container Shipping Companies or Individuals can advertise and List your container shipment dates for FREE! For Senders, after you get matched with a traveler, agree on a transaction Fee and PKLoop collects payment on the traveler’s behalf.</p>
       },
       {
         active: false,
         question:
-          'Why Use PKLoop as opposed to Traditional Shipping companies?',
-        answer: `Traditional Same-day and Express shipping options tend to be outrageously costly. Our app compares prices across the board, displays available cost options (you can also compare pricing using attached chart). PKLoop travelers save you at least 50% in shipping fees. ($14.99 to send a 1 lb package to Canada using PKLoop vs $65 using 2-Day Express Shipping)
-        Using a PKLoop traveler means faster custom clearance (minutes or hours) as opposed to days or even weeks.`
+          <p>Why Use PKLoop as opposed to Traditional Shipping companies?</p>,
+        answer: <p>Traditional Same-day and Express shipping options tend to be outrageously costly. Our app compares prices across the board, displays available cost options (you can also compare pricing using attached chart). PKLoop travelers save you at least 50% in shipping fees. ($14.99 to send a 1 lb package to Canada using PKLoop vs $65 using 2-Day Express Shipping)
+        Using a PKLoop traveler means faster custom clearance (minutes or hours) as opposed to days or even weeks.</p>
       },
       {
         active: false,
-        question: 'Is PKLoop legal?',
-        answer: `YES. Anyone over the age of 18 can use the PKLoop Site as Sender, traveler, or recipient. You simply carry the item as you would do for a family member or a friend.`
+        question: <p> Is PKLoop legal?</p >,
+        answer: <p>YES. Anyone over the age of 18 can use the PKLoop Site as Sender, traveler, or recipient. You simply carry the item as you would do for a family member or a friend.</p>
       }
     ]
   }
@@ -43,7 +45,7 @@ class Faqs extends Component {
     })
   }
 
-  render () {
+  render() {
     return (
       <div id='faqs' className='faqs'>
         <h2>Frequently Asked Questions</h2>
