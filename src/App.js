@@ -5,7 +5,7 @@ import './Mobile.css'
 import Routes from './routes'
 import Notifications from 'react-notify-toast'
 import ScrollToTop from './utils/scrollToTop'
-import { Helmet } from 'helmet'
+// import { Helmet } from 'helmet'
 
 import jwt_decode from 'jwt-decode'
 import setAuthToken from './utils/setAuthToken'
@@ -15,6 +15,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { Provider } from 'react-redux'
 import store from './store'
+
+import history from './history'
 
 if (localStorage.jwtToken) {
   // Set auth token as header
@@ -35,18 +37,18 @@ if (localStorage.jwtToken) {
 }
 
 function App () {
-  const head = () => (
-    <Helmet>
-      <meta charSet='utf-8' />
-      <title>MyPkloop | Parcel Delivery</title>
-      <link rel='canonical' href='https://mypkloop.com' />
-    </Helmet>
-  )
+  // const head = () => (
+  //   <Helmet>
+  //     <meta charSet='utf-8' />
+  //     <title>MyPkloop | Parcel Delivery</title>
+  //     <link rel='canonical' href='https://mypkloop.com' />
+  //   </Helmet>
+  // )
   return (
     <div className='App'>
       <Notifications />
       <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <Routes />
           <ScrollToTop />
         </Router>

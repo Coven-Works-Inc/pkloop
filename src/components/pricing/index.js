@@ -4,6 +4,7 @@ import Banner from '../common/banner'
 import Cta from '../home/cta_banner'
 
 import './pricing.css'
+import PricingDocument from '../../assets/ShippingCostComparison.pdf'
 
 const Pricing = (props) => {
   return (
@@ -46,7 +47,7 @@ const Pricing = (props) => {
             <p>$5.99/lb</p>
           </div>
           <div className='base-tagline'>
-            <p><a href='http://ifemide.com/ShippingCostComparison.pdf' target='_blank'>Download Shipping Cost Comparison</a></p>
+            <p><a href={PricingDocument} target='_blank'>Download Shipping Cost Comparison</a></p>
           </div>
         </div>
       </div>
