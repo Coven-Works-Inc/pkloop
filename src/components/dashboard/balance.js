@@ -12,8 +12,7 @@ import Connect from '../../assets/connect.png'
 
 const Balance = props => {
   // const { balance: { user: { balance } } } = props
-  const url =
-    'https://dashboard.stripe.com/express/oauth/authorize?response_type=code&client_id=ca_G5xbYGir14T6X3N1BNHW6K0a3LMsrayQ&scope=read_write'
+  const url = 'https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_G5xb7HT9bbwfdK1iEnPTD2Y9dNcQgaWF&scope=read_write'
   const [state, setState] = useState({
     amountMade: 0,
     modalOpen: false,
