@@ -690,7 +690,7 @@ const Parcel = props => {
                   {Number(state.fundAmount) + Number(walletBalance) >= 29.99 ?
                     <StripeCheckout
                       image={require('../../assets/payment-logo.png')}
-                      stripeKey="pk_test_Cx38uNUbnspMKJ4AX9y6NNAs0087uf7VGa"
+                      stripeKey="pk_live_LYJ9SGqqQIPBDokhAzDCBiIS008lZBDc9Z"
                       description="Connect with a traveler"
                       name="Make payment to continue"
                       locale="auto"
