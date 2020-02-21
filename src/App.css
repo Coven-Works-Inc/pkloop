@@ -440,7 +440,7 @@ a:nth-child(2) .cta_items {
 
 .dashboard-header,
 .tos-header {
-  background: url(/static/media/sendparcel.98e335a8.jpg) no-repeat center
+  background: url(./assets/parcel.jpg) no-repeat center
     center/cover;
   height: 240px;
   width: 100%;
