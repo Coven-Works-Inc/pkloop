@@ -31,6 +31,9 @@ const Balance = props => {
     getUserData()
   }, [])
   useEffect(() => {
+    props.getStripeId()
+  })
+  useEffect(() => {
     if (props.paymentSuccess) {
       setState({
         ...state,
@@ -259,7 +262,7 @@ const Balance = props => {
 const mapStateToProps = state => {
   console.log(state)
   return {
-    stripeUserId: state.auth.user.stripeUserId,
+    stripeUserId: state.auth.stripeId,
     transaction: state.transaction,
     balance: state.balance.balance,
     paymentSuccess: state.balance.paymentSuccess,

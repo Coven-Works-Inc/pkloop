@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { fetchTravelers, getTravelers, connectTraveler } from '../../actions/travelerActions'
 import { postTransaction } from '../../actions/transActions'
 import { addInsurance } from '../../actions/costActions'
-import { Link } from 'react-router-dom'
 
 import countries from '../../countries.json'
 import cities from '../../world-cities_json.json';
@@ -15,7 +14,7 @@ import Modal from '../common/modal'
 
 import axios from 'axios'
 import StripeCheckout from 'react-stripe-checkout'
-import { reduceBalance, updateBalance } from '../../actions/balanceActions'
+import { reduceBalance } from '../../actions/balanceActions'
 import './parcel.css'
 import travelData from '../../travelers.json'
 import countriesData from '../../countries.json'
@@ -428,15 +427,6 @@ const Parcel = props => {
     //   tripId: state.travelerData._id
     // }
     const earning = state.totalAndTip === 0 ? state.parcelCost : Number(state.parcelCost) + Number(state.tipAmount)
-    const userDetails = {
-      tripId: state.travelerData._id,
-      parcelWeight: state.parcelWeight,
-      travelerId: state.travelerData.user._id,
-      amount: earning,
-      username: state.travelerData.username,
-      message: state.message,
-      tip: Number(state.tipAmount)
-    }
     const insuranceData = {
       item: state.parcelItem,
       amount: Number(state.insuranceCost),
@@ -447,6 +437,16 @@ const Parcel = props => {
     props.reduceBalance({ amount: totalCost})
     if(state.checked){
       props.addInsurance(insuranceData)
+    }
+    const userDetails = {
+      tripId: state.travelerData._id,
+      parcelWeight: state.parcelWeight,
+      travelerId: state.travelerData.user._id,
+      amount: earning,
+      totalAmount: totalCost,
+      username: state.travelerData.username,
+      message: state.message,
+      tip: Number(state.tipAmount)
     }
     // props.postTransaction(transactionData))
   }
@@ -629,7 +629,8 @@ const Parcel = props => {
                 {
                   state.modal1 && (
                     <div>
-                        <h3 style={{ display: state.checked ?" none" : "block"}}>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h3>
+                        {props.user.escrowAmount && <h3>You have ${props.user.escrowAmount} in your account</h3>}
+                        <h5 style={{ display: state.checked ?" none" : "block"}}>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h5>
                         <h3>Total cost: ${state.tipAmount === 0 ? Number(state.totalCost): state.totalAndTip}</h3>
                         <textarea style={{ display: state.checked ?" none" : "block"}} className="support_input" placeholder="Leave a message for traveler" onChange={messageChangeHandler}></textarea>
                         <label className="container">Add insurance
@@ -667,7 +668,7 @@ const Parcel = props => {
                           <button className="btnQ inverse-btnQ medium" onClick={toggleModal}>No, Change weight</button>
                         </div>
                         {/* {state.totalCost >= Number(walletBalance) && Number(state.tipAmount) !== 0 && <h5>You need an addtional ${Number(state.totalCost - Number(walletBalance)).toFixed(2)} to continue with this transaction</h5>} */}
-                        {state.totalAndTip >= Number(walletBalance) && <h6 style={{ color: 'red'}}>You need an addtional ${Number(state.totalAndTip - Number(walletBalance)).toFixed(2)} to continue with this transaction</h6>}
+                        {state.totalAndTip + (0.05 * state.totalAndTip) >= Number(walletBalance) && <h6 style={{ color: 'red'}}>You need an addtional ${Number((state.totalAndTip + (0.05 * state.totalAndTip)) - Number(walletBalance)).toFixed(2)} to continue with this transaction</h6>}
                     </div>
                   )
 
@@ -724,6 +725,7 @@ const Parcel = props => {
         </Modal>
       )
       }
+      
       {/* {state.sameUser && <Modal show={state.sameUser} onClose={closeModal}><div>Can't connect with your self</div></Modal>} */}
     </HeaderFooter>
   )

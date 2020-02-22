@@ -1,6 +1,6 @@
 import isEmpty from '../utils/validation'
 
-import { SET_CURRENT_USER, SET_TOKEN, GET_ERRORS, LOADING, UPDATE_PROFILE_PICTURE } from '../actions/types'
+import { SET_CURRENT_USER, SET_TOKEN, GET_ERRORS, LOADING, UPDATE_PROFILE_PICTURE, GET_STRIPE_ID } from '../actions/types'
 
 const initialState = {
   isAuthenticated: false,
@@ -35,12 +35,16 @@ export default function (state = initialState, action) {
         ...state,
         loading: action.payload
       }
-    case UPDATE_PROFILE_PICTURE: {
+    case UPDATE_PROFILE_PICTURE: 
       return {
         ...state, 
         data: action.payload
       }
-    }
+    case GET_STRIPE_ID: 
+      return {
+        ...state,
+        stripeId: action.payload
+      }
 
     default:
       return state

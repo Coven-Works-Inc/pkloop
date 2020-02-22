@@ -52,7 +52,6 @@ import {
       })
   }
   export const setCurrentUser = () => dispatch => {
-    console.log('...calling fetchuser')
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/users/fetchUser`)
       .then(response => {
