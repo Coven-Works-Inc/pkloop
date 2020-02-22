@@ -14,7 +14,7 @@ import Modal from '../common/modal'
 
 import axios from 'axios'
 import StripeCheckout from 'react-stripe-checkout'
-import { reduceBalance } from '../../actions/balanceActions'
+import { reduceBalance, reduceEscrow } from '../../actions/balanceActions'
 import './parcel.css'
 import travelData from '../../travelers.json'
 import countriesData from '../../countries.json'
@@ -60,7 +60,8 @@ const Parcel = props => {
     message: '',
     tipAmount: 0,
     tipChecked: false,
-    disabled: false
+    disabled: false,
+    escrowModal: false
   })
 
   useEffect(() => {
@@ -71,6 +72,12 @@ const Parcel = props => {
     setState({
       ...state,
       disabled: Number(walletBalance) > 0 && state.totalAndTip > Number(walletBalance)
+    })
+  }, [state.totalAndTip])
+  useEffect(() => {
+    setState({
+      ...state,
+      escrowDisabled: Number(props.user.user.escrowAmount) + Number(walletBalance) < state.totalAndTip
     })
   }, [state.totalAndTip])
   useEffect(() => {
@@ -256,7 +263,6 @@ const Parcel = props => {
   }
 
   const handleConnect = (traveler) => {
-    console.log(traveler)
     if (!props.user.isAuthenticated) {
       setState({
         ...state,
@@ -283,10 +289,10 @@ const Parcel = props => {
     setModal(false)
   }
   const handleParcelCost = (traveler) => {
-    console.log(traveler)
     const localMultiplier = 1.5
     const intlMultiplier = 5.99
     const parcelWeight = parseInt(state.parcelWeight)
+    const escrowModal = Boolean(props.user.user.escrowAmount)
     if (traveler.locationCountry && traveler.destinationCountry) {
       if ((traveler.locationCountry === 'United States' || traveler.locationCountry === 'Canada') && (traveler.destinationCountry === 'United States' || traveler.destinationCountry === 'Canada')) {
         if (parcelWeight <= 5) {
@@ -316,6 +322,7 @@ const Parcel = props => {
           setState({
             ...state,
             modalOpen: true,
+            escrowModal,
             isAuthenticated: true,
             isLocal: true,
             modal1: true,
@@ -335,6 +342,7 @@ const Parcel = props => {
           setState({
             ...state,
             modalOpen: true,
+            escrowModal,
             modal1: true,
             isAuthenticated: true,
             isLocal: false,
@@ -352,6 +360,7 @@ const Parcel = props => {
           setState({
             ...state,
             modalOpen: true,
+            escrowModal,
             isAuthenticated: true,
             modal1: true,
             isLocal: false,
@@ -372,6 +381,7 @@ const Parcel = props => {
         setState({
           ...state,
           modalOpen: true,
+          escrowModal,
           isAuthenticated: true,
           modal1: true,
           isLocal: false,
@@ -389,6 +399,7 @@ const Parcel = props => {
         setState({
           ...state,
           modalOpen: true,
+          escrowModal,
           isAuthenticated: true,
           isLocal: false,
           modal1: true,
@@ -399,16 +410,6 @@ const Parcel = props => {
       }
     }
   }
-
-  console.log(props)
-
-  // fetchCountries = () => {
-  //   let countriesList = ''
-  //   this.state.countries.map((country, index) => {
-  //     countriesList += <option value={country[index]}>{country[index]}</option>
-  //   })
-  //   return countriesList
-  // }
   const connectToTraveler = () => {
 
     // props.history.push({
@@ -434,7 +435,16 @@ const Parcel = props => {
     }
     props.connectTraveler(userDetails)
     const totalCost = state.totalAndTip === 0 ? Number(state.totalCost) + (0.05 * Number(state.totalCost)) : Number(state.totalAndTip) + (0.05 * Number(state.totalAndTip))
-    props.reduceBalance({ amount: totalCost})
+    if(Number(props.user.user.escrowAmount) > totalCost) {
+      props.reduceEscrow({ amount: totalCost })
+    } else {
+      if(Number(props.user.user.escrowAmount) > 0){
+        props.reduceEscrow({ amount: totalCost })
+        props.reduceBalance({ amount: totalCost - Number(props.user.user.escrowAmount)})
+      } else {
+        props.reduceBalance({ amount: totalCost})
+      }
+    }
     if(state.checked){
       props.addInsurance(insuranceData)
     }
@@ -495,6 +505,12 @@ const Parcel = props => {
         totalAndTip: Number(Number(state.totalCost) + Number(e.target.value)).toFixed(2),
       })
     }
+  }
+  const closeEscrowModal = () => {
+    setState({
+      ...state,
+      escrowModal: false
+    })
   }
   const {
     travelers: { travelers }
@@ -629,7 +645,6 @@ const Parcel = props => {
                 {
                   state.modal1 && (
                     <div>
-                        {props.user.escrowAmount && <h3>You have ${props.user.escrowAmount} in your account</h3>}
                         <h5 style={{ display: state.checked ?" none" : "block"}}>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h5>
                         <h3>Total cost: ${state.tipAmount === 0 ? Number(state.totalCost): state.totalAndTip}</h3>
                         <textarea style={{ display: state.checked ?" none" : "block"}} className="support_input" placeholder="Leave a message for traveler" onChange={messageChangeHandler}></textarea>
@@ -724,8 +739,7 @@ const Parcel = props => {
           <div>You've successfully paid for this transaction</div>
         </Modal>
       )
-      }
-      
+      }     
       {/* {state.sameUser && <Modal show={state.sameUser} onClose={closeModal}><div>Can't connect with your self</div></Modal>} */}
     </HeaderFooter>
   )
@@ -738,4 +752,10 @@ const mapStateToProps = state => ({
   status: state.balance.status,
 })
 
-export default connect(mapStateToProps, { fetchTravelers, getTravelers, connectTraveler, addInsurance, postTransaction, reduceBalance })(Parcel)
+export default connect(mapStateToProps, { fetchTravelers, 
+                                          getTravelers, 
+                                          connectTraveler, 
+                                          addInsurance, 
+                                          postTransaction, 
+                                          reduceBalance, 
+                                          reduceEscrow })(Parcel)

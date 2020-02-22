@@ -110,6 +110,11 @@ export const payoutFund = (data) => dispatch => {
         type: IS_LOADING,
         payload:false
       })
-    })
-    
+    }) 
+}
+export const reduceEscrow = (data) => dispatch => {
+  axios.put(`${process.env.REACT_APP_BASE_URL}/users/reduceEscrow`, data)
+  .then(res => {
+    console.log(res)
+  })
 }
