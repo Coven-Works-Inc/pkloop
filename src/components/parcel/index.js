@@ -23,6 +23,7 @@ const Parcel = props => {
 
   const [modal, setModal] = useState(false)
   const [walletBalance, setBalance] = useState(0)
+  const [escrow, setEscrow] = useState(0)
   const [state, setState] = useState({
     locationCountry: '',
     locationCity: '',
@@ -71,13 +72,7 @@ const Parcel = props => {
     console.log(state)
     setState({
       ...state,
-      disabled: Number(walletBalance) > 0 && state.totalAndTip > Number(walletBalance)
-    })
-  }, [state.totalAndTip])
-  useEffect(() => {
-    setState({
-      ...state,
-      escrowDisabled: Number(props.user.user.escrowAmount) + Number(walletBalance) < state.totalAndTip
+      disabled: Number(walletBalance) > 0 && state.totalAndTip > Number(walletBalance) + Number(escrow)
     })
   }, [state.totalAndTip])
   useEffect(() => {
@@ -162,7 +157,6 @@ const Parcel = props => {
   }, [])
   useEffect(() => {
     if(!state.checked){
-      console.log(state.parcelCost)
       setState({
         ...state,
          totalCost: state.parcelCost + state.tipAmount,
@@ -174,7 +168,6 @@ const Parcel = props => {
   }, [state.checked])
   useEffect(() => {
     if(!state.tipChecked){
-      console.log(state.parcelCost)
       setState({
         ...state,
         totalCost: Number(state.parcelCost) + Number(state.insuranceCost),
@@ -206,8 +199,8 @@ const Parcel = props => {
   const getUserData = () => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/users/fetchUser`)
       .then(response => {
-        console.log(response.data)
         setBalance(response.data.data.balance)
+        setEscrow(response.data.data.escrowAmount)
       })
       .catch(error => {
         console.log(error)
@@ -254,7 +247,6 @@ const Parcel = props => {
 
     axios.post(`${process.env.REACT_APP_BASE_URL}/payments`, data)
       .then(response => {
-        console.log(response)
         fundWallet();
       })
       .catch(error => {
@@ -427,26 +419,12 @@ const Parcel = props => {
     //   trip: state.travelerData,
     //   tripId: state.travelerData._id
     // }
+    const totalCost = state.totalAndTip === 0 ? Number(state.totalCost) + (0.05 * Number(state.totalCost)) : Number(state.totalAndTip) + (0.05 * Number(state.totalAndTip))
     const earning = state.totalAndTip === 0 ? state.parcelCost : Number(state.parcelCost) + Number(state.tipAmount)
     const insuranceData = {
       item: state.parcelItem,
       amount: Number(state.insuranceCost),
       total: state.parcelWorth
-    }
-    props.connectTraveler(userDetails)
-    const totalCost = state.totalAndTip === 0 ? Number(state.totalCost) + (0.05 * Number(state.totalCost)) : Number(state.totalAndTip) + (0.05 * Number(state.totalAndTip))
-    if(Number(props.user.user.escrowAmount) > totalCost) {
-      props.reduceEscrow({ amount: totalCost })
-    } else {
-      if(Number(props.user.user.escrowAmount) > 0){
-        props.reduceEscrow({ amount: totalCost })
-        props.reduceBalance({ amount: totalCost - Number(props.user.user.escrowAmount)})
-      } else {
-        props.reduceBalance({ amount: totalCost})
-      }
-    }
-    if(state.checked){
-      props.addInsurance(insuranceData)
     }
     const userDetails = {
       tripId: state.travelerData._id,
@@ -457,6 +435,20 @@ const Parcel = props => {
       username: state.travelerData.username,
       message: state.message,
       tip: Number(state.tipAmount)
+    }
+    props.connectTraveler(userDetails)
+    if(Number(escrow) > totalCost) {
+      props.reduceEscrow({ amount: totalCost })
+    } else {
+      if(Number(escrow) > 0){
+        props.reduceEscrow({ amount: Number(escrow) })
+        props.reduceBalance({ amount: totalCost - Number(escrow)})
+      } else {
+        props.reduceBalance({ amount: totalCost})
+      }
+    }
+    if(state.checked){
+      props.addInsurance(insuranceData)
     }
     // props.postTransaction(transactionData))
   }
@@ -640,13 +632,14 @@ const Parcel = props => {
         {state.isAuthenticated &&
           <div>
             {
-              Number(walletBalance) >= Number(state.parcelCost) &&
+              Number(walletBalance) + Number(escrow) >= Number(state.parcelCost) &&
               <div>
                 {
                   state.modal1 && (
                     <div>
+                        {escrow && <h5>You have ${escrow} in your escrow wallet</h5>}
                         <h5 style={{ display: state.checked ?" none" : "block"}}>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h5>
-                        <h3>Total cost: ${state.tipAmount === 0 ? Number(state.totalCost): state.totalAndTip}</h3>
+                        <h5>Total cost: ${state.tipAmount === 0 ? Number(state.totalCost): state.totalAndTip}</h5>
                         <textarea style={{ display: state.checked ?" none" : "block"}} className="support_input" placeholder="Leave a message for traveler" onChange={messageChangeHandler}></textarea>
                         <label className="container">Add insurance
                           <input type="checkbox" checked={state.checked} onChange={handleCheckbox} />
@@ -683,7 +676,7 @@ const Parcel = props => {
                           <button className="btnQ inverse-btnQ medium" onClick={toggleModal}>No, Change weight</button>
                         </div>
                         {/* {state.totalCost >= Number(walletBalance) && Number(state.tipAmount) !== 0 && <h5>You need an addtional ${Number(state.totalCost - Number(walletBalance)).toFixed(2)} to continue with this transaction</h5>} */}
-                        {state.totalAndTip + (0.05 * state.totalAndTip) >= Number(walletBalance) && <h6 style={{ color: 'red'}}>You need an addtional ${Number((state.totalAndTip + (0.05 * state.totalAndTip)) - Number(walletBalance)).toFixed(2)} to continue with this transaction</h6>}
+                        {state.totalAndTip + (0.05 * state.totalAndTip) >= Number(walletBalance) + Number(escrow) && <h6 style={{ color: 'red'}}>You need an addtional ${Number((state.totalAndTip + (0.05 * state.totalAndTip)) - Number(walletBalance) - Number(escrow)).toFixed(2)} to continue with this transaction</h6>}
                     </div>
                   )
 
@@ -696,14 +689,14 @@ const Parcel = props => {
               </div>
             }
             {
-              Number(walletBalance) < Number(state.parcelCost) &&
+              Number(walletBalance) + Number(escrow)< Number(state.parcelCost) &&
               <div>
                 <h2>Your balance is insufficient to connect with a traveler. Fund your wallet to continue</h2>
                 <br />
                 <input type="number" className="popupInput" name="fundAmount" placeholder="Enter Amount" value={state.fundAmount} onChange={onChangeHandler} />
                 <br />
                 <div className="button-group">
-                  {Number(state.fundAmount) + Number(walletBalance) >= 29.99 ?
+                  {Number(state.fundAmount) + Number(walletBalance) + Number(escrow) >= 29.99 ?
                     <StripeCheckout
                       image={require('../../assets/payment-logo.png')}
                       stripeKey="pk_live_LYJ9SGqqQIPBDokhAzDCBiIS008lZBDc9Z"
@@ -714,7 +707,7 @@ const Parcel = props => {
                       token={onToken}
                       panelLabel="Pay"
                     /> :
-                    <div>{`Minimum of $${29.99 - Number(walletBalance)} is required to fund wallet`}</div>
+                    <div>{`Minimum of $${29.99 - Number(walletBalance) - Number(escrow)} is required to fund wallet`}</div>
                   }
                 </div>
               </div>

@@ -26,6 +26,7 @@ const Balance = props => {
 
   const [balance, setBalance] = useState(0)
   const [amountMade, setAmountMade] = useState(0)
+  const [escrow, setEscrow] = useState(0)
 
   useEffect(() => {
     getUserData()
@@ -57,9 +58,9 @@ const Balance = props => {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/users/fetchUser`)
       .then(response => {
-        console.log(response.data)
         setBalance(response.data.data.balance)
         setAmountMade(response.data.data.amountMade)
+        setEscrow(response.data.data.escrowAmount)
       })
       .catch(error => {
         console.log(error)
@@ -187,6 +188,10 @@ const Balance = props => {
               <button onClick={toggleModal}>Fund Balance</button>
             </div>
           </div>
+            <div className='left-side'>
+              <p>My PKLoop Escrow Balance</p>
+              <h2>${Number(escrow).toFixed(2)}</h2>
+            </div>
 
           <Modal show={state.modalOpen} onClose={toggleModal}>
             <div>
