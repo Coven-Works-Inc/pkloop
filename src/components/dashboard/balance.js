@@ -178,7 +178,7 @@ const Balance = props => {
             <p>Amount made(all time)</p>
             <h2>${amountMade}</h2>
           </div>
-          <div className='balance'>
+          <div className='balance' style={{ marginRight: '20px'}}>
             <div className='left-side'>
               <p>My PKLoop Balance</p>
               <h2>${Number(balance).toFixed(2)}</h2>
@@ -188,10 +188,12 @@ const Balance = props => {
               <button onClick={toggleModal}>Fund Balance</button>
             </div>
           </div>
+          <div className='balance'>
             <div className='left-side'>
               <p>My PKLoop Escrow Balance</p>
               <h2>${Number(escrow).toFixed(2)}</h2>
             </div>
+          </div>
 
           <Modal show={state.modalOpen} onClose={toggleModal}>
             <div>
