@@ -26,10 +26,14 @@ const Balance = props => {
 
   const [balance, setBalance] = useState(0)
   const [amountMade, setAmountMade] = useState(0)
+  const [escrow, setEscrow] = useState(0)
 
   useEffect(() => {
     getUserData()
   }, [])
+  useEffect(() => {
+    props.getStripeId()
+  })
   useEffect(() => {
     if (props.paymentSuccess) {
       setState({
@@ -54,9 +58,9 @@ const Balance = props => {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/users/fetchUser`)
       .then(response => {
-        console.log(response.data)
         setBalance(response.data.data.balance)
         setAmountMade(response.data.data.amountMade)
+        setEscrow(response.data.data.escrowAmount)
       })
       .catch(error => {
         console.log(error)
@@ -174,7 +178,7 @@ const Balance = props => {
             <p>Amount made(all time)</p>
             <h2>${amountMade}</h2>
           </div>
-          <div className='balance'>
+          <div className='balance' style={{ marginRight: '20px'}}>
             <div className='left-side'>
               <p>My PKLoop Balance</p>
               <h2>${Number(balance).toFixed(2)}</h2>
@@ -182,6 +186,12 @@ const Balance = props => {
             <div className='right-side'>
               <button onClick={withdrawFund}>Withdraw</button>
               <button onClick={toggleModal}>Fund Balance</button>
+            </div>
+          </div>
+          <div className='balance'>
+            <div className='left-side'>
+              <p>My PKLoop Escrow Balance</p>
+              <h2>${Number(escrow).toFixed(2)}</h2>
             </div>
           </div>
 
@@ -259,7 +269,7 @@ const Balance = props => {
 const mapStateToProps = state => {
   console.log(state)
   return {
-    stripeUserId: state.auth.user.stripeUserId,
+    stripeUserId: state.auth.stripeId,
     transaction: state.transaction,
     balance: state.balance.balance,
     paymentSuccess: state.balance.paymentSuccess,

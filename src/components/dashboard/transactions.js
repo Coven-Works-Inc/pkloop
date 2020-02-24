@@ -45,6 +45,7 @@ const Transactions = props => {
       tripId: sender.tripId,
       action: 'accept',
       amount: sender.amount,
+      totalAmount: sender.totalAmount,
       notifId: sender._id
     }
     setAction('accept')
@@ -56,6 +57,7 @@ const Transactions = props => {
       tripId: sender.tripId,
       action: 'decline',
       amount: sender.amount,
+      totalAmount: sender.totalAmount,
       notifId: sender._id
     }
     setAction('decline')
