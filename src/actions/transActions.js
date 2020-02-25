@@ -13,6 +13,7 @@ export const getTransaction = () => async dispatch => {
     const response = await axios.get(
       `${process.env.REACT_APP_BASE_URL}/transactions/fetchMyTransactions`
     )
+    console.log(response)
     dispatch({
       type: FETCH_TRANSACTIONS,
       payload: response.data.data
