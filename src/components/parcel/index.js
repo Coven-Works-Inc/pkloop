@@ -637,7 +637,7 @@ const Parcel = props => {
                 {
                   state.modal1 && (
                     <div>
-                        {escrow && <h5>You have ${escrow} in your escrow wallet</h5>}
+                        {escrow > 0 && <h5>You have ${Number(escrow).toFixed(2)} in your escrow wallet</h5>}
                         <h5 style={{ display: state.checked ?" none" : "block"}}>Are you sure you want to send {state.parcelWeight} pounds of weight? Costs ${state.parcelCost}</h5>
                         <h5>Total cost: ${state.tipAmount === 0 ? Number(state.totalCost): state.totalAndTip}</h5>
                         <textarea style={{ display: state.checked ?" none" : "block"}} className="support_input" placeholder="Leave a message for traveler" onChange={messageChangeHandler}></textarea>
