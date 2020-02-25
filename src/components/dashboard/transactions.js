@@ -46,7 +46,8 @@ const Transactions = props => {
       action: 'accept',
       amount: sender.amount,
       totalAmount: sender.totalAmount,
-      notifId: sender._id
+      notifId: sender._id,
+      transId: sender.transactionId
     }
     setAction('accept')
     props.respondToRequest(data)
@@ -58,7 +59,8 @@ const Transactions = props => {
       action: 'decline',
       amount: sender.amount,
       totalAmount: sender.totalAmount,
-      notifId: sender._id
+      notifId: sender._id, 
+      transId: sender.transactionId
     }
     setAction('decline')
     props.respondToRequest(data)
@@ -102,7 +104,7 @@ const Transactions = props => {
         ))}
         {console.log(transaction)}
         <div className='transactions'>
-          <h2 style={{ textAlign: "center"}}>Sender transaction</h2>
+          <h2 style={{ textAlign: "center"}}>Transactions</h2>
           <div className='table-header'>
             <p>Date</p>
             <p>Status</p>
