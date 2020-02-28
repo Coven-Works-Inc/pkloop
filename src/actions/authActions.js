@@ -356,10 +356,10 @@ export const connectStripe = data => dispatch => {
 }
 export const getStripeId = () => dispatch => {
   axios.get(`${process.env.REACT_APP_BASE_URL}/payments/stripe`)
-  .then(res => {
-    dispatch({
-      type: GET_STRIPE_ID,
-      payload: res.data.stripeId
+    .then(res => {
+      dispatch({
+        type: GET_STRIPE_ID,
+        payload: res.data.stripeId
+      })
     })
-  })
 }
