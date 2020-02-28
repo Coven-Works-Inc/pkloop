@@ -35,6 +35,7 @@ class Header extends Component {
             <Link to='/'>
               <img src={Logo} alt='Logo' />
             </Link>
+            <p>beta</p>
           </div>
           <div className='menu-links'>
             <ul>
@@ -136,6 +137,7 @@ class Header extends Component {
             <Link to='/'>
               <img src={Logo} alt='Logo' />
             </Link>
+            <p>beta</p>
           </div>
           <div className='menu-links'>
             <ul>
