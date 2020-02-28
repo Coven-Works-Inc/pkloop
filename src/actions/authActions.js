@@ -8,7 +8,8 @@ import {
   SET_CURRENT_USER,
   LOADING,
   SET_TOKEN,
-  UPDATE_PROFILE_PICTURE
+  UPDATE_PROFILE_PICTURE,
+  GET_STRIPE_ID
 } from './types'
 
 export const googleLogin = data => dispatch => {
@@ -53,21 +54,7 @@ export const facebookLogin = (data, history, props) => dispatch => {
       const decoded = jwt_decode(token)
       dispatch(setCurrentUser(decoded, token))
       const location = props.location
-      // if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/parcel')
-      // }  else if (location.redirect === '/trips' || localStorage.getItem('redirect') === '/trips') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/trips')
-      // } else if (location.redirect === '/shippers' || localStorage.getItem('redirect') === '/shippers') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/shippers')
-      // }
-      if (location.redirect) {
-        history.push(`${location.redirect}`)
-      } else {
-        history.push('/dashboard/transactions')
-      }
+      history.push('/dashboard/transactions')
     })
     .catch(err => {
       dispatch({
@@ -368,7 +355,11 @@ export const connectStripe = data => dispatch => {
     })
 }
 export const getStripeId = () => dispatch => {
-  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/stripe`).then(res => {
-    console.log(res)
-  })
+  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/stripe`)
+    .then(res => {
+      dispatch({
+        type: GET_STRIPE_ID,
+        payload: res.data.stripeId
+      })
+    })
 }

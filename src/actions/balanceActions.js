@@ -7,7 +7,8 @@ import {
     REDUCE_BALANCE,
     PAYMENT_SUCCESS,
     PAYOUT_ERROR,
-    IS_LOADING
+    IS_LOADING,
+    REDUCE_ESCROW
   } from './types'
   import axios from 'axios'
   
@@ -52,7 +53,6 @@ import {
       })
   }
   export const setCurrentUser = () => dispatch => {
-    console.log('...calling fetchuser')
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/users/fetchUser`)
       .then(response => {
@@ -111,6 +111,15 @@ export const payoutFund = (data) => dispatch => {
         type: IS_LOADING,
         payload:false
       })
+    }) 
+}
+export const reduceEscrow = (data) => dispatch => {
+  axios.put(`${process.env.REACT_APP_BASE_URL}/users/reduceEscrow`, data)
+  .then(res => {
+    console.log(res)
+    dispatch({
+      type: REDUCE_ESCROW,
+      payload: res.status
     })
-    
+  })
 }

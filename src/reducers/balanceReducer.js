@@ -6,7 +6,8 @@ import
     REDUCE_BALANCE,
     PAYMENT_SUCCESS,
     IS_LOADING,
-    PAYOUT_ERROR  
+    PAYOUT_ERROR,  
+    REDUCE_ESCROW
 } from '../actions/types'
 
 export default (state = {}, action) => {
@@ -27,6 +28,8 @@ export default (state = {}, action) => {
             return {...state, isLoading: action.payload }
         case PAYOUT_ERROR: 
             return { ...state, payoutError: action.payload }
+        case REDUCE_ESCROW: 
+            return { ...state, status: action.payload }
         default:
             return state
     }

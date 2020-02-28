@@ -440,7 +440,7 @@ a:nth-child(2) .cta_items {
 
 .dashboard-header,
 .tos-header {
-  background: url(./assets/parcel.jpg) no-repeat center center/cover;
+  background: url('./assets/parcel.jpg') no-repeat center center/cover;
   height: 240px;
   width: 100%;
   display: flex;
@@ -796,15 +796,16 @@ a:nth-child(2) .cta_items {
 
 .balance-section {
   margin: 4rem auto;
-  width: 70%;
-  max-width: 800px;
+  width: 80%;
+  max-width: 1080px;
   /* background-color: #fff; */
   /* padding: 5rem; */
   display: flex;
+  justify-content: center;
 }
 
 .balance-section .amount {
-  flex: 1;
+  /* flex: 1; */
   background-color: var(--secondary-color);
   padding: 3rem;
   margin-right: 1.5rem;
@@ -813,7 +814,7 @@ a:nth-child(2) .cta_items {
 }
 
 .balance-section .balance {
-  flex: 2.5;
+  /* flex: 2.5; */
   background-color: var(--primary-color);
   padding: 3rem;
   max-width: 550px;
@@ -836,6 +837,10 @@ a:nth-child(2) .cta_items {
   font-weight: 500;
 }
 
+.balance-section .balance .left-side {
+  margin-right: 2rem;
+}
+
 .balance .right-side button {
   display: block;
   padding: 10px 0px;
@@ -848,7 +853,7 @@ a:nth-child(2) .cta_items {
 }
 
 .balance .right-side button:first-child {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 /* END OF My Balance Styles */
