@@ -4,6 +4,7 @@ import HeaderFooter from '../headerFooter'
 import './faq.css'
 
 import { Link } from 'react-router-dom'
+import FAQDocument from '../../assets/PKLOOP_FREQUENTLY_ASKED_QUESTIONS.pdf'
 
 class index extends Component {
   state = {
@@ -14,9 +15,9 @@ class index extends Component {
         answer: <p>PKLoop Connects Senders looking to ship parcels with Travelers already traveling to
         the destination. PKLoop facilitates package delivery within 12-48 hours at the lowest cost.
         Visit Our <Link to='/howitworks'>How It Works</Link> page for a more detailed description of the PKLoop process. Our Motto:
-                      Good vibes only! Make money while you Travel the world. Monetize the space in your hand luggage
-                      or suitcase. Make an extra $200-$400 with already scheduled travel plans. For Cargo and Container
-                      Shipment: Individuals and Companies can freely advertise and list your upcoming shipment dates
+                          Good vibes only! Make money while you Travel the world. Monetize the space in your hand luggage
+                          or suitcase. Make an extra $200-$400 with already scheduled travel plans. For Cargo and Container
+                          Shipment: Individuals and Companies can freely advertise and list your upcoming shipment dates
         for Senders to find and contact you</p>
       },
       {
@@ -33,7 +34,7 @@ class index extends Component {
       },
       {
         active: false,
-        question: <p> Is PKLoop legal ?</p >,
+        question: <p> Is PKLoop legal?</p >,
         answer: <p>YES. Anyone over the age of 18 can use the PKLoop Site as Sender, traveler, or recipient. You simply carry the item as you would do for a family member or a friend.</p>
       },
       {
@@ -104,7 +105,7 @@ class index extends Component {
             </div>
           ))}
           <div className='full-faq'>
-            <p><a href='http://ifemide.com/PKLOOP_FREQUENTLY_ASKED_QUESTIONS.pdf' target='_blank'>Download Full FAQ</a></p>
+            <p><a href={FAQDocument} target='_blank'>Download Full FAQ</a></p>
           </div>
         </div>
       </HeaderFooter>

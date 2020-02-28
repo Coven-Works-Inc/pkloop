@@ -34,6 +34,10 @@ class Verify extends Component {
     }
   }
 
+  resendLink () {
+    
+  }
+
   render () {
     const { errors } = this.state
     console.log(errors)
@@ -46,7 +50,7 @@ class Verify extends Component {
               A link has been sent to your mail. Follow the instructions to
               complete this process.
             </p>
-            <button className='btnQ'>Resend Link</button>
+            <button className='btnQ' onClick={resendLink}>Resend Link</button>
           </div>
         )}
         {this.state.verified && (
