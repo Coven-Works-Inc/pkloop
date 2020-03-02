@@ -125,7 +125,7 @@ const Transactions = props => {
                   {transaction.map((trans, index) => (
                     <div key={index} className='table-row'>
                     <p>{trans.date.split('T')[0]}</p>
-                    <p className='completed'>{trans.status}</p>
+                    <p className='completed'>{trans.status  === 'Accepted' && new Date(trans.date.split('T')[0]) < new Date() ? 'In process' : trans.status}</p>
                     <p>{trans.sender}</p>
                     <p>{trans.traveler}</p>
                     <p>{trans.role}</p>
