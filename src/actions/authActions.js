@@ -134,10 +134,10 @@ export const loginUser = (userData, history, props) => dispatch => {
       //   localStorage.removeItem('redirect')
       //   history.push('/shippers')
       // }
-      if (location.redirect) {
-        history.push(`${location.redirect}`)
-      } else {
+      if (location.redirect === '/') {
         history.push('/parcel')
+      } else {
+        history.push(`${location.redirect}`)
       }
     })
     .catch(err => {
