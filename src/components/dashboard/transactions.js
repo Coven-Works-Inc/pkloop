@@ -126,10 +126,10 @@ const Transactions = props => {
                     <div key={index} className='table-row'>
                     <p>{trans.date.split('T')[0]}</p>
                     <p className='completed'>{trans.status  === 'Accepted' && new Date(trans.date.split('T')[0]) < new Date() ? 'In process' : trans.status}</p>
-                    <p>{trans.sender}</p>
-                    <p>{trans.traveler}</p>
-                    <p>{trans.role}</p>
-                    <p>{Number(trans.amountDue).toFixed(2)}</p>
+                    <p className="table-header-shift">{trans.sender}</p>
+                    <p className="table-header-shift-trav">{trans.traveler}</p>
+                    <p className="table-header-shift">{trans.role}</p>
+                    <p className="table-header-shift">{Number(trans.amountDue).toFixed(2)}</p>
                   </div>
                 ))}
                 </div>  
