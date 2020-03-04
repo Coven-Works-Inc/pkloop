@@ -137,7 +137,7 @@ export const loginUser = (userData, history, props) => dispatch => {
       if (location.redirect) {
         history.push(`${location.redirect}`)
       } else {
-        history.push('/dashboard/transactions')
+        history.push('/parcel')
       }
     })
     .catch(err => {
@@ -355,11 +355,10 @@ export const connectStripe = data => dispatch => {
     })
 }
 export const getStripeId = () => dispatch => {
-  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/stripe`)
-    .then(res => {
-      dispatch({
-        type: GET_STRIPE_ID,
-        payload: res.data.stripeId
-      })
+  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/stripe`).then(res => {
+    dispatch({
+      type: GET_STRIPE_ID,
+      payload: res.data.stripeId
     })
+  })
 }
