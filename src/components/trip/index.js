@@ -298,7 +298,7 @@ class index extends Component {
           </div>
         </section>
         <Modal show={this.state.modalOpen} onClose={this.toggleModal}>
-          <h5 className="trip-modal">Trip successfully posted</h5>
+          <h5 className="trip-modal">Trip successfully posted, We would let you know when you have a new connection</h5>
         </Modal>
       </HeaderFooter>
     )
