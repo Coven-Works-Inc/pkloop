@@ -1,4 +1,5 @@
 import React from 'react'
+import Img from 'react-image'
 // import HeaderFooter from '../headerFooter'
 // import Banner from '../common/banner'
 // import Card from '../common/card'
@@ -46,7 +47,7 @@ const Travelers = props => {
         travelers.map((traveler, key) => (
           <div key={key} className='travel-card'>
             <div className='card-left'>
-              <img
+              <Img
                 src={traveler.photo}
                 alt=''
                 style={{
