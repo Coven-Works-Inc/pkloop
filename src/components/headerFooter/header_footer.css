@@ -1,5 +1,6 @@
 .footerdiv {
-    margin: 40px 150px;
+    margin: 40px auto;
+    width: 90%;
     padding: 0;
 }
 .footers {

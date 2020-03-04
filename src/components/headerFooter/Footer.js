@@ -4,19 +4,29 @@ import { Link } from 'react-router-dom'
 
 import Icon from '../../assets/Footer Icon.png'
 
-function Footer () {
+function Footer() {
   return (
     <div className='footerdiv'>
       <div className='footers'>
         <img src={Icon} alt='' />
         <ul className='links'>
           <li>
+            <Link to='/about' style={{ textDecoration: 'none', color: '#000' }}>
+              About Us
+            </Link>
+          </li>
+          <li>
+            <Link to='/faq' style={{ textDecoration: 'none', color: '#000' }}>
+              FAQ
+            </Link>
+          </li>
+          <li>
             <Link to='/terms' style={{ textDecoration: 'none', color: '#000' }}>
               Terms of Service
             </Link>
           </li>
           <li>
-            <Link to='/privacy' style={{ textDecoration: 'none', color: '#000'}}>
+            <Link to='/privacy' style={{ textDecoration: 'none', color: '#000' }}>
               Privacy Policy
             </Link>
           </li>
@@ -27,7 +37,7 @@ function Footer () {
           </li>
           <li>
             <Link to='/contact' style={{ textDecoration: 'none', color: '#000' }}>
-              Contact us
+              Contact Us
             </Link>
           </li>
         </ul>
@@ -38,14 +48,14 @@ function Footer () {
             rel='noopener noreferrer'
           >
             {' '}
-            <i className='fab fa-facebook-f ' style={{ color: '#000'}}/>
+            <i className='fab fa-facebook-f ' style={{ color: '#000' }} />
           </a>
           <a
             href='https://www.twitter.com/mypkloop/'
             target='_blank'
             rel='noopener noreferrer'
           >
-            <i className='fab fa-twitter '  style={{ color: '#000'}}/>
+            <i className='fab fa-twitter ' style={{ color: '#000' }} />
           </a>
 
           <a
@@ -53,7 +63,7 @@ function Footer () {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <i className='fab fa-instagram '  style={{ color: '#000'}}/>
+            <i className='fab fa-instagram ' style={{ color: '#000' }} />
           </a>
         </div>
       </div>
