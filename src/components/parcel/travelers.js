@@ -5,7 +5,7 @@ import Img from 'react-image'
 // import Card from '../common/card'
 // import travelData from '../../travelers.json'
 
-import ProfilePicture from '../../assets/default-picture.jpg'
+import ProfilePicture from '../../assets/profilepic.png'
 // import Jephtah from '../../assets/jephtah.JPG'
 
 import './travel.css'
@@ -48,7 +48,7 @@ const Travelers = props => {
           <div key={key} className='travel-card'>
             <div className='card-left'>
               <Img
-                src={traveler.photo}
+                src={ProfilePicture}
                 alt=''
                 style={{
                   height: '150px',
