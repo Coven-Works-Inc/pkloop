@@ -16,11 +16,8 @@ export const googleLogin = data => dispatch => {
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data)
     .then(async res => {
-      console.log(res)
       // Save to localStorage
       const { token, _id } = res.data.data
-      // Set token to ls
-      console.log(token, _id)
       localStorage.setItem('jwtToken', token)
       localStorage.setItem('id', _id)
       // Set token to Auth header

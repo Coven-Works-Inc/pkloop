@@ -48,7 +48,7 @@ const Travelers = props => {
           <div key={key} className='travel-card'>
             <div className='card-left'>
               <Img
-                src={ProfilePicture}
+                src={traveler.photo ? traveler.photo : ProfilePicture}
                 alt=''
                 style={{
                   height: '150px',
