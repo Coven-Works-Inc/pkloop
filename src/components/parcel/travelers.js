@@ -1,10 +1,11 @@
 import React from 'react'
+import Img from 'react-image'
 // import HeaderFooter from '../headerFooter'
 // import Banner from '../common/banner'
 // import Card from '../common/card'
 // import travelData from '../../travelers.json'
 
-import ProfilePicture from '../../assets/default-picture.jpg'
+import ProfilePicture from '../../assets/profilepic.png'
 // import Jephtah from '../../assets/jephtah.JPG'
 
 import './travel.css'
@@ -46,8 +47,8 @@ const Travelers = props => {
         travelers.map((traveler, key) => (
           <div key={key} className='travel-card'>
             <div className='card-left'>
-              <img
-                src={ProfilePicture}
+              <Img
+                src={traveler.photo ? traveler.photo : ProfilePicture}
                 alt=''
                 style={{
                   height: '150px',

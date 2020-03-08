@@ -12,7 +12,7 @@ class Verify extends Component {
     errors: {}
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.state.token) {
       this.props.verify(this.state.token, this.props.history)
     }
@@ -22,7 +22,7 @@ class Verify extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push('/dashboard')
     }
@@ -34,7 +34,11 @@ class Verify extends Component {
     }
   }
 
-  render () {
+  resendLink() {
+
+  }
+
+  render() {
     const { errors } = this.state
     console.log(errors)
 
@@ -46,7 +50,7 @@ class Verify extends Component {
               A link has been sent to your mail. Follow the instructions to
               complete this process.
             </p>
-            <button className='btnQ'>Resend Link</button>
+            <button className='btnQ' onClick={this.resendLink}>Resend Link</button>
           </div>
         )}
         {this.state.verified && (
