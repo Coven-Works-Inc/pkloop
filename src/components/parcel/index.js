@@ -69,24 +69,23 @@ const Parcel = props => {
     props.fetchTravelers()
   }, [])
   useEffect(() => {
-    console.log(state)
     setState({
       ...state,
       disabled: Number(walletBalance) > 0 && state.totalAndTip > Number(walletBalance) + Number(escrow)
     })
   }, [state.totalAndTip])
-  useEffect(() => {
-    setTimeout(() => {
-      if (modal) {
-        setModal(false)
-        setState({
-          ...state,
-          modal1: false,
-          modalOpen: false
-        })
-      }
-    }, 1000)
-  }, [modal])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (modal) {
+  //       setModal(false)
+  //       setState({
+  //         ...state,
+  //         modal1: false,
+  //         modalOpen: false
+  //       })
+  //     }
+  //   }, 1000)
+  // }, [modal])
   const onFromCountryChangeHandler = e => {
     const selectedCountry = countries.filter(country => country.name === e.target.value)
     const city = cities.filter(city => city.country === selectedCountry[0].name)
@@ -188,6 +187,7 @@ const Parcel = props => {
       modal1: false,
       modal2: false,
       totalCost: 0,
+      modalOpen: false,
       totalAndTip: 0,
       message: '',
       tipAmount: 0,
