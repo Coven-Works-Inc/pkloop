@@ -184,8 +184,19 @@ button[disabled]{
 .transactions .table-header-shift{
   position: relative;
   right: 50px;
+  text-align: left;
 }
 .transactions .table-header-shift-trav{
   position: relative;
   right: 30px;
+  text-align: left;
+}
+.transactions .table-header-shift-role{
+  position: relative;
+  right: 100px;
+  text-align: left;
+}
+.role {
+  position: relative;
+  left: -60px;
 }

@@ -110,9 +110,8 @@ const Transactions = props => {
             <p>Status</p>
             <p>Sender</p>
             <p>Traveler</p>
-            <p>Role</p>
+            <p className="role">Role</p>
             <p>Amount Paid($)</p>
-            <p></p>
           </div>
           {transaction === undefined ? (
             <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</h3>
@@ -129,8 +128,9 @@ const Transactions = props => {
                     <p className='completed'>{trans.status  === 'Accepted' && new Date(trans.date.split('T')[0]) <= new Date() ? 'In process' : trans.status}</p>
                     <p className="table-header-shift">{trans.sender}</p>
                     <p className="table-header-shift-trav">{trans.traveler}</p>
-                    <p className="table-header-shift">{trans.role}</p>
+                    <p className="table-header-shift-role">{trans.role}</p>
                     <p className="table-header-shift">{Number(trans.amountDue).toFixed(2)}</p>
+                    {/* {trans.status === 'Accepted' && trans.role === 'Sender' && <button className="cancel">Cancel</button>} */}
                   </div>
                 ))}
                 </div>  
