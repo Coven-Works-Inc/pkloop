@@ -115,6 +115,7 @@ const Transactions = props => {
             <p>Traveler</p>
             <p>Role</p>
             <p>Amount Paid($)</p>
+            <p>Actions</p>
             <p></p>
           </div>
           {transaction === undefined ? (
@@ -143,7 +144,19 @@ const Transactions = props => {
                     {Number(trans.amountDue).toFixed(2)}
                   </p>
                   <p className='table-header-shift'>
-                    {trans.status === 'Pending' && <button> cancel </button>}
+                    {trans.status === 'Pending' && (
+                      <button
+                        style={{
+                          backgroundColor: 'red',
+                          color: '#fff',
+                          padding: '0.2rem 0.5rem',
+                          borderRadius: '0.2rem'
+                        }}
+                      >
+                        {' '}
+                        cancel{' '}
+                      </button>
+                    )}
                   </p>
                 </div>
               ))}
