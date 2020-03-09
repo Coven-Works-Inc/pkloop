@@ -400,4 +400,36 @@ body{
     line-height: 1.5rem;
 }
 
+.trip_container {
+    width: 100%;
+    padding: 1rem;
+}
+
+.trip_container .country_div {
+    flex-direction: column;
+}
+
+.country_div>div:first-child, 
+.country_div select:first-child {
+    margin-right: 0rem;
+}
+
+.country_div>div label {
+    width: 40%;
+}
+
+.country_div>div select {
+    width: 60%;
+    height: 60px;
+}
+
+.trip_container .dup {
+    flex-direction: column;
+}
+
+.trip_container .dup input:first-child {
+    margin-right: 0rem;
+    margin-bottom: 1rem;
+}
+
 }
