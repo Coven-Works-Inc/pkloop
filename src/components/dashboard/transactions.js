@@ -18,6 +18,7 @@ const Transactions = props => {
   const [sender, setSender] = useState({})
   const [success, setSuccess] = useState(false)
   const [action, setAction] = useState('')
+  const [cancel, setCancel] =  useState(false)
   useEffect(() => {
     props.getNotif()
   },[])
@@ -38,6 +39,7 @@ const Transactions = props => {
   }
   const closeModal = () =>{
     setModal(false)
+    setCancel(false)
   }
   const acceptRequest = () => {
     const data = {
@@ -65,6 +67,9 @@ const Transactions = props => {
     setAction('decline')
     props.respondToRequest(data)
 
+  }
+  const showCancel = () => {
+    setCancel(true)
   }
   const {
     transaction: { transaction }
@@ -130,10 +135,10 @@ const Transactions = props => {
                     <p className="table-header-shift-trav">{trans.traveler}</p>
                     <p className="table-header-shift-role">{trans.role}</p>
                     <p className="table-header-shift">{Number(trans.amountDue).toFixed(2)}</p>
-                    {/* {trans.status === 'Accepted' && trans.role === 'Sender' && <button className="cancel">Cancel</button>} */}
+                    {trans.status === 'Accepted' || trans.status ===  'Pending' && trans.role === 'Sender' && <button className="cancel" onClick={showCancel}>Cancel</button>}
                   </div>
                 ))}
-                </div>  
+                </div>
               )}
         </div>
       </div>
@@ -155,6 +160,13 @@ const Transactions = props => {
             <button className='btnQ inverse-btnQ' onClick={declineRequest}>Decline</button>
           </div>
       </Modal>
+      <Modal show={cancel} onClose={closeModal}>
+            <h5>Are you sure you want to cancel this transaction?<br />Cancellation attracts a 5% platform fee</h5>
+            <div className="button-group">
+              <button className='btnQ'>Cancel</button>
+              <button className='btnQ inverse-btnQ'>Don't cancel</button>
+          </div>
+      </Modal>
     </HeaderFooter>
   )
 }
@@ -169,4 +181,8 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getTransaction, getTrip, respondToRequest, getNotif })(withRouter(Transactions))
+export default connect(mapStateToProps, { getTransaction, 
+                                          getTrip, 
+                                          respondToRequest, 
+                                          getNotif 
+                                        })(withRouter(Transactions))
