@@ -19,7 +19,7 @@ Frontend: React and Redux
 Backend: Nodejs (Express)
 Database: MongoDB (Atlas)
 Staging: Heroku
-Live: Digital Ocean
+Production: Digital Ocean
 
 INSTALLATION: HOW TO RUN:
 ========================
@@ -29,7 +29,7 @@ cd into folder where you cloned the project and run npm ci (if you choose npm: n
 
 
 Main Modules
--------------
+=============
                                         
 - Authentication and Authorization
 
@@ -37,8 +37,20 @@ Main Modules
     
       Email and Password
       Google and Facebook Oauth
-
-
+      
+- Send Parcel
+    
+    *Connect with a Traveler*
+    
+        Inapp messaging
+        Email connection
+ 
+ - Payment
+    
+     *Transactions on the platform*
+     
+        Implementation done with Stripe
+        
 
 
 How to Contribute
