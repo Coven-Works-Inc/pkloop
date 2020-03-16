@@ -15,11 +15,11 @@ Make payment to the platform and get parcel sent.
 
 TOOLS (TECH STACK):
 ===================
-Frontend: React and Redux
-Backend: Nodejs (Express)
-Database: MongoDB (Atlas)
-Staging: Heroku
-Production: Digital Ocean
+**Frontend: React and Redux
+**Backend: Nodejs (Express)
+**Database: MongoDB (Atlas)
+**Staging: Heroku
+**Production: Digital Ocean
 
 INSTALLATION: HOW TO RUN:
 ========================
