@@ -17,6 +17,7 @@ const Transactions = props => {
   const [sender, setSender] = useState({})
   const [success, setSuccess] = useState(false)
   const [action, setAction] = useState('')
+  const [cancel, setCancel] =  useState(false)
   useEffect(() => {
     props.getNotif()
   }, [])
@@ -37,6 +38,7 @@ const Transactions = props => {
   }
   const closeModal = () => {
     setModal(false)
+    setCancel(false)
   }
   const acceptRequest = () => {
     const data = {
@@ -63,6 +65,9 @@ const Transactions = props => {
     }
     setAction('decline')
     props.respondToRequest(data)
+  }
+  const showCancel = () => {
+    setCancel(true)
   }
   const {
     transaction: { transaction }
@@ -113,10 +118,9 @@ const Transactions = props => {
             <p>Status</p>
             <p>Sender</p>
             <p>Traveler</p>
-            <p>Role</p>
+            <p className="role">Role</p>
             <p>Amount Paid($)</p>
             <p>Actions</p>
-            <p></p>
           </div>
           {transaction === undefined ? (
             <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>
@@ -127,41 +131,21 @@ const Transactions = props => {
               You do not have any transactions yet
             </h2>
           ) : (
-            <div>
-              {transaction.map((trans, index) => (
-                <div key={index} className='table-row'>
-                  <p>{trans.date.split('T')[0]}</p>
-                  <p className='completed'>
-                    {trans.status === 'Accepted' &&
-                    new Date(trans.date.split('T')[0]) < new Date()
-                      ? 'In process'
-                      : trans.status}
-                  </p>
-                  <p className='table-header-shift'>{trans.sender}</p>
-                  <p className='table-header-shift-trav'>{trans.traveler}</p>
-                  <p className='table-header-shift'>{trans.role}</p>
-                  <p className='table-header-shift'>
-                    {Number(trans.amountDue).toFixed(2)}
-                  </p>
-                  <p className='table-header-shift'>
-                    {trans.status === 'Pending' && (
-                      <button
-                        style={{
-                          backgroundColor: 'red',
-                          color: '#fff',
-                          padding: '0.2rem 0.5rem',
-                          borderRadius: '0.2rem'
-                        }}
-                      >
-                        {' '}
-                        cancel{' '}
-                      </button>
-                    )}
-                  </p>
+                <div>
+                  {transaction.map((trans, index) => (
+                    <div key={index} className='table-row'>
+                      {console.log(trans)}
+                    <p>{trans.date.split('T')[0]}</p>
+                    <p className='completed'>{trans.status  === 'Accepted' && new Date(trans.date.split('T')[0]) <= new Date() ? 'In process' : trans.status}</p>
+                    <p className="table-header-shift">{trans.sender}</p>
+                    <p className="table-header-shift-trav">{trans.traveler}</p>
+                    <p className="table-header-shift-role">{trans.role}</p>
+                    <p className="table-header-shift">{Number(trans.amountDue).toFixed(2)}</p>
+                    {trans.status === 'Accepted' || trans.status ===  'Pending' && trans.role === 'Sender' && <button className="cancel" onClick={showCancel}>Cancel</button>}
+                  </div>
+                ))}
                 </div>
-              ))}
-            </div>
-          )}
+              )}
         </div>
       </div>
       <Modal show={modal} onClose={closeModal}>
@@ -203,6 +187,13 @@ const Transactions = props => {
           </button>
         </div>
       </Modal>
+      <Modal show={cancel} onClose={closeModal}>
+            <h5>Are you sure you want to cancel this transaction?<br />Cancellation attracts a 5% platform fee</h5>
+            <div className="button-group">
+              <button className='btnQ'>Cancel</button>
+              <button className='btnQ inverse-btnQ'>Don't cancel</button>
+          </div>
+      </Modal>
     </HeaderFooter>
   )
 }
@@ -217,9 +208,8 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {
-  getTransaction,
-  getTrip,
-  respondToRequest,
-  getNotif
-})(withRouter(Transactions))
+export default connect(mapStateToProps, { getTransaction, 
+                                          getTrip, 
+                                          respondToRequest, 
+                                          getNotif 
+                                        })(withRouter(Transactions))

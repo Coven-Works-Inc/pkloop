@@ -157,5 +157,12 @@ button:disabled {
     flex-wrap: wrap;
   }
 }
-
+.cancel {
+  background-color: white;
+  color: red;
+  position: relative;
+  left: 80px;
+  border: 1px solid red;
+  padding: 10px 20px;
+}
 /*** END OF STYLE FOR NOTIFICATIONS COMPONENT ***/
