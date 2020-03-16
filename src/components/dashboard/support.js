@@ -57,9 +57,7 @@ const Support = props => {
   return (
     <HeaderFooter redirect={props.location}>
       <div className='dashboard-header'>
-        <h2>
-          Support
-          </h2>
+        <h2>Support</h2>
       </div>
       <div>
         <DashboardHeader />
@@ -69,7 +67,7 @@ const Support = props => {
             <h2>My Support Tickets</h2>
             <button className='btnSmall' onClick={onButtonClick}>
               Open a new ticket
-        </button>
+            </button>
           </div>
           <div className='table-header'>
             <p>Status</p>
@@ -87,18 +85,18 @@ const Support = props => {
           ) : tickets.length === 0 ? (
             <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>
               You do not any Tickets yet
-        </h3>
+            </h3>
           ) : (
-                tickets.map((ticket, index) => (
-                  <div className='table-row'>
-                    <p>{ticket.status}</p>
-                    <p>{ticket.subject}</p>
-                    <p>{ticket.ticketId}</p>
-                    <p>{ticket.createdAt.split('T')[0]}</p>
-                    <p className='open'>See details</p>
-                  </div>
-                ))
-              )}
+            tickets.map((ticket, index) => (
+              <div className='table-row'>
+                <p>{ticket.status}</p>
+                <p>{ticket.subject}</p>
+                <p>{ticket.ticketId}</p>
+                <p>{ticket.createdAt.split('T')[0]}</p>
+                {/* <p className='open'>See details</p> */}
+              </div>
+            ))
+          )}
           <Modal show={state.modalOpen} onClose={onModalClose}>
             <h2>Open a new support ticket</h2>
             <div className='support-form__group'>
@@ -123,7 +121,7 @@ const Support = props => {
                   style={{ fontSize: '1rem' }}
                 >
                   Submit
-            </button>
+                </button>
               </form>
             </div>
           </Modal>

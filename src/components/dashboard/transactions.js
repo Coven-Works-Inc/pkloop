@@ -9,7 +9,6 @@ import HeaderFooter from '../headerFooter'
 import Notification from './notification'
 import Modal from '../common/modal'
 
-
 // import Notification from './notification'
 
 const Transactions = props => {
@@ -21,23 +20,23 @@ const Transactions = props => {
   const [cancel, setCancel] =  useState(false)
   useEffect(() => {
     props.getNotif()
-  },[])
+  }, [])
   useEffect(() => {
-      if(props.transaction.res.status){
-        setSuccess(true)
-        setTimeout(() => {
-          setModal(false)
-        }, 3000)
-      }
-      console.log(props.transaction.res)
+    if (props.transaction.res.status) {
+      setSuccess(true)
+      setTimeout(() => {
+        setModal(false)
+      }, 3000)
+    }
+    console.log(props.transaction.res)
   }, [props.transaction.res])
-  const showTrip = (notif) => {
+  const showTrip = notif => {
     props.getTrip(notif.tripId)
     setModal(true)
     console.log(notif)
     setSender(notif)
   }
-  const closeModal = () =>{
+  const closeModal = () => {
     setModal(false)
     setCancel(false)
   }
@@ -61,12 +60,11 @@ const Transactions = props => {
       action: 'decline',
       amount: sender.amount,
       totalAmount: sender.totalAmount,
-      notifId: sender._id, 
+      notifId: sender._id,
       transId: sender.transactionId
     }
     setAction('decline')
     props.respondToRequest(data)
-
   }
   const showCancel = () => {
     setCancel(true)
@@ -78,7 +76,7 @@ const Transactions = props => {
   useEffect(() => {
     props.getTransaction()
   }, [])
-  const handleClick = async (trans) => {
+  const handleClick = async trans => {
     if (trans.role === 'Sender') {
       props.getTrip(trans.tripId)
       props.history.push({
@@ -97,19 +95,24 @@ const Transactions = props => {
   return (
     <HeaderFooter redirect={props.location}>
       <div className='dashboard-header'>
-        <h2>
-          My Transactions
-          </h2>
+        <h2>My Transactions</h2>
       </div>
       <div>
         <DashboardHeader />
         {/* <Notification message="Sender wants you to deliver a parcel" /> */}
-        {props.notifs && props.notifs.map(notif => (
-          <div> <Notification message={notif.notify} showTripDetails={() => showTrip(notif)}/> </div>
-        ))}
+        {props.notifs &&
+          props.notifs.map(notif => (
+            <div>
+              {' '}
+              <Notification
+                message={notif.notify}
+                showTripDetails={() => showTrip(notif)}
+              />{' '}
+            </div>
+          ))}
         {console.log(transaction)}
         <div className='transactions'>
-          <h2 style={{ textAlign: "center"}}>Transactions</h2>
+          <h2 style={{ textAlign: 'center' }}>Transactions</h2>
           <div className='table-header'>
             <p>Date</p>
             <p>Status</p>
@@ -117,13 +120,16 @@ const Transactions = props => {
             <p>Traveler</p>
             <p className="role">Role</p>
             <p>Amount Paid($)</p>
+            <p>Actions</p>
           </div>
           {transaction === undefined ? (
-            <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Loading...</h3>
+            <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>
+              Loading...
+            </h3>
           ) : transaction.length === 0 ? (
             <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
               You do not have any transactions yet
-          </h2>
+            </h2>
           ) : (
                 <div>
                   {transaction.map((trans, index) => (
@@ -143,22 +149,43 @@ const Transactions = props => {
         </div>
       </div>
       <Modal show={modal} onClose={closeModal}>
-          {success && <div style={{ color: 'green'}}>{action === 'accept' ? `Transaction successful` : null}</div>}
-          {success && <div style={{ color: 'green'}}>{action === 'decline' ? `Transaction declined` : null}</div>}
-          Sender<h5>{sender.username ? sender.username : sender.sender}</h5>
-          From<h5>{props.trip.locationCountry} , {props.trip.locationCity}</h5>
-          To<h5>{props.trip.destinationCountry} , {props.trip.destinationCity}</h5>
-          Arrival Date<h5>{props.trip.arrivalDate && props.trip.arrivalDate.split('T')[0]}</h5>
-          Parcel Size<h5>{props.trip.parcelSize}</h5>
-          Parcel weight<h5>{sender.parcelWeight}</h5>
-          Maximum Parcel weight<h5>{props.trip.parcelWeight}</h5>
-          Means of Transportation<h5>{props.trip.transport}</h5>
-          Tip<h5>${sender.tip}</h5>
-          <br />
-          <div className="button-group">
-            <button className='btnQ' onClick={acceptRequest}>Accept</button>
-            <button className='btnQ inverse-btnQ' onClick={declineRequest}>Decline</button>
+        {success && (
+          <div style={{ color: 'green' }}>
+            {action === 'accept' ? `Transaction successful` : null}
           </div>
+        )}
+        {success && (
+          <div style={{ color: 'green' }}>
+            {action === 'decline' ? `Transaction declined` : null}
+          </div>
+        )}
+        Sender<h5>{sender.username ? sender.username : sender.sender}</h5>
+        From
+        <h5>
+          {props.trip.locationCountry} , {props.trip.locationCity}
+        </h5>
+        To
+        <h5>
+          {props.trip.destinationCountry} , {props.trip.destinationCity}
+        </h5>
+        Arrival Date
+        <h5>
+          {props.trip.arrivalDate && props.trip.arrivalDate.split('T')[0]}
+        </h5>
+        Parcel Size<h5>{props.trip.parcelSize}</h5>
+        Parcel weight<h5>{sender.parcelWeight}</h5>
+        Maximum Parcel weight<h5>{props.trip.parcelWeight}</h5>
+        Means of Transportation<h5>{props.trip.transport}</h5>
+        Tip<h5>${sender.tip}</h5>
+        <br />
+        <div className='button-group'>
+          <button className='btnQ' onClick={acceptRequest}>
+            Accept
+          </button>
+          <button className='btnQ inverse-btnQ' onClick={declineRequest}>
+            Decline
+          </button>
+        </div>
       </Modal>
       <Modal show={cancel} onClose={closeModal}>
             <h5>Are you sure you want to cancel this transaction?<br />Cancellation attracts a 5% platform fee</h5>
@@ -177,7 +204,7 @@ const mapStateToProps = state => {
     username: state.auth.user.username,
     transaction: state.transaction,
     trip: state.trips.trip.data,
-    notifs: state.transaction.notif,
+    notifs: state.transaction.notif
   }
 }
 

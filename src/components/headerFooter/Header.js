@@ -35,6 +35,7 @@ class Header extends Component {
             <Link to='/'>
               <img src={Logo} alt='Logo' />
             </Link>
+            <p>beta</p>
           </div>
           <div className='menu-links'>
             <ul>
@@ -60,16 +61,10 @@ class Header extends Component {
                 <Link to='/pricing'>Pricing</Link>
               </li>
               <li>
-                <Link to='/faq'>FAQ</Link>
-              </li>
-              <li>
-                <Link to='/about'>About us</Link>
-              </li>
-              <li>
                 <Link to='/parcel'>Send Parcel</Link>
               </li>
               <li>
-                <Link to='/trips'>List your trip</Link>
+                <Link to='/trips'>List Your Trip</Link>
               </li>
               <li>
                 <Link to='/dashboard/transactions'>Dashboard</Link>
@@ -101,16 +96,10 @@ class Header extends Component {
                 <Link to='/pricing'>Pricing</Link>
               </li>
               <li>
-                <Link to='/faq'>FAQs</Link>
-              </li>
-              <li>
-                <Link to='/about'>About us</Link>
-              </li>
-              <li>
                 <Link to='/parcel'>Send Parcel</Link>
               </li>
               <li>
-                <Link to='/trips'>List your trip</Link>
+                <Link to='/trips'>List Your Trip</Link>
               </li>
               <li>
                 <Link to='/dashboard/transactions'>Dashboard</Link>
@@ -136,6 +125,7 @@ class Header extends Component {
             <Link to='/'>
               <img src={Logo} alt='Logo' />
             </Link>
+            <p>beta</p>
           </div>
           <div className='menu-links'>
             <ul>
@@ -149,16 +139,10 @@ class Header extends Component {
                 <Link to='/pricing'>Pricing</Link>
               </li>
               <li>
-                <Link to='/faq'>FAQ</Link>
-              </li>
-              <li>
-                <Link to='/about'>About us</Link>
-              </li>
-              <li>
                 <Link to='/parcel'>Send Parcel</Link>
               </li>
               <li>
-                <Link to='/trips'>List your trip</Link>
+                <Link to='/trips'>List Your Trip</Link>
               </li>
               <li>
                 <Link to={{ pathname: '/login', redirect: this.props.redirect.pathname }}>Log in</Link>
@@ -183,16 +167,10 @@ class Header extends Component {
                 <Link to='/pricing'>Pricing</Link>
               </li>
               <li>
-                <Link to='/faq'>FAQs</Link>
-              </li>
-              <li>
-                <Link to='/about'>About us</Link>
-              </li>
-              <li>
                 <Link to='/parcel'>Send Parcel</Link>
               </li>
               <li>
-                <Link to='/trips'>List your trip</Link>
+                <Link to='/trips'>List Your Trip</Link>
               </li>
               <li>
                 <Link to={{ pathname: '/login', redirect: this.props.redirect.pathname }}>Log in</Link>

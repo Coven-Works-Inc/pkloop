@@ -1,11 +1,7 @@
-import React from 'react'
-// import HeaderFooter from '../headerFooter'
-// import Banner from '../common/banner'
-// import Card from '../common/card'
-// import travelData from '../../travelers.json'
-
-import ProfilePicture from '../../assets/default-picture.jpg'
-// import Jephtah from '../../assets/jephtah.JPG'
+import React, { Fragment } from 'react'
+import Img from 'react-image'
+import { Link } from 'react-router-dom'
+import ProfilePicture from '../../assets/profilepic.png'
 
 import './travel.css'
 
@@ -41,13 +37,55 @@ const Travelers = props => {
       {travelers === undefined ? (
         <h3>Loading...</h3>
       ) : travelers.length === 0 ? (
-        <h3>No Traveler found</h3>
+        <div>
+          <div>
+            <h2>
+              <b>There is no traveler going your route currently.</b>
+            </h2>
+          </div>
+          <br />
+          <div>
+            <h4>
+              To get a notification when there is a traveler available for your
+              route <br />
+            </h4>
+            <div>
+              <Link to='/register'>
+                <button
+                  style={{
+                    backgroundColor: '#00bdbe',
+                    color: '#fff',
+                    padding: '0.7rem 1rem',
+                    fontSize: '1.2rem',
+                    borderRadius: '0.3rem'
+                  }}
+                >
+                  Register
+                </button>{' '}
+              </Link>
+              or{' '}
+              <Link to='/login'>
+                <button
+                  style={{
+                    backgroundColor: '#00bdbe',
+                    color: '#fff',
+                    padding: '0.7rem 2rem',
+                    fontSize: '1.2rem',
+                    borderRadius: '0.3rem'
+                  }}
+                >
+                  Login
+                </button>{' '}
+              </Link>
+            </div>
+          </div>
+        </div>
       ) : (
         travelers.map((traveler, key) => (
           <div key={key} className='travel-card'>
             <div className='card-left'>
-              <img
-                src={ProfilePicture}
+              <Img
+                src={traveler.photo ? traveler.photo : ProfilePicture}
                 alt=''
                 style={{
                   height: '150px',

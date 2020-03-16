@@ -175,4 +175,19 @@ footer{
 .loginright, .regright {
     display: none;
 }
+
+.footers {
+    display: flex;
+    align-items: center;
+}
+
+.footers ul.links {
+    width: 70%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footers ul.links li:first-child {
+    margin-bottom: 1rem;
+}
 }

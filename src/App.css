@@ -440,8 +440,7 @@ a:nth-child(2) .cta_items {
 
 .dashboard-header,
 .tos-header {
-  background: url('./assets/parcel.jpg') no-repeat center
-    center/cover;
+  background: url('./assets/parcel.jpg') no-repeat center center/cover;
   height: 240px;
   width: 100%;
   display: flex;
@@ -619,10 +618,10 @@ a:nth-child(2) .cta_items {
 .pending-row {
   background-color: #00bdbe;
   color: #ffffff;
-  -webkit-animation: bg-flash 1s infinite;  /* Safari 4+ */
-  -moz-animation: bg-flash 1s infinite;  /* Fx 5+ */
-  -o-animation: bg-flash 1s infinite;  /* Opera 12+ */
-  animation: bg-flash 1s infinite;  /* IE 10+, Fx 29+ */
+  -webkit-animation: bg-flash 1s infinite; /* Safari 4+ */
+  -moz-animation: bg-flash 1s infinite; /* Fx 5+ */
+  -o-animation: bg-flash 1s infinite; /* Opera 12+ */
+  animation: bg-flash 1s infinite; /* IE 10+, Fx 29+ */
 }
 
 .pending-row p.open,
@@ -630,20 +629,34 @@ a:nth-child(2) .cta_items {
 .pending-row p.pending,
 .pending-row p.completed {
   color: #ffffff;
-  -webkit-animation: para-flash 1s infinite;  /* Safari 4+ */
-  -moz-animation: para-flash 1s infinite;  /* Fx 5+ */
-  -o-animation: para-flash 1s infinite;  /* Opera 12+ */
-  animation: para-flash 1s infinite;  /* IE 10+, Fx 29+ */
+  -webkit-animation: para-flash 1s infinite; /* Safari 4+ */
+  -moz-animation: para-flash 1s infinite; /* Fx 5+ */
+  -o-animation: para-flash 1s infinite; /* Opera 12+ */
+  animation: para-flash 1s infinite; /* IE 10+, Fx 29+ */
 }
 
 @keyframes bg-flash {
-  0%, 30% { background-color: #00bdbe; color: #ffffff; }
-  70%, 100% { background-color: #ffffff; color: #212529; }
+  0%,
+  30% {
+    background-color: #00bdbe;
+    color: #ffffff;
+  }
+  70%,
+  100% {
+    background-color: #ffffff;
+    color: #212529;
+  }
 }
 
 @keyframes para-flash {
-  0%, 30% { color: #ffffff; }
-  70%, 100% { color: #212529; }
+  0%,
+  30% {
+    color: #ffffff;
+  }
+  70%,
+  100% {
+    color: #212529;
+  }
 }
 
 /* END OF User Dashboard Styles */
@@ -783,15 +796,16 @@ a:nth-child(2) .cta_items {
 
 .balance-section {
   margin: 4rem auto;
-  width: 70%;
-  max-width: 800px;
+  width: 80%;
+  max-width: 1080px;
   /* background-color: #fff; */
   /* padding: 5rem; */
   display: flex;
+  justify-content: center;
 }
 
 .balance-section .amount {
-  flex: 1;
+  /* flex: 1; */
   background-color: var(--secondary-color);
   padding: 3rem;
   margin-right: 1.5rem;
@@ -800,7 +814,7 @@ a:nth-child(2) .cta_items {
 }
 
 .balance-section .balance {
-  flex: 2.5;
+  /* flex: 2.5; */
   background-color: var(--primary-color);
   padding: 3rem;
   max-width: 550px;
@@ -823,6 +837,10 @@ a:nth-child(2) .cta_items {
   font-weight: 500;
 }
 
+.balance-section .balance .left-side {
+  margin-right: 2rem;
+}
+
 .balance .right-side button {
   display: block;
   padding: 10px 0px;
@@ -835,7 +853,7 @@ a:nth-child(2) .cta_items {
 }
 
 .balance .right-side button:first-child {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 /* END OF My Balance Styles */
@@ -973,7 +991,7 @@ a:nth-child(2) .cta_items {
 }
 
 .redeem-main button:hover {
-  transform: scale(0.98)
+  transform: scale(0.98);
 }
 
 .redeem-main input {
@@ -1012,7 +1030,7 @@ a:nth-child(2) .cta_items {
 }
 
 .tips-main button:hover {
-  transform: scale(0.98)
+  transform: scale(0.98);
 }
 
 .tips-main input {

@@ -16,11 +16,8 @@ export const googleLogin = data => dispatch => {
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/auth/google-login`, data)
     .then(async res => {
-      console.log(res)
       // Save to localStorage
       const { token, _id } = res.data.data
-      // Set token to ls
-      console.log(token, _id)
       localStorage.setItem('jwtToken', token)
       localStorage.setItem('id', _id)
       // Set token to Auth header
@@ -54,21 +51,7 @@ export const facebookLogin = (data, history, props) => dispatch => {
       const decoded = jwt_decode(token)
       dispatch(setCurrentUser(decoded, token))
       const location = props.location
-      // if (location.redirect === '/parcel' || localStorage.getItem('redirect') === '/parcel') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/parcel')
-      // }  else if (location.redirect === '/trips' || localStorage.getItem('redirect') === '/trips') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/trips')
-      // } else if (location.redirect === '/shippers' || localStorage.getItem('redirect') === '/shippers') {
-      //   localStorage.removeItem('redirect')
-      //   history.push('/shippers')
-      // }
-      if (location.redirect) {
-        history.push(`${location.redirect}`)
-      } else {
-        history.push('/dashboard/transactions')
-      }
+      history.push('/dashboard/transactions')
     })
     .catch(err => {
       dispatch({
@@ -148,10 +131,10 @@ export const loginUser = (userData, history, props) => dispatch => {
       //   localStorage.removeItem('redirect')
       //   history.push('/shippers')
       // }
-      if (location.redirect) {
-        history.push(`${location.redirect}`)
+      if (location.redirect === '/') {
+        history.push('/parcel')
       } else {
-        history.push('/dashboard/transactions')
+        history.push(`${location.redirect}`)
       }
     })
     .catch(err => {
@@ -369,8 +352,7 @@ export const connectStripe = data => dispatch => {
     })
 }
 export const getStripeId = () => dispatch => {
-  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/stripe`)
-  .then(res => {
+  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/stripe`).then(res => {
     dispatch({
       type: GET_STRIPE_ID,
       payload: res.data.stripeId
