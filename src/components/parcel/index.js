@@ -206,6 +206,9 @@ const Parcel = props => {
     if (props.status === 200) {
       setModal(true)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 637f18926e48dabeddc008ee2a45004e99f58c76
           setState({
       ...state,
       parcelWorth: 0,
@@ -221,6 +224,7 @@ const Parcel = props => {
       tipAmount: 0,
       tipChecked: false,
     })
+<<<<<<< HEAD
 =======
       setState({
         ...state,
@@ -237,6 +241,8 @@ const Parcel = props => {
         tipChecked: false
       })
 >>>>>>> eb6fbee142a20dfc1bbd9e283df464f6daa84ca2
+=======
+>>>>>>> 637f18926e48dabeddc008ee2a45004e99f58c76
     }
   }, [props.status])
 
