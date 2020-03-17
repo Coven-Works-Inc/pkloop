@@ -9,7 +9,9 @@ import {
   GET_TRAVELERS,
   CONNECT_TRAVELER,
   TRANSACTION_RESPONSE,
-  LOADING
+  LOADING,
+  MAKE_RESERVATION,
+  RESERVTION_ERROR
 } from './types'
 
 export const fetchTravelers = () => async dispatch => {
@@ -93,11 +95,26 @@ export const addTravelerEarning = data => dispatch => {
 
 export const respondToRequest = data => dispatch => {
   axios.post(`${process.env.REACT_APP_BASE_URL}/transactions/respond`, data).then(res => {
-    console.log(res)
     dispatch({
       type: TRANSACTION_RESPONSE,
       payload: res.data
     })
-    console.log(res)
   })
+}
+
+export const createReservation = data => dispatch => {
+  axios.post(`${process.env.REACT_APP_BASE_URL}/trips/reserve`, data)
+  .then(res => {
+    dispatch({
+      type: MAKE_RESERVATION,
+      payload: res.data.message
+    })
+  })
+  .catch(() => {
+    dispatch({
+      type: RESERVTION_ERROR,
+      payload: 'Unable to make reservation, ensure all locations are selected'
+    })
+  })
+  
 }

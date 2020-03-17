@@ -5,7 +5,9 @@ import {
   TRANSACTION_RESPONSE,
   REDEEM_CODE,
   TIP_SUCCESS,
-  GET_NOTIF
+  GET_NOTIF,
+  CANCEL_TRANSACTION,
+  CANCEL_LOADING
 } from './types'
 
 export const getTransaction = () => async dispatch => {
@@ -69,7 +71,6 @@ export const handleTransactionRequest = data => dispatch => {
   axios
     .post(`${process.env.REACT_APP_BASE_URL}/transactions/respond`, data)
     .then(res => {
-      console.log(res.data.data)
       dispatch({
         type: TRANSACTION_RESPONSE,
         payload: res.data.data
@@ -103,6 +104,26 @@ export const getNotif = () => dispatch => {
     dispatch({
       type: GET_NOTIF,
       payload: res.data.notif
+    })
+  })
+}
+export const cancelTransaction = (data) => dispatch => {
+  dispatch({
+    type: CANCEL_LOADING,
+    payload: true
+  })
+  axios.post(`${process.env.REACT_APP_BASE_URL}/transactions/cancel`, data)
+  .then(res => {
+    dispatch({
+      type: CANCEL_TRANSACTION,
+      payload: res.data.message
+    })
+    console.log(res)
+  })
+  .finally(() => {
+    dispatch({
+      type: CANCEL_LOADING,
+      payload:false
     })
   })
 }

@@ -9,6 +9,7 @@ import {
 } from '../../actions/travelerActions'
 import { postTransaction } from '../../actions/transActions'
 import { addInsurance } from '../../actions/costActions'
+import { createReservation } from '../../actions/travelerActions'
 
 import countries from '../../countries.json'
 import cities from '../../world-cities_json.json'
@@ -27,6 +28,8 @@ const Parcel = props => {
   const [modal, setModal] = useState(false)
   const [walletBalance, setBalance] = useState(0)
   const [escrow, setEscrow] = useState(0)
+  const [messageModal, toggleMessageModal] = useState(false)
+  const [errorModal, toggleErrorModal] = useState(false)
   const [state, setState] = useState({
     locationCountry: '',
     locationCity: '',
@@ -205,10 +208,6 @@ const Parcel = props => {
   useEffect(() => {
     if (props.status === 200) {
       setModal(true)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 637f18926e48dabeddc008ee2a45004e99f58c76
           setState({
       ...state,
       parcelWorth: 0,
@@ -224,8 +223,6 @@ const Parcel = props => {
       tipAmount: 0,
       tipChecked: false,
     })
-<<<<<<< HEAD
-=======
       setState({
         ...state,
         parcelWorth: 0,
@@ -240,9 +237,6 @@ const Parcel = props => {
         tipAmount: 0,
         tipChecked: false
       })
->>>>>>> eb6fbee142a20dfc1bbd9e283df464f6daa84ca2
-=======
->>>>>>> 637f18926e48dabeddc008ee2a45004e99f58c76
     }
   }, [props.status])
 
@@ -583,6 +577,36 @@ const Parcel = props => {
       escrowModal: false
     })
   }
+  const makeReservation = () => {
+    const data = {
+      email: props.user.user.email,
+      locationCity: state.fromCity,
+      locationCountry: state.fromCountry,
+      destinationCity: state.toCity,
+      destinationCountry: state.toCountry
+    }
+    console.log(data, state)
+    props.createReservation(data)
+  }
+  useEffect(() => {
+    if(props.travelers.message) {
+      toggleMessageModal(true)
+    }
+  },[props.travelers.message])
+
+  useEffect(() => {
+    if(props.travelers.errorMessage) {
+      toggleErrorModal(true)
+    }
+  },[props.travelers.errorMessage])
+
+  const closeMessageModal = () => {
+    toggleMessageModal(false)
+  }
+
+  const closeErrorModal = () => {
+    toggleErrorModal(false)
+  }
   const {
     travelers: { travelers }
   } = props
@@ -718,6 +742,7 @@ const Parcel = props => {
         travelers={state.filteredLocation ? state.filteredLocation : travelers}
         toggle={toggleModal}
         connect={handleConnect}
+        makeReservation={makeReservation}
       />
 
       <Modal show={state.modalOpen} onClose={toggleModal}>
@@ -962,6 +987,15 @@ const Parcel = props => {
         </Modal>
       )}
       {/* {state.sameUser && <Modal show={state.sameUser} onClose={closeModal}><div>Can't connect with your self</div></Modal>} */}
+      <Modal show={messageModal} onClose={closeMessageModal}> 
+          Your reservation has been successfully sent
+          <br />
+          We would let you know when a trip matches.
+          Thanks for using PKLOOP
+      </Modal>
+      <Modal show={errorModal} onClose={closeErrorModal}> 
+          {props.travelers.errorMessage}
+      </Modal>
     </HeaderFooter>
   )
 }
@@ -980,5 +1014,6 @@ export default connect(mapStateToProps, {
   addInsurance,
   postTransaction,
   reduceBalance,
-  reduceEscrow
+  reduceEscrow,
+  createReservation
 })(Parcel)
