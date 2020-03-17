@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react'
-// import Img from 'react-image'
+import React, { useState, useEffect } from 'react'
+import Img from 'react-image'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {  createReservation } from '../../actions/travelerActions'
+import Modal from '../common/modal'
 import ProfilePicture from '../../assets/profilepic.png'
 
 import './travel.css'
 
 const Travelers = props => {
   const { travelers } = props
-
   //This function helps the user filter by location
   const getLocation = e => {
     let keyword = e.target.value.toUpperCase()
@@ -102,14 +102,14 @@ const Travelers = props => {
         travelers.map((traveler, key) => (
           <div key={key} className='travel-card'>
             <div className='card-left'>
-              {/* <Img
+              <Img
                 src={traveler.photo ? traveler.photo : ProfilePicture}
                 alt=''
                 style={{
                   height: '150px',
                   maxWidth: '100%'
                 }}
-              /> */}
+              />
               <p style={{ marginTop: '2px' }}>{traveler.username}</p>
 
               <p onClick={() => props.connect(traveler)} className='button'>
@@ -156,5 +156,7 @@ const Travelers = props => {
 }
 const mapStateToProps = state => ({
   user: state.auth,
+  message: state.travelers.message,
+  errorMessage: state.travelers.errorMessage
 })
 export default connect(mapStateToProps, { createReservation })(Travelers)

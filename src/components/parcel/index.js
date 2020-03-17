@@ -28,6 +28,8 @@ const Parcel = props => {
   const [modal, setModal] = useState(false)
   const [walletBalance, setBalance] = useState(0)
   const [escrow, setEscrow] = useState(0)
+  const [messageModal, toggleMessageModal] = useState(false)
+  const [errorModal, toggleErrorModal] = useState(false)
   const [state, setState] = useState({
     locationCountry: '',
     locationCity: '',
@@ -586,6 +588,25 @@ const Parcel = props => {
     console.log(data, state)
     props.createReservation(data)
   }
+  useEffect(() => {
+    if(props.travelers.message) {
+      toggleMessageModal(true)
+    }
+  },[props.travelers.message])
+
+  useEffect(() => {
+    if(props.travelers.errorMessage) {
+      toggleErrorModal(true)
+    }
+  },[props.travelers.errorMessage])
+
+  const closeMessageModal = () => {
+    toggleMessageModal(false)
+  }
+
+  const closeErrorModal = () => {
+    toggleErrorModal(false)
+  }
   const {
     travelers: { travelers }
   } = props
@@ -966,6 +987,15 @@ const Parcel = props => {
         </Modal>
       )}
       {/* {state.sameUser && <Modal show={state.sameUser} onClose={closeModal}><div>Can't connect with your self</div></Modal>} */}
+      <Modal show={messageModal} onClose={closeMessageModal}> 
+          Your reservation has been successfully sent
+          <br />
+          We would let you know when a trip matches.
+          Thanks for using PKLOOP
+      </Modal>
+      <Modal show={errorModal} onClose={closeErrorModal}> 
+          {props.travelers.errorMessage}
+      </Modal>
     </HeaderFooter>
   )
 }
