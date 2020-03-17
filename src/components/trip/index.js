@@ -71,11 +71,7 @@ class index extends Component {
   onSubmitHandler = e => {
     e.preventDefault()
     this.toggleModal()
-<<<<<<< HEAD
     // setTimeout(this.toggleModal, 3000)
-=======
-    // setTimeout(this.toggleModal, 1000)
->>>>>>> eb6fbee142a20dfc1bbd9e283df464f6daa84ca2
     const tripData = {
       locationCity: this.state.locationCity,
       locationCountry: this.state.locationCountry,

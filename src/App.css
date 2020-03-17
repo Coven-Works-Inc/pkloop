@@ -520,7 +520,7 @@ a:nth-child(2) .cta_items {
 .transactions,
 .support {
   margin: 2rem auto;
-  width: 70%;
+  width: 100%;
   max-width: 1140px;
   background-color: #fff;
   padding: 2rem;
@@ -548,7 +548,6 @@ a:nth-child(2) .cta_items {
   display: flex;
   height: 60px;
   align-items: center;
-  padding: 30px 16px;
 }
 
 .table-header {
@@ -567,29 +566,37 @@ a:nth-child(2) .cta_items {
 
 .table-header p:nth-child(1),
 .table-row p:nth-child(1) {
-  width: 20%;
+  width: calc(100% / 7);
 }
 
 .table-header p:nth-child(2),
 .table-row p:nth-child(2) {
-  width: 25%;
+  width: calc(100% / 7);
 }
 
 .table-header p:nth-child(3),
 .table-row p:nth-child(3) {
-  width: 15%;
+  width: calc(100% / 7);
 }
 
 .table-header p:nth-child(4),
 .table-row p:nth-child(4) {
-  width: 30%;
+  width: calc(100% / 7);
 }
-
 .table-header p:nth-child(5),
 .table-row p:nth-child(5) {
-  width: 10%;
-}
-
+  width: calc(100% / 7);
+} 
+.table-header p:nth-child(6),
+.table-row p:nth-child(6) {
+  width: calc(100% / 7);
+} 
+/* .table-row div.btn-container {
+  width: calc(100% / 7);
+} */
+/* .table-header p:nth-child(7) {
+  width: calc(100% / 7);
+}  */
 .table-row p {
   font-size: 0.85rem;
 }

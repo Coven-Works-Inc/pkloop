@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getTransaction, getNotif } from '../../actions/transActions'
+import { getTransaction, getNotif, cancelTransaction } from '../../actions/transActions'
 import { getTrip } from '../../actions/tripActions'
 import { respondToRequest } from '../../actions/travelerActions'
 import { withRouter } from 'react-router-dom'
@@ -17,7 +17,9 @@ const Transactions = props => {
   const [sender, setSender] = useState({})
   const [success, setSuccess] = useState(false)
   const [action, setAction] = useState('')
+  const [trans, setTrans] = useState({})
   const [cancel, setCancel] =  useState(false)
+  const [cancelSuccess, setCancelSuccess] = useState(false)
   useEffect(() => {
     props.getNotif()
   }, [])
@@ -66,8 +68,17 @@ const Transactions = props => {
     setAction('decline')
     props.respondToRequest(data)
   }
-  const showCancel = () => {
+  const showCancel = (trans) => {
+    setTrans(trans)
+    props.getTransaction()
     setCancel(true)
+  }
+  const cancelUserTransaction = () => {
+    const data = {
+      tripId: trans.tripId,
+      transactionId: trans._id
+    }
+    props.cancelTransaction(data)
   }
   const {
     transaction: { transaction }
@@ -92,6 +103,12 @@ const Transactions = props => {
       })
     }
   }
+  useEffect(() => {
+    console.log(props.cancelSuccess)
+      if(props.cancelSuccess){
+        setCancelSuccess(true)
+      }
+  },[props.cancelSuccess])
   return (
     <HeaderFooter redirect={props.location}>
       <div className='dashboard-header'>
@@ -110,7 +127,6 @@ const Transactions = props => {
               />{' '}
             </div>
           ))}
-        {console.log(transaction)}
         <div className='transactions'>
           <h2 style={{ textAlign: 'center' }}>Transactions</h2>
           <div className='table-header'>
@@ -134,14 +150,13 @@ const Transactions = props => {
                 <div>
                   {transaction.map((trans, index) => (
                     <div key={index} className='table-row'>
-                      {console.log(trans)}
                     <p>{trans.date.split('T')[0]}</p>
                     <p className='completed'>{trans.status  === 'Accepted' && new Date(trans.date.split('T')[0]) <= new Date() ? 'In process' : trans.status}</p>
                     <p className="table-header-shift">{trans.sender}</p>
                     <p className="table-header-shift-trav">{trans.traveler}</p>
                     <p className="table-header-shift-role">{trans.role}</p>
                     <p className="table-header-shift">{Number(trans.amountDue).toFixed(2)}</p>
-                    {trans.status === 'Accepted' || trans.status ===  'Pending' && trans.role === 'Sender' && <button className="cancel" onClick={showCancel}>Cancel</button>}
+                    {(trans.status ===  'Pending') && trans.role === 'Sender' && <div className="btn-container"><button className="cancel" onClick={() => showCancel(trans)}>Cancel</button></div>}
                   </div>
                 ))}
                 </div>
@@ -188,9 +203,20 @@ const Transactions = props => {
         </div>
       </Modal>
       <Modal show={cancel} onClose={closeModal}>
+            {props.cancelSuccess ? <h6 style={{ color: 'green'}}>{props.cancelSuccess}</h6>: ''}
             <h5>Are you sure you want to cancel this transaction?<br />Cancellation attracts a 5% platform fee</h5>
             <div className="button-group">
-              <button className='btnQ'>Cancel</button>
+              <button className='btnQ' onClick={cancelUserTransaction}>
+                {props.cancelLoading ? <span
+                            style={{ display: 'inline-block' }}
+                            className='spinner-border spinner-border-sm'
+                            role='status'
+                            aria-hidden='true'
+                          ></span>
+                          :
+                          <span>Cancel</span>
+                           }
+                          </button>
               <button className='btnQ inverse-btnQ'>Don't cancel</button>
           </div>
       </Modal>
@@ -204,12 +230,15 @@ const mapStateToProps = state => {
     username: state.auth.user.username,
     transaction: state.transaction,
     trip: state.trips.trip.data,
-    notifs: state.transaction.notif
+    notifs: state.transaction.notif,
+    cancelSuccess: state.transaction.cancelSuccess,
+    cancelLoading: state.transaction.cancelLoading
   }
 }
 
 export default connect(mapStateToProps, { getTransaction, 
                                           getTrip, 
                                           respondToRequest, 
-                                          getNotif 
+                                          getNotif,
+                                          cancelTransaction
                                         })(withRouter(Transactions))

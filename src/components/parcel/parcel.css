@@ -181,12 +181,12 @@ button[disabled]{
   color: white;
   opacity: 0.6;
 }
-.transactions .table-header-shift{
+/* .transactions .table-header-shift{
   position: relative;
   right: 50px;
   text-align: left;
-}
-.transactions .table-header-shift-trav{
+} */
+/* .transactions .table-header-shift-trav{
   position: relative;
   right: 30px;
   text-align: left;
@@ -199,4 +199,4 @@ button[disabled]{
 .role {
   position: relative;
   left: -60px;
-}
+} */

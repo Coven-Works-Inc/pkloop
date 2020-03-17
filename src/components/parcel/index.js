@@ -9,6 +9,7 @@ import {
 } from '../../actions/travelerActions'
 import { postTransaction } from '../../actions/transActions'
 import { addInsurance } from '../../actions/costActions'
+import { createReservation } from '../../actions/travelerActions'
 
 import countries from '../../countries.json'
 import cities from '../../world-cities_json.json'
@@ -205,10 +206,6 @@ const Parcel = props => {
   useEffect(() => {
     if (props.status === 200) {
       setModal(true)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 637f18926e48dabeddc008ee2a45004e99f58c76
           setState({
       ...state,
       parcelWorth: 0,
@@ -224,8 +221,6 @@ const Parcel = props => {
       tipAmount: 0,
       tipChecked: false,
     })
-<<<<<<< HEAD
-=======
       setState({
         ...state,
         parcelWorth: 0,
@@ -240,9 +235,6 @@ const Parcel = props => {
         tipAmount: 0,
         tipChecked: false
       })
->>>>>>> eb6fbee142a20dfc1bbd9e283df464f6daa84ca2
-=======
->>>>>>> 637f18926e48dabeddc008ee2a45004e99f58c76
     }
   }, [props.status])
 
@@ -583,6 +575,17 @@ const Parcel = props => {
       escrowModal: false
     })
   }
+  const makeReservation = () => {
+    const data = {
+      email: props.user.user.email,
+      locationCity: state.fromCity,
+      locationCountry: state.fromCountry,
+      destinationCity: state.toCity,
+      destinationCountry: state.toCountry
+    }
+    console.log(data, state)
+    props.createReservation(data)
+  }
   const {
     travelers: { travelers }
   } = props
@@ -718,6 +721,7 @@ const Parcel = props => {
         travelers={state.filteredLocation ? state.filteredLocation : travelers}
         toggle={toggleModal}
         connect={handleConnect}
+        makeReservation={makeReservation}
       />
 
       <Modal show={state.modalOpen} onClose={toggleModal}>
@@ -980,5 +984,6 @@ export default connect(mapStateToProps, {
   addInsurance,
   postTransaction,
   reduceBalance,
-  reduceEscrow
+  reduceEscrow,
+  createReservation
 })(Parcel)

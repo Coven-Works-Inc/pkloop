@@ -160,8 +160,6 @@ button:disabled {
 .cancel {
   background-color: white;
   color: red;
-  position: relative;
-  left: 80px;
   border: 1px solid red;
   padding: 10px 20px;
 }
